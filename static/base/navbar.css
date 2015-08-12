@@ -1,0 +1,58 @@
+.navbar {
+	margin: 0px;
+	/*background-color: lightcyan;*/
+	border: none;
+}
+.navbar-home {
+	display: inline-block;
+}
+.menu:hover, .menu-right:hover {
+	cursor: pointer;
+}
+.navbar-now {
+	display: inline-block;
+	width: 245px;
+	position: relative;
+}
+#nav-date {
+	font-size: x-large;
+	font-weight: bold;
+	position: absolute;
+	top: -45px;
+	left: 8px;
+}
+#nav-mode {
+	position: absolute;
+}
+
+.navbar-menus {
+	display: inline;
+}
+.navbar-operation-setting {
+	position: absolute;
+	top: 87px;
+	left: 845px;
+	font-size: 15px;
+	display: inline;
+}
+.nav-op, .nav-db {
+	display: inline;
+}
+.nav-op:hover, .nav-db:hover {
+	cursor: pointer;
+}
+.nav-op-selected, .nav-db-selected {
+	font-weight: bold;
+}
+.navbar-search-db {
+	position: absolute;
+	top: 87px;
+	left: 1015px;
+	font-size: 15px;
+}
+
+.navbar-menu-right {
+	display: inline;
+	/*float: right;*/
+	margin-left: 200px;
+}

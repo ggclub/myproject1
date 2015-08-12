@@ -1,0 +1,10 @@
+<!DOCTYPE HTML>
+{% extends "monitor/base.html" %}
+
+{% block  script %}
+<script type="text/javascript">
+$.post("/monitor/errorlog", function(data) {
+	$('body').html(data)
+});
+</script>
+{% endblock %}

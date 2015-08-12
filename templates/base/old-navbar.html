@@ -1,0 +1,16 @@
+<button onclick="playSound();" class="btn btn-default" style="display:none;">Play</button>
+<audio id="sound"/></audio>
+<button onclick="stopSound();" class="btn btn-default" style="display:none;">Stop</button>
+<button onclick="changePassword();" class="btn btn-default" style="display:none;">비밀번호 변경</button>
+
+<button class="btn btn-default alignleft btn-coolMode control" id="cl-status" style="margin-right: 4px; display:none;">냉방</button>
+<button class="btn btn-default alignleft btn-heatMode control" id="ht-status" style="display:none;">난방</button>
+
+<h4 id="title" style="display: inline; display:none;"><b>지하수 열원 냉난방 시스템</b></h3>
+<p style="display: inline; display:none;">최종 업데이트 : {{ dateTime }}</p>
+<form action="/login/logout/" method="post">{% csrf_token %}
+	<button type="submit" class="btn btn-default alignright" name="logout" style="display:none;">로그아웃</button>
+</form>
+
+<button class="btn btn-default alignright btn-opMode btn-manual control" id="mn-status" style="margin-right: 4px; display:none;">수동</button>
+<button class="btn btn-default alignright btn-opMode btn-auto control" id="at-status" style="margin-right: 4px; display:none;">자동</button>

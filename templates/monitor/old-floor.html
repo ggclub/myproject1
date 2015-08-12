@@ -1,0 +1,488 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<p style="text-align:center;"><b>실내기 운행 상태</b></p>
+<div class="unit-info">
+{% if floor == "1" %}
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">방재실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.0.switch }}</td>
+			<td>{{ us.0.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">수유실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.3.switch }}</td>
+			<td>{{ us.3.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">저소득층상담실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.4.switch }}</td>
+			<td>{{ us.4.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">회의실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.5.switch }}</td>
+			<td>{{ us.5.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">주민등록실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.9.switch }}</td>
+			<td>{{ us.9.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">MDF실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.10.switch }}</td>
+			<td>{{ us.10.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">진료실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.11.switch }}</td>
+			<td>{{ us.11.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">사무대기실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.12.switch }}</td>
+			<td>{{ us.12.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">접종보건실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.13.switch }}</td>
+			<td>{{ us.13.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">사무실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.6.switch }}</td>
+			<td>{{ us.6.temperature }}</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>{{ us.7.switch }}</td>
+			<td>{{ us.7.temperature }}</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>{{ us.8.switch }}</td>
+			<td>{{ us.8.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">로비</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.1.switch }}</td>
+			<td>{{ us.1.temperature }}</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>{{ us.2.switch }}</td>
+			<td>{{ us.2.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+{% elif floor == "2" %}
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">2층 홀</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.0.switch }}</td>
+			<td>{{ us.0.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">조정실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.1.switch }}</td>
+			<td>{{ us.1.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">준비실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.2.switch }}</td>
+			<td>{{ us.2.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">면장실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.3.switch }}</td>
+			<td>{{ us.3.temperature }}</td>
+		</tr>
+		</tbody>
+		<tbody style="border-left-style:hidden; border-right-style:hidden;">
+			<tr><td colspan="3"></td></tr>
+		</tbody>
+		<thead>
+		<tr>
+			<td class="room">로비</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.7.switch }}</td>
+			<td>{{ us.7.temperature }}</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>{{ us.8.switch }}</td>
+			<td>{{ us.8.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">서고</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.9.switch }}</td>
+			<td>{{ us.9.temperature }}</td>
+		</tr>
+		</tbody>
+		<tbody style="border-left-style:hidden; border-right-style:hidden;">
+			<tr><td colspan="3"></td></tr>
+		</tbody>
+		<thead>
+		<tr>
+			<td class="room">면대</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.10.switch }}</td>
+			<td>{{ us.10.temperature }}</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>{{ us.11.switch }}</td>
+			<td>{{ us.11.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">교육실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.4.switch }}</td>
+			<td>{{ us.4.temperature }}</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>{{ us.5.switch }}</td>
+			<td>{{ us.5.temperature }}</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>{{ us.6.switch }}</td>
+			<td>{{ us.6.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+{% else %}
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">다목적홀</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.3.switch }}</td>
+			<td>{{ us.3.temperature }}</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>{{ us.4.switch }}</td>
+			<td>{{ us.4.temperature }}</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>{{ us.5.switch }}</td>
+			<td>{{ us.5.temperature }}</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>{{ us.6.switch }}</td>
+			<td>{{ us.6.temperature }}</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>{{ us.7.switch }}</td>
+			<td>{{ us.7.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">3층 홀</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.0.switch }}</td>
+			<td>{{ us.0.temperature }}</td>
+		</tr>
+		</tbody>
+		<tbody style="border-left-style:hidden; border-right-style:hidden;">
+			<tr><td colspan="3"></td></tr>
+		</tbody>
+		<thead>
+			<tr>
+				<td class="room">강당</td>
+				<td>상태</td>
+				<td>온도</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>1</td>
+				<td>{{ us.1.switch }}</td>
+				<td>{{ us.1.temperature }}</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>{{ us.2.switch }}</td>
+				<td>{{ us.2.temperature }}</td>
+			</tr>
+			</tbody>
+		<!-- <tr rowspan="3"> -->
+			<!-- <td colspan="3"> -->
+			<!-- </td></tr> -->
+	</table>
+	<table class="table table-bordered table-condensed ciu" style="display:inline-table;">
+		<thead>
+		<tr>
+			<td class="room">평생학습실</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1</td>
+			<td>{{ us.8.switch }}</td>
+			<td>{{ us.8.temperature }}</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>{{ us.9.switch }}</td>
+			<td>{{ us.9.temperature }}</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>{{ us.10.switch }}</td>
+			<td>{{ us.10.temperature }}</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>{{ us.11.switch }}</td>
+			<td>{{ us.11.temperature }}</td>
+		</tr>
+		</tbody>
+	</table>
+{% endif %}
+</div>
+<div class="slider">
+	<div class="floor-nav" >
+		<li><a class="fl-selected" id="1">1층</a></li>
+		<li><a id="2">2층</a></li>
+		<li><a id="3">3층</a></li>
+	</div>
+</div>
+
+<script type="text/javascript">
+// 실내기 층 변경
+$('.floor-nav > li > a').on('click', function () {
+	var floor = this.id;
+
+	$.ajax({
+		url: "/monitor/floor_change/",
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'floor': floor,
+		},
+		success: function(data){
+			$("#right-floor").html(data);
+			$('.fl-selected').removeClass('fl-selected');
+			$('.floor-nav').find('#'+floor).addClass('fl-selected');
+		}
+	});
+	return false;
+});
+
+</script>

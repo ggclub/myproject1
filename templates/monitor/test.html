@@ -1,0 +1,49 @@
+hello: {{ hello }}
+dump: {{ dump }}
+page_index : {{ page_index }}
+
+
+
+<div class="left-status">
+	<ul>
+		<h4>Operation</h4>
+		<li>HP1 : {{ operation_data.HP1 }}
+		</li>
+		<li>HP2 : {{ operation_data.HP2 }}
+		</li>
+		<li>HP3 : {{ operation_data.HP3 }}
+		</li>
+		<li>HP4 : {{ operation_data.HP4 }}
+		</li>
+		<li>HP5 : {{ operation_data.HP5 }}
+		</li>
+		<li>HP6 : {{ operation_data.HP6 }}
+		</li>
+		<li>DWP1 : {{ operation_data.DWP1 }}
+		</li>
+		<li>DWP2 : {{ operation_data.DWP2 }}
+		</li>
+		<li>DWP3 : {{ operation_data.DWP3 }}
+		</li>
+		<li>DWP4 : {{ operation_data.DWP4 }}
+		</li>
+		<li>CP1 : {{ operation_data.CP1 }}
+		</li>
+		<li>CP2 : {{ operation_data.CP2 }}
+		</li>
+	</ul>
+	<ul>
+		<h4>Temperature</h4>
+		<li>HP1. IN: {{ temperature_data.HPI1|floatformat:1 }}, OUT: {{ temperature_data.HPO1|floatformat:1 }}</li>
+		<li>HP2. IN: {{ temperature_data.HPI2|floatformat:1 }}, OUT: {{ temperature_data.HPO2|floatformat:1 }}</li>
+		<li>HP3. IN: {{ temperature_data.HPI3|floatformat:1 }}, OUT: {{ temperature_data.HPO3|floatformat:1 }}</li>
+		<li>HP4. IN: {{ temperature_data.HPI4|floatformat:1 }}, OUT: {{ temperature_data.HPO4|floatformat:1 }}</li>
+		<li>HP5. IN: {{ temperature_data.HPI5|floatformat:1 }}, OUT: {{ temperature_data.HPO5|floatformat:1 }}</li>
+		<li>HP6. IN: {{ temperature_data.HPI6|floatformat:1 }}, OUT: {{ temperature_data.HPO6|floatformat:1 }}</li>
+	</ul>
+	<ul>
+		<h4>Flowmeter</h4>
+		<li>DWP: {{ flowmeter_data.DWP }}</li>
+		<li>CP: {{ flowmeter_data.CP }}</li>
+	</ul>
+</div>

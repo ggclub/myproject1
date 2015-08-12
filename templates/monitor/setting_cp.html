@@ -1,0 +1,131 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<head>
+	<meta charset="utf-8">
+	<script src="{% static "jquery/jquery-1.11.3.min.js" %}"></script>
+	<script src="{% static "bootstrap-3.3.4-dist/js/bootstrap.min.js" %}"></script>
+	<link rel="stylesheet" href="{% static "bootstrap-3.3.4-dist/css/bootstrap.min.css" %}">
+</head>
+<body style="background-color:transparent;">
+	<div class="cp-setting-container" style="margin: 405px 170px;">
+		<div class="cp-setting-modal" style="width:200px; height:240px; background-color:lightgray; padding-top:12px; text-align:center; border-style:groove;">
+			<div style="display:none;"><p id='operation-mode'>{{ op_mode }}</p><p id='temperature-mode'>{{ temp_mode }}</p></div>
+			<form class="form-horizontal" id="cp-setting-form">
+				<div class="form-group">
+					<label for="cpid" class="col-sm-5">ID</label>
+					{# 라디오버튼 chk 1,2 #}
+					<div class="col-sm-7" style="margin-bottom:3px;">
+					<input type="radio" name="cpid" value="1"> 1
+					<input type="radio" name="cpid" value="2"> 2
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="cpswitch" class="col-sm-5">스위치</label>
+					{# 라디오버튼 on/off #}
+					<div class="col-sm-7" style="font-size:13px;">
+					<input type="radio" name="cpswitch" value="ON"> ON
+					<input type="radio" name="cpswitch" value="OFF"> OFF <br>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="cphz" style="display:inline-block;  width:25%; margin-right:13.5%;">회전수</label>
+					{# 숫자입력창 회전수 #}
+					<div style="display:inline-block; width:25%;">
+					<input type="number" class="form-control" id="cp-hz" name="cphz" min="0" max="60" value="{{ circulating_pump.Hz }}" style="padding:2px; text-align:center;">
+					</div>
+					<div style="display:inline-block; width:15%;">Hz</div><br>
+				</div>
+				<div class="form-group">
+					<label for="cplpm" style="display:inline-block;  width:25%; margin-right:13.5%;">유량</label>
+					{# 숫자입력창 유량 #}
+					<div style="display:inline-block; width:25%;">
+					<input type="number" class="form-control" id="cp-flux" name="cpflux" min="0" max="1000" value="{{ circulating_pump.flux }}" style="padding:2px; text-align:center;">
+					</div>
+					<div style="display:inline-block; width:15%;">LPM</div><br>
+				</div>
+			</form>
+			<div class="form-group">
+				<button type="submit" class="btn btn-default" id="ok">입력</button>
+				<button class="btn btn-default" id="cancel">취소</button>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#cp-hz').val(0);
+	$('#cp-flux').val(0);
+});
+
+$('#cp-hz').on('keyup change', function() {
+	var val = parseInt($('#cp-hz').val());
+	var max = parseInt($('#cp-hz').attr('max'));
+	var min = parseInt($('#cp-hz').attr('min'));
+	if (!val || val < min) {
+		$('#cp-hz').val(0);
+		$('#cp-flux').val(0);
+	}
+	else if (val > max) {
+		$('#cp-hz').val(60);
+		$('#cp-flux').val(1000);
+	} else {	// normal range
+		$('#cp-flux').val(Math.round(16.67 * val));
+	}
+});
+$('#cp-flux').on('keyup change', function() {
+	var val = parseInt($('#cp-flux').val());
+	var max = parseInt($('#cp-flux').attr('max'));
+	var min = parseInt($('#cp-flux').attr('min'));
+	if (!val || val < min) {
+		$('#cp-flux').val(0);
+		$('#cp-hz').val(0);
+	}
+	else if (val > max) {
+		$('#cp-flux').val(1000);
+		$('#cp-hz').val(60);
+	} else {	// normal range
+		$('#cp-hz').val(Math.round(val / 16.67));
+	}
+});
+
+// 인버터 세팅
+$('#ok').on('click', function() {
+	var opMode = $('#operation-mode').text();
+	var tempMode = $('#temperature-mode').text();
+	var cpid = $('input:radio[name="cpid"]:checked').val();
+	var cpswitch = $('input:radio[name="cpswitch"]:checked').val();
+	var cphz = $('input[name="cphz"]').val();
+	var cpflux = $('input[name="cpflux"]').val();
+	if (typeof cpid === "undefined" || typeof cpswitch === "undefined"){
+		alert('값을 입력해주세요.');
+		return false;
+	}
+	$.ajax({
+		url: "/monitor/set_cp/",
+		type: "POST",
+		data: {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'cpid' : cpid,
+			'cpswitch' : cpswitch,
+			'cphz' : cphz,
+			'cpflux' : cpflux,
+			'opMode' : opMode,
+			'tempMode' : tempMode,
+		},
+		success: function(data) {
+			alert('설정 되었습니다.');
+			$('.container-control', window.parent.document).removeClass('show-spec');
+			$('#cp-setting-frame', window.parent.document).css('display', 'none');	
+			$('.container-control').html(data)
+		}
+	});
+	// return false;
+});
+
+// 설정 취소
+$('#cancel').on('click', function() {
+	$('.container-control', window.parent.document).removeClass('show-spec');
+	$('#cp-setting-frame', window.parent.document).css('display', 'none');
+});
+</script>

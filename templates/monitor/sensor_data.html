@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+{% if id == "TempHEIn1" %}
+	<p>열 교환기 IN 1</p>
+{% elif id == "TempHEIn2" %}
+	<p>열 교환기 IN 2</p>
+{% elif id == "TempHEOut1" %}
+	<p>열 교환기 OUT 1</p>
+{% elif id == "TempHEOut2" %}
+	<p>열 교환기 OUT 2</p>
+{% elif id == "TempHIn1" %}
+	<p>히트 펌프 1 IN</p>
+{% elif id == "TempHPIn2" %}
+	<p>히트 펌프 2 IN</p>
+{% elif id == "TempHPIn3" %}
+	<p>히트 펌프 3 IN</p>
+{% elif id == "TempHPIn4" %}
+	<p>히트 펌프 4 IN</p>
+{% elif id == "TempHPIn5" %}
+	<p>히트 펌프 5 IN</p>
+{% elif id == "TempHPIn6" %}
+	<p>히트 펌프 6 IN</p>
+{% elif id == "TempHPOut1" %}
+	<p>히트 펌프 1 OUT</p>
+{% elif id == "TempHPOut2" %}
+	<p>히트 펌프 2 OUT</p>
+{% elif id == "TempHPOut3" %}
+	<p>히트 펌프 3 OUT</p>
+{% elif id == "TempHPOut4" %}
+	<p>히트 펌프 4 OUT</p>
+{% elif id == "TempHPOut5" %}
+	<p>히트 펌프 5 OUT</p>
+{% elif id == "TempHPOut6" %}
+	<p>히트 펌프 6 OUT</p>
+{% elif id == "CirculatingPump" %}
+	<p>순환 펌프</p>
+{% elif id == "CPFlowmeter" %}
+	<p>순환 유량계</p>
+{% elif id == "DWPFlowmeter" %}
+	<p>심정 유량계</p>
+{% elif id == "DeepwellPump1" %}
+	<p>심정 펌프 1</p>
+{% elif id == "DeepwellPump2" %}
+	<p>심정 펌프 2</p>
+{% elif id == "DeepwellPump3" %}
+	<p>심정 펌프 3</p>
+{% elif id == "DeepwellPump4" %}
+	<p>심정 펌프 4</p>
+{% elif id == "RefrigerationTon" %}
+	<p>RT</p>
+{% elif id == "PowerConsumption" %}
+	<p>전력량</p>
+{% else %}
+	<p>Nothing</p>
+{% endif %}
+
+{# 온도 센서 #}
+{% if "Temp" in id %}
+	<table class="table">
+		<thead>
+			<tr>
+				<td>No.</td>
+				<td>시간</td>
+				<td>온도</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for d in database %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ d.dateTime }}</td>
+				<td>{{ d.temperature|floatformat:1 }}°C</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endif %}
+
+{# 순환 펌프 #}
+{% if "Circulating" in id %}
+	<table class="table">
+		<thead>
+			<tr>
+				<td>No.</td>
+				<td>시간</td>
+				<td>순환펌프</td>
+				<td>전원</td>
+				<td>회전수</td>
+				<td>유량</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for d in database %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ d.dateTime }}</td>
+				<td>{{ d.get_CPID_display }}</td>
+				<td>{{ d.switch }}</td>
+				<td>{{ d.Hz }}Hz</td>
+				<td>{{ d.flux }}LPM</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endif %}
+
+{# 순환 유량계 #}
+{% if "CPFlow" in id %}
+	<table class="table">
+		<thead>
+			<tr>
+				<td>No.</td>
+				<td>시간</td>
+				<td>순시 유량</td>
+				<td>적산 유량</td>
+				<td>내부 온도</td>
+				<td>유속</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for d in database %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ d.dateTime }}</td>
+				<td>{{ d.currentFlux|floatformat:1 }}LPM</td>
+				<td>{{ d.integralFlux }}ton/hr</td>
+				<td>{{ d.temperature|floatformat:1 }}°C</td>
+				<td>{{ d.velocity }}m/s</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endif %}
+
+{# 심정 유량계 #}
+{% if "DWPFlow" in id %}
+	<table class="table">
+		<thead>
+			<tr>
+				<td>No.</td>
+				<td>시간</td>
+				<td>순시 유량</td>
+				<td>적산 유량</td>
+				<td>내부 온도</td>
+				<td>유속</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for d in database %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ d.dateTime }}</td>
+				<td>{{ d.currentFlux|floatformat:1 }}LPM</td>
+				<td>{{ d.integralFlux }}ton/hr</td>
+				<td>{{ d.temperature|floatformat:1 }}°C</td>
+				<td>{{ d.velocity }}m/s</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endif %}
+
+{# 심정 펌프 #}
+{% if "DeepwellPump" in id %}
+	<table class="table">
+		<thead>
+			<tr>
+				<td>No.</td>
+				<td>시간</td>
+				<td>상태</td>
+				<td>수위</td>
+				<td>수온</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for d in database %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ d.dateTime }}</td>
+				<td>{{ d.switch }}</td>
+				<td>{{ d.get_waterLevel_display }}</td>
+				<td></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endif %}
+
+{# rt #}
+{% if "Refriger" in id %}
+	<table class="table">
+		<thead>
+			<tr>
+				<td>No.</td>
+				<td>시간</td>
+				<td>RT</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for d in database %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ d.dateTime }}</td>
+				<td>{{ d.RT }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endif %}
+
+{# 전력량 #}
+{% if "Power" in id %}
+	<table class="table">
+		<thead>
+			<tr>
+				<td>No.</td>
+				<td>시간</td>
+				<td>순시 전력</td>
+				<td>적산 전력</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for d in database %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ d.dateTime }}</td>
+				<td>{{ d.currentPowerConsumption }}</td>
+				<td>{{ d.integralPowerConsumption }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endif %}
+
+
+

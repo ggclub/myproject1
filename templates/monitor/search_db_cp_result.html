@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+
+<table class="table table-bordered">
+	<thead id="query-title">
+		<tr>
+			<td class="result-datetime" rowspan="2"><b>시간</b></td>
+			<td class="result-cp1" colspan="4"><b>순환펌프 1</b></td>
+			<td class="result-cp2" colspan="4"><b>순환펌프 2</b></td>
+		</tr>
+		<tr>
+		{% for i in 12|make_list %}
+			<td class="result-cp{{ i }}">동작상태</td>
+			<td class="result-cp{{ i }}">운전모드</td>
+			<td class="result-cp{{ i }}">유량(Lpm)</td>
+			<td class="result-cp{{ i }}">회전수(Hz)</td>
+		{% endfor %}
+		</tr>
+	</thead>
+	<tbody id="query-result">
+		{% for cp1, cp2 in database_list %}
+		<tr>
+			<td class="result-datetime">{{ cp1.dateTime|date:"Y-m-d H:i" }}</td>
+			<td class="result-cp1">{{ cp1.switch }}</td>
+			<td class="result-cp1">{{ cp1.get_opMode_display }}</td>
+			<td class="result-cp1">{{ cp1.flux }}</td>
+			<td class="result-cp1">{{ cp1.Hz }}</td>
+			<td class="result-cp2">{{ cp2.switch }}</td>
+			<td class="result-cp2">{{ cp2.get_opMode_display }}</td>
+			<td class="result-cp2">{{ cp2.flux }}</td>
+			<td class="result-cp2">{{ cp2.Hz }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div id="found">{{ count }}</div>

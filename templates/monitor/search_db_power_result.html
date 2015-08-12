@@ -1,0 +1,42 @@
+{% load monitor_extras %}
+<!DOCTYPE HTML>
+<div id="cur">
+<table class="table table-bordered">
+	<thead id="query-title">
+		<tr>
+			<td class="result-datetime"><b>시간</b></td>
+			<td class="result-power"><b>순시전력량(kW)</b></td>
+		</tr>
+	</thead>
+	<tbody id="query-result">
+		{% for power in database_list %}
+		<tr>
+			<td class="result-datetime">{{ power.dateTime|date:"Y-m-d H:i" }}</td>
+			<td class="result-power">{{ power.currentPowerConsumption }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div id="found">{{ count }}</div>
+</div>
+
+<div id="int" style="display:none;">
+<table class="table table-bordered">
+	<thead id="query-title-int">
+		<tr>
+			<td class="result-datetime"><b>시간</b></td>
+			<td class="result-power"><b>적산전력량(kWh)</b></td>
+		</tr>
+		</tr>
+	</thead>
+	<tbody id="query-result-int">
+		{% for power in database_list_int %}
+		<tr>
+			<td class="result-datetime">{{ power.dateTime|date:"Y-m-d" }}</td>
+			<td class="result-power">{{ power.integralPowerConsumption }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div id="found-int">{{ count_int }}</div>
+</div>

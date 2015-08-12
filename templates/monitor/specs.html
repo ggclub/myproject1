@@ -1,0 +1,243 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{% static "monitor/specs.css" %}" type="text/css">
+</head>
+<body class="spec-body">
+	<div class="spec-container">
+		<div class="spec-modal">
+			<div class="spec-table">
+				{% for pump in heatpump_info %}
+				<table class="table" id="heat-pump{{ forloop.counter }}-info">
+					<thead>
+						<tr><td><b>히트펌프 {{ forloop.counter }}</b></td></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>모델</td>
+							<td>{{ pump.name }}</td>
+						</tr>
+						<tr>
+							<td>입력 전압</td>
+							<td>{{ pump.voltage }}</td>
+						</tr>
+						<tr>
+							<td>용량</td>
+							<td>{{ pump.capacity }}</td>
+						</tr>
+						<tr>
+							<td>냉매</td>
+							<td>{{ pump.refrigerant }}</td>
+						</tr>
+						<tr>
+							<td>크기</td>
+							<td>{{ pump.size }}</td>
+						</tr>
+						<tr>
+							<td>무게</td>
+							<td>{{ pump.weight }}</td>
+						</tr>
+						<tr>
+							<td>수량</td>
+							<td>{{ pump.quantity }}</td>
+						</tr>
+					</tbody>
+				</table>
+				{% endfor %}
+				{% for pump in circulatingpump_info %}
+				<table class="table" id="circulating-pump-info">
+					<thead>
+						<tr><td><b>순환펌프</b></td></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>모델</td>
+							<td>{{ pump.name }}</td>
+						</tr>
+						<tr>
+							<td>유량</td>
+							<td>{{ pump.flux }}</td>
+						</tr>
+						<tr>
+							<td>양정</td>
+							<td>{{ pump.suction }}</td>
+						</tr>
+						<tr>
+							<td>모터 동력</td>
+							<td>{{ pump.motorHP }}</td>
+						</tr>
+						<tr>
+							<td>최대 운전 압력</td>
+							<td>{{ pump.maxPressure }}</td>
+						</tr>
+						<tr>
+							<td>모터</td>
+							<td>{{ pump.motor }}</td>
+						</tr>
+						<tr>
+							<td>전압</td>
+							<td>{{ pump.voltage }}</td>
+						</tr>
+						<tr>
+							<td>주파수</td>
+							<td>{{ pump.frequency }}</td>
+						</tr>
+						<tr>
+							<td>수량</td>
+							<td>{{ pump.quantity }}</td>
+						</tr>
+					</tbody>
+				</table>
+				{% endfor %}
+				{% for fm in flowmeter_info %}
+				<table class="table" id="flowmeter-info">
+					<thead>
+						<tr><td><b>유량계</b></td></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>모델</td>
+							<td>{{ fm.name }}</td>
+						</tr>
+						<tr>
+							<td>크기</td>
+							<td>{{ fm.size }}</td>
+						</tr>
+						<tr>
+							<td>측정 범위</td>
+							<td>{{ fm.measureGauge }}</td>
+						</tr>
+						<tr>
+							<td>입력 전원</td>
+							<td>{{ fm.inputPower }}</td>
+						</tr>
+						<tr>
+							<td>수량</td>
+							<td>{{ fm.quantity }}</td>
+						</tr>
+					</tbody>
+				</table>
+				{% endfor %}
+				{% for he in heatexchanger_info %}
+				<table class="table" id="heat-exchanger-info">
+					<thead>
+						<tr><td><b>열교환기</b></td></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>모델</td>
+							<td>{{ he.name }}</td>
+						</tr>
+						<tr>
+							<td>최대 허용 압력</td>
+							<td>{{ he.maxPressure }}</td>
+						</tr>
+						<tr>
+							<td>온도 범위</td>
+							<td>{{ he.tempRange }}</td>
+						</tr>
+						<tr>
+							<td>수량</td>
+							<td>{{ he.quantity }}</td>
+						</tr>
+					</tbody>
+				</table>
+				{% endfor %}
+				{% for pump in deepwellpump_info %}
+				<table class="table" id="deepwell-pump-info">
+					<thead>
+						<tr><td><b>심정펌프 {{ forloop.counter }}</b></td></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>모델</td>
+							<td>{{ pump.name }}</td>
+						</tr>
+						<tr>
+							<td>용량</td>
+							<td>{{ pump.volume }}</td>
+						</tr>
+						<tr>
+							<td>출력</td>
+							<td>{{ pump.output }}</td>
+						</tr>
+						<tr>
+							<td>입력 전원</td>
+							<td>{{ pump.power }}</td>
+						</tr>
+						<tr>
+							<td>최대 머리 높이</td>
+							<td>{{ pump.height }}</td>
+						</tr>
+						<tr>
+							<td>길이</td>
+							<td>{{ pump.length }}</td>
+						</tr>
+						<tr>
+							<td>외경</td>
+							<td>{{ pump.diameter }}</td>
+						</tr>
+						<tr>
+							<td>수량</td>
+							<td>{{ pump.quantity }}</td>
+						</tr>
+					</tbody>
+				</table>
+				{% endfor %}
+				{% for whm in watthourmeter_info %}
+				<table class="table" id="watthourmeter-info">
+					<thead>
+						<tr><td><b>전력량계</b></td></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>모델</td>
+							<td>{{ whm.name }}</td>
+						</tr>
+						<tr>
+							<td>크기</td>
+							<td>{{ whm.size }}</td>
+						</tr>
+						<tr>
+							<td>정격 전압</td>
+							<td>{{ whm.ratedVoltage }}</td>
+						</tr>
+						<tr>
+							<td>정격 전류</td>
+							<td>{{ whm.ratedCurrent }}</td>
+						</tr>
+						<tr>
+							<td>정밀도</td>
+							<td>{{ whm.accuracy }}</td>
+						</tr>
+						<tr>
+							<td>계기 정수</td>
+							<td>{{ whm.constant }}</td>
+						</tr>
+						<tr>
+							<td>외부 출력 펄스</td>
+							<td>{{ whm.outputPulse }}</td>
+						</tr>
+						<tr>
+							<td>펄스 출력 사양</td>
+							<td>{{ whm.pulseSpec }}</td>
+						</tr>
+						<tr>
+							<td>소비 전력</td>
+							<td>{{ whm.powerConsumption }}</td>
+						</tr>
+						<tr>
+							<td>수량</td>
+							<td>{{ whm.quantity }}</td>
+						</tr>
+					</tbody>
+				</table>
+				{% endfor %}
+			</div>
+			<div class="spec-close">
+				<img src="{% static "monitor/close-overlay.png" %}"/>
+			</div>
+		</div>
+	</div>
+</body>

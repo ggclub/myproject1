@@ -1,0 +1,183 @@
+<!DOCTYPE HTML> 
+<div class="container-search-db">
+<div class="conditions">
+	{# op_mode, temp_mode #}
+	<div style="display:none;"><p id='operation-mode'>{{ op_mode }}</p><p id='temperature-mode'>{{ temp_mode }}</p></div>
+	<table class="table table-bordered table-conditions" id="search-conditions">
+		<tr>
+			<td rowspan="2" style="vertical-align: middle;"><b>검색조건</b></td>
+			<td rowspan="1">날짜 <input type="text" id="datepicker1" class="datepicker"> ~ <input type="text" id="datepicker2" class="datepicker">
+			</a></td>
+		</tr>
+		<tr class="search-conditions-detail">
+			<td>
+				<div>전력량계</div>
+			</td>
+		</tr>
+	</table>
+	<div style="display:inline;">
+		<button class="btn-search-db">검색</button>
+		<button class='btn-excel' onclick='Result2excel();'>엑셀변환</button>
+	</div>
+	<table class="table table-bordered table-conditions" id="show-conditions">
+		<tr>
+			<td>
+				<input type="radio" name='power' value='cur' onclick="CheckRadioValue();"><p>순시전력량</p>
+			</td>
+			<td>
+				<input type="radio" name='power' value='int' onclick="CheckRadioValue();"><p>적산전력량</p>
+			</td>
+		</tr>
+	</table>
+	{# <div style="display:inline; float:right;"> #}
+		{# <button class="btn-show-conditions">확인</button> #}
+	{# </div> #}
+</div>
+
+<div class="search-results">
+	{% include 'monitor/search_db_power_result.html' %}
+</div>
+</div>
+
+
+<script>
+// 달력 한글화
+$(function() {
+	$( ".datepicker" ).datepicker({
+		dateFormat: 'yy-mm-dd',
+		prevText: '이전 달',
+		nextText: '다음 달',
+		monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		dayNames: ['일','월','화','수','목','금','토'],
+		dayNamesShort: ['일','월','화','수','목','금','토'],
+		dayNamesMin: ['일','월','화','수','목','금','토'],
+		showMonthAfterYear: true,
+		yearSuffix: '년',
+		dateFormat: 'yy-mm-dd'
+	});
+	$(".datepicker").datepicker("setDate", new Date());
+});
+
+// 초기화
+$(document).ready(function() {
+	$(":radio[value='cur']").attr("checked", true);
+});
+
+// 검색 버튼 클릭
+$('.btn-search-db').on('click', function() {
+	var opMode = $('#operation-mode').text();
+	var tempMode = $('#temperature-mode').text();
+	var startDate = $('#datepicker1').val();
+	var endDate = $('#datepicker2').val();
+	var name = $('select[name=name] option:selected').val();
+
+	$.ajax({
+		url: '/monitor/search_db_power_result/',
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'opMode': opMode,
+			'startDate': startDate,
+			'endDate': endDate,
+			'name': name,
+		},
+		beforeSend: function() { $('#ajax-loader').show(); },
+		complete: function() { $('#ajax-loader').hide(); },
+		success: function(data){
+			$('.search-results').html(data);
+			CheckRadioValue();
+		}
+	});
+	return false;
+});
+
+// 순시유량 적산유량 check
+function CheckRadioValue() {
+	var radio = $(":radio[name=power]:checked").val();
+	if(radio == 'cur') {
+		$('#int').hide();
+		$('#cur').show();
+	} else { // radio == 'int'
+		$('#cur').hide();
+		$('#int').show();
+	}
+}
+
+function Result2excel() {
+	var radio = $(":radio[name=power]:checked").val();
+	var numCol = 2;
+	if(radio == 'cur'){
+		var found = $('#found').text();
+
+		if(found == '0'){
+			alert('검색된 내용이 없습니다.');
+			return;
+		}
+		numRow = parseInt(found);
+
+		var columns = [];
+		$('#query-title tr').find('td').each(function (i) {
+			columns.push($(this).text());
+		});
+
+		var rows = new Array(numRow);
+		for (var i = 0; i < numRow; i++){
+			rows[i] = new Array(numCol);
+		}
+
+		$('#query-result tr').map(function (i) {
+			$(this).find('td').each(function (j) {
+				rows[i][j] = $(this).text();
+			});
+		});	
+	} else { // radio == 'int'
+		var found = $('#found-int').text();
+
+		if(found == '0'){
+			alert('검색된 내용이 없습니다.');
+			return;
+		}
+		numRow = parseInt(found);
+
+		var columns = [];
+		$('#query-title-int tr').find('td').each(function (i) {
+			columns.push($(this).text());
+		});
+		console.log(columns);
+
+		var rows = new Array(numRow);
+		for (var i = 0; i < numRow; i++){
+			rows[i] = new Array(numCol);
+		}
+
+		$('#query-result-int tr').map(function (i) {
+			$(this).find('td').each(function (j) {
+				rows[i][j] = $(this).text();
+			});
+		});	
+	}
+
+	$.ajax({
+		url: '/monitor/search_db_excel/',
+		type: "POST",
+		dataType: "json",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'columns': JSON.stringify(columns),
+			'rows' : JSON.stringify(rows),
+			'numRow' : numRow,
+			'numCol' : numCol,
+			'objType' : 'power-' + radio,
+		},
+		beforeSend: function() { $('#ajax-loader').show(); },
+		complete: function() {  },
+		success: function(data){
+			$('#ajax-loader').hide();
+			alert("파일을 다운로드합니다.");
+		}
+	});
+	return false;
+}
+
+</script>

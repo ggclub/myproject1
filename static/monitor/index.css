@@ -1,0 +1,414 @@
+#ajax-loader {
+	position: fixed;
+	top: 500px;
+	left: 850px;
+	display: none;
+}
+.content {
+	/*position: fixed;*/
+}
+
+/*############################ full screen ##########################*/
+.container {
+	/*background-image: url("temp_backimg.jpg");*/
+	/*background-color: white;*/
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+	margin: 0;
+	font-size: 15px;
+}
+
+.left {
+	float: left;			
+	width: 65%;
+	height: 89vh;
+}
+.left-status {
+	background-image: url("cooling2.jpg");
+	background-size: contain;
+	background-color: #aaaaaa;
+	height: 80vh;
+	position: relative;
+}
+.left-footer {
+	background-color: lightseagreen;
+	height:9vh;
+}
+.right {
+	background-color: #ccddbb;
+	float: right;
+	width: 35%;
+	height: 89vh;
+}
+.right-floor {
+	background-color: #aabbcc;
+	float: top;
+	height: 49%;
+	padding: 2%;
+}
+.right-bottom {
+	background-color: #ccbbaa;
+	float: bottom;
+	height: 51%;
+	padding: 2%;
+}
+/*############################ left - status #########################*/
+.left-header {
+	text-align: center;
+	margin-top: 2%;
+	margin-bottom: 5%;
+}
+
+iframe {
+	display: none;
+	margin-top: 100px;
+	margin-left: 300px;
+	opacity: 1;
+	background-color: #ffffe0;
+	z-index: 124124;
+}
+
+.show-spec {
+	background-blend-mode: screen;
+	opacity: 0.5;
+	z-index: -1;
+}
+
+.btn-opMode {
+	float: right;
+}
+.sys-selected, .sys-selected:focus {
+	background-color: #ffffe0;
+}
+
+.left-table {
+	display: inline-table;
+	width: 130px;
+	border: none;
+	table-layout: fixed;
+}
+.left-table > thead > tr > td,
+.left-table > tbody > tr > td {
+	padding: 5px;
+}
+
+.left-table > thead {
+	height: 50px;
+}
+.table {
+	text-align: center;
+	font-size: 13px;
+}
+.table-title {
+	text-align: left;
+}
+.table-value {
+	text-align: right;
+}
+.table-value:hover {
+	/*cursor: pointer;*/
+}
+
+
+a:hover {
+	cursor: pointer; 
+	text-decoration: none;
+}
+.device {
+	color: black;
+}
+
+.first {
+	position: absolute;
+	top: 80px;
+	left: 200px;
+	height: 190px;
+	width: 954px;
+}
+.heat-pump {
+	width: 144px;
+	height: 190px;
+	margin-right: 10px;
+	font-size: 15px;
+	margin-bottom: 0;
+}
+.left-table > thead > tr > td, .left-table > tbody > tr > td {
+	padding: 8px 5px;
+}
+
+.sec-1 {
+	position: absolute;
+	top: 250px;
+	left: 150px;
+}
+.circulating-pump {
+	width: 163px;
+	height: 167px;
+	font-size: 15px;
+	padding: 0px 5px;
+}
+#cp1-status, #cp2-status {
+	disabled: disabled;
+}
+.sec-2 {
+	position: absolute;
+	top: 290px;
+	left: 500px;
+	height: 208px;
+}
+.flowmeter {
+	width: 280px;
+	height: 106px;
+	font-size: 13px;
+}
+.sec-3 {
+	position: absolute;
+	top: 380px;
+	left: 800px;
+	/*height: 208px;*/
+}
+.heat-exchanger-in1 {
+	width: 141px;
+	height: 72px;
+	font-size: 13px;
+}
+
+.third-1 {
+	position: absolute;
+	top: 520px;
+	left: 220px;
+}
+.third-2 {
+	position: absolute;
+	top: 540px;
+	left: 733px;
+}
+.heat-exchanger-out2 {
+	width: 141px;
+	height: 72px;
+	font-size: 13px;
+}
+
+.fourth-1 {
+	position: absolute;
+	top: 685px;
+	left: 53px;
+	width: 625px;
+}
+.deepwell-pump {
+	width: 143px;
+	height: 165px;
+	margin-right: 10px;
+	font-size: 15px;
+	padding: 0px 5px;
+}
+.deepwell-pump > thead {
+	height: 45px;
+}
+.fourth-2 {
+	position: absolute;
+	top: 695px;
+	left: 855px;
+}
+.rt {
+	width: 200px;
+}
+.fourth-3 {
+	position: absolute;
+	top: 754px;
+	left: 855px;
+}
+.power {
+	width: 200px;
+	height: 81px;
+}
+
+.btn-status{
+	color: white;
+}
+
+.status-on, .status-on:focus {
+	background-color: green;
+	color: white;
+}
+.status-off, .status-off:focus {
+	background-color: red;
+	color: white;
+}
+
+.tubular {
+	margin-right: 5px;
+}
+
+
+/*########### r-floor ##########*/
+.floor-title {
+	/*text-align:center; */
+	display: inline;
+	margin-bottom:20px;
+}
+
+.cius-title {
+	display: inline-table;
+	background-color: lightgoldenrodyellow;
+	border-style: none;
+}
+/*.unit-info > table > tbody > tr > td {
+	padding: 4px 4px;
+}*/
+
+.alignleft {
+	float: left;
+	display: inline;
+}
+
+.alignright {
+	float: right;
+	display: inline;
+}
+
+
+.opMode {
+	margin: 5px;
+}
+#div-btn-opMode {
+	margin: 5px 5px 5px 0;
+}
+
+.slides {
+	padding: 0;
+}
+.ciu {
+	width: 200px;
+	display: inline-table;
+	margin: 5px;
+}
+.room {
+	width: 105px;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.floor-nav {
+	position: fixed; 
+	text-align: center;
+	padding: 0;
+	top: 550px;
+	right: 292px;
+}
+.floor-nav > li, .hp-ciu-nav > li {
+	margin: 0 0 0 5px; 
+	display: inline-block; 
+	zoom: 1; 
+	*display: inline;
+}
+.floor-nav > li:first-child {
+	margin: 0;
+}
+.floor-nav > li > a {
+	display: block; 
+	cursor: pointer; 
+	text-decoration: none;
+/*	width: 13px; 
+	height: 13px; 
+	text-indent: -9999px;*/
+}
+.fl-selected {
+	font-weight: bold;
+}
+/*
+.floor-nav > li > a:hover {
+}
+.floor-nav > li > a.active {
+	cursor: default;
+}
+*/
+
+/*########### r-bottom ##########*/
+.title-hp-ciu > thead > tr > td {
+	background-color: lightgoldenrodyellow;
+}
+.hp-ciu {
+	margin-bottom: 10px;
+}
+
+.hp-ciu-nav {
+	position: fixed; 
+	text-align: center;
+	padding: 0;
+	top: 1040px;
+	right: 110px;
+}
+.hp-selected {
+	font-weight: bold;
+}
+
+/*########### r-log ##########*/
+.pagination {
+	margin: 5px 0 14px;
+}
+
+.pagination > li > a, .pagination > li > span {
+	background-color: inherit;
+}
+
+.pg-selected {
+	font-weight: bold;
+}
+
+/*######################## operation setting #######################*/
+.container-control {
+	padding: 100px 400px;
+}
+#setting-mode-form {
+	position: absolute;
+	top: 300px;
+	left: 700px;
+	font-size: xx-large;	
+	border: black;
+	border-style: solid;
+	padding: 50px;
+	width: 500px;
+}
+.container-change-pw {
+	padding: 300px 700px;
+}
+
+
+/*########################## search database ########################*/
+.container-search-db {
+	padding: 100px 300px;
+}
+.table-conditions {
+	width: initial;
+	display: inline-table;
+}
+.btn-search-db, .btn-excel {
+	width:85px;
+	height:85px;
+}
+#show-conditions {
+	float: right;
+}
+.show-condition {
+	/* check box in show-conditions-detail */
+	float: left;
+}
+.search-conditions-detail > td > div,
+.show-conditions-detail > p {
+	display: inline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

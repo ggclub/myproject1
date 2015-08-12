@@ -1,0 +1,75 @@
+{% load monitor_extras %}
+<!DOCTYPE HTML>
+<div id="cur">
+<table class="table table-bordered">
+	<thead id="query-title">
+		<tr>
+			<td class="result-datetime" rowspan="2"><b>시간</b></td>
+			<td class="result-cpfm" colspan="2"><b>순환 IN</b></td>
+			<td class="result-cpfm" colspan="2"><b>순환 OUT</b></td>
+			<td class="result-dwpfm" colspan="2"><b>심정 IN</b></td>
+			<td class="result-dwpfm" colspan="2"><b>심정 OUT</b></td>
+		</tr>
+		<tr>
+		{% for i in 12|make_list %}
+			<td class="result-cpfm">Ton/hour</td>
+			<td class="result-cpfm">lpm</td>
+		{% endfor %}
+		{% for i in 12|make_list %}
+			<td class="result-dwpfm">Ton/hour</td>
+			<td class="result-dwpfm">lpm</td>
+		{% endfor %}
+		</tr>
+	</thead>
+	<tbody id="query-result">
+		{% for cpfm, dwpfm in database_list %}
+		<tr>
+			<td class="result-datetime">{{ cpfm.dateTime|date:"Y-m-d H:i" }}</td>
+			<td class="result-cpfm">{{ cpfm.currentFlux|div:16.67 }}</td>
+			<td class="result-cpfm">{{ cpfm.currentFlux }}</td>
+			<td class="result-cpfm">{{ cpfm.currentFlux|div:16.67 }}</td>
+			<td class="result-cpfm">{{ cpfm.currentFlux }}</td>
+			<td class="result-dwpfm">{{ dwpfm.currentFlux|div:16.67 }}</td>
+			<td class="result-dwpfm">{{ dwpfm.currentFlux }}</td>
+			<td class="result-dwpfm">{{ dwpfm.currentFlux|div:16.67 }}</td>
+			<td class="result-dwpfm">{{ dwpfm.currentFlux }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div id="found">{{ count }}</div>
+</div>
+
+<div id="int" style="display:none;">
+<table class="table table-bordered">
+	<thead id="query-title-int">
+		<tr>
+			<td class="result-datetime" rowspan="2"><b>시간</b></td>
+			<td class="result-cpfm"><b>순환 IN</b></td>
+			<td class="result-cpfm"><b>순환 OUT</b></td>
+			<td class="result-dwpfm"><b>심정 IN</b></td>
+			<td class="result-dwpfm"><b>심정 OUT</b></td>
+		</tr>
+		<tr>
+		{% for i in 12|make_list %}
+			<td class="result-cpfm">Ton/day</td>
+		{% endfor %}
+		{% for i in 12|make_list %}
+			<td class="result-dwpfm">Ton/day</td>
+		{% endfor %}
+		</tr>
+	</thead>
+	<tbody id="query-result-int">
+		{% for cpfm, dwpfm in database_list_int %}
+		<tr>
+			<td class="result-datetime">{{ cpfm.dateTime|date:"Y-m-d" }}</td>
+			<td class="result-cpfm">{{ cpfm.integralFlux|div:16.67 }}</td>
+			<td class="result-cpfm">{{ cpfm.integralFlux|div:16.67 }}</td>
+			<td class="result-dwpfm">{{ dwpfm.integralFlux|div:16.67 }}</td>
+			<td class="result-dwpfm">{{ dwpfm.integralFlux|div:16.67 }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div id="found-int">{{ count_int }}</div>
+</div>

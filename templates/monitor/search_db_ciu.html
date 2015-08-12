@@ -1,0 +1,311 @@
+<!DOCTYPE HTML> 
+<div class="container-search-db">
+<div class="conditions">
+	{# op_mode, temp_mode #}
+	<div style="display:none;"><p id='operation-mode'>{{ op_mode }}</p><p id='temperature-mode'>{{ temp_mode }}</p></div>
+	<table class="table table-bordered table-conditions" id="search-conditions">
+		<tr>
+			<td rowspan="2" style="vertical-align: middle;"><b>검색조건</b></td>
+			<td>날짜 <input type="text" id="datepicker1" class="datepicker"> ~ <input type="text" id="datepicker2" class="datepicker">
+			</a></td>
+		</tr>
+		<tr class="search-conditions-detail">
+			<td>
+				<div>층 수
+				<select name="floor" id="floor">
+					<option value="0">(전체)</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select></div>
+				<div style="margin: 0px 15px;"></div>
+				<div>실내기
+				<select name="name" id="name">
+					<option>(전체)</option>
+				</select></div>
+			</td>
+		</tr>
+	</table>
+	<div style="display:inline;">
+		<button class="btn-search-db">검색</button>
+		<button class='btn-excel' onclick='Result2excel();'>엑셀변환</button>
+	</div>
+	<table class="table table-conditions" id="show-conditions">
+		<tr>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="1"><p>시간</p>
+			</td>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="2"><p>층수</p>
+			</td>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="3"><p>실내기명</p>
+			</td>
+			<td rowspan="3">
+				<input type="checkbox" id="select-all" value="all"> 전체선택/해제<br>
+				<div style="margin-bottom:5px;"></div>
+				<button class="btn-apply-chkbox">적용</button>
+			</td>
+		</tr>
+		<tr>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="4"><p>동작상태</p>
+			</td>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="5"><p>설정온도</p>
+			</td>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="6"><p>실내온도</p>
+			</td>
+		</tr>
+		<tr>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="7"><p>운전모드</p>
+			</td>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="8"><p>풍량</p>
+			</td>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="9"><p>에러</p>
+			</td> 
+		</tr>
+	</table>
+</div>
+
+<div class="search-results">
+	{% include 'monitor/search_db_ciu_result.html' %}
+</div>
+</div>
+
+
+<script>
+// 달력 한글화
+$(function() {
+	$( ".datepicker" ).datepicker({
+		dateFormat: 'yy-mm-dd',
+		prevText: '이전 달',
+		nextText: '다음 달',
+		monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		dayNames: ['일','월','화','수','목','금','토'],
+		dayNamesShort: ['일','월','화','수','목','금','토'],
+		dayNamesMin: ['일','월','화','수','목','금','토'],
+		showMonthAfterYear: true,
+		yearSuffix: '년',
+		dateFormat: 'yy-mm-dd'
+	});
+	$(".datepicker").datepicker("setDate", new Date());
+});
+// 초기화
+$(document).ready(function() {
+	$(':checkbox').each(function() {
+		this.checked = true;
+	});
+});
+// 전체 선택/해제
+$('#select-all').on('click', function() {
+	if($('input:checkbox[id=select-all]').is(':checked')){
+		$('input:checkbox[name=show-condition]').each(function() {
+			this.checked = true; // 선택
+		});	
+	} else {
+		$('input:checkbox[name=show-condition]').each(function() {
+			this.checked = false; // 해제
+		});	
+	}
+});
+
+// 보여주기 조건 적용시
+$('.btn-apply-chkbox').on('click', function() {
+	// 시간
+	if($(':checkbox[value=1]').is(':checked')){
+		$('.result-datetime').css('display','table-cell');
+	} else {
+		$('.result-datetime').css('display','none');
+	}
+	// 층 수
+	if($(':checkbox[value=2]').is(':checked')){
+		$('.result-floor').css('display','table-cell');
+	} else {
+		$('.result-floor').css('display','none');
+	}
+	// 실내기명
+	if($(':checkbox[value=3]').is(':checked')){
+		$('.result-location').css('display','table-cell');
+	} else {
+		$('.result-location').css('display','none');
+	}
+	// 동작상태
+	if($(':checkbox[value=4]').is(':checked')){
+		$('.result-switch').css('display','table-cell');
+	} else {
+		$('.result-switch').css('display','none');
+	}
+	// 설정온도
+	if($(':checkbox[value=5]').is(':checked')){
+		$('.result-set-temp').css('display','table-cell');
+	} else {
+		$('.result-set-temp').css('display','none');
+	}
+	// 실내온도
+	if($(':checkbox[value=6]').is(':checked')){
+		$('.result-temperature').css('display','table-cell');
+	} else {
+		$('.result-temperature').css('display','none');
+	}
+	// 운전모드
+	if($(':checkbox[value=7]').is(':checked')){
+		$('.result-op-mode').css('display','table-cell');
+	} else {
+		$('.result-op-mode').css('display','none');
+	}
+	// 풍량
+	if($(':checkbox[value=8]').is(':checked')){
+		$('.result-air-flow').css('display','table-cell');
+	} else {
+		$('.result-air-flow').css('display','none');
+	}
+	// 에러
+	if($(':checkbox[value=9]').is(':checked')){
+		$('.result-state').css('display','table-cell');
+	} else {
+		$('.result-state').css('display','none');
+	}
+});
+
+// 층수 정했을 때 실내기명 콤보박스
+$('select[name=floor]').on('change', function() {
+	var options
+	if($(this).val() == "1") { 		// 1층
+		options = "<option value='0'>(전체)</option>"+
+			"<option value='1'>방재실</option>"+
+			"<option value='2'>로비1</option>"+
+			"<option value='3'>로비2</option>"+
+			"<option value='4'>수유실</option>"+
+			"<option value='5'>저소득층상담실</option>"+
+			"<option value='6'>회의실</option>"+
+			"<option value='7'>사무실1</option>"+
+			"<option value='8'>사무실2</option>"+
+			"<option value='9'>사무실3</option>"+
+			"<option value='10'>주민등록실</option>"+
+			"<option value='11'>MDF실</option>"+
+			"<option value='12'>진료실</option>"+
+			"<option value='13'>사무대기실</option>"+
+			"<option value='14'>접종보건실</option>"
+		$("#name").html(options);
+	} else if ($(this).val() == "2") { 	// 2층
+		options = "<option value='0'>(전체)</option>"+
+			"<option value='1'>2층 홀</option>"+
+			"<option value='2'>조정실</option>"+
+			"<option value='3'>준비실</option>"+
+			"<option value='4'>면장실</option>"+
+			"<option value='5'>교육실1</option>"+
+			"<option value='6'>교육실2</option>"+
+			"<option value='7'>교육실3</option>"+
+			"<option value='8'>농업인상담실1</option>"+
+			"<option value='9'>농업인상담실2</option>"+
+			"<option value='10'>서고</option>"+
+			"<option value='11'>면대1</option>"+
+			"<option value='12'>면대2</option>"
+		$("#name").html(options);
+	} else if ($(this).val() == "3") {	// 3층
+		options = "<option value='0'>(전체)</option>"+
+			"<option value='1'>3층 홀</option>"+
+			"<option value='2'>강당1</option>"+
+			"<option value='3'>강당2</option>"+
+			"<option value='4'>다목적홀1</option>"+
+			"<option value='5'>다목적홀2</option>"+
+			"<option value='6'>다목적홀3</option>"+
+			"<option value='7'>홀공간1</option>"+
+			"<option value='8'>홀공간2</option>"+
+			"<option value='9'>평생학습실1-1</option>"+
+			"<option value='10'>평생학습실1-2</option>"+
+			"<option value='11'>평생학습실2-1</option>"+
+			"<option value='12'>평생학습실2-2</option>"
+		$("#name").html(options);
+	} else {				// (전체)
+		$("#name").html("<option value='0'>(전체)</option>");
+	}
+});
+
+// 검색 버튼 클릭
+$('.btn-search-db').on('click', function() {
+	var opMode = $('#operation-mode').text();
+	var tempMode = $('#temperature-mode').text();
+	var startDate = $('#datepicker1').val();
+	var endDate = $('#datepicker2').val();
+	var floor = $('select[name=floor] option:selected').val();
+	var name = $('select[name=name] option:selected').val();
+	// console.log(startDate + ", " + endDate + ", " +  floor + ", " +  name);
+	$.ajax({
+		url: '/monitor/search_db_ciu_result/',
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'opMode': opMode,
+			'startDate': startDate,
+			'endDate': endDate,
+			'floor': floor,
+			'name': name,
+			'objType': 'ciu',
+		},
+		beforeSend: function() { $('#ajax-loader').show(); },
+		complete: function() { $('#ajax-loader').hide(); },
+		success: function(data){
+			$('.search-results').html(data);
+		}
+	});
+	return false;
+});
+
+
+function Result2excel() {
+	var found = $('#found').text();
+	if(found == '0'){
+		alert('검색된 내용이 없습니다.');
+		return;
+	}
+	numRow = parseInt(found);
+	var numCol = $('input[name=show-condition]:checkbox:checked').length;
+
+	var columns = [];
+	$('#query-title tr').find('td').each(function (i) {
+		columns.push($(this).text());
+	});
+	// console.log(columns);
+
+	var rows = new Array(numRow);
+	for (var i = 0; i < numRow; i++){
+		rows[i] = new Array(numCol);
+	}
+
+	$('#query-result tr').map(function (i) {
+		$(this).find('td').each(function (j) {
+			rows[i][j] = $(this).text();
+		});
+	});
+	// console.log(rows);
+
+	$.ajax({
+		url: '/monitor/search_db_excel/',
+		type: "POST",
+		dataType: "json",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'columns': JSON.stringify(columns),
+			'rows' : JSON.stringify(rows),
+			'numRow' : numRow,
+			'numCol' : numCol,
+			'objType' : 'ciu',
+		},
+		beforeSend: function() { $('#ajax-loader').show(); },
+		complete: function() {  },
+		success: function(data){
+			$('#ajax-loader').hide();
+			alert("파일을 다운로드합니다.");
+		}
+	});
+	return false;
+}
+
+</script>

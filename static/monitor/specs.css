@@ -1,0 +1,30 @@
+ 
+.spec-body {
+	background-color: transparent;
+
+	/*background-blend-mode: screen;*/
+}
+ .spec-container {
+	margin: 250px 400px 720px 400px;
+ }
+
+.spec-modal {
+	width: 800px;
+	/*height: 600px;*/
+	/*margin: 250px 400px;*/
+	background-color: #ffffe0;
+}
+
+.spec-table {
+
+}
+
+.spec-close {
+	  position: absolute;
+	  /*top: -20px;*/
+	  /*right: -25px;*/
+	  top: 225px;
+	  left: 1175px;
+	  cursor: pointer;
+}
+

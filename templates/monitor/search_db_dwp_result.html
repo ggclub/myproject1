@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+
+<table class="table table-bordered">
+	<thead id="query-title">
+		<tr>
+			<td class="result-datetime" rowspan="2"><b>시간</b></td>
+			<td class="result-dwp1" colspan="3"><b>순환펌프 1 (SB-1)/(7.5HP)</b></td>
+			<td class="result-dwp2" colspan="3"><b>순환펌프 2 (AB-1)/(5HP)</b></td>
+			<td class="result-dwp3" colspan="3"><b>순환펌프 3 (AB-2)/(5HP)</b></td>
+			<td class="result-dwp4" colspan="3"><b>순환펌프 4 (SB-2)/(7.5HP)</b></td>
+		</tr>
+		<tr>
+		{% for i in 1234|make_list %}
+			<td class="result-dwp{{ i }}">동작상태</td>
+			<td class="result-dwp{{ i }}">온도</td>
+			<td class="result-dwp{{ i }}">운전모드</td>
+		{% endfor %}
+		</tr>
+	</thead>
+	<tbody id="query-result">
+		{% for dwp1, dwp2, dwp3, dwp4, temp in database_list %}
+		<tr>
+			<td class="result-datetime">{{ dwp1.dateTime|date:"Y-m-d H:i" }}</td>
+			<td class="result-dwp1">{{ dwp1.switch }}</td>
+			<td class="result-dwp1">{{ temp.temperature }}</td>
+			<td class="result-dwp1">{{ dwp1.get_opMode_display }}</td>
+			<td class="result-dwp2">{{ dwp2.switch }}</td>
+			<td class="result-dwp2">{{ temp.temperature }}</td>
+			<td class="result-dwp2">{{ dwp2.get_opMode_display }}</td>
+			<td class="result-dwp3">{{ dwp3.switch }}</td>
+			<td class="result-dwp3">{{ temp.temperature }}</td>
+			<td class="result-dwp3">{{ dwp3.get_opMode_display }}</td>
+			<td class="result-dwp4">{{ dwp4.switch }}</td>
+			<td class="result-dwp4">{{ temp.temperature }}</td>
+			<td class="result-dwp4">{{ dwp4.get_opMode_display }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div id="found">{{ count }}</div>

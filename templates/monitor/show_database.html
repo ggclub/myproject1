@@ -1,0 +1,19 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{% static "monitor/show-database.css" %}" type="text/css">
+</head>
+<body style="background-color:transparent;">
+	<div class="show-database-container" style="margin: 50px 50px; width:1220px;">
+		<div class="show-database-modal" style="width:1220px; background-color:lightgray;">
+			<div class="sensor-data">
+				{% include 'monitor/sensor_data.html' %}
+			</div>
+
+			<div class="show-database-close">
+				<img src="{% static "monitor/close-overlay.png" %}"/>
+			</div>
+		</div>
+	</div>
+</body>

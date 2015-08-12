@@ -1,0 +1,406 @@
+<!DOCTYPE HTML>
+
+<div class="first">
+{% for pump in heat_pump %}
+<table class="left-table heat-pump">
+	<thead>
+		<tr><td colspan="2">
+			<p class="device" id="hp{{ forloop.counter }}"><b>히트 펌프 {{ forloop.counter }} <br>
+				{% if forloop.counter == 1 or forloop.counter == 3 %}
+				RGUW200C9C
+				{% elif forloop.counter == 2 or forloop.counter == 5 %}
+				LRG-N5801DC
+				{% elif forloop.counter == 4 or forloop.counter == 6 %}
+				RGUW100C9C
+				{% endif %}
+			</b></p>
+		</td></tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="table-title">상태</td>
+			<td style="float:right;">
+				<button class="btn btn-default btn-xs hp-status" id="hp{{ forloop.counter }}-status">{{ pump.switch }}</button>
+			</td>
+		</tr>
+		<tr>
+			<td class="table-title">IN</td>
+			<td class="table-value" id="TempHPIn{{ forloop.counter }}">{{ pump.tempIn|floatformat:1 }}  °C</td>
+		</tr>
+		<tr>
+			<td class="table-title">OUT</td>
+			<td class="table-value" id="TempHPOut{{ forloop.counter }}">{{ pump.tempOut|floatformat:1 }}  °C</td>
+		</tr>
+	</tbody>
+</table>
+{% endfor %}
+</div>
+
+<div class="sec-1">
+	{% for pump in CP %}
+	<table class="left-table circulating-pump">
+		<thead>
+			<tr><td colspan="2">
+				<p class="device" id="cp{{ pump.get_CPID_display }}"><b>순환 펌프 {{ pump.get_CPID_display }}
+				</b></p>
+			</td></tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="table-title">상태</td>
+				<td style="float:right;">
+					<button class="btn btn-default btn-xs btn-status control" id="cp{{ pump.get_CPID_display }}-status">{{ pump.switch }}</button>
+				</td>
+			</tr>
+			<tr>
+				<td class="table-title">회전수</td>
+				<td class="table-value" id="CirculatingPump">{{ pump.Hz }} Hz</td>
+			</tr>
+			<tr>
+				<td class="table-title">유량</td>
+				<td class="table-value" id="CirculatingPump">{{ pump.flux }} LPM</td>
+			</tr>
+	</table>
+	{% endfor %}
+</div>
+<div class="sec-2">
+	<table class="left-table flowmeter">
+		<tbody>
+			<tr>
+				<td colspan="2">
+				<p class="device" id="cpfm"><b>유량계</b></p>
+				</td>
+				<td class="table-title">수온</td>
+				<td class="table-value" id="TempHEOut1">{{ temp_HEOut1.temperature|floatformat:1 }} °C</td>
+			</tr>
+			<tr>
+				<td class="table-title">순시 유량</td>
+				<td class="table-value" id="CPFlowmeter">{{ CPFM.currentFlux|floatformat:1 }} LPM</td>
+				<td class="table-title">적산 유량</td>
+				<td class="table-value" id="CPFlowmeter" style="font-size:smaller;">{{ CPFM.integralFlux }} ton/hr</td>
+			</tr>
+			<tr>
+				<td class="table-title">내부 온도</td>
+				<td class="table-value" id="CPFlowmeter">{{ CPFM.temperature|floatformat:1 }} °C</td>
+				<td class="table-title">유속</td>
+				<td class="table-value" id="CPFlowmeter">{{ CPFM.velocity }} m/s</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="sec-3">
+<table class="left-table heat-exchanger-in1">
+	<tbody>
+		<tr>
+			<td class="table-title">수온</td>
+			<td class="table-value" id="TempHEIn1">{{ temp_HEIn1.temperature|floatformat:1 }} °C</td>
+		</tr>
+		<tr>
+			<td class="table-title">순시 유량</td>
+			<td class="table-value" id="CPFlowmeter">{{ CPFM.currentFlux|floatformat:1 }} °C</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div class="third-1">
+	<table class="left-table flowmeter">
+		<tbody>
+			<tr>
+				<td colspan="2">
+				<p class="device" id="dwpfm"><b>유량계</b></p>
+				</td>
+				<td class="table-title">수온</td>
+				<td class="table-value" id="TempHEOut2">{{ temp_HEOut2.temperature|floatformat:1 }} °C</td>
+			</tr>
+			<tr>
+				<td class="table-title">순시 유량</td>
+				<td class="table-value" id="DWPFlowmeter">{{ DWPFM.currentFlux|floatformat:1 }} LPM</td>
+				<td class="table-title">적산 유량</td>
+				<td class="table-value" id="DWPFlowmeter" style="font-size:smaller;">{{ DWPFM.integralFlux }} ton/hr</td>
+			</tr>
+			<tr>
+				<td class="table-title">내부 온도</td>
+				<td class="table-value" id="DWPFlowmeter">{{ DWPFM.temperature|floatformat:1 }} °C</td>
+				<td class="table-title">유속</td>
+				<td class="table-value" id="DWPFlowmeter">{{ DWPFM.velocity }} m/s</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="third-2">
+	<table class="left-table heat-exchanger-out2">
+		<tbody>
+			<tr>
+				<td class="table-title">수온</td>
+				<td class="table-value" id="TempHEIn2">{{ temp_HEIn2.temperature|floatformat:1 }} °C</td>
+			</tr>
+			<tr>
+				<td class="table-title">순시 유량</td>
+				<td class="table-value" id="DWPFlowmeter">{{ DWPFM.currentFlux|floatformat:1 }} °C</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="fourth-1">
+	{% for pump in DWP %}
+	<table class="left-table deepwell-pump">
+		<thead>
+			<tr><td colspan="2">
+				<p class="device" id="dwp{{ forloop.counter }}"><b>심정 펌프 {{ forloop.counter }}</b></p>
+			</td></tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="table-title">상태</td>
+				<td style="float:right;">
+					<button class="btn btn-default btn-xs btn-status control" id="dwp{{ forloop.counter }}-status">{{ pump.switch }}</button>
+				</td>
+			</tr>
+			<tr>
+				<td class="table-title">수위</td>
+				<td class="table-value" id="DeepwellPump{{ forloop.counter }}">{{ pump.get_waterLevel_display }}</td>
+			</tr>
+			<tr>
+				<td class="table-title">수온</td>
+				<td class="table-value" id="DeepwellPump{{ forloop.counter }}"></td>
+			</tr>
+		</tbody>
+	</table>
+	{% endfor %}
+</div>
+<div class="fourth-2">
+	<table class="left-table rt">
+		<tbody>
+			<tr>
+				<td class="table-title">RT</td>
+				<td class="table-value" id="RefrigerationTon">{{ rt.RT }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="fourth-3">
+	<table class="left-table power">
+		<tbody>
+			<tr>
+				<td class="table-title">순시 전력</td>
+				<td class="table-value" id="PowerConsumption">{{ power.currentPowerConsumption }} W</td>
+			</tr>
+			<tr>
+				<td class="table-title">적산 전력</td>
+				<td class="table-value" id="PowerConsumption">{{ power.integralPowerConsumption }} kWh</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div id="error-msg">
+	<p>{{ error }}</p>
+</div>
+
+<script type="text/javascript">
+	// var opMode = 'AT';
+	
+	// 초기 세팅
+	var btns = $('.btn-status');
+	$.each(btns, function(i, val) {
+		// alert(val.value);
+		if(val.innerText === "OFF") {
+			$(this).removeClass('status-on');
+			$(this).addClass('status-off');
+		} else if (val.innerText === "ON") {
+			$(this).removeClass('status-off');
+			$(this).addClass('status-on');
+		}
+		$(this).attr('disabled', true);
+		$(this).removeClass('btn-default');
+	});
+	$.each($('.hp-status'), function(i, val) {
+		if(val.innerText === "OFF"){
+			$(this).removeClass('status-on');
+			$(this).addClass('status-off');
+		} else {
+			$(this).removeClass('status-off');
+			$(this).addClass('status-on');
+		}
+		$(this).attr('disabled', true);
+		$('.hp-status').removeClass('btn-default');
+	});
+
+	// // ajax 스위치 on/off
+	// $('.control').on('click', function toggleStatus(){
+	// 	var id = this.id;
+	// 	var status = '';
+
+	// 	if($(this).text()=== "OFF"){
+	// 		$(this).text("ON"); status='ON';
+	// 		$(this).removeClass('status-off');
+	// 		$(this).addClass('status-on');
+	// 	} else if($(this).text()==="ON"){
+	// 		$(this).text("OFF"); status='OFF';
+	// 		$(this).removeClass('status-on');
+	// 		$(this).addClass('status-off');
+	// 	} else {
+	// 		status = 'N/A';
+	// 	}
+
+	// 	// var opMode = $('.sys-selected').last().text();
+	// 	// console.log(opMode);
+	// 	// var tempMode = $('.sys-selected').first().text();
+	// 	// console.log(tempMode);
+	// 	if(opMode == '수동') {
+	// 		opMode = 'MN';
+	// 	} else {
+	// 		opMode = 'AT';
+	// 	}
+	// 	if(tempMode == '난방') {
+	// 		tempMode = 'HT';
+	// 	} else {
+	// 		tempMode = 'CL';
+	// 	}
+	// 	// console.log(opMode);
+	// 	// console.log(tempMode);
+	// 	$.ajax({
+	// 		url: "/monitor/toggle_switch/",
+	// 		type: "POST",
+	// 		data: {
+	// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
+	// 			'id': id,
+	// 			'status': status,
+	// 			'tempMode': tempMode,
+	// 			'opMode': opMode,
+	// 			'flag': 1,
+	// 		},
+	// 		success: function(data) {
+	// 			$('#right-bottom').html(data);
+	// 		}
+	// 	});
+	// 	return false;
+	// });
+
+	// // 냉방 버튼 클릭
+	// $('.btn-coolMode').on('click', function setCoolImg(){
+	// 	$('.btn-heatMode').removeClass('sys-selected');
+	// 	$('.btn-coolMode').addClass('sys-selected');
+	// 	$('#left').css("background-image", "url(/static/monitor/cooling2.jpg)");
+	// });
+	// // 난방 버튼 클릭
+	// $('.btn-heatMode').on('click', function setHeatImg(){
+	// 	$('.btn-coolMode').removeClass('sys-selected');
+	// 	$('.btn-heatMode').addClass('sys-selected');
+	// 	$('#left').css("background-image", "url(/static/monitor/heating2.jpg)");
+	// });
+	// // 자동 버튼 클릭
+	// $('.btn-auto').on('click', function setHeatImg(){
+	// 	$('.btn-manual').removeClass('sys-selected');
+	// 	$('.btn-auto').addClass('sys-selected');
+	// 	$('.btn-status').attr('disabled', true);
+	// 	$('.btn-status').removeClass('btn-default');
+	// 	$('#cp-setting').attr('disabled', true);
+	// 	$('#cp-setting').removeClass('btn-default');
+	// });
+	// // 수동 버튼 클릭
+	// $('.btn-manual').on('click', function setHeatImg(){
+	// 	$('.btn-auto').removeClass('sys-selected');
+	// 	$('.btn-manual').addClass('sys-selected');
+	// 	$('.btn-status').removeAttr('disabled');
+	// 	$('.btn-status').addClass('btn-default');
+	// 	$('#cp-setting').removeAttr('disabled');
+	// 	$('#cp-setting').addClass('btn-default');
+	// });
+
+	// // 장비 스펙 표시
+	// $('.device').on('click', function () {
+	// 	var id = $(this).attr('id');
+	// 	$('.left').addClass('show-spec');
+	// 	$('#spec-frame').css('display', 'block');
+	// });
+
+	// // 순환 펌프 설정
+	// $('#cp-setting').on('click', function setCP() {
+	// 	$('.left').addClass('show-spec');
+	// 	$('#cp-setting-frame').css('display', 'block');
+	// });
+
+	// 해당 센서 데이터베이스 보여주기
+	// $('.table-value').on('click', function showDB() {
+	// 	var id = $(this).attr('id');
+	// 	console.log(id);
+	// 	$.ajax({
+	// 		url: "/monitor/show_database/",
+	// 		type: "POST",
+	// 		data: {
+	// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
+	// 			'id': id,
+	// 		},
+	// 		success: function(data) {
+	// 			$('.left').addClass('show-spec');
+	// 			$('#show-database-frame').css('display', 'block');
+	// 			$('#show-database-frame').contents().find('.sensor-data').html(data);
+	// 		}
+	// 	});
+	// 	return false;
+	// });
+	// ############################ end left-status ############################
+
+	// 인버터 세팅
+	// $('#ok').on('click', function() {
+	// 	var cpid = $('input:radio[name=cpid]:checked').val();
+	// 	var cpswitch = $('input:radio[name=cpswitch]:checked').val();
+	// 	var cphz =$('input[name=cphz]').val();
+	// 	var cpflux = $('input[name=cpflux]').val();
+	// 	if (cpid == '' || cpswitch == '' || cphz == '' || cpflux == ''){
+	// 		alert('값을 입력해주세요.');
+	// 		return false;
+	// 	}
+	// 	// var opMode =  $('.sys-selected', window.parent.document).last().text();
+	// 	// var tempMode =  $('.sys-selected', window.parent.document).first().text();
+	// 	if(opMode == '수동') {
+	// 		opMode = 'MN';
+	// 	} else {
+	// 		opMode = 'AT';
+	// 	}
+	// 	if(tempMode == '난방') {
+	// 		tempMode = 'HT';
+	// 	} else {
+	// 		tempMode = 'CL';
+	// 	}
+	// 	$.ajax({
+	// 		url: "/monitor/set_cp/",
+	// 		type: "POST",
+	// 		data: {
+	// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
+	// 			'cpid' : cpid,
+	// 			'cpswitch' : cpswitch,
+	// 			'cphz' : cphz,
+	// 			'cpflux' : cpflux,
+	// 			'opMode' : opMode,
+	// 			'tempMode' : tempMode,
+	// 		},
+	// 		success: function(data) {
+	// 			alert('설정 되었습니다.');
+	// 			$('#left', window.parent.document).removeClass('show-spec');
+	// 			$('#cp-setting-frame', window.parent.document).css('display', 'none');	
+	// 			$('#container').html(data)
+	// 		}
+	// 	});
+	// 	return false;
+	// });
+
+	// // 설정 취소
+	// $('#cancel').on('click', function() {
+	// 	$('#left', window.parent.document).removeClass('show-spec');
+	// 	$('#cp-setting-frame', window.parent.document).css('display', 'none');
+	// });
+
+	// // 장비 이력 iframe close
+	// $('.spec-close').on('click', function () {
+	// 	$('#spec-frame', window.parent.document).css('display', 'none');
+	// 	$('#left-status', window.parent.document).removeClass('show-spec');
+	// });
+
+	// // 데이터베이스
+	// $('.show-database-close').on('click', function () {
+	// 	$('#show-database-frame', window.parent.document).css('display', 'none');
+	// 	$('#left', window.parent.document).removeClass('show-spec');
+	// });
+</script>

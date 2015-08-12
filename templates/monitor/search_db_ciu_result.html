@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+
+<table class="table table-bordered">
+	<thead id="query-title">
+		<tr>
+			<td class="result-datetime"><b>시간</b></td>
+			<td class="result-floor"><b>층 수</b></td>
+			<td class="result-location"><b>실내기명</b></td>
+			<td class="result-switch"><b>동작상태</b></td>
+			<td class="result-set-temp"><b>설정온도</b></td>
+			<td class="result-temperature"><b>실내온도</b></td>
+			<td class="result-op-mode"><b>운전모드</b></td>
+			<td class="result-air-flow"><b>풍량</b></td>
+			<td class="result-state"><b>에러</b></td>
+		</tr>
+	</thead>
+	<tbody id="query-result">
+		{% if database_list %}
+			{% for database in database_list %}
+			{% for data in database %}
+				{% for d in data %}
+				<tr>
+					<td class="result-datetime">{{ d.dateTime|date:"Y-m-d H:i" }}</td>
+					<td class="result-floor">{{ d.floor }}</td>
+					<td class="result-location">{{ d.get_location_display }}</td>
+					<td class="result-switch">{{ d.switch }}</td>
+					<td class="result-set-temp">{{ d.setTemp }}</td>
+					<td class="result-temperature">{{ d.temperature }}</td>
+					<td class="result-op-mode">{{ d.opMode }}</td>
+					<td class="result-air-flow">{{ d.airFlow }}</td>
+					<td class="result-state">{{ d.state }}</td>
+				</tr>
+				{% endfor %}
+			{% endfor %}
+			{% endfor %}
+		{% else %}
+			{% for data in database %}
+			{% for d in data %}
+			<tr>
+				<td class="result-datetime">{{ d.dateTime|date:"Y-m-d H:i:s" }}</td>
+				<td class="result-floor">{{ d.floor }}</td>
+				<td class="result-location">{{ d.get_location_display }}</td>
+				<td class="result-switch">{{ d.switch }}</td>
+				<td class="result-set-temp">{{ d.setTemp }}</td>
+				<td class="result-temperature">{{ d.temperature }}</td>
+				<td class="result-op-mode">{{ d.opMode }}</td>
+				<td class="result-air-flow">{{ d.airFlow }}</td>
+				<td class="result-state">{{ d.state }}</td>
+			</tr>
+			{% endfor %}
+			{% endfor %}
+		{% endif %}
+	</tbody>
+</table>
+<div id="found">{{ count }}</div>

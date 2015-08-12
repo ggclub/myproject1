@@ -1,0 +1,55 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<div class="floor-title">
+	<table class="table table-bordered cius-title">
+	<tr>
+		<td><b>실내기 운행 상태</b></td>
+		<td>55 RT</td>
+		<td>ON {{ ciu_on_count }}</td>
+	</tr>
+	</table>
+</div>
+<div class="unit-info">
+{% for ciu in us %}
+	<table class="table table-bordered table-condensed ciu" >
+		<tr>
+			<td class="room" rowspan="2">{{ ciu.get_location_display }}</td>
+			<td>상태</td>
+			<td>온도</td>
+		</tr>
+		<tr>
+			<td>{{ ciu.switch }}</td>
+			<td>{{ ciu.temperature }}</td>
+		</tr>
+	</table>
+{% endfor %}
+</div>
+<div class="slider">
+	<div class="floor-nav" >
+		<li><a class="fl-selected" id="1">1층</a></li>
+		<li><a id="2">2층</a></li>
+		<li><a id="3">3층</a></li>
+	</div>
+</div>
+
+<script type="text/javascript">
+// 실내기 층 변경
+$('.floor-nav > li > a').on('click', function () {
+	var floor = this.id;
+	// console.log("floor, floor: " + floor);
+	$.ajax({
+		url: "/monitor/floor_change/",
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'floor': floor,
+		},
+		success: function(data){	
+			$("#right-floor").html(data);
+			$('.fl-selected').removeClass('fl-selected');
+			$('.floor-nav').find('#'+floor).addClass('fl-selected');
+		}
+	});
+	return false;
+});
+</script>

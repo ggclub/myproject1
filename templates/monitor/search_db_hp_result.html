@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+
+<table class="table table-bordered">
+	<thead id="query-title">
+		<tr>
+			<td class="result-datetime" rowspan="2"><b>시간</b></td>
+			<td class="result-hp1" colspan="3"><b>히트펌프 1(3F)</b></td>
+			<td class="result-hp2" colspan="3"><b>히트펌프 2(2F)</b></td>
+			<td class="result-hp3" colspan="3"><b>히트펌프 3(2F)</b></td>
+			<td class="result-hp4" colspan="3"><b>히트펌프 4(1F)</b></td>
+			<td class="result-hp5" colspan="3"><b>히트펌프 5(1F)</b></td>
+			<td class="result-hp6" colspan="3"><b>히트펌프 6(3F)</b></td>
+		</tr>
+		<tr>
+		{% for i in 123456|make_list %}
+			<td class="result-hp{{ i }}">동작상태</td>
+			<td class="result-hp{{ i }}">IN</td>
+			<td class="result-hp{{ i }}">OUT</td>
+		{% endfor %}
+		</tr>
+	</thead>
+	<tbody id="query-result">
+		{% for hp1, hp2, hp3, hp4, hp5, hp6 in database_list %}
+		<tr>
+			<td class="result-datetime">{{ hp1.dateTime|date:"Y-m-d H:i" }}</td>
+			<td class="result-hp1">{{ hp1.switch }}</td>
+			<td class="result-hp1">{{ hp1.tempIn.temperature }}</td>
+			<td class="result-hp1">{{ hp1.tempOut.temperature }}</td>
+			<td class="result-hp2">{{ hp2.switch }}</td>
+			<td class="result-hp2">{{ hp2.tempIn.temperature }}</td>
+			<td class="result-hp2">{{ hp2.tempOut.temperature }}</td>
+			<td class="result-hp3">{{ hp3.switch }}</td>
+			<td class="result-hp3">{{ hp3.tempIn.temperature }}</td>
+			<td class="result-hp3">{{ hp3.tempOut.temperature }}</td>
+			<td class="result-hp4">{{ hp4.switch }}</td>
+			<td class="result-hp4">{{ hp4.tempIn.temperature }}</td>
+			<td class="result-hp4">{{ hp4.tempOut.temperature }}</td>
+			<td class="result-hp5">{{ hp5.switch }}</td>
+			<td class="result-hp5">{{ hp5.tempIn.temperature }}</td>
+			<td class="result-hp5">{{ hp5.tempOut.temperature }}</td>
+			<td class="result-hp6">{{ hp6.switch }}</td>
+			<td class="result-hp6">{{ hp6.tempIn.temperature }}</td>
+			<td class="result-hp6">{{ hp6.tempOut.temperature }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div id="found">{{ count }}</div>
