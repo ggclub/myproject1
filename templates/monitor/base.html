@@ -199,24 +199,6 @@ function reloadDisplay() {
 	return false;
 }
 
-// ############################ left-status ############################
-// ajax 자동수동
-// $('.btn-opMode').on('click', function setMode(){
-// 	var opMode = this.innerText;
-// 	$.ajax({
-// 		url: "/monitor/set_operation_mode/",
-// 		type: "POST",
-// 		data: {
-// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
-// 			'opMode': opMode,
-// 		},
-// 		success: function(data){
-// 			$('.opMode').text(data.opMode + ' 모드');
-// 		}
-// 	});
-// 	return false;
-// });
-
 
 </script>
 {% endblock %}
