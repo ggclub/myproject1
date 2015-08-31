@@ -31,9 +31,9 @@ function stopSound(){
 	$('#error-msg > p').text('정상');
 }
 function changePassword() {
-	$.post("/monitor/change_password_page/", function(data) {
-		$('.right-floor').html(data);
-	});
+	// $.post("/monitor/change_password_page/", function(data) {
+		// $('.right-top').html(data);
+	// });
 }
 
 var displayTime = 5000;
@@ -93,6 +93,13 @@ function reloadDisplay() {
 				// 실내기 상태 정보 페이지
 				$('.fl-selected').removeClass('fl-selected');
 				$('.floor-nav').find('#'+floor).addClass('fl-selected');
+				if (floor == "1") {
+					$('.unit-info').css('background-image', "url({% static 'monitor/ciu-1F.png' %})");
+				} else if (floor == "2") {
+					$('.unit-info').css('background-image', "url({% static 'monitor/ciu-2F.png' %})");
+				} else {	 // floor == 3
+					$('.unit-info').css('background-image', "url({% static 'monitor/ciu-3F.png' %})");
+				}
 				// 히트펌프-실내기 상태 정보 페이지
 				$('.hp-selected').removeClass('hp-selected');
 				$('.hp-ciu-nav').find('#'+hpciu).addClass('hp-selected');
@@ -113,14 +120,14 @@ function reloadDisplay() {
 						$('.btn-status').removeClass('btn-default');
 					}
 				});
-				$('.hp-status').each(function() {
+				$('.hp-status, .btn-cp').each(function() {
 					if($(this).text() === "OFF"){
 						$(this).addClass('status-off');
 					} else if($(this).text() === "ON"){
 						$(this).addClass('status-on');
 					}
 					$(this).attr('disabled', true);
-					$('.hp-status').removeClass('btn-default');
+					$(this).removeClass('btn-default');
 				});
 			}
 
@@ -191,12 +198,6 @@ function reloadDisplay() {
 	});
 	return false;
 }
-
-
-
-
-
-
 
 // ############################ left-status ############################
 // ajax 자동수동

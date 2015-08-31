@@ -66,7 +66,7 @@ $('#setting-mode-form').on('submit', function() {
 					$(this).attr('disabled', true);
 					$(this).removeClass('btn-default');
 				});
-				$.each($('.hp-status'), function(i, val) {
+				$.each($('.hp-status, btn-cp'), function(i, val) {
 					if(val.innerText === "OFF"){
 						$(this).removeClass('status-on');
 						$(this).addClass('status-off');
@@ -75,7 +75,7 @@ $('#setting-mode-form').on('submit', function() {
 						$(this).addClass('status-on');
 					}
 					$(this).attr('disabled', true);
-					$('.hp-status').removeClass('btn-default');
+					$(this).removeClass('btn-default');
 				});
 			} else { // 수동
 				// 동작설정-동작제어 선택 이펙트
@@ -102,7 +102,7 @@ $('#setting-mode-form').on('submit', function() {
 						$('.btn-status').removeClass('btn-default');
 					}
 				});
-				$.each($('.hp-status'), function(i, val) {
+				$.each($('.hp-status, .btn-cp'), function(i, val) {
 					if(val.innerText === "OFF"){
 						$(this).removeClass('status-on');
 						$(this).addClass('status-off');
@@ -111,7 +111,7 @@ $('#setting-mode-form').on('submit', function() {
 						$(this).addClass('status-on');
 					}
 					$(this).attr('disabled', true);
-					$('.hp-status').removeClass('btn-default');
+					$(this).removeClass('btn-default');
 				});
 			}
 		}

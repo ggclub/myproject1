@@ -5,34 +5,40 @@
 	<thead id="query-title">
 		<tr>
 			<td class="result-datetime" rowspan="2"><b>시간</b></td>
-			<td class="result-cpfm" colspan="2"><b>순환 IN</b></td>
-			<td class="result-cpfm" colspan="2"><b>순환 OUT</b></td>
-			<td class="result-dwpfm" colspan="2"><b>심정 IN</b></td>
-			<td class="result-dwpfm" colspan="2"><b>심정 OUT</b></td>
+			<td class="result-cpfm" colspan="3"><b>순환수(열교환 후)</b></td>
+			<td class="result-cpfm" colspan="3"><b>순환수(열교환 전)</b></td>
+			<td class="result-dwpfm" colspan="3"><b>지하수 공급(열교환 전)</b></td>
+			<td class="result-dwpfm" colspan="3"><b>지하수 공급(열교환 후)</b></td>
 		</tr>
 		<tr>
 		{% for i in 12|make_list %}
 			<td class="result-cpfm">Ton/hour</td>
 			<td class="result-cpfm">lpm</td>
+			<td class="result-temp">온도</td>
 		{% endfor %}
 		{% for i in 12|make_list %}
 			<td class="result-dwpfm">Ton/hour</td>
 			<td class="result-dwpfm">lpm</td>
+			<td class="result-temp">온도</td>
 		{% endfor %}
 		</tr>
 	</thead>
 	<tbody id="query-result">
-		{% for cpfm, dwpfm in database_list %}
+		{% for cpfm, dwpfm, in1, in2, out1, out2 in database_list %}
 		<tr>
 			<td class="result-datetime">{{ cpfm.dateTime|date:"Y-m-d H:i" }}</td>
 			<td class="result-cpfm">{{ cpfm.currentFlux|div:16.67 }}</td>
 			<td class="result-cpfm">{{ cpfm.currentFlux }}</td>
+			<td class="result-temp">{{ out1.temperature }}</td>
 			<td class="result-cpfm">{{ cpfm.currentFlux|div:16.67 }}</td>
 			<td class="result-cpfm">{{ cpfm.currentFlux }}</td>
-			<td class="result-dwpfm">{{ dwpfm.currentFlux|div:16.67 }}</td>
+			<td class="result-temp">{{ in1.temperature }}</td>
 			<td class="result-dwpfm">{{ dwpfm.currentFlux }}</td>
-			<td class="result-dwpfm">{{ dwpfm.currentFlux|div:16.67 }}</td>
+			<td class="result-dwpfm">{{ dwpfm.currentFlux|multiply:1000 }}</td>
+			<td class="result-temp">{{ in2.temperature }}</td>
 			<td class="result-dwpfm">{{ dwpfm.currentFlux }}</td>
+			<td class="result-dwpfm">{{ dwpfm.currentFlux|multiply:1000 }}</td>
+			<td class="result-temp">{{ out2.temperature }}</td>
 		</tr>
 		{% endfor %}
 	</tbody>
@@ -63,10 +69,10 @@
 		{% for cpfm, dwpfm in database_list_int %}
 		<tr>
 			<td class="result-datetime">{{ cpfm.dateTime|date:"Y-m-d" }}</td>
-			<td class="result-cpfm">{{ cpfm.integralFlux|div:16.67 }}</td>
-			<td class="result-cpfm">{{ cpfm.integralFlux|div:16.67 }}</td>
-			<td class="result-dwpfm">{{ dwpfm.integralFlux|div:16.67 }}</td>
-			<td class="result-dwpfm">{{ dwpfm.integralFlux|div:16.67 }}</td>
+			<td class="result-cpfm">{{ cpfm.integralFlux|div:1000 }}</td>
+			<td class="result-cpfm">{{ cpfm.integralFlux|div:1000 }}</td>
+			<td class="result-dwpfm">{{ dwpfm.integralFlux|div:1000 }}</td>
+			<td class="result-dwpfm">{{ dwpfm.integralFlux|div:1000 }}</td>
 		</tr>
 		{% endfor %}
 	</tbody>

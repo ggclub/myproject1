@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<table class="table table-bordered title-hp-ciu">
+	<thead>
+		<tr>
+			<td><b>히트펌프 - 실내기 연결/동작 상태</b></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>
+			<div class="inside-table">
+			<table class="table table-bordered hp-ciu">
+				<thead>
+					<tr>
+						<td>No</td>
+						<td>실내기 위치</td>
+						<td>상태</td>
+						<td>온도(°C)</td>
+					</tr>
+				</thead>
+				{% for ciu in ciu_on_hp %}
+				<tbody>
+					<tr>
+						<td>{{ forloop.counter }}</td>
+						<td>{{ ciu.get_location_display }}</td>
+						<td>{{ ciu.switch }}</td>
+						<td>{{ ciu.temperature }}</td>
+					</tr>
+				</tbody>
+				{% endfor %}
+			</table>
+			</div>
+			{# end of inner table (hp-ciu) #}
+		</td></tr>
+	</tbody>
+</table>
+
+<div class="slider">
+	<div class="hp-ciu-nav" >
+		<li><a class="hp-selected" id="1">히트펌프1</a></li>
+		<li><a id="2">히트펌프2</a></li>
+		<li><a id="3">히트펌프3</a></li>
+		<li><a id="4">히트펌프4</a></li>
+		<li><a id="5">히트펌프5</a></li>
+		<li><a id="6">히트펌프6</a></li>
+	</div>
+</div>
+
+<script type="text/javascript">
+// 히트펌프 선택 변경
+$('.hp-ciu-nav > li > a').on('click', function() {
+	var id = this.id;
+	$.ajax({
+		url: "/monitor/change_ciuonhp/",
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'no_hp': id,
+		},
+		success: function(data){
+			$("#right-top").html(data);
+			$('.hp-selected').removeClass('hp-selected');
+			$('.hp-ciu-nav').find('#'+id).addClass('hp-selected');
+		}
+	});
+});
+</script>

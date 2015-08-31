@@ -37,7 +37,7 @@
 			{% for data in database %}
 			{% for d in data %}
 			<tr>
-				<td class="result-datetime">{{ d.dateTime|date:"Y-m-d H:i:s" }}</td>
+				<td class="result-datetime">{{ d.dateTime|date:"Y-m-d H:i" }}</td>
 				<td class="result-floor">{{ d.floor }}</td>
 				<td class="result-location">{{ d.get_location_display }}</td>
 				<td class="result-switch">{{ d.switch }}</td>

@@ -59,7 +59,7 @@ $('.page-index').on('click', function() {
 			'page': selected,
 		},
 		success: function(data) {
-			$('#right-bottom').html(data);
+			$('#right-top').html(data);
 			$('.pg-selected').removeClass('pg-selected');
 			$('.pagination').find('#'+selected).addClass('pg-selected');
 		}

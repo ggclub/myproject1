@@ -477,7 +477,7 @@ $('.floor-nav > li > a').on('click', function () {
 			'floor': floor,
 		},
 		success: function(data){
-			$("#right-floor").html(data);
+			$("#right-bottom").html(data);
 			$('.fl-selected').removeClass('fl-selected');
 			$('.floor-nav').find('#'+floor).addClass('fl-selected');
 		}

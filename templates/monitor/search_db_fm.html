@@ -119,7 +119,7 @@ function CheckRadioValue() {
 function Result2excel() {
 	var radio = $(":radio[name=flux]:checked").val();
 	if(radio == 'cur'){
-		var numCol = 9;
+		var numCol = 13;
 		var found = $('#found').text();
 
 		if(found == '0'){
@@ -157,7 +157,7 @@ function Result2excel() {
 		$('#query-title-int tr').find('td').each(function (i) {
 			columns.push($(this).text());
 		});
-		console.log(columns);
+		// console.log(columns);
 
 		var rows = new Array(numRow);
 		for (var i = 0; i < numRow; i++){

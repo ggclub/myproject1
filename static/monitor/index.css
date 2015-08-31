@@ -4,6 +4,10 @@
 	left: 850px;
 	display: none;
 }
+body {
+	background-image: url("main.jpg");
+	background-size: cover;
+}
 .content {
 	/*position: fixed;*/
 }
@@ -25,32 +29,33 @@
 	height: 89vh;
 }
 .left-status {
-	background-image: url("cooling2.jpg");
-	background-size: contain;
-	background-color: #aaaaaa;
+	/*background-image: url("cooling2.jpg");*/
+	/*background-size: contain;*/
+	/*background-color: #aaaaaa;*/
 	height: 80vh;
 	position: relative;
 }
 .left-footer {
-	background-color: lightseagreen;
-	height:9vh;
+	/*background-color: lightseagreen;*/
+	/*height:9vh;*/
 }
 .right {
-	background-color: #ccddbb;
+	/*background-color: #ccddbb;*/
 	float: right;
-	width: 35%;
+	width: 32%;
 	height: 89vh;
+	margin-right: 25px;
 }
-.right-floor {
-	background-color: #aabbcc;
+.right-top {
+	/*background-color: #aabbcc;*/
 	float: top;
-	height: 49%;
+	height: 51%;
 	padding: 2%;
 }
 .right-bottom {
-	background-color: #ccbbaa;
+	/*background-color: #ccbbaa;*/
 	float: bottom;
-	height: 51%;
+	height: 49%;
 	padding: 2%;
 }
 /*############################ left - status #########################*/
@@ -84,7 +89,7 @@ iframe {
 
 .left-table {
 	display: inline-table;
-	width: 130px;
+	width: 71px;
 	border: none;
 	table-layout: fixed;
 }
@@ -96,6 +101,16 @@ iframe {
 .left-table > thead {
 	height: 50px;
 }
+
+.left-table > thead > tr > td, .left-table > tbody > tr > td {
+	padding: 7px 5px;
+	text-align: center;
+}
+
+.padding-status {
+	padding: 7px 18px;
+}
+
 .table {
 	text-align: center;
 	font-size: 13px;
@@ -110,7 +125,6 @@ iframe {
 	/*cursor: pointer;*/
 }
 
-
 a:hover {
 	cursor: pointer; 
 	text-decoration: none;
@@ -121,85 +135,61 @@ a:hover {
 
 .first {
 	position: absolute;
-	top: 80px;
-	left: 200px;
-	height: 190px;
-	width: 954px;
+	top: 187px;
+	left: 517px;
 }
 .heat-pump {
-	width: 144px;
-	height: 190px;
-	margin-right: 10px;
-	font-size: 15px;
+	width: 70px;
+	height: 105px;
+	margin-right: 40px;
+	font-size: 12px;
 	margin-bottom: 0;
-}
-.left-table > thead > tr > td, .left-table > tbody > tr > td {
-	padding: 8px 5px;
 }
 
 .sec-1 {
 	position: absolute;
-	top: 250px;
+	top: 373px;
 	left: 150px;
 }
 .circulating-pump {
-	width: 163px;
-	height: 167px;
-	font-size: 15px;
-	padding: 0px 5px;
+	font-size: 11px;
+	height: 105px;
+	margin-right: 25px
 }
-#cp1-status, #cp2-status {
-	disabled: disabled;
-}
+
 .sec-2 {
 	position: absolute;
-	top: 290px;
-	left: 500px;
-	height: 208px;
+	top: 402px;
+	left: 515px;
 }
 .flowmeter {
-	width: 280px;
-	height: 106px;
-	font-size: 13px;
+	height: 75px;
+	font-size: 11px;
 }
 .sec-3 {
 	position: absolute;
-	top: 380px;
-	left: 800px;
-	/*height: 208px;*/
-}
-.heat-exchanger-in1 {
-	width: 141px;
-	height: 72px;
-	font-size: 13px;
+	top: 400px;
+	left: 1125px;
 }
 
 .third-1 {
 	position: absolute;
-	top: 520px;
-	left: 220px;
+	top: 699px;
+	left: 654px;
 }
 .third-2 {
 	position: absolute;
-	top: 540px;
-	left: 733px;
-}
-.heat-exchanger-out2 {
-	width: 141px;
-	height: 72px;
-	font-size: 13px;
+	top: 698px;
+	left: 927px;
 }
 
 .fourth-1 {
 	position: absolute;
-	top: 685px;
-	left: 53px;
-	width: 625px;
+	top: 687px;
+	left: 164px;
 }
 .deepwell-pump {
-	width: 143px;
-	height: 165px;
-	margin-right: 10px;
+	margin-right: 9px;
 	font-size: 15px;
 	padding: 0px 5px;
 }
@@ -208,21 +198,15 @@ a:hover {
 }
 .fourth-2 {
 	position: absolute;
-	top: 695px;
-	left: 855px;
+	top: 658px;
+	left: 1147px;
+	color: white;
 }
-.rt {
-	width: 200px;
+.etc {
+	width: 84px;
+	height: 187px;
 }
-.fourth-3 {
-	position: absolute;
-	top: 754px;
-	left: 855px;
-}
-.power {
-	width: 200px;
-	height: 81px;
-}
+
 
 .btn-status{
 	color: white;
@@ -254,10 +238,27 @@ a:hover {
 	background-color: lightgoldenrodyellow;
 	border-style: none;
 }
-/*.unit-info > table > tbody > tr > td {
-	padding: 4px 4px;
-}*/
-
+.unit-info {
+	background-image: url("ciu-1F.png");
+	font-size: 11px;
+	position: fixed;
+	top: 736px;
+	left: 1290px;
+	width: 565px;
+	height: 299px;
+	padding:10px;
+}
+.ciu {
+	display: inline-table;
+	width: 40px;
+	height: 33px;
+	margin: 18px 33px 20px 59px;
+	color: white;
+	text-align: center;
+}
+.ciu > tbody > tr > td {
+	padding: 0px;
+}
 .alignleft {
 	float: left;
 	display: inline;
@@ -279,11 +280,7 @@ a:hover {
 .slides {
 	padding: 0;
 }
-.ciu {
-	width: 200px;
-	display: inline-table;
-	margin: 5px;
-}
+
 .room {
 	width: 105px;
 	font-weight: bold;
@@ -294,7 +291,7 @@ a:hover {
 	position: fixed; 
 	text-align: center;
 	padding: 0;
-	top: 550px;
+	top: 1040px;
 	right: 292px;
 }
 .floor-nav > li, .hp-ciu-nav > li {
@@ -337,7 +334,7 @@ a:hover {
 	position: fixed; 
 	text-align: center;
 	padding: 0;
-	top: 1040px;
+	top: 550px;
 	right: 110px;
 }
 .hp-selected {

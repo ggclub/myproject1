@@ -1,66 +1,64 @@
+{% load staticfiles %}
 <!DOCTYPE HTML>
-<table class="table table-bordered title-hp-ciu">
-	<thead>
+<div class="floor-title">
+	<table class="table table-bordered cius-title">
+	<tr>
+		<td><b>실내기 운행 상태</b></td>
+		<td>55 RT</td>
+		<td>ON {{ ciu_on_count }}</td>
+	</tr>
+	</table>
+</div>
+<div class="unit-info">
+{% for ciu in us %}
+	<table class="ciu" >
+		{# <tr> #}
+			{# <td class="room" rowspan="2">{{ ciu.get_location_display }}</td> #}
+			{# <td>상태</td> #}
+			{# <td>온도</td> #}
+		{# </tr> #}
 		<tr>
-			<td><b>히트펌프 - 실내기 연결/동작 상태</b></td>
+			<td>{{ ciu.switch }}</td>
 		</tr>
-	</thead>
-	<tbody>
-		<tr><td>
-			<div class="inside-table">
-			<table class="table table-bordered hp-ciu">
-				<thead>
-					<tr>
-						<td>No</td>
-						<td>실내기 위치</td>
-						<td>상태</td>
-						<td>온도(°C)</td>
-					</tr>
-				</thead>
-				{% for ciu in ciu_on_hp %}
-				<tbody>
-					<tr>
-						<td>{{ forloop.counter }}</td>
-						<td>{{ ciu.get_location_display }}</td>
-						<td>{{ ciu.switch }}</td>
-						<td>{{ ciu.temperature }}</td>
-					</tr>
-				</tbody>
-				{% endfor %}
-			</table>
-			</div>
-			{# end of inner table (hp-ciu) #}
-		</td></tr>
-	</tbody>
-</table>
-
+		<tr>
+			<td>{{ ciu.temperature }}</td>
+		</tr>
+	</table>
+{% endfor %}
+</div>
 <div class="slider">
-	<div class="hp-ciu-nav" >
-		<li><a class="hp-selected" id="1">히트펌프1</a></li>
-		<li><a id="2">히트펌프2</a></li>
-		<li><a id="3">히트펌프3</a></li>
-		<li><a id="4">히트펌프4</a></li>
-		<li><a id="5">히트펌프5</a></li>
-		<li><a id="6">히트펌프6</a></li>
+	<div class="floor-nav" >
+		<li><a class="fl-selected" id="1">1층</a></li>
+		<li><a id="2">2층</a></li>
+		<li><a id="3">3층</a></li>
 	</div>
 </div>
 
 <script type="text/javascript">
-// 히트펌프 선택 변경
-$('.hp-ciu-nav > li > a').on('click', function() {
-	var id = this.id;
+// 실내기 층 변경
+$('.floor-nav > li > a').on('click', function () {
+	var floor = this.id;
+	// console.log("floor, floor: " + floor);
 	$.ajax({
-		url: "/monitor/change_ciuonhp/",
+		url: "/monitor/floor_change/",
 		type: "POST",
 		data : {
 			'csrfmiddlewaretoken': '{{ csrf_token }}',
-			'no_hp': id,
+			'floor': floor,
 		},
-		success: function(data){
+		success: function(data){	
 			$("#right-bottom").html(data);
-			$('.hp-selected').removeClass('hp-selected');
-			$('.hp-ciu-nav').find('#'+id).addClass('hp-selected');
+			$('.fl-selected').removeClass('fl-selected');
+			$('.floor-nav').find('#'+floor).addClass('fl-selected');
+			if (floor == "1") {
+				$('.unit-info').css('background-image', "url({% static 'monitor/ciu-1F.png' %})");
+			} else if (floor == "2") {
+				$('.unit-info').css('background-image', "url({% static 'monitor/ciu-2F.png' %})");
+			} else {	 // floor == 3
+				$('.unit-info').css('background-image', "url({% static 'monitor/ciu-3F.png' %})");
+			}
 		}
 	});
+	return false;
 });
 </script>

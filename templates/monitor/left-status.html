@@ -1,34 +1,53 @@
+{% load staticfiles %}
+{% load monitor_extras %}
 <!DOCTYPE HTML>
+
+
+<div class="now-mode">
+	<img id ="nav-mode" src="{% static 'base/nav-manual-cool.png' %}" style="top:29px; left:375px;">
+</div>
+<script type="text/javascript">
+$(document).ready(function (){
+	var opMode = $('#operation-mode').text();
+	if (opMode == 'MN') {
+		$('#nav-mode').attr('src', "{% static 'base/nav-manual-cool.png' %}");
+	} else {
+		$('#nav-mode').attr('src', "{% static 'base/nav-auto-cool.png' %}");
+	}
+});
+</script>
+
+
 
 <div class="first">
 {% for pump in heat_pump %}
 <table class="left-table heat-pump">
-	<thead>
-		<tr><td colspan="2">
-			<p class="device" id="hp{{ forloop.counter }}"><b>히트 펌프 {{ forloop.counter }} <br>
-				{% if forloop.counter == 1 or forloop.counter == 3 %}
-				RGUW200C9C
-				{% elif forloop.counter == 2 or forloop.counter == 5 %}
-				LRG-N5801DC
-				{% elif forloop.counter == 4 or forloop.counter == 6 %}
-				RGUW100C9C
-				{% endif %}
-			</b></p>
-		</td></tr>
-	</thead>
+	{# <thead> #}
+		{# <tr><td colspan="2"> #}
+			{# <p class="device" id="hp{{ forloop.counter }}"><b>히트 펌프 {{ forloop.counter }} <br> #}
+				{# {% if forloop.counter == 1 or forloop.counter == 3 %} #}
+				{# RGUW200C9C #}
+				{# {% elif forloop.counter == 2 or forloop.counter == 5 %} #}
+				{# LRG-N5801DC #}
+				{# {% elif forloop.counter == 4 or forloop.counter == 6 %} #}
+				{# RGUW100C9C #}
+				{# {% endif %} #}
+			{# </b></p> #}
+		{# </td></tr> #}
+	{# </thead> #}
 	<tbody>
 		<tr>
-			<td class="table-title">상태</td>
-			<td style="float:right;">
+			{# <td class="table-title">상태</td> #}
+			<td class="padding-status">
 				<button class="btn btn-default btn-xs hp-status" id="hp{{ forloop.counter }}-status">{{ pump.switch }}</button>
 			</td>
 		</tr>
 		<tr>
-			<td class="table-title">IN</td>
+			{# <td class="table-title">IN</td> #}
 			<td class="table-value" id="TempHPIn{{ forloop.counter }}">{{ pump.tempIn|floatformat:1 }}  °C</td>
 		</tr>
 		<tr>
-			<td class="table-title">OUT</td>
+			{# <td class="table-title">OUT</td> #}
 			<td class="table-value" id="TempHPOut{{ forloop.counter }}">{{ pump.tempOut|floatformat:1 }}  °C</td>
 		</tr>
 	</tbody>
@@ -39,27 +58,28 @@
 <div class="sec-1">
 	{% for pump in CP %}
 	<table class="left-table circulating-pump">
-		<thead>
-			<tr><td colspan="2">
-				<p class="device" id="cp{{ pump.get_CPID_display }}"><b>순환 펌프 {{ pump.get_CPID_display }}
-				</b></p>
-			</td></tr>
-		</thead>
+		{# <thead> #}
+			{# <tr><td colspan="2"> #}
+				{# <p class="device" id="cp{{ pump.get_CPID_display }}"><b>순환 펌프 {{ pump.get_CPID_display }} #}
+				{# </b></p> #}
+			{# </td></tr> #}
+		{# </thead> #}
 		<tbody>
 			<tr>
-				<td class="table-title">상태</td>
-				<td style="float:right;">
+				{# <td class="table-title">상태</td> #}
+				<td class="padding-status">
 					<button class="btn btn-default btn-xs btn-status control" id="cp{{ pump.get_CPID_display }}-status">{{ pump.switch }}</button>
 				</td>
 			</tr>
 			<tr>
-				<td class="table-title">회전수</td>
+				{# <td class="table-title">회전수</td> #}
 				<td class="table-value" id="CirculatingPump">{{ pump.Hz }} Hz</td>
 			</tr>
 			<tr>
-				<td class="table-title">유량</td>
-				<td class="table-value" id="CirculatingPump">{{ pump.flux }} LPM</td>
+				{# <td class="table-title">유량</td> #}
+				<td class="table-value" id="CirculatingPump">{{ pump.flux|floatformat:1 }} LPM</td>
 			</tr>
+		</tbody>
 	</table>
 	{% endfor %}
 </div>
@@ -67,37 +87,37 @@
 	<table class="left-table flowmeter">
 		<tbody>
 			<tr>
-				<td colspan="2">
-				<p class="device" id="cpfm"><b>유량계</b></p>
-				</td>
-				<td class="table-title">수온</td>
+				{# <td class="table-title">순시 유량</td> #}
+				<td class="table-value" id="CPFlowmeter">{{ CPFM.currentFlux|floatformat:1 }} LPM</td>
+				{# <td class="table-title">적산 유량</td> #}
+				{# <td class="table-value" id="CPFlowmeter" style="font-size:smaller;">{{ CPFM.integralFlux }} L</td> #}
+			</tr>
+			<tr>
+				{# <td colspan="2"> #}
+				{# <p class="device" id="cpfm"><b>유량계</b></p> #}
+				{# </td> #}
+				{# <td class="table-title">수온</td> #}
 				<td class="table-value" id="TempHEOut1">{{ temp_HEOut1.temperature|floatformat:1 }} °C</td>
 			</tr>
-			<tr>
-				<td class="table-title">순시 유량</td>
-				<td class="table-value" id="CPFlowmeter">{{ CPFM.currentFlux|floatformat:1 }} LPM</td>
-				<td class="table-title">적산 유량</td>
-				<td class="table-value" id="CPFlowmeter" style="font-size:smaller;">{{ CPFM.integralFlux }} ton/hr</td>
-			</tr>
-			<tr>
-				<td class="table-title">내부 온도</td>
-				<td class="table-value" id="CPFlowmeter">{{ CPFM.temperature|floatformat:1 }} °C</td>
-				<td class="table-title">유속</td>
-				<td class="table-value" id="CPFlowmeter">{{ CPFM.velocity }} m/s</td>
-			</tr>
+			{# <tr> #}
+				{# <td class="table-title">내부 온도</td> #}
+				{# <td class="table-value" id="CPFlowmeter">{{ CPFM.temperature|floatformat:1 }} °C</td> #}
+				{# <td class="table-title">유속</td> #}
+				{# <td class="table-value" id="CPFlowmeter">{{ CPFM.velocity }} m/s</td> #}
+			{# </tr> #}
 		</tbody>
 	</table>
 </div>
 <div class="sec-3">
-<table class="left-table heat-exchanger-in1">
+<table class="left-table flowmeter">
 	<tbody>
 		<tr>
-			<td class="table-title">수온</td>
-			<td class="table-value" id="TempHEIn1">{{ temp_HEIn1.temperature|floatformat:1 }} °C</td>
+			{# <td class="table-title">순시 유량</td> #}
+			<td class="table-value" id="CPFlowmeter">{{ CPFM.currentFlux|floatformat:1 }} LPM</td>
 		</tr>
 		<tr>
-			<td class="table-title">순시 유량</td>
-			<td class="table-value" id="CPFlowmeter">{{ CPFM.currentFlux|floatformat:1 }} °C</td>
+			{# <td class="table-title">수온</td> #}
+			<td class="table-value" id="TempHEIn1">{{ temp_HEIn1.temperature|floatformat:1 }} °C</td>
 		</tr>
 	</tbody>
 </table>
@@ -107,37 +127,37 @@
 	<table class="left-table flowmeter">
 		<tbody>
 			<tr>
-				<td colspan="2">
-				<p class="device" id="dwpfm"><b>유량계</b></p>
-				</td>
-				<td class="table-title">수온</td>
-				<td class="table-value" id="TempHEOut2">{{ temp_HEOut2.temperature|floatformat:1 }} °C</td>
+				{# <td class="table-title">순시 유량</td> #}
+				<td class="table-value" id="DWPFlowmeter">{{ DWPFM.currentFlux|floatformat:1 }} Ton/hr</td>
+				{# <td class="table-title">적산 유량</td> #}
+				{# <td class="table-value" id="DWPFlowmeter" style="font-size:smaller;">{{ DWPFM.integralFlux }} L</td> #}
 			</tr>
 			<tr>
-				<td class="table-title">순시 유량</td>
-				<td class="table-value" id="DWPFlowmeter">{{ DWPFM.currentFlux|floatformat:1 }} LPM</td>
-				<td class="table-title">적산 유량</td>
-				<td class="table-value" id="DWPFlowmeter" style="font-size:smaller;">{{ DWPFM.integralFlux }} ton/hr</td>
+				{# <td colspan="2"> #}
+				{# <p class="device" id="dwpfm"><b>유량계</b></p> #}
+				{# </td> #}
+				{# <td class="table-title">수온</td> #}
+				<td class="table-value" id="TempHEIn2">{{ temp_HEIn2.temperature|floatformat:1 }} °C</td>
 			</tr>
-			<tr>
-				<td class="table-title">내부 온도</td>
-				<td class="table-value" id="DWPFlowmeter">{{ DWPFM.temperature|floatformat:1 }} °C</td>
-				<td class="table-title">유속</td>
-				<td class="table-value" id="DWPFlowmeter">{{ DWPFM.velocity }} m/s</td>
-			</tr>
+			{# <tr> #}
+				{# <td class="table-title">내부 온도</td> #}
+				{# <td class="table-value" id="DWPFlowmeter">{{ DWPFM.temperature|floatformat:1 }} °C</td> #}
+				{# <td class="table-title">유속</td> #}
+				{# <td class="table-value" id="DWPFlowmeter">{{ DWPFM.velocity }} m/s</td> #}
+			{# </tr> #}
 		</tbody>
 	</table>
 </div>
 <div class="third-2">
-	<table class="left-table heat-exchanger-out2">
+	<table class="left-table flowmeter">
 		<tbody>
 			<tr>
-				<td class="table-title">수온</td>
-				<td class="table-value" id="TempHEIn2">{{ temp_HEIn2.temperature|floatformat:1 }} °C</td>
+				{# <td class="table-title">순시 유량</td> #}
+				<td class="table-value" id="DWPFlowmeter">{{ DWPFM.currentFlux|floatformat:1 }} Ton/hr</td>
 			</tr>
 			<tr>
-				<td class="table-title">순시 유량</td>
-				<td class="table-value" id="DWPFlowmeter">{{ DWPFM.currentFlux|floatformat:1 }} °C</td>
+				{# <td class="table-title">수온</td> #}
+				<td class="table-value" id="TempHEOut2">{{ temp_HEOut2.temperature|floatformat:1 }} °C</td>
 			</tr>
 		</tbody>
 	</table>
@@ -145,24 +165,24 @@
 <div class="fourth-1">
 	{% for pump in DWP %}
 	<table class="left-table deepwell-pump">
-		<thead>
-			<tr><td colspan="2">
-				<p class="device" id="dwp{{ forloop.counter }}"><b>심정 펌프 {{ forloop.counter }}</b></p>
-			</td></tr>
-		</thead>
+		{# <thead> #}
+			{# <tr><td colspan="2"> #}
+				{# <p class="device" id="dwp{{ forloop.counter }}"><b>심정 펌프 {{ forloop.counter }}</b></p> #}
+			{# </td></tr> #}
+		{# </thead> #}
 		<tbody>
 			<tr>
-				<td class="table-title">상태</td>
-				<td style="float:right;">
+				{# <td class="table-title">상태</td> #}
+				<td class="padding-status">
 					<button class="btn btn-default btn-xs btn-status control" id="dwp{{ forloop.counter }}-status">{{ pump.switch }}</button>
 				</td>
 			</tr>
 			<tr>
-				<td class="table-title">수위</td>
+				{# <td class="table-title">수위</td> #}
 				<td class="table-value" id="DeepwellPump{{ forloop.counter }}">{{ pump.get_waterLevel_display }}</td>
 			</tr>
 			<tr>
-				<td class="table-title">수온</td>
+				{# <td class="table-title">수온</td> #}
 				<td class="table-value" id="DeepwellPump{{ forloop.counter }}"></td>
 			</tr>
 		</tbody>
@@ -170,25 +190,22 @@
 	{% endfor %}
 </div>
 <div class="fourth-2">
-	<table class="left-table rt">
+	<table class="left-table etc">
 		<tbody>
 			<tr>
-				<td class="table-title">RT</td>
-				<td class="table-value" id="RefrigerationTon">{{ rt.RT }}</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-<div class="fourth-3">
-	<table class="left-table power">
-		<tbody>
-			<tr>
-				<td class="table-title">순시 전력</td>
-				<td class="table-value" id="PowerConsumption">{{ power.currentPowerConsumption }} W</td>
+				{# <td class="table-title">RT</td> #}
+				<td class="table-value" id="RefrigerationTon">{{ rt.RT }} RT</td>
 			</tr>
 			<tr>
-				<td class="table-title">적산 전력</td>
-				<td class="table-value" id="PowerConsumption">{{ power.integralPowerConsumption }} kWh</td>
+				<td class="table-value" id="flux-int">{{ DWPFM.integralFlux|floatformat:0 }} ton</td>
+			</tr>
+			<tr>
+				{# <td class="table-title">순시 전력</td> #}
+				<td class="table-value" id="PowerConsumption" style="font-size:12px;">{{ power.integralPowerConsumption|floatformat:0 }} kWh</td>
+			</tr>
+			<tr>
+				{# <td class="table-title">적산 전력</td> #}
+				<td class="table-value" id="PowerConsumption">{{ power.currentPowerConsumption|floatformat:1 }} Wh</td>
 			</tr>
 		</tbody>
 	</table>
@@ -271,7 +288,7 @@
 	// 			'flag': 1,
 	// 		},
 	// 		success: function(data) {
-	// 			$('#right-bottom').html(data);
+	// 			$('#right-top').html(data);
 	// 		}
 	// 	});
 	// 	return false;

@@ -1,17 +1,29 @@
 {% load staticfiles %}
 <!DOCTYPE HTML>
 <div class="navbar-home">
-	<img id="navbar-home" src="{% static 'base/nav-title.png' %}">
+	{# <img id="navbar-home" src="{% static 'base/nav-title.png' %}"> #}
 </div>
 <div class="navbar-now">
 	<span id="nav-date"></span>
-	<img id ="nav-mode" src="{% static 'base/nav-manual-cool.png' %}">
+	{# <img id ="nav-mode" src="{% static 'base/nav-manual-cool.png' %}"> #}
 </div>
 <div class="navbar-menus">
-	<img class="menu" id="nav-fullscreen" src="{% static 'base/navbar-btns/fullscreen-sel.png' %}">
-	<img class="menu" id="nav-operation-setting" src="{% static 'base/navbar-btns/operation-setting.png' %}">
-	<img class="menu" id="nav-search-db" src="{% static 'base/navbar-btns/search-db.png' %}">
-	<img class="menu" id="nav-manage-alarm" src="{% static 'base/navbar-btns/manage-alarm.png' %}">
+	<div class="menu" id="div-fullscreen">
+		<img id="nav-fullscreen" src="{% static 'base/navbar-btns/fullscreen-sel.jpg' %}">
+	</div>
+	<div class="menu" id="div-operation-setting">
+		<img id="nav-operation-setting">
+	</div>
+	<div class="menu" id="div-search-db">
+		<img id="nav-search-db">
+	</div>
+	<div class="menu" id="div-manage-alarm">
+		<img id="nav-manage-alarm">
+	</div>
+	{# <img class="menu" id="nav-fullscreen" src="{% static 'base/navbar-btns/fullscreen-sel.jpg' %}"> #}
+	{# <img class="menu" id="nav-operation-setting" src="{% static 'base/navbar-btns/operation-setting.jpg' %}"> #}
+	{# <img class="menu" id="nav-search-db" src="{% static 'base/navbar-btns/search-db.jpg' %}"> #}
+	{# <img class="menu" id="nav-manage-alarm" src="{% static 'base/navbar-btns/manage-alarm.jpg' %}"> #}
 </div>
 <div class="navbar-operation-setting" style="display:none;">
 	<p class="nav-op" id="nav-op-mode">운전모드설정</p>
@@ -30,8 +42,10 @@
 	{# <p class="nav-db" id="nav-db-statistics">통계</p> #}
 </div>
 <div class="navbar-menu-right">
-	<img class="menu-right" id="nav-manual" src="{% static 'base/navbar-btns/manual.png' %}">
-	<img class="menu-right" id="nav-logout" src="{% static 'base/navbar-btns/logout.png' %}">
+	<div class="menu-right" id="nav-manual"></div>
+	<div class="menu-right" id="nav-logout"></div>
+	{# <img class="menu-right" id="nav-manual" src="{% static 'base/navbar-btns/manual.png' %}"> #}
+	{# <img class="menu-right" id="nav-logout" src="{% static 'base/navbar-btns/logout.png' %}"> #}
 </div>
 
 <script type="text/javascript">
@@ -48,12 +62,12 @@ $(document).ready(function() {
 });
 // navbar 1st line
 // 전체화면
-$('#nav-fullscreen').on('click', clickFullscreen);
+$('#div-fullscreen').on('click', clickFullscreen);
 function clickFullscreen(){
 	$('.navbar-operation-setting').css('display','none');
 	$('.navbar-search-db').css('display','none');
 	setBtnUnclick();
-	$('#nav-fullscreen').attr('src', "{% static 'base/navbar-btns/fullscreen-sel.png' %}");
+	$('#nav-fullscreen').attr('src', "{% static 'base/navbar-btns/fullscreen-sel.jpg' %}");
 
 	var opMode = $('#operation-mode').text();
 	var tempMode = $('#temperature-mode').text();
@@ -67,6 +81,8 @@ function clickFullscreen(){
 			'tempMode': tempMode,
 		},
 		success: function(data){
+			$('body').css('background-image', "url({% static 'monitor/main.jpg' %})");
+
 			$('.content').empty();
 		
 			$('.content').html("<div class='container' id='container'>" + data + "</div>");
@@ -83,7 +99,7 @@ function clickFullscreen(){
 					$(this).addClass('status-on');
 				}
 			});
-			$.each($('.hp-status'), function(i, val) {
+			$.each($('.hp-status, btn-cp'), function(i, val) {
 				if(val.innerText === "OFF"){
 					$(this).removeClass('status-on');
 					$(this).addClass('status-off');
@@ -92,17 +108,17 @@ function clickFullscreen(){
 					$(this).addClass('status-on');
 				}
 				$(this).attr('disabled', true);
-				$('.hp-status').removeClass('btn-default');
+				$(this).removeClass('btn-default');
 			});
 		}
 	});
 	return false;
 }
 // 동작설정
-$('#nav-operation-setting').on('click', function() {
+$('#div-operation-setting').on('click', function() {
 	$('.navbar-search-db').css('display','none');
 	setBtnUnclick();
-	$('#nav-operation-setting').attr('src', "{% static 'base/navbar-btns/operation-setting-sel.png' %}");
+	$('#nav-operation-setting').attr('src', "{% static 'base/navbar-btns/operation-setting-sel.jpg' %}");
 	$('.navbar-operation-setting').css('display','inline');
 	$('.navbar-operation-setting').find('.nav-op-selected').first().removeClass('nav-op-selected');
 	$('#nav-op-mode').addClass('nav-op-selected');
@@ -114,15 +130,16 @@ $('#nav-operation-setting').on('click', function() {
 			'csrfmiddlewaretoken': '{{ csrf_token }}',
 		},
 		success: function(data){
+			$('body').css('background-image', "none");
 			$('.content').html(data);	
 		}
 	});
 });
 // DB검색
-$('#nav-search-db').on('click', function() {
+$('#div-search-db').on('click', function() {
 	$('.navbar-operation-setting').css('display','none');
 	setBtnUnclick();
-	$('#nav-search-db').attr('src', "{% static 'base/navbar-btns/search-db-sel.png' %}");
+	$('#nav-search-db').attr('src', "{% static 'base/navbar-btns/search-db-sel.jpg' %}");
 	$('.navbar-search-db').css('display','inline');
 	$('.navbar-search-db').find('.nav-db-selected').first().removeClass('nav-db-selected');
 	$('#nav-db-ciu').addClass('nav-db-selected');
@@ -134,23 +151,25 @@ $('#nav-search-db').on('click', function() {
 			'csrfmiddlewaretoken': '{{ csrf_token }}',
 		},
 		success: function(data){
+			$('body').css('background-image', 'none');
 			$('.content').html(data);	
 		}
 	});
 });
 // 경보관리
-$('#nav-manage-alarm').on('click', function() {
+$('#div-manage-alarm').on('click', function() {
 	$('.navbar-operation-setting').css('display','none');
 	$('.navbar-search-db').css('display','none');
 	setBtnUnclick();
-	$('#nav-manage-alarm').attr('src', "{% static 'base/navbar-btns/manage-alarm-sel.png' %}");
+	$('#nav-manage-alarm').attr('src', "{% static 'base/navbar-btns/manage-alarm-sel.jpg' %}");
+	$('body').css('background-image', "none");
 });
 
 function setBtnUnclick() {
-	$('#nav-fullscreen').attr('src', "{% static 'base/navbar-btns/fullscreen.png' %}");
-	$('#nav-operation-setting').attr('src', "{% static 'base/navbar-btns/operation-setting.png' %}");
-	$('#nav-search-db').attr('src', "{% static 'base/navbar-btns/search-db.png' %}");
-	$('#nav-manage-alarm').attr('src', "{% static 'base/navbar-btns/manage-alarm.png' %}");
+	$('#nav-fullscreen').removeAttr('src');
+	$('#nav-operation-setting').removeAttr('src');
+	$('#nav-search-db').removeAttr('src');
+	$('#nav-manage-alarm').removeAttr('src');
 }
 
 
@@ -208,7 +227,7 @@ $('#nav-op-control').on('click', function (event) {
 					$(this).addClass('status-on');
 				}
 			});
-			$.each($('.hp-status'), function(i, val) {
+			$.each($('.hp-status, .btn-cp'), function(i, val) {
 				if(val.innerText === "OFF"){
 					$(this).removeClass('status-on');
 					$(this).addClass('status-off');
@@ -217,7 +236,7 @@ $('#nav-op-control').on('click', function (event) {
 					$(this).addClass('status-on');
 				}
 				$(this).attr('disabled', true);
-				$('.hp-status').removeClass('btn-default');
+				$(this).removeClass('btn-default');
 			});
 		}
 	});

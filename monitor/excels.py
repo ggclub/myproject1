@@ -6,6 +6,9 @@ sys.setdefaultencoding('utf-8')
 from datetime import datetime
 import xlsxwriter
 
+import logging
+log = logging.getLogger(__name__)
+
 def make_excel_file(obj_type, columns, rows, fail=0):
      num_col = len(columns)
      num_row = len(rows)
@@ -15,11 +18,28 @@ def make_excel_file(obj_type, columns, rows, fail=0):
           # file_dir = u'C:/Users/hsinh_000/Desktop/지열 냉난방 시스템/'.encode('utf-8')
           import os, myproject.settings
           file_dir = os.path.join(myproject.settings.BASE_DIR, 'database/')
-          # if obj_type == 'ciu':
-          #      obj_type = '실내기.xlsx'
+
           if fail:
                filename = file_dir + obj_type + str(fail) + '.xlsx'
           else:
+               # if obj_type == 'ciu':
+               #      filename = file_dir + 'ciu실내기.xlsx'
+               # elif obj_type == 'hp':
+               #      filename = file_dir + '' + '히트펌프.xlsx'
+               # elif obj_type == 'cp':
+               #      filename = file_dir + '' + '순환펌프.xlsx'
+               # elif obj_type == 'dwp':
+               #      filename = file_dir + '' + '심정펌프.xlsx'
+               # elif obj_type == 'fm-cur':
+               #      filename = file_dir + '' + '유량계(순시).xlsx'
+               # elif obj_type == 'fm-int':
+               #      filename = file_dir + '' + '유량계(적산).xlsx'
+               # elif obj_type == 'power-cur':
+               #      filename = file_dir + '' + '전력량계(순시).xlsx'
+               # elif obj_type == 'power-int':
+               #      filename = file_dir + '' + '전력량계(적산).xlsx'
+               # else:
+               #      filename = file_dir + obj_type + '.xlsx'
                filename = file_dir + obj_type + '.xlsx'
           workbook = xlsxwriter.Workbook(filename)
           worksheet = workbook.add_worksheet()
@@ -43,16 +63,17 @@ def make_excel_file(obj_type, columns, rows, fail=0):
           # money_format = workbook.add_format({'num_format': '$#,##0'})
 
           # Adjust the column width.
+          # set_column(start, end, width_pixel)
           worksheet.set_column(0, 0, 16)
           if obj_type == 'ciu':
                worksheet.set_column(2, 2, 13.5)
                worksheet.set_column(3, 8, 10)
           elif obj_type == 'hp':
                worksheet.set_column(1, 19, 8)
-          elif obj_type == 'cp' or obj_type == 'dwp':
+          elif obj_type == 'cp':
                worksheet.set_column(1, 9, 10.5)
-          elif 'fm' in obj_type:
-               worksheet.set_column(1, 9, 9.5)
+          elif obj_type == 'dwp' or 'fm' in obj_type:
+               worksheet.set_column(1, 13, 9.5)
           elif 'power' in obj_type:
                worksheet.set_column(1, 1, 16.5)
           else: # 관측센서
@@ -101,7 +122,7 @@ def make_excel_file(obj_type, columns, rows, fail=0):
                     col += 1
                     if col == num_col:
                          col = 1; row += 1;
-          elif obj_type == 'dwp':
+          elif obj_type == 'dwp' or 'fm-cur':
                # 심정펌프 제목
                num_col = 13
                for title in columns:
@@ -120,17 +141,17 @@ def make_excel_file(obj_type, columns, rows, fail=0):
                          col = 1; row += 1;
           elif obj_type == 'fm-cur':
                # 유량계 제목
-               num_col = 9
+               num_col = 13
                for title in columns:
                     if row == 0 and col == 0:
                          # 시간
                          worksheet.merge_range(row, col, row+1, col, title.encode('utf-8'), merge_format)
                     elif row == 0 and col != 0:
-                         # 순환 IN, OUT, 심정 IN, OUT
-                         worksheet.merge_range(row, col, row, col+1, title.encode('utf-8'), merge_format)
-                         col += 1
+                         # 순환 OUT, IN 심정 IN, OUT
+                         worksheet.merge_range(row, col, row, col+2, title.encode('utf-8'), merge_format)
+                         col += 2
                     else: 
-                         # 유량
+                         # 유량(ton/hr, lpm), 온도
                          worksheet.write(row, col, title.encode('utf-8'), title_format)
                     col += 1
                     if col == num_col:
@@ -154,6 +175,7 @@ def make_excel_file(obj_type, columns, rows, fail=0):
 
 
           # Start from the first cell below the headers.
+          # 내용
           if obj_type == 'ciu' or 'power' in obj_type:
                row = 1
           else:
@@ -184,8 +206,9 @@ def make_excel_file(obj_type, columns, rows, fail=0):
           # worksheet.write(row, 2, '=SUM(C2:C5)', money_format)
 
           workbook.close()
-     except:
+     except Exception, e:
      # maybe permission denied error
+          log.debug(str(e))
           fail += 1
           make_excel_file(obj_type, columns, rows, fail)
 

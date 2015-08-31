@@ -4,7 +4,7 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
-
+DEFAULT_PK = 1
 SWITCH_CHOICES = (
 	('ON', 'On'),
 	('OFF', 'Off'),
@@ -470,6 +470,7 @@ ERROR = 'ER'
 STATE_CHOICES = (
 	(ERROR, '에러'),
 	(NORMAL, '정상'),
+	(ERROR, '응답없음'),
 )
 
 FL1_CHOICES = (
@@ -1190,7 +1191,7 @@ class CiuOnHeatPump4(models.Model):
 	def to_dict(self):
 		return {"u1":self.u1, "u2":self.u2, "u3":self.u3, "u4":self.u4, "u5":self.u5, "u6":self.u6, "u7":self.u7}
 	def items(self):
-		return [self.u1,self.u2,self.u3,self.u4,self.u5,self.u6,self.u7]
+		return [self.u1,self.u2,self.u3,self.u4,self.u5,self.u6,self.u7]	
 
 class CiuOnHeatPump5(models.Model):
 	u1 = models.ForeignKey(Floor1CIU6)

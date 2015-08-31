@@ -74087,3 +74087,202 @@ DoesNotExist: CPFlowmeterLogger matching query does not exist.
 [12/Aug/2015 11:02:07] DEBUG [monitor.views:928] {'count': 13, 'database_list_int': [<PowerConsumptionLogger: 2015-08-12 03:21:55, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:50:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:17:27, current: 0.0>], 'count_int': 3, 'database_list': [<PowerConsumptionLogger: 2015-08-12 03:21:55, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:50:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:23:10, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:17:27, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:12:16, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:07:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:49:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:44:31, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:38:57, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:37:51, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:36:44, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:35:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 13:25:53, current: 0.0>]}
 [12/Aug/2015 11:03:47] DEBUG [monitor.views:44] index: program started.
 [12/Aug/2015 11:03:51] DEBUG [monitor.views:928] {'count': 13, 'database_list_int': [<PowerConsumptionLogger: 2015-08-12 03:21:55, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:50:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:17:27, current: 0.0>], 'count_int': 3, 'database_list': [<PowerConsumptionLogger: 2015-08-12 03:21:55, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:50:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:23:10, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:17:27, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:12:16, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:07:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:49:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:44:31, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:38:57, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:37:51, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:36:44, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:35:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 13:25:53, current: 0.0>]}
+[12/Aug/2015 13:21:18] DEBUG [monitor.views:44] index: program started.
+[12/Aug/2015 13:21:19] DEBUG [monitor.views:44] index: program started.
+[12/Aug/2015 13:24:12] DEBUG [monitor.views:44] index: program started.
+[12/Aug/2015 13:25:10] DEBUG [monitor.views:105] database updated
+[12/Aug/2015 13:25:19] DEBUG [monitor.views:105] database updated
+[12/Aug/2015 13:25:30] DEBUG [monitor.views:105] database updated
+[12/Aug/2015 13:25:40] DEBUG [monitor.views:105] database updated
+[12/Aug/2015 13:25:51] DEBUG [monitor.views:105] database updated
+[12/Aug/2015 13:26:01] DEBUG [monitor.views:105] database updated
+[12/Aug/2015 13:30:05] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 13:30:15] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 13:30:25] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 13:30:35] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 13:30:46] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 13:30:56] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 13:35:05] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 13:39:24] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 13:40:06] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 13:45:09] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 13:50:09] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 13:55:05] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 14:00:07] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 14:05:08] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 14:10:10] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 14:15:06] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 14:20:07] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 14:25:08] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 14:26:07] DEBUG [monitor.views:879] [datetime.datetime(2015, 8, 13, 0, 0)]
+[12/Aug/2015 14:26:23] DEBUG [monitor.views:879] [datetime.datetime(2015, 8, 13, 0, 0), datetime.datetime(2015, 8, 12, 0, 0), datetime.datetime(2015, 8, 11, 0, 0), datetime.datetime(2015, 8, 10, 0, 0), datetime.datetime(2015, 8, 9, 0, 0), datetime.datetime(2015, 8, 8, 0, 0), datetime.datetime(2015, 8, 7, 0, 0), datetime.datetime(2015, 8, 6, 0, 0)]
+[12/Aug/2015 14:26:34] DEBUG [monitor.views:948] {'count': 36, 'database_list_int': [<PowerConsumptionLogger: 2015-08-12 14:25:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:50:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:17:27, current: 0.0>], 'count_int': 3, 'database_list': [<PowerConsumptionLogger: 2015-08-12 14:25:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:20:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:15:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:10:06, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:05:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:00:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:55:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:50:06, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:45:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:40:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:35:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:43, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:32, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:22, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:12, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:58, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:48, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:27, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:17, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 03:21:55, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:50:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:23:10, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:17:27, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:12:16, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:07:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:49:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:44:31, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:38:57, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:37:51, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:36:44, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:35:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 13:25:53, current: 0.0>]}
+[12/Aug/2015 14:30:10] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 14:33:57] DEBUG [monitor.views:879] [datetime.datetime(2015, 8, 13, 0, 0), datetime.datetime(2015, 8, 12, 0, 0), datetime.datetime(2015, 8, 11, 0, 0), datetime.datetime(2015, 8, 10, 0, 0), datetime.datetime(2015, 8, 9, 0, 0), datetime.datetime(2015, 8, 8, 0, 0), datetime.datetime(2015, 8, 7, 0, 0), datetime.datetime(2015, 8, 6, 0, 0), datetime.datetime(2015, 8, 5, 0, 0)]
+[12/Aug/2015 14:35:06] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 14:36:00] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 14:39:51] DEBUG [monitor.views:879] [datetime.datetime(2015, 8, 13, 0, 0), datetime.datetime(2015, 8, 12, 0, 0), datetime.datetime(2015, 8, 11, 0, 0), datetime.datetime(2015, 8, 10, 0, 0), datetime.datetime(2015, 8, 9, 0, 0), datetime.datetime(2015, 8, 8, 0, 0), datetime.datetime(2015, 8, 7, 0, 0), datetime.datetime(2015, 8, 6, 0, 0)]
+[12/Aug/2015 14:40:08] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 14:45:09] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 14:50:10] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 14:55:06] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:00:07] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:05:08] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:10:10] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:15:06] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:20:07] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:25:08] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:27:25] DEBUG [monitor.controller:237] command written
+[12/Aug/2015 15:27:25] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-12 15:27:25', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[12/Aug/2015 15:30:09] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:31:36] DEBUG [monitor.controller:237] command written
+[12/Aug/2015 15:31:36] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-12 15:31:36', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[12/Aug/2015 15:35:10] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:40:06] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:45:07] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:45:37] DEBUG [monitor.controller:237] command written
+[12/Aug/2015 15:45:37] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-12 15:45:37', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[12/Aug/2015 15:50:11] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:55:06] DEBUG [monitor.views:106] database updated
+[12/Aug/2015 15:59:07] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 15:59:36] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 16:44:08] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 16:45:40] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 16:47:06] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 16:47:52] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 17:07:40] DEBUG [monitor.controller:237] command written
+[12/Aug/2015 17:07:40] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-12 17:07:40', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[12/Aug/2015 17:10:14] DEBUG [monitor.controller:237] command written
+[12/Aug/2015 17:10:14] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-12 17:10:14', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[12/Aug/2015 17:14:34] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 17:14:43] DEBUG [monitor.controller:237] command written
+[12/Aug/2015 17:14:43] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-12 17:14:43', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[12/Aug/2015 17:15:10] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 17:16:07] DEBUG [monitor.controller:237] command written
+[12/Aug/2015 17:16:07] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-12 17:16:07', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[12/Aug/2015 17:18:36] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 17:18:44] DEBUG [monitor.controller:237] command written
+[12/Aug/2015 17:18:44] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-12 17:18:44', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[12/Aug/2015 17:19:31] DEBUG [monitor.controller:237] command written
+[12/Aug/2015 17:19:31] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-12 17:19:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[12/Aug/2015 17:31:23] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 17:31:29] DEBUG [monitor.controller:237] command written
+[12/Aug/2015 17:31:29] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-12 17:31:29', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[12/Aug/2015 17:36:24] DEBUG [monitor.views:45] index: program started.
+[12/Aug/2015 17:36:32] DEBUG [monitor.controller:237] command written
+[12/Aug/2015 17:36:32] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-12 17:36:32', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 09:22:55] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 09:22:55] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 09:22:55', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 09:35:06] DEBUG [monitor.views:45] index: program started.
+[13/Aug/2015 09:35:55] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 09:35:55] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 09:35:55', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 09:38:23] DEBUG [monitor.views:879] [datetime.datetime(2015, 8, 14, 0, 0), datetime.datetime(2015, 8, 13, 0, 0), datetime.datetime(2015, 8, 12, 0, 0), datetime.datetime(2015, 8, 11, 0, 0), datetime.datetime(2015, 8, 10, 0, 0), datetime.datetime(2015, 8, 9, 0, 0), datetime.datetime(2015, 8, 8, 0, 0), datetime.datetime(2015, 8, 7, 0, 0), datetime.datetime(2015, 8, 6, 0, 0)]
+[13/Aug/2015 09:38:47] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 09:38:47] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 09:38:47', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 09:39:57] DEBUG [monitor.views:45] index: program started.
+[13/Aug/2015 09:40:00] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 09:40:00] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 09:40:00', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 09:50:03] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 09:50:03] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 09:50:03', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'ON', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 09:50:03] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 09:50:03] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 09:50:03', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 09:53:41] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 09:53:41] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 09:53:41', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 10:25:54] DEBUG [monitor.views:879] [datetime.datetime(2015, 8, 14, 0, 0), datetime.datetime(2015, 8, 13, 0, 0), datetime.datetime(2015, 8, 12, 0, 0), datetime.datetime(2015, 8, 11, 0, 0)]
+[13/Aug/2015 10:26:04] DEBUG [monitor.views:948] {'count': 44, 'database_list_int': [<PowerConsumptionLogger: 2015-08-12 15:55:03, current: 0.0>], 'count_int': 1, 'database_list': [<PowerConsumptionLogger: 2015-08-12 15:55:03, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:50:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:45:03, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:40:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:35:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:30:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:25:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:20:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:15:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:10:06, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:05:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:00:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:55:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:50:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:45:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:40:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:35:03, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:30:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:25:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:20:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:15:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:10:06, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:05:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:00:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:55:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:50:06, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:45:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:40:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:35:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:43, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:32, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:22, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:12, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:58, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:48, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:27, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:17, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 03:21:55, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:50:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:23:10, current: 0.0>]}
+[13/Aug/2015 10:26:35] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 10:26:35] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 10:26:35', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 10:26:50] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 10:26:50] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 10:26:50', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 10:43:50] DEBUG [monitor.views:879] [datetime.datetime(2015, 8, 14, 0, 0), datetime.datetime(2015, 8, 13, 0, 0), datetime.datetime(2015, 8, 12, 0, 0), datetime.datetime(2015, 8, 11, 0, 0)]
+[13/Aug/2015 10:44:19] DEBUG [monitor.views:879] [datetime.datetime(2015, 8, 14, 0, 0), datetime.datetime(2015, 8, 13, 0, 0), datetime.datetime(2015, 8, 12, 0, 0), datetime.datetime(2015, 8, 11, 0, 0), datetime.datetime(2015, 8, 10, 0, 0)]
+[13/Aug/2015 10:44:46] DEBUG [monitor.views:948] {'count': 54, 'database_list_int': [<PowerConsumptionLogger: 2015-08-12 15:55:03, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:50:53, current: 0.0>], 'count_int': 2, 'database_list': [<PowerConsumptionLogger: 2015-08-12 15:55:03, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:50:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:45:03, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:40:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:35:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:30:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:25:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:20:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:15:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:10:06, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:05:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:00:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:55:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:50:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:45:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:40:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:35:03, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:30:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:25:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:20:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:15:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:10:06, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:05:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:00:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:55:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:50:06, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:45:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:40:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:35:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:43, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:32, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:22, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:12, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:58, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:48, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:27, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:17, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 03:21:55, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:50:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:23:10, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:17:27, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:12:16, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:07:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:49:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:44:31, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:38:57, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:37:51, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:36:44, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:35:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 13:25:53, current: 0.0>]}
+[13/Aug/2015 10:52:57] DEBUG [monitor.views:948] {'count': 54, 'database_list_int': [<PowerConsumptionLogger: 2015-08-12 15:55:03, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:50:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:17:27, current: 0.0>], 'count_int': 3, 'database_list': [<PowerConsumptionLogger: 2015-08-12 15:55:03, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:50:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:45:03, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:40:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:35:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:30:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:25:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:20:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:15:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:10:06, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:05:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 15:00:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:55:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:50:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:45:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:40:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:35:03, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:30:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:25:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:20:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:15:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:10:06, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:05:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 14:00:04, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:55:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:50:06, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:45:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:40:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:35:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:43, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:32, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:22, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:12, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:30:02, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:58, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:48, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:27, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:17, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 13:25:07, current: 0.0>, <PowerConsumptionLogger: 2015-08-12 03:21:55, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:50:53, current: 0.0>, <PowerConsumptionLogger: 2015-08-11 21:23:10, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:17:27, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:12:16, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 17:07:05, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:49:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:44:31, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:38:57, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:37:51, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:36:44, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 16:35:37, current: 0.0>, <PowerConsumptionLogger: 2015-08-10 13:25:53, current: 0.0>]}
+[13/Aug/2015 11:09:11] DEBUG [monitor.views:45] index: program started.
+[13/Aug/2015 11:09:18] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 11:09:18] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 11:09:18', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 11:11:01] DEBUG [monitor.views:45] index: program started.
+[13/Aug/2015 11:11:04] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 11:11:04] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 11:11:04', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 11:15:16] DEBUG [monitor.views:45] index: program started.
+[13/Aug/2015 11:15:21] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 11:15:21] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 11:15:21', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 11:17:04] DEBUG [monitor.views:45] index: program started.
+[13/Aug/2015 11:17:07] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 11:17:07] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 11:17:07', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 11:17:36] DEBUG [monitor.views:45] index: program started.
+[13/Aug/2015 11:17:40] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 11:17:40] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 11:17:40', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 11:27:51] DEBUG [monitor.views:45] index: program started.
+[13/Aug/2015 11:27:56] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 11:27:56] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 11:27:56', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 11:31:19] DEBUG [monitor.views:45] index: program started.
+[13/Aug/2015 11:31:22] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 11:31:22] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 11:31:22', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 11:34:26] DEBUG [monitor.views:45] index: program started.
+[13/Aug/2015 11:34:29] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 11:34:29] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 11:34:29', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 11:36:34] DEBUG [monitor.views:45] index: program started.
+[13/Aug/2015 11:36:39] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 11:36:39] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 11:36:39', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[13/Aug/2015 11:37:14] DEBUG [monitor.views:45] index: program started.
+[13/Aug/2015 11:37:18] DEBUG [monitor.controller:237] command written
+[13/Aug/2015 11:37:18] DEBUG [monitor.controller:238] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-13 11:37:18', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': 'CL', 'dwp1': u'OFF', 'op_mode': 'MN', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'dwp2': u'OFF'}
+[27/Aug/2015 09:24:26] ERROR [django.request:256] Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\django\core\handlers\base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Python27\lib\site-packages\django\core\urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "C:\Python27\lib\site-packages\django\core\urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "C:\Python27\lib\site-packages\django\core\urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "C:\Django\myproject\myproject\urls.py", line 28, in <module>
+    url(r'^monitor/', include('monitor.urls', namespace="monitor")),
+  File "C:\Python27\lib\site-packages\django\conf\urls\__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "C:\Django\myproject\monitor\urls.py", line 14, in <module>
+    url(r'^set_cp/$', set_cp, name='set_cp'),
+NameError: name 'set_cp' is not defined
+[27/Aug/2015 09:24:27] ERROR [django.request:256] Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\django\core\handlers\base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "C:\Python27\lib\site-packages\django\middleware\common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "C:\Python27\lib\site-packages\django\core\urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "C:\Python27\lib\site-packages\django\core\urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "C:\Python27\lib\site-packages\django\core\urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "C:\Python27\lib\site-packages\django\core\urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "C:\Python27\lib\site-packages\django\core\urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "C:\Django\myproject\myproject\urls.py", line 28, in <module>
+    url(r'^monitor/', include('monitor.urls', namespace="monitor")),
+  File "C:\Python27\lib\site-packages\django\conf\urls\__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "C:\Django\myproject\monitor\urls.py", line 14, in <module>
+    url(r'^set_cp/$', set_cp, name='set_cp'),
+NameError: name 'set_cp' is not defined
+[27/Aug/2015 09:25:26] WARNING [django.request:170] Not Found: /favicon.ico
+[27/Aug/2015 09:25:29] DEBUG [monitor.views:46] index: program started.
+[27/Aug/2015 09:26:20] DEBUG [monitor.views:46] index: program started.
+[27/Aug/2015 09:26:39] DEBUG [monitor.views:46] index: program started.
+[27/Aug/2015 09:27:13] DEBUG [monitor.views:46] index: program started.
+[27/Aug/2015 17:48:37] DEBUG [monitor.controller:248] command written
+[27/Aug/2015 17:48:37] DEBUG [monitor.controller:249] {'rt': 0.0, 'cp1_hz': 0, 'datetime': '2015-08-27 17:48:37', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'cp2_flux': 0, 'cp1_flux': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[27/Aug/2015 17:48:37] DEBUG [monitor.views:449] write_cmd from settimg_mode_confirm
+[27/Aug/2015 17:48:37] DEBUG [monitor.controller:553] total_rt: 0.0, data[rt]: 0.0
+[27/Aug/2015 17:48:37] DEBUG [monitor.controller:553] total_rt: 0.0, data[rt]: 0.0
