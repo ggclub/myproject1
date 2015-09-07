@@ -447,6 +447,62 @@ class TubeWellLogger(models.Model):
 	# 	return unicode(self.TubeWellLogger)
 
 
+################ ERROR LOG  #########################
+TEMPERATURE = 'TP'
+FLUX = 'FX'
+WATERLEVEL = 'WL'
+POWER = 'PO'
+COMMUNICATION = 'COMM'
+ALARM_CASE_CHOICES = (
+	(TEMPERATURE, '온도 안전범위 이탈'),
+	(FLUX, '유량 안전범위 이탈'),
+	(WATERLEVEL, '수위 부족'),
+	(POWER, '전력 안전범위 초과'),
+	(COMMUNICATION, '통신 에러'),
+)
+ALARM_LOCATION_CHOICES = (
+	('T1', '온도 센서1'),
+	('T2', '온도 센서2'),
+	('T3', '온도 센서3'),
+	('T4', '온도 센서4'),
+	('T5', '온도 센서5'),
+	('T6', '온도 센서6'),
+	('T7', '온도 센서7'),
+	('T8', '온도 센서8'),
+	('T9', '온도 센서9'),
+	('T10', '온도 센서10'),
+	('F1', '순환수 유량계'),
+	('F2', '지하수 유량계'),
+	('DWP1', '심정 펌프1'),
+	('DWP2', '심정 펌프2'),
+	('DWP3', '심정 펌프3'),
+	('DWP4', '심정 펌프4'),
+	('PO', '전력량계'),
+	('DAQ', 'DAQ'),
+	('IV', '인버터'),
+	('FM', '유량계'),
+	('HMI', 'HMI'),
+)
+ALARM_STATE_CHOICES = (
+	('HT', '고온'),
+	('LT', '저온'),
+	('HF', '유량 과다'),
+	('LF', '유량 부족'),
+	('LL', '수위 부족'),
+	('HP', '과전력'),
+	('CE', '통신 에러'),
+)
+
+class AlarmLogger(models.Model):
+	classification = models.CharField(max_length=4, choices=ALARM_CASE_CHOICES, default=TEMPERATURE)
+	location = models.CharField(max_length=4, choices=ALARM_LOCATION_CHOICES, default='T1')
+	state = models.CharField(max_length=2, choices=ALARM_STATE_CHOICES, default='NA')
+	occurTime = models.DateTimeField()
+	closedTime = models.DateTimeField()
+	def __str__(self):
+		return '{}, {}, {}, {}, {}'.format(self.classification, self.location, self.state, str(self.occurTime), str(self.closedTime))
+
+
 ################ CEILING INDOOR UNIT #########################
 ACOOL = 'CL'
 AHEAT = 'HT'

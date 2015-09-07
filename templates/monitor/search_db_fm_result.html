@@ -7,8 +7,8 @@
 			<td class="result-datetime" rowspan="2"><b>시간</b></td>
 			<td class="result-cpfm" colspan="3"><b>순환수(열교환 후)</b></td>
 			<td class="result-cpfm" colspan="3"><b>순환수(열교환 전)</b></td>
-			<td class="result-dwpfm" colspan="3"><b>지하수 공급(열교환 전)</b></td>
-			<td class="result-dwpfm" colspan="3"><b>지하수 공급(열교환 후)</b></td>
+			<td class="result-dwpfm" colspan="3"><b>지하수 공급(양수)</b></td>
+			<td class="result-dwpfm" colspan="3"><b>지하수 환수(주입)</b></td>
 		</tr>
 		<tr>
 		{% for i in 12|make_list %}
@@ -34,10 +34,10 @@
 			<td class="result-cpfm">{{ cpfm.currentFlux }}</td>
 			<td class="result-temp">{{ in1.temperature }}</td>
 			<td class="result-dwpfm">{{ dwpfm.currentFlux }}</td>
-			<td class="result-dwpfm">{{ dwpfm.currentFlux|multiply:1000 }}</td>
+			<td class="result-dwpfm">{{ dwpfm.currentFlux|multiply:16.67 }}</td>
 			<td class="result-temp">{{ in2.temperature }}</td>
 			<td class="result-dwpfm">{{ dwpfm.currentFlux }}</td>
-			<td class="result-dwpfm">{{ dwpfm.currentFlux|multiply:1000 }}</td>
+			<td class="result-dwpfm">{{ dwpfm.currentFlux|multiply:16.67 }}</td>
 			<td class="result-temp">{{ out2.temperature }}</td>
 		</tr>
 		{% endfor %}
@@ -51,10 +51,10 @@
 	<thead id="query-title-int">
 		<tr>
 			<td class="result-datetime" rowspan="2"><b>시간</b></td>
-			<td class="result-cpfm"><b>순환 IN</b></td>
-			<td class="result-cpfm"><b>순환 OUT</b></td>
-			<td class="result-dwpfm"><b>심정 IN</b></td>
-			<td class="result-dwpfm"><b>심정 OUT</b></td>
+			<td class="result-cpfm"><b>순환수(열교환 후)</b></td>
+			<td class="result-cpfm"><b>순환수(열교환 전)</b></td>
+			<td class="result-dwpfm"><b>지하수 공급(양수)</b></td>
+			<td class="result-dwpfm"><b>지하수 환수(주입)</b></td>
 		</tr>
 		<tr>
 		{% for i in 12|make_list %}
@@ -71,8 +71,8 @@
 			<td class="result-datetime">{{ cpfm.dateTime|date:"Y-m-d" }}</td>
 			<td class="result-cpfm">{{ cpfm.integralFlux|div:1000 }}</td>
 			<td class="result-cpfm">{{ cpfm.integralFlux|div:1000 }}</td>
-			<td class="result-dwpfm">{{ dwpfm.integralFlux|div:1000 }}</td>
-			<td class="result-dwpfm">{{ dwpfm.integralFlux|div:1000 }}</td>
+			<td class="result-dwpfm">{{ dwpfm.integralFlux }}</td>
+			<td class="result-dwpfm">{{ dwpfm.integralFlux }}</td>
 		</tr>
 		{% endfor %}
 	</tbody>

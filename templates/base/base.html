@@ -6,9 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<link rel="stylesheet" href="{% static "bootstrap-3.3.4-dist/css/bootstrap.css" %}">
+	<link rel="stylesheet" href="{% static "base/base.css" %}" type="text/css">
 	<link rel="stylesheet" href="{% static "base/navbar.css" %}" type="text/css">
 	<link rel="stylesheet" href="{% static "monitor/index.css" %}" type="text/css">
 	<link rel="stylesheet" href="{% static "jquery/jquery-ui.min.css" %}" type="text/css">
+	<link rel="shortcut icon" href="{% static "favicon.ico" %}">
 
 	<script src="{% static "jquery/jquery-1.11.3.min.js" %}"></script>
 	<script src="{% static "jquery/jquery-ui.min.js" %}"></script>
@@ -18,7 +20,7 @@
 
 	{% block script %}{% endblock %}
 	{% block header %}{% endblock %}
-    	<title>{% block title %}{% endblock %}</title>
+	<title>{% block title %}{% endblock %}</title>  	
 </head>
 <body class="body">
 	<div id='ajax-loader'>

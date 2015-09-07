@@ -271,6 +271,7 @@ def read_data_from_json(op_mode, temp_mode, total_rt):
 	cp_operating = int(_data["cp_operating"]) - 1
 
 	data = {
+		"datetime": dt.strptime(datetime, "%Y-%m-%d %H:%M:%S"),
 		"heat_pump": [
 			{
 				"switch":_data["hp1"],
@@ -381,9 +382,15 @@ def read_data_from_json(op_mode, temp_mode, total_rt):
 			"RT":_data["rt"],
 			# "RT":total_rt,
 		},
-		"op_mode": op_mode,
-		"temp_mode": temp_mode,
+		"op_mode": _data["op_mode"],
+		"temp_mode": _data["temp_mode"],
+		"error": None,
 	}
+	# 서버가 리셋?되어 global op/temp _mode가 초기화 되는 경우가 있으므로 hmidata의 값과 맞춤
+	if op_mode != data["op_mode"]:
+		op_mode = data["op_mode"]
+	if temp_mode != data["temp_mode"]:
+		temp_mode = data["temp_mode"]
 
 	buf_a, buf_b, buf_c, buf_d = set_section_buffer()
 	# data["rt"]["RT"] = total_rt

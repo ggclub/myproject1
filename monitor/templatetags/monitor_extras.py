@@ -13,3 +13,16 @@ def div( value, arg ):
         if arg: return value / arg
     except: pass
     return ''
+
+@register.filter
+def multiply( value, arg ):
+    '''
+    Multiplies the value; argument is the multiplier.
+    Returns empty string on any error.
+    '''
+    try:
+        value = int( value )
+        arg = float( arg )
+        if arg: return value * arg
+    except: pass
+    return ''

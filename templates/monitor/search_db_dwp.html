@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE HTML> 
 <div class="container-search-db">
 <div class="conditions">
@@ -29,7 +30,7 @@
 	</table>
 	<div style="display:inline;">
 		<button class="btn-search-db">검색</button>
-		<button class='btn-excel' onclick='Result2excel();'>엑셀변환</button>
+		<button class='btn-excel' onclick='Result2excel();'><img src="{% static "monitor/excel.png" %}" width="20"> 저장</button>
 	</div>
 </div>
 

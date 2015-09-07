@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE HTML> 
 <div class="container-search-db">
 <div class="conditions">
@@ -28,7 +29,7 @@
 	</table>
 	<div style="display:inline;">
 		<button class="btn-search-db">검색</button>
-		<button class='btn-excel' onclick='Result2excel();'>엑셀변환</button>
+		<button class='btn-excel' onclick='Result2excel();'><img src="{% static "monitor/excel.png" %}" width="20"> 저장</button>
 	</div>
 	<table class="table table-conditions" id="show-conditions">
 		<tr>
@@ -62,12 +63,12 @@
 			<td class="show-conditions-detail">
 				<input type="checkbox" class="show-condition" name="show-condition" value="7"><p>운전모드</p>
 			</td>
-			<td class="show-conditions-detail">
-				<input type="checkbox" class="show-condition" name="show-condition" value="8"><p>풍량</p>
-			</td>
-			<td class="show-conditions-detail">
-				<input type="checkbox" class="show-condition" name="show-condition" value="9"><p>에러</p>
-			</td> 
+			{# <td class="show-conditions-detail"> #}
+				{# <input type="checkbox" class="show-condition" name="show-condition" value="8"><p>풍량</p> #}
+			{# </td> #}
+			{# <td class="show-conditions-detail"> #}
+				{# <input type="checkbox" class="show-condition" name="show-condition" value="9"><p>에러</p> #}
+			{# </td>  #}
 		</tr>
 	</table>
 </div>
@@ -159,18 +160,18 @@ $('.btn-apply-chkbox').on('click', function() {
 	} else {
 		$('.result-op-mode').css('display','none');
 	}
-	// 풍량
-	if($(':checkbox[value=8]').is(':checked')){
-		$('.result-air-flow').css('display','table-cell');
-	} else {
-		$('.result-air-flow').css('display','none');
-	}
-	// 에러
-	if($(':checkbox[value=9]').is(':checked')){
-		$('.result-state').css('display','table-cell');
-	} else {
-		$('.result-state').css('display','none');
-	}
+	// // 풍량
+	// if($(':checkbox[value=8]').is(':checked')){
+	// 	$('.result-air-flow').css('display','table-cell');
+	// } else {
+	// 	$('.result-air-flow').css('display','none');
+	// }
+	// // 에러
+	// if($(':checkbox[value=9]').is(':checked')){
+	// 	$('.result-state').css('display','table-cell');
+	// } else {
+	// 	$('.result-state').css('display','none');
+	// }
 });
 
 // 층수 정했을 때 실내기명 콤보박스

@@ -38,6 +38,7 @@ admin.site.register(HeatPump6Logger)
 admin.site.register(PowerConsumptionLogger)
 admin.site.register(RefrigerationTonLogger)
 admin.site.register(TubeWellLogger)
+admin.site.register(AlarmLogger)
 # Ceiling Type Indoor Unit
 admin.site.register(Floor1CIUs)
 admin.site.register(Floor2CIUs)

@@ -200,18 +200,34 @@ $(document).ready(function (){
 				<td class="table-value" id="flux-int">{{ DWPFM.integralFlux|floatformat:0 }} ton</td>
 			</tr>
 			<tr>
-				{# <td class="table-title">순시 전력</td> #}
-				<td class="table-value" id="PowerConsumption" style="font-size:12px;">{{ power.integralPowerConsumption|floatformat:0 }} kWh</td>
+				{# <td class="table-title">적산 전력</td> #}
+				<td class="table-value" id="PowerConsumption" style="font-size:12px;">{{ power.integralPowerConsumption|floatformat:2 }} kWh</td>
 			</tr>
 			<tr>
-				{# <td class="table-title">적산 전력</td> #}
-				<td class="table-value" id="PowerConsumption">{{ power.currentPowerConsumption|floatformat:1 }} Wh</td>
+				{# <td class="table-title">순시 전력</td> #}
+				<td class="table-value" id="PowerConsumption">{{ power.currentPowerConsumption|floatformat:2 }} kW</td>
+			</tr>
+			<tr>
+				{# <td class="table-title">COP</td> #}
+				<td class="table-value" id="PowerConsumption">{{ COP|floatformat:2 }} COP</td>
 			</tr>
 		</tbody>
 	</table>
 </div>
 <div id="error-msg">
-	<p>{{ error }}</p>
+	<table class="table borderless">
+		<tbody>
+		{% for error in error_msg %}
+		<tr>
+			<td>{{ forloop.counter }}</td>
+			<td>{{ error.location }}</td>
+			<td>{{ error.status }}</td> 
+			<td>{{ error.OT }}</td> 
+			<td>{{ error.CT }}</td>
+		</tr>
+		{% endfor %}
+		</tbody>
+	</table>
 </div>
 
 <script type="text/javascript">

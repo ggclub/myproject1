@@ -72,8 +72,10 @@ def make_excel_file(obj_type, columns, rows, fail=0):
                worksheet.set_column(1, 19, 8)
           elif obj_type == 'cp':
                worksheet.set_column(1, 9, 10.5)
-          elif obj_type == 'dwp' or 'fm' in obj_type:
+          elif obj_type == 'dwp' or obj_type == 'fm-cur':
                worksheet.set_column(1, 13, 9.5)
+          elif obj_type == 'fm-int':
+               worksheet.set_column(1, 6, 17)
           elif 'power' in obj_type:
                worksheet.set_column(1, 1, 16.5)
           else: # 관측센서
@@ -122,7 +124,7 @@ def make_excel_file(obj_type, columns, rows, fail=0):
                     col += 1
                     if col == num_col:
                          col = 1; row += 1;
-          elif obj_type == 'dwp' or 'fm-cur':
+          elif obj_type == 'dwp':
                # 심정펌프 제목
                num_col = 13
                for title in columns:
@@ -163,12 +165,12 @@ def make_excel_file(obj_type, columns, rows, fail=0):
                     if row == 0 and col == 0:
                          # 시간
                          worksheet.merge_range(row, col, row+1, col, title.encode('utf-8'), merge_format)
-                    elif row == 0 and col != 0:
-                         # 순환 IN, OUT, 심정 IN, OUT
+                    else: # row == 0 and col != 0
+                         # 순환 IN, OUT, 심정 IN, OUT, 유량
                          worksheet.write(row, col, title.encode('utf-8'), title_format)
-                    else: 
-                         # 유량
-                         worksheet.write(row, col, title.encode('utf-8'), title_format)
+                    # else: 
+                    #      # 유량
+                    #      worksheet.write(row, col, title.encode('utf-8'), title_format)
                     col += 1
                     if col == num_col:
                          col = 1; row += 1;

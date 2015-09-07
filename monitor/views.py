@@ -23,18 +23,21 @@ from django.views.decorators.csrf import csrf_exempt
 import logging
 log = logging.getLogger(__name__)
 
-op_mode = 'MN'
-temp_mode = 'CL'
+op_mode = None
+temp_mode = None
+# 명령을 준 후에 잠시 page reload를 하지 않음
 flag_command = 0
+# ?? 이거 왜 있지?
 flag_reload_display = False
 file_path = os.path.join(myproject.settings.BASE_DIR, 'share/')
-save_time = timezone.now()
 # 저장 주기
 save_interval = 10	# minutes
-is_saved = False
+# save_time = timezone.now()
+# is_saved = False
 total_rt = 0.0
 
-date_format = "%Y-%m-%d"
+date_format = "%Y-%m-%d"				# db search
+datetime_format = "%Y-%m-%d %H:%M:%S"
 
 @csrf_exempt
 @login_required
@@ -44,12 +47,11 @@ def index(request):
 	# log.debug(str(request.session['name']))
 
 	log.debug("index: program started.")
-	check_if_error_exist(request)
+	response_data = check_if_error_exist()
+	
 	global op_mode, temp_mode
 	op_mode = 'MN'
 	temp_mode = 'CL'
-
-	response_data = {}
 	
 	# 실내기 db
 	floor = request.POST.get('floor','1')
@@ -82,16 +84,166 @@ def index(request):
 	return render(request, url, response_data)
 
 
-def check_if_error_exist(request):
-	file = file_path + 'errorlog.json'
-	if isfile(file):
+
+def check_if_error_exist(error_count = 0):
+	error_alarm = []
+	# file = file_path + 'errorlog' + str(error_count) + '.json'
+	# errorlog 파일이 있는지 확인한다.
+	from glob import glob
+	for file in glob(file_path + 'errorlog?.*'):
+		# 파일이 있으면 에러를 처리한다.
 		with open(file) as data_file:
-			response_data = json.load(data_file)
-		os.remove(file)
-		log.error(str(response_data))
-		# url = 'error/errorlog.html'
-		# html = render_to_string(url, response_data, RequestContext(request))
-		# return HttpResponse(html)
+			_data = json.load(data_file)
+		# log.error(str(_data))
+
+		# 변수에 각 내용 저장
+		code = _data["CODE"]
+		ot = _data["OT"]
+		ct = _data["CT"]
+
+		# 경보 상황 해제
+		# database 저장
+		if ct != "":
+			# occurTime, closedTime
+			occur_time = dt.strptime(ot, datetime_format)
+			closed_time = dt.strptime(ct, datetime_format)
+
+			# classification, location, state
+			if code[0] == "T":		# 온도 안전범위 이탈
+				classification = "TP"
+				location = "T" + code[1]
+				if code[2] == "H":
+					state = "HT"	# 고온
+				else:
+					state = "LT"	# 저온
+			elif code[0] == "F":	# 유량 안전범위 이탈
+				classification = "FX"
+				location = "F" + code[1]
+				if code[2] == "H":
+					state = "HF" 	# 유량 과다
+				else: 
+					state = "LF"	# 유량 부족
+			elif code[0] == "L":	# 수위 부족
+				classification = "WL"
+				location = "DWP" + code[1]
+			elif code[0] == "P":	# 전력 안전범위 초과
+				classification = "PO"
+				location = "PO"
+			else: 					# 통신 에러
+				classification = "COMM"
+				if code == "DAQ":	# DAQ
+					location = "DAQ"
+				elif code == "CIV":	# 인버터
+					location = "IV"
+				elif code == "CFM":	# 유량계
+					location = "FM"
+				else:				# HMI-PC
+					location = "HMI"
+				state = "CE"
+
+			try:
+				alarm = AlarmLogger(
+					classification = classification, location = location, state = state,
+					occurTime = occur_time, closedTime = closed_time
+					).save()
+			except Exception, e:
+				log.error(str(e))
+			
+			# errorlog 파일 삭제
+			os.remove(file)
+
+		# 에러 분석
+		if code[0] == "T":			# 온도 안전범위 초과
+			# 에러 상태 파악
+			if code[2] == "H":		# 고온
+				error_alarm.append({
+					"location": "온도"+code[1],
+					"status": "고온",
+					"OT": ot,
+					"CT": ct,
+				})
+			else: # "L"				# 저온
+				error_alarm.append({
+					"location": "온도"+code[1],
+					"status": "저온",
+					"OT": ot,
+					"CT": ct,
+				})
+		elif code[0] == "F":		# 유량 안전범위 초과
+			# 에러 상태 파악
+			if code[1] == "1":		# 순환수 유량계
+				if code[2] == "H":	# 유량 과다
+					error_alarm.append({
+						"location": "순환수",
+						"status": "유량 과다",
+						"OT": ot,
+						"CT": ct,
+					})
+				else: # "L"			# 유량 부족
+					error_alarm.append({
+						"location": "순환수",
+						"status": "유량 부족",
+						"OT": ot,
+						"CT": ct,
+					})
+			if code[1] == "2":		# 순환수 유량계
+				if code[2] == "H":	# 유량 과다
+					error_alarm.append({
+						"location": "지하수",
+						"status": "유량 과다",
+						"OT": ot,
+						"CT": ct,
+					})
+				else: # "L"			# 유량 부족
+					error_alarm.append({
+						"location": "지하수",
+						"status": "유량 부족",
+						"OT": ot,
+						"CT": ct,
+					})
+		elif code[0] == "L":		# 수위 부족
+			error_alarm.append({
+					"location": "심정펌프"+code[1],
+					"status": "수위 부족",
+					"OT": ot,
+					"CT": ct,
+				})
+		elif code[0] == "P":		# 전력 안전범위 초과
+			error_alarm.append({
+					"location": "전력량",
+					"status": "안전범위 초과",
+					"OT": ot,
+					"CT": ct,
+				})
+		elif code == "DAQ":			# DAQ 장치 에러
+			error_alarm.append({
+					"location": "HMI",
+					"status": "DAQ에러",
+					"OT": ot,
+					"CT": ct,
+				})
+		elif code == "CIV":			# 인버터 통신 에러
+			error_alarm.append({
+					"location": "HMI",
+					"status": "인버터 통신 에러",
+					"OT": ot,
+					"CT": ct,
+				})
+		else: # code == "CFM"		# 유량계 통신 에러
+			error_alarm.append({
+					"location": "HMI",
+					"status": "유량계 통신 에러",
+					"OT": ot,
+					"CT": ct,
+				})
+
+
+		# log.debug(code + ot + ct)
+		# 여러개의 경보가 동시에 발생하는 경우인지 확인하여 처리.
+		# error_count += 1
+		# error_alarm.append(check_if_error_exist(error_count))
+
+	return {"error_msg": error_alarm}
 
 def save_data(response_data):
 	if not controller.save_data(response_data):
@@ -105,7 +257,7 @@ def save_data(response_data):
 		response_data.update(controller.get_CIU_from_json('3'))
 		controller.save_ciu3(response_data)
 		log.debug("database updated")
-		save_time = timezone.now()
+		# save_time = timezone.now()
 
 
 @csrf_exempt
@@ -114,10 +266,9 @@ def reload_display(request):
 	# 5초마다 갱신해서 왼쪽 상태창, 오른쪽 실내기 정보 갱신
 	# 자동제어시, 자동제어 로직에 따라 hmi에 명령을 줌
 	# 수동인 경우 데이터 값만 갱신함.
-	response_data = {}
+
 	# check if error exist
-	check_if_error_exist(request)
-	
+	response_data = check_if_error_exist()
 
 	# 실내기 정보 읽어오기
 	floor = request.POST.get('floor','1')
@@ -139,32 +290,46 @@ def reload_display(request):
 	# 센서값 읽어오기
 	global op_mode, temp_mode, flag_reload_display
 	# log.debug("reload_display: " + op_mode + ", " + temp_mode)
+	# ?? 역할이 뭐지
 	if flag_reload_display:
 		op_mode = request.POST.get('opMode', 'error').encode('utf-8')
 		temp_mode = request.POST.get('tempMode','error').encode('utf-8')
 		# log.debug(op_mode + ", " + temp_mode)
 		flag_reload_display = False
-	# 데이터 읽고, (자동)제어, 수동인 경우 데이터 값만 갱신함.
-	response_data.update(controller.read_data_from_json(op_mode, temp_mode, total_rt))
-	if response_data.has_key("error"):
-		log.debug("read_data_from_json error")
-	# 	response_data = {"error":"file read error"}
-	# 	url = 'error/read.html'
-	# 	html = render_to_string(url, response_data)
-	# 	return HttpResponse(html)
 
+	# hmi에서 데이터 읽고 (자동)제어
+	# 수동인 경우 데이터 값(디스플레이)만 갱신함.
+	response_data.update(controller.read_data_from_json(op_mode, temp_mode, total_rt))
+	# log.debug("timedelta = " + str(timezone.now() - response_data["datetime"]))
+	# if timezone.now() - response_data["datetime"] > timezone.timedelta(seconds=5):
+	# 	# HMI와 통신에러
+	# 	pass
+	# else: 
+
+	t = timezone.now()		
+	while response_data["error"] != None:
+		response_data.update(controller.read_data_from_json(op_mode, temp_mode, total_rt))
+	op_mode = response_data["op_mode"]
+	temp_mode = response_data["temp_mode"]
+	# if response_data.has_key("error"):
+	# 	log.debug("read_data_from_json error")
+	try:
+		COP = total_rt/response_data["power"]["currentPowerConsumption"]
+	except ZeroDivisionError:
+		COP = 0
+	response_data.update({"COP": COP})
+	
 	# 기기 동작 내역
 	# selected = int(request.POST.get('page', 1))
 	# response_data.update(controller.get_operation_log(selected))
 
-
 	# save time 주기마다 DB에 저장
-	global save_time
+	# global save_time
 	# log.debug("save_time: " + str(save_time))
 	# if (timezone.now() - save_time) > timezone.timedelta(minutes=save_interval):
 		# log.debug(timezone.now() - save_time)
-	global is_saved
-	t = timezone.now()
+
+	# t = timezone.now()	
 	# log.debug(str(t))	
 	if save_interval == 10:
 		if t.minute % 10 == 0 and t.second < 6: 
@@ -178,7 +343,6 @@ def reload_display(request):
 	else:
 		if t.minute % 5 == 0 and t.second < 6:
 			save_data(response_data)
-
 
 
 	# log.debug(response_data)
@@ -282,7 +446,8 @@ def setting_cp_done(request):
 		log.error(str(e))
 
 	# check if error exist
-	check_if_error_exist(request)
+	response_data = check_if_error_exist()
+	
 
 	global flag_command 
 	if flag_command: # command를 준 후에 파일을 잠시 읽지 않는다.
@@ -291,7 +456,7 @@ def setting_cp_done(request):
 		flag_command = 0
 
 	# 센서값 읽어오기
-	response_data = controller.read_data_from_json(op_mode, temp_mode, total_rt)
+	response_data.update(controller.read_data_from_json(op_mode, temp_mode, total_rt))
 	# if response_data == False:
 	# 	response_data = {"error":"file read error"}
 	# 	url = 'error/read.html'
@@ -448,9 +613,6 @@ def setting_mode_confirm(request):
 		controller.write_cmd(temp_mode,op_mode)
 		log.debug("write_cmd from settimg_mode_confirm")
 
-	# check if error exist
-	check_if_error_exist(request)
-
 	if op_mode == 'AT':
 		# log.debug("setting_mode_confirm: " + op_mode + ", " + temp_mode)
 		global	flag_reload_display
@@ -463,7 +625,10 @@ def setting_mode_confirm(request):
 
 @login_required	
 def operation_control(request):
-	response_data = {}
+	# check if error exist
+	response_data = check_if_error_exist()
+	
+
 	# RT 값을 받기 위해 get_ciu_from_json 필요
 	response_data.update(controller.get_CIU_from_json(1))
 	total_rt = response_data["cooling_rt"]
@@ -991,7 +1156,7 @@ def search_db_power_result(request):
 	# log.debug(str(date_list))
 	for date in date_list:
 		d = dt.strftime(date, date_format)
-		log.debug(str(date.day))
+		# log.debug(str(date.day))
 		try:
 			power2.append(PowerConsumptionLogger.objects.filter(Q(dateTime__day=date.day)).latest('dateTime'))
 		except:

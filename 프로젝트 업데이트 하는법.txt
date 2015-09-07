@@ -1,0 +1,39 @@
+프로젝트 경로: 내문서(documents)/django/myproject
+
+1. static 폴더와 templates 폴더는 새로운 폴더로 바꿔서 덮어쓰면 됨(기존에 있던 파일과 교체)
+
+2. monitor폴더
+	=============== 주   의 ===============
+	기존의 파일을 덮어쓰거나 교체하면 안됨.
+	=======================================
+	2-1 views.py를 열어 "안의 내용을" 최신 버전의 views.py 내용으로 바꿔줌.
+	ex. 최신버전 views.py 열어서 ctrl+a(전체선택), ctrl+c(복사) 
+	    구버전 views.py 열어서 전체선택 후 붙여넣기(ctrl+a, ctrl+v)
+		파일 저장
+	2-2 controller.py 안의 내용 교체 (2-1과 방법 동일) 후 저장
+	2-3 models.py 안의 내용 교체 (2-1과 방법 동일) 후 저장
+
+3. cmd창을 연다. win+r 누르고 'cmd'입력 후 enter. 혹은 cmd 찾아서 실행
+
+4. 프로젝트 경로로 들어간다.
+	명령어: cd C:\Users\Admin\documents\django\myproject
+	명령어 입력 후 엔터
+	(cmd 처음 켜면 위치가 Admin인 경우 'cd documents\django\myproject' 만 입력해도 됨.)
+
+5. 다음 명령어 입력
+	5-1 명령어: python manage.py makemigrations
+	그럼 어쩌구저쩌구 나오다가 완료 되었다는 메세지가 나올 것임.
+	5-2 명령어: python manage.py migrate
+	그럼 어쩌구저쩌구 나오다가 완료 되었다는 메세지가 나올 것임.
+	
+	5번 과정에서 에러가 나는 경우 전화(010-4024-9212)
+
+6. 브라우져 열고 localhost:8009 입력 (프로젝트 실행)
+
+7. 5번까지 제대로 됐는데 6번이 안되는 경우
+	monitor 폴더에 있는 admin.py, excels.py, urls.py 파일 내용 최신 버전으로 업데이트
+
+	login 폴더에 있는 admin.py, urls.py, views.py 파일 내용 최신 버전으로 업데이트
+	이것도 다 했는데 안되는 경우:
+	login의 models.py 파일 내용 최신 버전으로 업데이트
+	3~5 다시 수행

@@ -81,7 +81,7 @@ function clickFullscreen(){
 			'tempMode': tempMode,
 		},
 		success: function(data){
-			$('body').css('background-image', "url({% static 'monitor/main.jpg' %})");
+			$('body').css('background-image', "url({% static 'base/main.jpg' %})");
 
 			$('.content').empty();
 		
@@ -156,13 +156,17 @@ $('#div-search-db').on('click', function() {
 		}
 	});
 });
+
+var popDatabase;
 // 경보관리
 $('#div-manage-alarm').on('click', function() {
 	$('.navbar-operation-setting').css('display','none');
 	$('.navbar-search-db').css('display','none');
 	setBtnUnclick();
 	$('#nav-manage-alarm').attr('src', "{% static 'base/navbar-btns/manage-alarm-sel.jpg' %}");
-	$('body').css('background-image', "none");
+	// $('body').css('background-image', "none");
+	popDatabase = window.open('/monitor/search_db_ciu/','DB',
+		'height=300,width=400,left=300,top=200,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes');
 });
 
 function setBtnUnclick() {

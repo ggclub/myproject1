@@ -4,10 +4,7 @@
 	left: 850px;
 	display: none;
 }
-body {
-	background-image: url("main.jpg");
-	background-size: cover;
-}
+
 .content {
 	/*position: fixed;*/
 }
@@ -48,13 +45,11 @@ body {
 }
 .right-top {
 	/*background-color: #aabbcc;*/
-	float: top;
 	height: 51%;
 	padding: 2%;
 }
 .right-bottom {
 	/*background-color: #ccbbaa;*/
-	float: bottom;
 	height: 49%;
 	padding: 2%;
 }
@@ -397,9 +392,15 @@ a:hover {
 	display: inline;
 }
 
+#error-msg {
+	position: absolute;
+	top: 104%;
+	left: 140px;
+}
 
-
-
+.borderless tbody tr, .borderless tbody tr td {
+    border: none;
+}
 
 
 

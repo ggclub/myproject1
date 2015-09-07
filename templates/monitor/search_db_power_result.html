@@ -33,7 +33,7 @@
 		{% for power in database_list_int %}
 		<tr>
 			<td class="result-datetime">{{ power.dateTime|date:"Y-m-d" }}</td>
-			<td class="result-power">{{ power.integralPowerConsumption|div:1000 }}</td>
+			<td class="result-power">{{ power.integralPowerConsumption|floatformat:2 }}</td>
 		</tr>
 		{% endfor %}
 	</tbody>
