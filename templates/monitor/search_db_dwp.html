@@ -90,7 +90,7 @@ $('.btn-search-db').on('click', function() {
 
 function Result2excel() {
 	var found = $('#found').text();
-	if(found == '0'){
+	if(found == '0' || found == ''){
 		alert('검색된 내용이 없습니다.');
 		return;
 	}
@@ -101,7 +101,7 @@ function Result2excel() {
 	$('#query-title tr').find('td').each(function (i) {
 		columns.push($(this).text());
 	});
-	console.log(columns);
+	// console.log(columns);
 
 	var rows = new Array(numRow);
 	for (var i = 0; i < numRow; i++){
@@ -131,7 +131,7 @@ function Result2excel() {
 		complete: function() {  },
 		success: function(data){
 			$('#ajax-loader').hide();
-			alert("파일을 다운로드합니다.");
+			window.location.href = 'monitor/download_result/' + data.obj_type + '/';
 		}
 	});
 	return false;

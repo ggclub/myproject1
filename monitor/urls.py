@@ -21,6 +21,7 @@ urlpatterns = [
 	url(r'^setting_mode/$', setting_mode, name='setting_mode'),
 	url(r'^setting_mode_confirm/$', setting_mode_confirm, name='setting_mode_confirm'),
 	url(r'^operation_control/$', operation_control, name='operation_control'),
+	# url(r'^set_db_save_interval/$', set_db_save_interval, name='set_db_save_interval'),
 	# DB 검색
 	url(r'^show_database/$', show_database, name='show_database'),
 	url(r'^search_db_excel/$', search_db_excel, name='search_db_excel'),
@@ -36,4 +37,6 @@ urlpatterns = [
 	url(r'^search_db_fm_result/$', search_db_fm_result, name='search_db_fm_result'),
 	url(r'^search_db_power/$', search_db_power, name='search_db_power'),
 	url(r'^search_db_power_result/$', search_db_power_result, name='search_db_power_result'),
+	# 결과 다운로드
+	url(r'^download_result/(?P<o>.*)/$', download_result, name='download_result'),
 ]

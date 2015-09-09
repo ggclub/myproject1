@@ -111,7 +111,7 @@ function Result2excel() {
 	if(radio == 'cur'){
 		var found = $('#found').text();
 
-		if(found == '0'){
+		if(found == '0' || found == ''){
 			alert('검색된 내용이 없습니다.');
 			return;
 		}
@@ -135,7 +135,7 @@ function Result2excel() {
 	} else { // radio == 'int'
 		var found = $('#found-int').text();
 
-		if(found == '0'){
+		if(found == '0' || found == ''){
 			alert('검색된 내용이 없습니다.');
 			return;
 		}
@@ -175,7 +175,7 @@ function Result2excel() {
 		complete: function() {  },
 		success: function(data){
 			$('#ajax-loader').hide();
-			alert("파일을 다운로드합니다.");
+			window.location.href = 'monitor/download_result/' + data.obj_type + '/';
 		}
 	});
 	return false;

@@ -10,8 +10,8 @@
 			<td class="result-set-temp"><b>설정온도</b></td>
 			<td class="result-temperature"><b>실내온도</b></td>
 			<td class="result-op-mode"><b>운전모드</b></td>
-			<td class="result-air-flow"><b>풍량</b></td>
-			<td class="result-state"><b>에러</b></td>
+			{# <td class="result-air-flow"><b>풍량</b></td> #}
+			{# <td class="result-state"><b>에러</b></td> #}
 		</tr>
 	</thead>
 	<tbody id="query-result">
@@ -27,8 +27,8 @@
 					<td class="result-set-temp">{{ d.setTemp }}</td>
 					<td class="result-temperature">{{ d.temperature }}</td>
 					<td class="result-op-mode">{{ d.opMode }}</td>
-					<td class="result-air-flow">{{ d.airFlow }}</td>
-					<td class="result-state">{{ d.state }}</td>
+					{# <td class="result-air-flow">{{ d.airFlow }}</td> #}
+					{# <td class="result-state">{{ d.state }}</td> #}
 				</tr>
 				{% endfor %}
 			{% endfor %}
@@ -44,12 +44,12 @@
 				<td class="result-set-temp">{{ d.setTemp }}</td>
 				<td class="result-temperature">{{ d.temperature }}</td>
 				<td class="result-op-mode">{{ d.opMode }}</td>
-				<td class="result-air-flow">{{ d.airFlow }}</td>
-				<td class="result-state">{{ d.state }}</td>
+				{# <td class="result-air-flow">{{ d.airFlow }}</td> #}
+				{# <td class="result-state">{{ d.state }}</td> #}
 			</tr>
 			{% endfor %}
 			{% endfor %}
 		{% endif %}
 	</tbody>
 </table>
-<div id="found">{{ count }}</div>
+<div id="found" style="display:none;">{{ count }}</div>

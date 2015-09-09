@@ -59,7 +59,7 @@ def make_excel_file(obj_type, columns, rows, fail=0):
                'align': 'center',
                'valign': 'vcenter',
           })
-          # date_format = workbook.add_format({'num_format': 'mmmm d yyyy'})
+          date_format = workbook.add_format({'num_format': 'yyyy-mm-dd hh:mm'})
           # money_format = workbook.add_format({'num_format': '$#,##0'})
 
           # Adjust the column width.
@@ -188,7 +188,8 @@ def make_excel_file(obj_type, columns, rows, fail=0):
           for r in rows:
                for x in r:
                     # Convert the date string into a datetime object.
-                    # date = datetime.strptime(date_str, "%Y-%m-%d")
+                    if col == 0:
+                         worksheet.write(row,col,x,date_format)
                     if type(x) is 'str':
                          worksheet.write(row,col,''.join(x), center)
                     else:
@@ -199,7 +200,6 @@ def make_excel_file(obj_type, columns, rows, fail=0):
                     if col == num_col:
                          col = 0; row += 1;
 
-               # worksheet.write_datetime(row, col + 1, date, date_format )
                # worksheet.write_number  (row, col + 2, cost, money_format)
                # row += 1
 

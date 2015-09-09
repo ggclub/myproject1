@@ -28,6 +28,7 @@
 <div class="navbar-operation-setting" style="display:none;">
 	<p class="nav-op" id="nav-op-mode">운전모드설정</p>
 	<p class="nav-op" id="nav-op-control">동작제어</p>
+	{# <p class="nav-op" id="nav-op-db-interval">DB저장주기설정</p> #}
 	<p class="nav-op" id="nav-op-change-password">비밀번호변경</p>
 </div>
 <div class="navbar-search-db" style="display:none;">
@@ -245,6 +246,25 @@ $('#nav-op-control').on('click', function (event) {
 		}
 	});
 	return false;
+});
+
+// db 저장 주기 설정
+$('#nav-op-db-interval').on('click', function() {
+	if($(event.target).is('.navbar-operation-setting')){
+		return;
+	}
+	$('.navbar-operation-setting').find('.nav-op-selected').first().removeClass('nav-op-selected');
+	$(event.target).addClass('nav-op-selected');
+	$.ajax({
+		url: 'monitor/set_db_save_interval/',
+		type: "POST",
+		data: {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+		},
+		success: function(data) {
+			$('.content').html(data);
+		}
+	});
 });
 
 // 비밀번호변경

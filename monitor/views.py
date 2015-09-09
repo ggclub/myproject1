@@ -634,8 +634,8 @@ def operation_control(request):
 	total_rt = response_data["cooling_rt"]
 
 	response_data.update(controller.read_data_from_json(op_mode, temp_mode, total_rt))
-	global op_mode, temp_mode
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
+	# global op_mode, temp_mode
+	# response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
 	# log.debug(op_mode + ", " + temp_mode)
 
 	if response_data.has_key("error"):
@@ -666,6 +666,7 @@ def search_db_excel(request):
 
 	i=0;j=0;
 	for r in row_split:
+		# log.debug("i: " + str(i) + ", j: " + str(j))
 		if '.' in r:
 			# type = float
 			row_mat[i][j] = float(r)
@@ -676,60 +677,44 @@ def search_db_excel(request):
 		j += 1
 		if j == num_col:
 			j = 0; i += 1;
-
+			if i == num_row: break;
 
 	make_excel_file(obj_type, col_mat, row_mat)
 
-
-	# log.debug(col)
-	# log.debug(rows)
-	# log.debug(row_mat)
-	# log.debug(row_list)
-
-	response_data = {	}
-
-	# return download_file(request, 'ciu')
+	response_data = {"obj_type":obj_type}
 	return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
 import mimetypes
-from django.core.servers.basehttp import FileWrapper
-def download_file(request, name='database'):
-	file_dir = os.path.join(myproject.settings.BASE_DIR, 'database\\')
-	filename = file_dir + name + '.xlsx'
-	wrapper = FileWrapper(file(filename))
+def download_result(request, o):
+	obj_type = o
+	# obj_type = request.GET['o']
+	if obj_type:
+		filename = os.path.join(myproject.settings.BASE_DIR, 'database/' + obj_type + '.xlsx')
 
-	fp = open(filename, 'rb')
-	response = HttpResponse(fp.read())
-	fp.close()
-
-	type, encoding = mimetypes.guess_type(name+'.xlsx')
-	if type is None:
-		type = 'application/octet-stream'
-	response['Content-Type'] = type
-	# response['Content-Length'] = str(os.stat(file_path).st_size)
-	if encoding is not None:
-		response['Content-Encoding'] = encoding
-
-
-	if u'WebKit' in request.META['HTTP_USER_AGENT']:
-		# Safari 3.0 and Chrome 2.0 accepts UTF-8 encoded string directly.
-		filename_header = 'filename=%s' % name+'.xlsx'.encode('utf-8')
-	elif u'MSIE' in request.META['HTTP_USER_AGENT']:
-		# IE does not support internationalized filename at all.
-		# It can only recognize internationalized URL, so we do the trick via routing rules.
+		if os.path.exists(filename) and os.path.isfile(filename):
+			with open(filename, 'rb') as fp:
+				response = HttpResponse(fp.read())
+			content_type, encoding = mimetypes.guess_type(filename)
+			if content_type is None:
+				content_type = 'application/octet-stream'
+			response['Content-Type'] = content_type
+			response['Content-Length'] = str(os.stat(filename).st_size)
+		if encoding is not None:
+			response['Content-Encoding'] = encoding
+		# if u'WebKit'in request.META.get('HTTP_USER_AGENT', u'Webkit'):
+		# 	filename_header = 'filename="%s"' % filename.encode('utf-8')
+		# elif u'MSIE' in request.META.get('HTTP_USER_AGENT', u'MSIE'):
+		# 	filename_header = ''
+		# else:
+		# 	filename_header = "filename*=UTF-8''%s" % urllib.quote(filename.encode('utf-8'))
 		filename_header = ''
-	else:
-		# For others like Firefox, we follow RFC2231 (encoding extension in HTTP headers).
-		filename_header = 'filename*=UTF-8\'\'%s' % urllib.quote(name+'.xlsx'.encode('utf-8'))
+		
+		response['Content-Disposition'] = 'attachment; ' + filename_header
 
-
-	# response = HttpResponse(wrapper, content_type='application/vnd.ms-excel')
-	response['Content-Disposition'] = 'attachment; filename=' + filename_header
-	# response['Content-Length'] = str(os.stat(file_path).st_size)
-	response['Content-Length'] = os.path.getsize(filename)
-	# log.debug(str(response['Content-Length']))
-
+	else:	# obj_type ??
+		log.debug('obj_type:' + obj_type)
+		response = HttpResponse("obj_type ??", content_type="text/plain")
 	return response
 
 

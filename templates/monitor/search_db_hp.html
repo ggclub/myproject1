@@ -92,11 +92,12 @@ $('.btn-search-db').on('click', function() {
 
 function Result2excel() {
 	var found = $('#found').text();
-	if(found == '0'){
+	if(found == '0' || found == ''){
 		alert('검색된 내용이 없습니다.');
 		return;
 	}
 	numRow = parseInt(found);
+	// console.log("numRow: " + numRow);
 	var numCol = 19;
 
 	var columns = [];
@@ -133,7 +134,7 @@ function Result2excel() {
 		complete: function() {  },
 		success: function(data){
 			$('#ajax-loader').hide();
-			alert("파일을 다운로드합니다.");
+			window.location.href = 'monitor/download_result/' + data.obj_type + '/';
 		}
 	});
 	return false;
