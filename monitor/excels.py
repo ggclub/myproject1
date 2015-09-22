@@ -76,9 +76,10 @@ def make_excel_file(obj_type, columns, rows, fail=0):
                worksheet.set_column(1, 13, 9.5)
           elif obj_type == 'fm-int':
                worksheet.set_column(1, 6, 17)
-          elif 'power' in obj_type:
+          elif 'power' in obj_type or obj_type == 'cop':
                worksheet.set_column(1, 1, 16.5)
           else: # 관측센서
+               # worksheet.set_column()
                pass
 
 
@@ -149,7 +150,7 @@ def make_excel_file(obj_type, columns, rows, fail=0):
                          # 시간
                          worksheet.merge_range(row, col, row+1, col, title.encode('utf-8'), merge_format)
                     elif row == 0 and col != 0:
-                         # 순환 OUT, IN 심정 IN, OUT
+                         # 순환수(열교환 전/후), 지하수(양수/주입)
                          worksheet.merge_range(row, col, row, col+2, title.encode('utf-8'), merge_format)
                          col += 2
                     else: 
@@ -165,20 +166,39 @@ def make_excel_file(obj_type, columns, rows, fail=0):
                     if row == 0 and col == 0:
                          # 시간
                          worksheet.merge_range(row, col, row+1, col, title.encode('utf-8'), merge_format)
-                    else: # row == 0 and col != 0
-                         # 순환 IN, OUT, 심정 IN, OUT, 유량
+                    elif row == 0 and col != 0:
+                         # 순환수(열교환 전/후), 지하수(양수/주입)
                          worksheet.write(row, col, title.encode('utf-8'), title_format)
-                    # else: 
-                    #      # 유량
-                    #      worksheet.write(row, col, title.encode('utf-8'), title_format)
+                    else: 
+                         # 유량
+                         worksheet.write(row, col, title.encode('utf-8'), title_format)
+                    col += 1
+                    if col == num_col:
+                         col = 1; row += 1;
+          elif obj_type == 'tw':
+               # 관측센서
+               num_col = 9
+               for title in columns:
+                    if row == 0 and col == 0:
+                         # 시간
+                         worksheet.merge_range(row, col, row+1, col, title.encode('utf-8'), merge_format)
+                    elif row == 0 and col != 0:
+                         # 관정센서 1~4
+                         worksheet.merge_range(row, col, row, col+1, title.encode('utf-8'), merge_format)
+                         col += 1
+                    else:
+                         # 수위, 온도
+                         worksheet.write(row, col, title.encode('utf-8'), title_format)
                     col += 1
                     if col == num_col:
                          col = 1; row += 1;
 
 
+
+
           # Start from the first cell below the headers.
           # 내용
-          if obj_type == 'ciu' or 'power' in obj_type:
+          if obj_type == 'ciu' or 'power' in obj_type or 'cop' in obj_type:
                row = 1
           else:
                row = 2

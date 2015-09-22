@@ -1,0 +1,118 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<div class="setting_mode">
+<form class="form" id="setting-mode-form">
+	<div class="form-group">
+		<label for="mode">운전 모드를 설정합니다.</label><br>
+		{# 라디오버튼 자동/수동 #}
+		<input type="radio" name="mode" value="AT"> 자동 운전<br>
+		<input type="radio" name="mode" value="MN"> 수동 운전<br>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-default" id="apply">적용</button>
+	</div>
+</form>
+</div>
+
+
+<script type="text/javascript">
+$('#setting-mode-form').on('submit', function() {
+	var opMode = $('input:radio[name=mode]:checked').val();
+	// console.log(opMode);
+	if(typeof(opMode) == 'undefined'){
+		alert("모드를 선택해주세요");
+		return false;
+	}
+	// console.log(opMode);
+	var page;
+	if(opMode == "AT") {
+		page = 'fullscreen';
+	} else if (opMode == "MN") {
+		page = 'control';
+	}
+	$('.content').empty();
+	$.ajax({
+		url: '/monitor/setting_mode_confirm/',
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',		
+			'tempMode': tempMode,
+			'page': page,
+		},
+		success: function(data){
+			if(opMode == "AT"){
+				// 전체화면 선택 이펙트
+				$('#nav-mode').attr('src', "{% static 'navbar/mode/auto-cooling.jpg' %}");
+				clickFullscreen();
+				// 내용 갱신
+				$('.content').html("<div class='container' id='container'>" + data + "</div>");
+				// $('.content').append(data);
+				// $('.content').append("</div>");
+
+				// 초기 세팅
+				var btns = $('.btn-status');
+				$.each(btns, function(i, val) {
+					// alert(val.value);
+					if(val.innerText === "OFF") {
+						$(this).removeClass('status-on');
+						$(this).addClass('status-off');
+					} else if (val.innerText === "ON") {
+						$(this).removeClass('status-off');
+						$(this).addClass('status-on');
+					}
+					$(this).attr('disabled', true);
+					$(this).removeClass('btn-default');
+				});
+				$.each($('.hp-status, btn-cp'), function(i, val) {
+					if(val.innerText === "OFF"){
+						$(this).removeClass('status-on');
+						$(this).addClass('status-off');
+					} else {
+						$(this).removeClass('status-off');
+						$(this).addClass('status-on');
+					}
+					$(this).attr('disabled', true);
+					$(this).removeClass('btn-default');
+				});
+			} else { // 수동
+				// 동작설정-동작제어 선택 이펙트
+				$('#nav-mode').attr('src', "{% static 'navbar/mode/manual-cooling.jpg' %}");
+				$('.navbar-operation-setting').find('.nav-op-selected').first().removeClass('nav-op-selected');
+				$('#nav-op-control').addClass('nav-op-selected');
+				// 내용 갱신
+				$('.content').html(data);
+				$('#control-modal').css('background-image', "url({% static 'monitor/cooling2.jpg' %})");
+
+				// 초기 세팅
+				var btns = $('.control');
+				$.each(btns, function(i, val) {
+					// alert(val.value);
+					if(val.innerText === "OFF") {
+						$(this).removeClass('status-on');
+						$(this).addClass('status-off');
+					} else if (val.innerText === "ON") {
+						$(this).removeClass('status-off');
+						$(this).addClass('status-on');
+					}
+					if(opMode == 'AT') {
+						$(this).attr('disabled', true);
+						$('.btn-status').removeClass('btn-default');
+					}
+				});
+				$.each($('.hp-status, .btn-cp'), function(i, val) {
+					if(val.innerText === "OFF"){
+						$(this).removeClass('status-on');
+						$(this).addClass('status-off');
+					} else {
+						$(this).removeClass('status-off');
+						$(this).addClass('status-on');
+					}
+					$(this).attr('disabled', true);
+					$(this).removeClass('btn-default');
+				});
+			}
+		}
+	});
+	return false;
+});
+</script>

@@ -10,13 +10,6 @@ SWITCH_CHOICES = (
 	('OFF', 'Off'),
 )
 
-MANUAL = 'MN'
-AUTO = 'AT'
-OPMODE_CHOICES = (
-	(MANUAL, '수동'),
-	(AUTO, '자동'),
-)
-
 # switch control
 class OperationSwitchControl(models.Model):
 	dateTime = models.DateTimeField()
@@ -49,6 +42,36 @@ class OperationSwitchControl(models.Model):
 	def __str__(self):
 		return '{}, location: {}, {}'.format(str(self.dateTime.replace(microsecond=0)), self.location, self.switch)
 
+
+MANUAL = 'MN'
+AUTO = 'AT'
+OPMODE_CHOICES = (
+	(MANUAL, '수동'),
+	(AUTO, '자동'),
+)
+class OperationModeLogger(models.Model):
+	dateTime = models.DateTimeField()
+	opMode = models.CharField(max_length=2, choices=OPMODE_CHOICES, default=AUTO)
+	def __str__(self):
+		return '{}: {}'.format(str(self.dateTime.replace(microsecond=0)), self.opMode)
+
+COOLING = 'CL'
+HEATING = 'HT'
+TEMPMODE_CHOICES = (
+	(COOLING, '냉방'),
+	(HEATING, '난방'),
+)
+class TemperatureModeLogger(models.Model):
+	dateTime = models.DateTimeField()
+	tempMode = models.CharField(max_length=2, choices=TEMPMODE_CHOICES, default=COOLING)
+	def __str__(self):
+		return '{}: {}'.format(str(self.dateTime.replace(microsecond=0)), self.tempMode)
+
+class SaveIntervalLogger(models.Model):
+	dateTime = models.DateTimeField()
+	interval = models.SmallIntegerField(default=10)
+	def __str__(self):
+		return '{}: {}'.format(str(self.dateTime.replace(microsecond=0)), self.interval)
 
 # pump
 APPROPRIATE='AP'
@@ -292,30 +315,30 @@ class TempHPOut6Logger(models.Model):
 	# 	return unicode(self.TempHPOut6Logger)
 
 
-def get_HPI1():
-	return TempHPIn1Logger.objects.latest('temperature')
-def get_HPO1():
-	return TempHPOut1Logger.objects.latest('temperature')
-def get_HPI2():
-	return TemperatureLogger.objects.latest('dateTime').HPI2
-def get_HPO2():
-	return TemperatureLogger.objects.latest('dateTime').HPO2
-def get_HPI3():
-	return TemperatureLogger.objects.latest('dateTime').HPI3
-def get_HPO3():
-	return TemperatureLogger.objects.latest('dateTime').HPO3
-def get_HPI4():
-	return TemperatureLogger.objects.latest('dateTime').HPI4
-def get_HPO4():
-	return TemperatureLogger.objects.latest('dateTime').HPO4
-def get_HPI5():
-	return TemperatureLogger.objects.latest('dateTime').HPI5
-def get_HPO5():
-	return TemperatureLogger.objects.latest('dateTime').HPO5
-def get_HPI6():
-	return TemperatureLogger.objects.latest('dateTime').HPI6
-def get_HPO6():
-	return TemperatureLogger.objects.latest('dateTime').HPO6
+# def get_HPI1():
+# 	return TempHPIn1Logger.objects.latest('temperature')
+# def get_HPO1():
+# 	return TempHPOut1Logger.objects.latest('temperature')
+# def get_HPI2():
+# 	return TemperatureLogger.objects.latest('dateTime').HPI2
+# def get_HPO2():
+# 	return TemperatureLogger.objects.latest('dateTime').HPO2
+# def get_HPI3():
+# 	return TemperatureLogger.objects.latest('dateTime').HPI3
+# def get_HPO3():
+# 	return TemperatureLogger.objects.latest('dateTime').HPO3
+# def get_HPI4():
+# 	return TemperatureLogger.objects.latest('dateTime').HPI4
+# def get_HPO4():
+# 	return TemperatureLogger.objects.latest('dateTime').HPO4
+# def get_HPI5():
+# 	return TemperatureLogger.objects.latest('dateTime').HPI5
+# def get_HPO5():
+# 	return TemperatureLogger.objects.latest('dateTime').HPO5
+# def get_HPI6():
+# 	return TemperatureLogger.objects.latest('dateTime').HPI6
+# def get_HPO6():
+# 	return TemperatureLogger.objects.latest('dateTime').HPO6
 
 # thermometer
 class TemperatureLogger(models.Model):
@@ -432,9 +455,16 @@ class RefrigerationTonLogger(models.Model):
 	# def __unicode__(self):
 	# 	return unicode(self.RefrigerationTonLogger)
 
+# COP
+class CoefficientOfPerformanceLogger(models.Model):
+	dateTime = models.DateTimeField()
+	COP = models.FloatField()
+	def __str__(self):
+		return '{}, COP: {}'.format(str(self.dateTime.replace(microsecond=0)), self.COP)
 
-# tube well 
+# 관정센서
 class TubeWellLogger(models.Model):
+	dateTime = models.DateTimeField()
 	T1level = models.FloatField()
 	T1temp = models.FloatField()
 	T2level = models.FloatField()

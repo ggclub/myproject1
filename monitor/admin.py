@@ -4,6 +4,9 @@ from models import *
 
 # Logger
 admin.site.register(OperationSwitchControl)
+admin.site.register(OperationModeLogger)
+admin.site.register(TemperatureModeLogger)
+admin.site.register(SaveIntervalLogger)
 admin.site.register(DeepwellPump1Logger)
 admin.site.register(DeepwellPump2Logger)
 admin.site.register(DeepwellPump3Logger)
@@ -37,6 +40,7 @@ admin.site.register(HeatPump5Logger)
 admin.site.register(HeatPump6Logger)
 admin.site.register(PowerConsumptionLogger)
 admin.site.register(RefrigerationTonLogger)
+admin.site.register(CoefficientOfPerformanceLogger)
 admin.site.register(TubeWellLogger)
 admin.site.register(AlarmLogger)
 # Ceiling Type Indoor Unit

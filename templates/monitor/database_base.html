@@ -1,0 +1,60 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="{% static "bootstrap-3.3.4-dist/css/bootstrap.css" %}">
+	<link rel="stylesheet" href="{% static "monitor/database.css" %}" type="text/css">
+	<link rel="stylesheet" href="{% static "jquery/jquery-ui.min.css" %}" type="text/css">
+	<link rel="shortcut icon" href="{% static "favicon.ico" %}">
+
+	<script src="{% static "jquery/jquery-1.11.3.min.js" %}"></script>
+	<script src="{% static "jquery/jquery-ui.min.js" %}"></script>
+	<script src="{% static "jquery/jquery-dateFormat.min.js" %}"></script>
+	<script src="{% static "bootstrap-3.3.4-dist/js/bootstrap.min.js" %}"></script>
+	<script src="{% static "JSON-js-master/json2.js" %}"></script>
+	<title>데이터베이스를 검색합니다.</title>  	
+</head>
+<body class="body">
+	<div id='ajax-loader'>
+		<img src="{% static 'monitor/ajax-loader.gif' %}">
+	</div>
+	<div class="content">
+			{% block content %}{% endblock %}
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+// <div class="select">
+// 	<div>선  택
+// 		<select name="type" id="type">
+// 			<option value="ciu">실내기</option>
+// 			<option value="hp">히트펌프</option>
+// 			<option value="cp">순환펌프</option>
+// 			<option value="dwp">심정펌프</option>
+// 			<option value="fm">유량계</option>
+// 			<option value="power">전력량계</option>
+// 			<option value="cop">COP</option>
+// 			<option value="tw">관측센서</option>
+// 		</select>
+// 	</div>
+// </div>
+
+// $('select[name=type]').on('change', function () {
+// 	var device = $(this).val();
+// 	$.ajax({
+// 		url: '/monitor/search_db_'+device + '/',
+// 		type: "POST",
+// 		data : {
+// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
+// 		},
+// 		success: function(data){
+// 			$('.content').html(data);
+// 		}
+// 	});
+// 	return false;
+// });
+</script>
+

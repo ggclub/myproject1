@@ -1,13 +1,15 @@
+{% extends "monitor/database_base.html" %}
 {% load staticfiles %}
-<!DOCTYPE HTML> 
+{% block content %}
 <div class="container-search-db">
 <div class="conditions">
-	{# op_mode, temp_mode #}
-	<div style="display:none;"><p id='operation-mode'>{{ op_mode }}</p><p id='temperature-mode'>{{ temp_mode }}</p></div>
 	<table class="table table-bordered table-conditions" id="search-conditions">
 		<tr>
 			<td rowspan="2" style="vertical-align: middle;"><b>검색조건</b></td>
-			<td>날짜 <input type="text" id="datepicker1" class="datepicker"> ~ <input type="text" id="datepicker2" class="datepicker">
+			<td>날짜 
+				<input type="text" id="datepicker1" class="datepicker">
+				 ~ 
+				<input type="text" id="datepicker2" class="datepicker">
 			</a></td>
 		</tr>
 		<tr class="search-conditions-detail">
@@ -31,37 +33,33 @@
 		<button class="btn-search-db">검색</button>
 		<button class='btn-excel' onclick='Result2excel();'><img src="{% static "monitor/excel.png" %}" width="20"> 저장</button>
 	</div>
-	<table class="table table-conditions" id="show-conditions">
+	<div class="option">
+	<table id="show-conditions">
 		<tr>
 			<td class="show-conditions-detail">
-				<input type="checkbox" class="show-condition" name="show-condition" value="1"><p>시간</p>
+				<input type="checkbox" class="show-condition" name="show-condition" value="1">시간
 			</td>
 			<td class="show-conditions-detail">
-				<input type="checkbox" class="show-condition" name="show-condition" value="2"><p>층수</p>
+				<input type="checkbox" class="show-condition" name="show-condition" value="2">층수
 			</td>
 			<td class="show-conditions-detail">
-				<input type="checkbox" class="show-condition" name="show-condition" value="3"><p>실내기명</p>
+				<input type="checkbox" class="show-condition" name="show-condition" value="3">실내기명
 			</td>
-			<td rowspan="3">
-				<input type="checkbox" id="select-all" value="all"> 전체선택/해제<br>
-				<div style="margin-bottom:5px;"></div>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="4">동작상태
+			</td>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="5">설정온도
+			</td>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="6">실내온도
+			</td>
+			<td class="show-conditions-detail">
+				<input type="checkbox" class="show-condition" name="show-condition" value="7">운전모드
+			</td>
+			<td class="show-conditions-detail">
+				<input type="checkbox" id="select-all" value="all"> 전체선택/해제
 				<button class="btn-apply-chkbox">적용</button>
-			</td>
-		</tr>
-		<tr>
-			<td class="show-conditions-detail">
-				<input type="checkbox" class="show-condition" name="show-condition" value="4"><p>동작상태</p>
-			</td>
-			<td class="show-conditions-detail">
-				<input type="checkbox" class="show-condition" name="show-condition" value="5"><p>설정온도</p>
-			</td>
-			<td class="show-conditions-detail">
-				<input type="checkbox" class="show-condition" name="show-condition" value="6"><p>실내온도</p>
-			</td>
-		</tr>
-		<tr>
-			<td class="show-conditions-detail">
-				<input type="checkbox" class="show-condition" name="show-condition" value="7"><p>운전모드</p>
 			</td>
 			{# <td class="show-conditions-detail"> #}
 				{# <input type="checkbox" class="show-condition" name="show-condition" value="8"><p>풍량</p> #}
@@ -71,6 +69,7 @@
 			{# </td>  #}
 		</tr>
 	</table>
+	</div>
 </div>
 
 <div class="search-results">
@@ -231,8 +230,6 @@ $('select[name=floor]').on('change', function() {
 
 // 검색 버튼 클릭
 $('.btn-search-db').on('click', function() {
-	var opMode = $('#operation-mode').text();
-	var tempMode = $('#temperature-mode').text();
 	var startDate = $('#datepicker1').val();
 	var endDate = $('#datepicker2').val();
 	var floor = $('select[name=floor] option:selected').val();
@@ -243,7 +240,6 @@ $('.btn-search-db').on('click', function() {
 		type: "POST",
 		data : {
 			'csrfmiddlewaretoken': '{{ csrf_token }}',
-			'opMode': opMode,
 			'startDate': startDate,
 			'endDate': endDate,
 			'floor': floor,
@@ -307,10 +303,11 @@ function Result2excel() {
 		complete: function(data) { $('#ajax-loader').hide(); },
 		success: function(data){
 			$('#ajax-loader').hide();
-			window.location.href = 'monitor/download_result/' + data.obj_type + '/';
+			window.location.pathname = 'monitor/download_result/' + data.obj_type + '/';
 		}
 	});
 	return false;
 }
 
 </script>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="{% static "bootstrap-3.3.4-dist/css/bootstrap.css" %}">
+	<link rel="stylesheet" href="{% static "navbar/mode.css" %}" type="text/css">
+	<link rel="shortcut icon" href="{% static "favicon.ico" %}">
+	<script src="{% static "jquery/jquery-1.11.3.min.js" %}"></script>
+	<title>운전 모드를 선택합니다.</title>
+</head>
+<body>
+	<div class="pop-{{ mode }}">
+		<input type="radio" id="left" name="mode" value="yes">
+		<input type="radio" id="right" name="mode" value="no">
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+	$('input[type="radio"][name="mode"][value="no"]').on('click', closeWindow);
+	function closeWindow () {
+		window.close();
+	}
+	$('input[type="radio"][name="mode"][value="yes"]').on('click', setModeConfirm);
+	function setModeConfirm () {
+		var mode = $('div').first().attr('class').split("-")[1];
+		// console.log(mode);
+		$.ajax({
+			url: '/monitor/setting_mode_confirm/',
+			type: "POST",
+			data : {
+				'csrfmiddlewaretoken': '{{ csrf_token }}',
+				'mode': mode,
+			},
+			success: function(data){
+				// window.opener.location.reload();
+				var parent = window.opener;
+
+				// 전광판 변경
+				// 모드 선택 이펙트
+				// console.log(data);
+				// console.log(data.op_mode, data.temp_mode);
+				var opMode = data.op_mode;
+				var tempMode = data.temp_mode;
+				// console.log(opMode, tempMode);
+				if (opMode == "MN" && tempMode == "CL") {
+					// 전광판
+					parent.$('#nav-mode').attr('src', "{% static 'navbar/mode/manual-cooling.jpg' %}");
+					// 모드 선택 이펙트
+					parent.$('#mode-auto').attr('src', "{% static 'navbar/mode/auto.jpg' %}");
+					parent.$('#mode-manual').attr('src', "{% static 'navbar/mode/manual-sel.jpg' %}");
+				} else if (opMode == "MN" && tempMode == "HT") {
+					// 전광판
+					parent.$('#nav-mode').attr('src', "{% static 'navbar/mode/manual-heating.jpg' %}");
+					// 모드 선택 이펙트
+					parent.$('#mode-auto').attr('src', "{% static 'navbar/mode/auto.jpg' %}");
+					parent.$('#mode-manual').attr('src', "{% static 'navbar/mode/manual-sel.jpg' %}");
+				} else if (opMode == "AT" && tempMode == "CL") {
+					// 전광판
+					parent.$('#nav-mode').attr('src', "{% static 'navbar/mode/auto-cooling.jpg' %}");
+					// 모드 선택 이펙트
+					parent.$('#mode-auto').attr('src', "{% static 'navbar/mode/auto-sel.jpg' %}");
+					parent.$('#mode-manual').attr('src', "{% static 'navbar/mode/manual.jpg' %}");
+				} else {	// AT & HT
+					// 전광판
+					parent.$('#nav-mode').attr('src', "{% static 'navbar/mode/auto-heating.jpg' %}");
+					// 모드 선택 이펙트
+					parent.$('#mode-auto').attr('src', "{% static 'navbar/mode/auto-sel.jpg' %}");
+					parent.$('#mode-manual').attr('src', "{% static 'navbar/mode/manual.jpg' %}");
+				}
+
+				parent.chkBtnActive();
+
+				// reload_display 화면 갱신
+				// $('#container').html(data);
+				
+				window.close();
+			}
+		});
+	}
+</script>

@@ -1,0 +1,387 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+
+<div class="navbar-now">
+	{# <span id="nav-date"></span> #}
+
+	{# 전광판 #}
+	{% if op_mode == "MN" and temp_mode == "CL" %}
+	<img id="nav-mode" src="{% static 'navbar/mode/manual-cooling.jpg' %}">
+	{% elif op_mode == "MN" and temp_mode == "HT" %}
+	<img id="nav-mode" src="{% static 'navbar/mode/manual-heating.jpg' %}">
+	{% elif op_mode == "AT" and temp_mode == "CL" %}
+	<img id="nav-mode" src="{% static 'navbar/mode/auto-cooling.jpg' %}">
+	{% else %}  {# op_mode == "AT" and temp_mode == "HT" #}
+	<img id="nav-mode" src="{% static 'navbar/mode/auto-heating.jpg' %}">
+	{% endif %}
+
+	{# 자동 수동 #}
+	{% if op_mode == "MN" %}
+		<img class="mode-select" id="mode-auto" src="{% static 'navbar/mode/auto.jpg' %}">
+		<img class="mode-select" id="mode-manual" src="{% static 'navbar/mode/manual-sel.jpg' %}">
+	{% else %} {# "AT" #}
+		<img class="mode-select" id="mode-auto" src="{% static 'navbar/mode/auto-sel.jpg' %}">
+		<img class="mode-select" id="mode-manual" src="{% static 'navbar/mode/manual.jpg' %}">
+	{% endif %}
+</div>
+
+{# 메뉴: 전체화면 Database 경보관리 운영메뉴얼 #}
+<div class="navbar-menu">
+	{# 전체화면 #}
+	<div class="menu" id="div-fullscreen">
+		<img id="nav-fullscreen" src="{% static 'navbar/menu/fullscreen-sel.jpg' %}">
+	</div>
+	{# Database #}
+	<div class="menu" id="div-search-db">
+		<img id="nav-search-db" src="{% static 'navbar/menu/search-db.jpg' %}">
+	</div>
+	{# 경보관리 #}
+	<div class="menu" id="div-manage-alarm">
+		<img id="nav-manage-alarm" src="{% static 'navbar/menu/manage-alarm.jpg' %}">
+	</div>
+	{# 운영메뉴얼 #}
+	<div class="menu" id="div-manual">
+		<img id="nav-manual" src="{% static 'navbar/menu/manual.jpg' %}">
+	</div>
+</div>
+{# <div class="navbar-operation-setting" style="display:none;"> #}
+	{# <p class="nav-op" id="nav-op-mode">운전모드설정</p> #}
+	{# <p class="nav-op" id="nav-op-control">동작제어</p> #}
+	{# <p class="nav-op" id="nav-op-db-interval">DB저장주기설정</p> #}
+	{# <p class="nav-op" id="nav-op-change-password">비밀번호변경</p> #}
+{# </div> #}
+<div class="navbar-search-db pos-abs none bold">
+	<p class="nav-db" id="nav-db-ciu">실내기</p> |
+	<p class="nav-db" id="nav-db-hp">히트펌프</p> |
+	<p class="nav-db" id="nav-db-cp">순환펌프</p> |
+	<p class="nav-db" id="nav-db-dwp">심정펌프</p> |
+	<p class="nav-db" id="nav-db-fm">유량계</p> |
+	<p class="nav-db" id="nav-db-power">전력량계</p> |
+	<p class="nav-db" id="nav-db-cop">COP</p> |
+	<p class="nav-db" id="nav-db-tw">관측센서</p> |
+	<p class="nav-db" id="nav-db-interval">저장주기설정</p>
+</div>
+
+<div class="nav-logout">
+	<button>로그아웃</button>
+</div>
+
+
+
+<script type="text/javascript">
+// 시간 디스플레이
+// $(document).ready(function() {
+// 	var timeFormat = "yyyy-MM-dd HH:mm";
+// 	var dt = new Date();
+// 	$('#nav-date').html($.format.date(dt, timeFormat));
+// 	setTimeout(displayTime, 6000);
+// 	function displayTime() {
+// 		var dt = new Date();
+// 		$('#nav-date').html($.format.date(dt, timeFormat));
+// 		setTimeout(displayTime, 6000);
+// 	}
+// });
+// navbar 1st line
+
+// 모드 선택
+var popMode, popMode;
+$('.mode-select').on('click', clickMode);
+function clickMode() {
+	var id = this.id;
+	if (id == "mode-auto"){
+		// 자동
+	popMode = window.open('/monitor/setting_mode/AT/','pop',
+			'width=350,height=208,left=400,top=260,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+			popMode.resizeTo(366,275);
+	} else {
+		// 수동
+	popMode = window.open('/monitor/setting_mode/MN/','pop',
+			'width=350,height=208,left=400,top=260,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=yes');	
+			popMode.resizeTo(366,275);
+	}
+}
+
+
+// 전체화면
+$('#div-fullscreen').on('click', clickFullscreen);
+function clickFullscreen() {
+	// database 소메뉴 삭제
+	$('.navbar-search-db').addClass('none');
+	// 전체화면 페이지로 이동
+	$.ajax({
+		url: '/monitor/reload_display/',
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+		},
+		success: function(data){
+			$('.content').empty();
+			$('.content').html("<div class='container' id='container'>" + data + "</div>");
+			// $('.container').css('background-image', "url({% static 'monitor/main.jpg' %})");
+		}
+	});
+	return false;
+}
+
+// DB검색
+$('#div-search-db').on('click', clickDatabase);
+function clickDatabase () {
+	if ($('.navbar-search-db').hasClass('none')) {
+		// 소메뉴 보이기
+		$('.navbar-search-db').removeClass('none');
+	} else {
+		// 소메뉴 숨기기
+		$('.navbar-search-db').addClass('none');
+	}
+}
+
+$('#nav-db-ciu').on('click', clickDatabaseCiu);
+$('#nav-db-hp').on('click', clickDatabaseHp);
+$('#nav-db-cp').on('click', clickDatabaseCp);
+$('#nav-db-dwp').on('click', clickDatabaseDwp);
+$('#nav-db-fm').on('click', clickDatabaseFm);
+$('#nav-db-power').on('click', clickDatabasePower);
+$('#nav-db-cop').on('click', clickDatabaseCop);
+$('#nav-db-tw').on('click', clickDatabaseTw);
+
+var popDatabase;
+// 실내기
+function clickDatabaseCiu () {
+	popDatabase = window.open('/monitor/search_db_ciu/','pop',
+		'height=600,width=1000,left=400,top=260,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+	popDatabase.resizeTo(1260,600);
+	// $('.navbar-operation-setting').css('display','none');
+	// setBtnUnclick();
+	// $('#nav-search-db').attr('src', "{% static 'navbar/menu/search-db-sel.jpg' %}");
+	// $('.navbar-search-db').css('display','inline');
+	// $('.navbar-search-db').find('.nav-db-selected').first().removeClass('nav-db-selected');
+	// $('#nav-db-ciu').addClass('nav-db-selected');
+	// 데이터베이스 검색 팝업
+	// 실내기 페이지 띄우기
+	// $.ajax({
+	// 	url: '/monitor/search_db_ciu/',
+	// 	type: "POST",
+	// 	data : {
+	// 		'csrfmiddlewaretoken': '{{ csrf_token }}',
+	// 	},
+	// 	success: function(data){
+	// 		popDatabase = window.open('/monitor/search_db_ciu/','DB',
+	// 		'height=300,width=400,left=300,top=200,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+	// 	}
+	// });
+}
+
+// 히트펌프
+function clickDatabaseHp () {
+	popDatabase = window.open('/monitor/search_db_hp/','pop',
+		'height=600,width=1000,left=400,top=260,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+	popDatabase.resizeTo(1260,600);
+}
+// 순환펌프
+function clickDatabaseCp () {
+	popDatabase = window.open('/monitor/search_db_cp/','pop',
+		'height=600,width=1000,left=400,top=260,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+	popDatabase.resizeTo(1260,600);
+}
+// 심정펌프
+function clickDatabaseDwp () {
+	popDatabase = window.open('/monitor/search_db_dwp/','pop',
+		'height=600,width=1000,left=400,top=260,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+	popDatabase.resizeTo(1260,600);
+}
+// 유량계
+function clickDatabaseFm () {
+	popDatabase = window.open('/monitor/search_db_fm/','pop',
+		'height=600,width=1000,left=400,top=260,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+	popDatabase.resizeTo(1260,600);
+}
+// 전력량계
+function clickDatabasePower () {
+	popDatabase = window.open('/monitor/search_db_power/','pop',
+		'height=600,width=1000,left=400,top=260,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+	popDatabase.resizeTo(1260,600);
+}
+// COP
+function clickDatabaseCop () {
+	popDatabase = window.open('/monitor/search_db_cop/','pop',
+		'height=600,width=1000,left=400,top=260,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+	popDatabase.resizeTo(1260,600);
+}
+// 관정센서
+function clickDatabaseTw () {
+	popDatabase = window.open('/monitor/search_db_tw/','pop',
+		'height=600,width=1000,left=400,top=260,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+	popDatabase.resizeTo(1260,600);
+}
+// 저장 주기 설정
+
+
+// 경보관리
+var popManageAlarm;
+$('#div-manage-alarm').on('click', clickManageAlarm);
+function clickManageAlarm () {
+	// database 소메뉴 삭제
+	$('.navbar-search-db').addClass('none');
+	popManageAlarm = window.open('/monitor/search_db_alarm/','pop',
+		'height=600,width=1000,left=400,top=260,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+	popManageAlarm.resizeTo(1260,600);
+}
+
+function setBtnUnclick() {
+	$('#nav-fullscreen').attr('src', "{% static 'navbar/menu/fullscreen.jpg' %}");
+	$('#nav-search-db').attr('src', "{% static 'navbar/menu/search-db.jpg' %}");
+	$('#nav-manage-alarm').attr('src', "{% static 'navbar/menu/manage-alarm.jpg' %}");
+	$('#nav-manual').attr('src', "{% static 'navbar/menu/manual.jpg' %}");
+}
+
+// db 저장 주기 설정
+var popSaveInterval
+$('#nav-db-interval').on('click', clickSaveInterval);
+function clickSaveInterval () {
+	popSaveInterval = window.open('/monitor/set_db_save_interval/','pop',
+		'height=600,width=1000,left=400,top=260,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+	popSaveInterval.resizeTo(296,339);
+}
+// 비밀번호변경
+// $('#nav-op-change-password').on('click', function() {
+// 	if($(event.target).is('.navbar-operation-setting')){
+// 		return;
+// 	}
+// 	$('.navbar-operation-setting').find('.nav-op-selected').first().removeClass('nav-op-selected');
+// 	$(event.target).addClass('nav-op-selected');
+// 	$.ajax({
+// 		url: '/login/change_password_page/',
+// 		type: "POST",
+// 		data : {
+// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
+// 		},
+// 		success: function(data){
+// 			$('.content').html(data);
+// 		}
+// 	});
+// });
+
+
+// DB검색 하위 메뉴
+// 실내기
+// $('#nav-db-ciu').on('click', function(event) {
+// 	if($(event.target).is('.navbar-search-db')){
+// 		return;
+// 	}
+// 	$('.navbar-search-db').find('.nav-db-selected').first().removeClass('nav-db-selected');
+// 	$(event.target).addClass('nav-db-selected');	
+// 	$.ajax({
+// 		url: '/monitor/search_db_ciu/',
+// 		type: "POST",
+// 		data : {
+// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
+// 		},
+// 		success: function(data){
+// 			$('.content').html(data);	
+// 		}
+// 	});
+// });
+// // 히트펌프
+// $('#nav-db-hp').on('click', function(event) {
+// 	if($(event.target).is('.navbar-search-db')){
+// 		return;
+// 	}
+// 	$('.navbar-search-db').find('.nav-db-selected').first().removeClass('nav-db-selected');
+// 	$(event.target).addClass('nav-db-selected');	
+// 	$.ajax({
+// 		url: '/monitor/search_db_hp/',
+// 		type: "POST",
+// 		data : {
+// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
+// 		},
+// 		success: function(data){
+// 			$('.content').html(data);	
+// 		}
+// 	});
+// });
+// // 순환펌프
+// $('#nav-db-cp').on('click', function(event) {
+// 	if($(event.target).is('.navbar-search-db')){
+// 		return;
+// 	}
+// 	$('.navbar-search-db').find('.nav-db-selected').first().removeClass('nav-db-selected');
+// 	$(event.target).addClass('nav-db-selected');	
+// 	$.ajax({
+// 		url: '/monitor/search_db_cp/',
+// 		type: "POST",
+// 		data : {
+// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
+// 		},
+// 		success: function(data){
+// 			$('.content').html(data);	
+// 		}
+// 	});
+// });
+// // 심정펌프
+// $('#nav-db-dwp').on('click', function(event) {
+// 	if($(event.target).is('.navbar-search-db')){
+// 		return;
+// 	}
+// 	$('.navbar-search-db').find('.nav-db-selected').first().removeClass('nav-db-selected');
+// 	$(event.target).addClass('nav-db-selected');	
+// 	$.ajax({
+// 		url: '/monitor/search_db_dwp/',
+// 		type: "POST",
+// 		data : {
+// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
+// 		},
+// 		success: function(data){
+// 			$('.content').html(data);	
+// 		}
+// 	});
+// });
+// // 유량계
+// $('#nav-db-fm').on('click', function(event) {
+// 	if($(event.target).is('.navbar-search-db')){
+// 		return;
+// 	}
+// 	$('.navbar-search-db').find('.nav-db-selected').first().removeClass('nav-db-selected');
+// 	$(event.target).addClass('nav-db-selected');	
+// 	$.ajax({
+// 		url: '/monitor/search_db_fm/',
+// 		type: "POST",
+// 		data : {
+// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
+// 		},
+// 		success: function(data){
+// 			$('.content').html(data);	
+// 		}
+// 	});
+// });
+// // 전력량계
+// $('#nav-db-power').on('click', function(event) {
+// 	if($(event.target).is('.navbar-search-db')){
+// 		return;
+// 	}
+// 	$('.navbar-search-db').find('.nav-db-selected').first().removeClass('nav-db-selected');
+// 	$(event.target).addClass('nav-db-selected');	
+// 	$.ajax({
+// 		url: '/monitor/search_db_power/',
+// 		type: "POST",
+// 		data : {
+// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
+// 		},
+// 		success: function(data){
+// 			$('.content').html(data);	
+// 		}
+// 	});
+// });
+
+
+$('#nav-logout').on('click', function() {
+	$.post("/login/logout/", function(data) {
+		$('html').html(data)
+	});
+});
+</script>
+
+
+
+
+
+

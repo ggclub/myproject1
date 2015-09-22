@@ -23,21 +23,12 @@ from django.views.decorators.csrf import csrf_exempt
 import logging
 log = logging.getLogger(__name__)
 
-op_mode = None
-temp_mode = None
 # 명령을 준 후에 잠시 page reload를 하지 않음
 flag_command = 0
-# ?? 이거 왜 있지?
-flag_reload_display = False
 file_path = os.path.join(myproject.settings.BASE_DIR, 'share/')
-# 저장 주기
-save_interval = 10	# minutes
-# save_time = timezone.now()
-# is_saved = False
-total_rt = 0.0
 
 date_format = "%Y-%m-%d"				# db search
-datetime_format = "%Y-%m-%d %H:%M:%S"
+datetime_format = "%Y-%m-%d %H:%M:%S"	# check if error exist
 
 @csrf_exempt
 @login_required
@@ -49,40 +40,406 @@ def index(request):
 	log.debug("index: program started.")
 	response_data = check_if_error_exist()
 	
-	global op_mode, temp_mode
-	op_mode = 'MN'
-	temp_mode = 'CL'
-	
-	# 실내기 db
-	floor = request.POST.get('floor','1')
-	response_data.update(controller.get_CIU_from_json(floor))
-	response_data.update({'floor':floor})
-	check_rt = response_data["cooling_rt"]
-
-	# ciu - hp
-	no_hp = request.POST.get('no_hp','1')
-	# response_data.update(controller.get_CIU_on_HP(no_hp))
-	response_data.update(controller.get_CIU_on_HP_from_json(no_hp))
+	# 실내기
+	ciu_nav = request.POST.get('ciu_nav','f1')
+	response_data.update({'ciu_nav':ciu_nav})
+	if ciu_nav[0] == "f":
+		response_data.update(controller.get_CIU_from_json(ciu_nav[1]))
+	else: # ciu_nav[0] == "h"
+		response_data.update(controller.get_CIU_on_HP_from_json(ciu_nav[1]))
+	rt = response_data["rt_total"]
 
 	# 센서값 읽어오기
-	response_data.update(controller.read_data_from_json(op_mode, temp_mode, total_rt))
-	# if response_data == False:
-	# 	response_data = {"error":"file read error"}
-	# 	url = 'error/read.html'
-	# 	return render(request, url, response_data)
+	response_data.update(controller.read_data_from_json(rt))
+	while response_data["error"] != None:
+		response_data.update(controller.read_data_from_json(rt))
 
+	# 임시 COP
+	try:
+		COP = rt/response_data["power"]["currentPowerConsumption"]
+	except ZeroDivisionError:
+		COP = 0
+	response_data.update({"COP": COP})
 
-	# 기기 동작 내역
-	selected = int(request.POST.get('page', 1))
-	response_data.update(controller.get_operation_log(selected))
+	# 처음 프로그램 실행시 모드는 수동
+	response_data.update({"op_mode":"MN"})
+	oml = OperationModeLogger(
+		dateTime=timezone.now(), opMode="MN"
+	).save()
+	# 처음 프로그램 실행시 hmi도 수동모드로 명령
+	controller.write_cmd()
+	log.debug("program start - Manual command")
 
-	# csrf token
 	response_data.update(csrf(request))
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	# log.debug(op_mode + ", " + temp_mode)
 	url = 'monitor/index.html'
 	return render(request, url, response_data)
 
+# @login_required
+def save_data(response_data):
+	if not controller.save_data(response_data):
+		# DB save 에러
+		log.error("DB save error.")
+	else :
+		response_data.update(controller.get_CIU_from_json('1'))
+		controller.save_ciu1(response_data)
+		response_data.update(controller.get_CIU_from_json('2'))
+		controller.save_ciu2(response_data)
+		response_data.update(controller.get_CIU_from_json('3'))
+		controller.save_ciu3(response_data)
+		log.debug("database updated")
+		# save_time = timezone.now()
+
+
+@csrf_exempt
+@login_required
+def reload_display(request):
+	###########################################
+	# 5초마다 갱신해서 왼쪽 상태창, 오른쪽 실내기 정보 갱신
+	# 자동제어시, 자동제어 로직에 따라 hmi에 명령을 줌
+	# 수동인 경우 데이터 값만 갱신함.
+	###########################################
+
+	# check if error exist
+	response_data = check_if_error_exist()
+
+	# 실내기 정보 읽어오기
+	ciu_nav = request.POST.get('ciu_nav','f1')
+	response_data.update({'ciu_nav':ciu_nav})
+	if ciu_nav[0] == "f":
+		response_data.update(controller.get_CIU_from_json(ciu_nav[1]))
+	else: # ciu_nav[0] == "h"
+		response_data.update(controller.get_CIU_on_HP_from_json(ciu_nav[1]))
+	rt = response_data["rt_total"]
+	
+	global flag_command 
+	if flag_command: # command를 준 후에 파일을 잠시 읽지 않는다.
+		import time
+		time.sleep(2)
+		flag_command = 0
+
+	# hmi에서 데이터 읽고 (자동)제어
+	# 수동인 경우 데이터 값(디스플레이)만 갱신함.
+	response_data.update(controller.read_data_from_json(rt))
+	# log.debug("timedelta = " + str(timezone.now() - response_data["datetime"]))
+
+	# HMI와 통신에러 검출
+	# if timezone.now() - response_data["datetime"] > timezone.timedelta(seconds=5):
+	# 	pass
+	# else: 
+
+	t = timezone.now()		
+	# log.debug(str(response_data["error"]))
+	while response_data["error"] != None:
+		response_data.update(controller.read_data_from_json(rt))
+
+	# COP
+	try:
+		COP = rt/response_data["power"]["currentPowerConsumption"]
+	except ZeroDivisionError:
+		COP = 0
+	response_data.update({"COP": COP})
+
+	# 저장 주기마다 data save
+	save_interval = SaveIntervalLogger.objects.latest('id').interval
+	if save_interval == 10:
+		if t.minute % 10 == 0 and t.second < 6: 
+			save_data(response_data)
+	elif save_interval == 30:
+		if t.minute % 30 == 0 and t.second < 6:
+			save_data(response_data)
+	elif save_interval == 60:
+		if t.minute == 0 and t.second < 6:
+			save_data(response_data)
+	else:
+		if t.minute % 5 == 0 and t.second < 6:
+			save_data(response_data)
+
+	op_mode = OperationModeLogger.objects.latest('id').opMode
+	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
+	response_data.update({
+		"op_mode": op_mode,
+		"temp_mode": temp_mode,
+	})
+	# log.debug(str(response_data))
+
+	url = 'monitor/container.html'
+	html = render_to_string(url, response_data, RequestContext(request))
+	return HttpResponse(html)
+
+@login_required
+def specs(request):
+	response_data = controller.get_device_specs()
+	url = 'monitor/specs.html'
+	return render(request, url, response_data)
+
+@login_required
+def setting_cp(request):
+	# 순환펌프 설정을 눌렀을 때 뜨는 페이지
+	response_data = {}
+	response_data.update(controller.read_cp_operating())
+
+	url = 'monitor/setting_cp.html'
+	return render(request, url, response_data)
+
+@login_required
+def setting_cp_done(request):
+	# 순환펌프 동작을 설정했을 때 적용
+	response_data = {}
+
+	cp_operating = int(request.POST.get('cpOperating',0))
+	cp1switch = request.POST.get('cp1switch', 'error').encode('utf-8')
+	cp1hz = int(request.POST.get('cp1hz', 0))
+	cp1flux = int(request.POST.get('cp1flux', 0))
+	cp2switch = request.POST.get('cp2switch', 'error').encode('utf-8')
+	cp2hz = int(request.POST.get('cp2hz', 0))
+	cp2flux = int(request.POST.get('cp2flux', 0))
+
+	# 설정 값 db에 저장
+	controller.set_cp(1, op_mode, cp1switch, cp1hz, cp1flux)
+	controller.set_cp(2, op_mode, cp2switch, cp2hz, cp2flux)
+	# cmdmain에 기록
+	# ######## 	controller.write_cmd()
+	op_mode = OperationModeLogger.objects.latest('id').opMode
+	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
+	cp1 = CirculatingPump1Logger.objects.latest('id')
+	cp2 = CirculatingPump2Logger.objects.latest('id')
+	dwp1 = DeepwellPump1Logger.objects.latest('id')
+	dwp2 = DeepwellPump2Logger.objects.latest('id')
+	dwp3 = DeepwellPump3Logger.objects.latest('id')
+	dwp4 = DeepwellPump4Logger.objects.latest('id')
+	# rt = RefrigerationTonLogger.objects.latest('id')
+	datetime = str(timezone.now())[:-7]
+	if cp1.switch == "OFF":
+		cp1.Hz = 0
+		cp1.flux = 0
+	if cp2.switch == "OFF":
+		cp2.Hz = 0
+		cp2.flux = 0
+	cmd_text = {
+		'op_mode': op_mode,
+		'temp_mode': temp_mode,
+		'cp_operating': cp_operating,
+		'cp1': cp1.switch,
+		'cp1_hz': cp1.Hz,
+		'cp1_flux': cp1.flux,
+		'cp2': cp2.switch,
+		'cp2_hz': cp2.Hz,
+		'cp2_flux': cp2.flux,
+		'dwp1': dwp1.switch,
+		'dwp2': dwp2.switch,
+		'dwp3': dwp3.switch,
+		'dwp4': dwp4.switch,
+		'datetime':datetime,
+		# 'rt': rt.RT,
+	}
+	log.debug("command written")
+	log.debug(cmd_text)
+	log.debug("write_cmd from setting_cp_done")
+	try:
+		with open(file_path + 'cmdmain.json', 'w') as fp:
+			json.dump(cmd_text, fp)
+	except Exception, e:
+		log.error(str(e))
+
+	# check if error exist
+	response_data = check_if_error_exist()
+	
+
+	global flag_command 
+	if flag_command: # command를 준 후에 파일을 잠시 읽지 않는다.
+		import time
+		time.sleep(2)
+		flag_command = 0
+
+	# 센서값 읽어오기
+	response_data.update(controller.read_data_from_json(rt))
+	# if response_data == False:
+	# 	response_data = {"error":"file read error"}
+	# 	url = 'error/read.html'
+	# 	html = render_to_string(url, response_data)
+	# 	return HttpResponse(html)
+
+	html = render_to_string('monitor/container.html', response_data, RequestContext(request))
+	return HttpResponse(html)
+
+@login_required
+def set_db_save_interval(request):
+	response_data = {}
+	url = 'navbar/setting_db_save_interval.html'
+	return render(request, url, response_data)
+
+@login_required
+def set_db_save_interval_confirm(request):
+	new_save_interval = request.POST.get('savetime', '10')
+	save_interval = SaveIntervalLogger.objects.latest('id').interval
+	if save_interval != new_save_interval:
+		sil = SaveIntervalLogger(
+				dateTime=timezone.now(), interval=new_save_interval
+			).save()
+	return reload_display(request)
+
+
+
+@login_required
+def show_database(request):
+	# 지금 안쓰임
+	response_data = {}
+	url = 'monitor/show_database.html'
+	return render(request, url, response_data)
+
+@login_required
+def page_request(request):
+	# 지금 안쓰임
+	if not request.POST:
+		return render_to_response('monitor/container.html',context_instance=RequestContext(request))
+
+	# 기기 동작 내역
+	selected = int(request.POST.get('page', 1))
+	response_data = controller.get_operation_log(selected)
+
+	html = render_to_string('monitor/right_bottom.html', response_data, RequestContext(request))
+    	return HttpResponse(html)
+
+@login_required
+def toggle_switch(request):
+	# 심정펌프 스위치 on/off 버튼 클릭시 제어
+	if not request.POST:
+		return render_to_response('monitor/container.html', context_instance=RequestContext(request))
+
+	location = request.POST.get('id', 'error')
+	loc = location.upper()
+	toggle = request.POST.get('toggle', 'error').encode('utf-8').upper()
+	if toggle == 'error':
+		log.debug("toggle_switch, toggle: error")
+
+	op_mode = OperationModeLogger.objects.latest('id').opMode
+	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
+
+	# 심정 펌프 갱신
+	dwp = ''
+	try:
+		if loc == 'DWP1': 
+			dwp = DeepwellPump1Logger(
+				dateTime=timezone.now(), opMode=op_mode, switch=toggle
+			)
+		elif loc == 'DWP2':
+			dwp = DeepwellPump2Logger(
+				dateTime=timezone.now(), opMode=op_mode, switch=toggle
+			)
+		elif loc == 'DWP3':
+			dwp = DeepwellPump3Logger(
+				dateTime=timezone.now(), opMode=op_mode, switch=toggle
+			)
+		elif loc == 'DWP4':
+			dwp = DeepwellPump4Logger(
+				dateTime=timezone.now(), opMode=op_mode, switch=toggle
+			)
+		if dwp != '':
+			dwp.save()
+	except Exception, e:
+		log.debug(str(e))
+
+
+	# 기기 동작 내역 갱신
+	try:
+		new_cmd = OperationSwitchControl(
+				dateTime=timezone.now(), location=loc, switch=toggle
+			)
+		new_cmd.save()
+	except Exception, e:
+		log.error(str(e))
+
+	# 커맨드 파일 작성
+	controller.write_cmd()
+	log.debug("write_cmd from toggle_switch")
+
+	# 커맨드 후 hmidata를 잠시동안 읽지 않는다.
+	global flag_command 
+	flag_command = int(request.POST.get('flag', '0'))
+
+	# html = render_to_string('monitor/right_top.html', response_data, RequestContext(request))
+	# return HttpResponseBadRequest
+	return HttpResponse('')
+
+
+@login_required
+def change_ciu(request):
+	if not request.POST:
+		return render_to_response('monitor/container.html', context_instance=RequestContext(request))
+
+	response_data = {}
+	# 실내기 정보 읽어오기
+	ciu_nav = request.POST.get('ciu_nav','f1')
+	response_data.update({'ciu_nav':ciu_nav})
+	if ciu_nav[0] == "f":
+		response_data.update(controller.get_CIU_from_json(ciu_nav[1]))
+	elif ciu_nav[0] == "h":
+		response_data.update(controller.get_CIU_on_HP_from_json(ciu_nav[1]))
+	else: # total
+		response_data.update(controller.get_CIU_total())
+	
+	html = render_to_string('monitor/right.html', response_data, RequestContext(request))
+	return HttpResponse(html)
+
+
+@login_required
+def setting_mode(request, mode):
+	# log.debug(str(mode))
+	response_data = {"mode": mode}
+	url = 'navbar/setting_mode.html'
+	html = render_to_response(url, response_data, RequestContext(request))
+	return HttpResponse(html)
+
+@login_required
+def setting_mode_confirm(request):
+	new_op_mode = request.POST.get('mode', 'error')
+	if new_op_mode == 'error':
+		log.debug("setting_mode_confirm, op_mode: error")
+
+	log.debug("setting_mode_confirm: " + new_op_mode)
+	op_mode = OperationModeLogger.objects.latest('id').opMode
+	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
+	# op_mode가 변경된 경우 저장
+	if op_mode != new_op_mode:
+		op_mode = new_op_mode
+		oml = OperationModeLogger(
+				dateTime=timezone.now(), opMode=op_mode
+			).save()
+		controller.write_cmd()
+		log.debug("write_cmd from settimg_mode_confirm")
+	response_data = {
+		"op_mode": op_mode,
+		"temp_mode": temp_mode,
+	}
+
+	# return reload_display(request)	
+	return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
+@login_required	
+def operation_control(request):
+	# check if error exist
+	response_data = check_if_error_exist()
+	
+
+	# RT 값을 받기 위해 get_ciu_from_json 필요
+	response_data.update(controller.get_CIU_from_json(1))
+	rt = response_data["cooling_rt"]
+
+	response_data.update(controller.read_data_from_json(rt))
+	while response_data["error"] != None:
+		response_data.update(controller.read_data_from_json(rt))
+
+	# COP
+	try:
+		COP = rt/response_data["power"]["currentPowerConsumption"]
+	except ZeroDivisionError:
+		COP = 0
+	response_data.update({"COP": COP})
+
+	url = 'monitor/operation_control.html'
+	html = render_to_string(url, response_data, RequestContext(request))
+	return HttpResponse(html)
 
 
 def check_if_error_exist(error_count = 0):
@@ -245,411 +602,6 @@ def check_if_error_exist(error_count = 0):
 
 	return {"error_msg": error_alarm}
 
-def save_data(response_data):
-	if not controller.save_data(response_data):
-		# DB save 에러
-		log.error("DB save error.")
-	else :
-		response_data.update(controller.get_CIU_from_json('1'))
-		controller.save_ciu1(response_data)
-		response_data.update(controller.get_CIU_from_json('2'))
-		controller.save_ciu2(response_data)
-		response_data.update(controller.get_CIU_from_json('3'))
-		controller.save_ciu3(response_data)
-		log.debug("database updated")
-		# save_time = timezone.now()
-
-
-@csrf_exempt
-@login_required
-def reload_display(request):
-	# 5초마다 갱신해서 왼쪽 상태창, 오른쪽 실내기 정보 갱신
-	# 자동제어시, 자동제어 로직에 따라 hmi에 명령을 줌
-	# 수동인 경우 데이터 값만 갱신함.
-
-	# check if error exist
-	response_data = check_if_error_exist()
-
-	# 실내기 정보 읽어오기
-	floor = request.POST.get('floor','1')
-	response_data.update(controller.get_CIU_from_json(floor))
-	response_data.update({'floor':floor})
-	total_rt = response_data["cooling_rt"]
-	# log.debug("total_rt: " + str(total_rt))
-
-	# ciu - hp
-	no_hp = request.POST.get('no_hp','1')
-	response_data.update(controller.get_CIU_on_HP_from_json(no_hp))
-	
-	global flag_command 
-	if flag_command: # command를 준 후에 파일을 잠시 읽지 않는다.
-		import time
-		time.sleep(3)
-		flag_command = 0
-
-	# 센서값 읽어오기
-	global op_mode, temp_mode, flag_reload_display
-	# log.debug("reload_display: " + op_mode + ", " + temp_mode)
-	# ?? 역할이 뭐지
-	if flag_reload_display:
-		op_mode = request.POST.get('opMode', 'error').encode('utf-8')
-		temp_mode = request.POST.get('tempMode','error').encode('utf-8')
-		# log.debug(op_mode + ", " + temp_mode)
-		flag_reload_display = False
-
-	# hmi에서 데이터 읽고 (자동)제어
-	# 수동인 경우 데이터 값(디스플레이)만 갱신함.
-	response_data.update(controller.read_data_from_json(op_mode, temp_mode, total_rt))
-	# log.debug("timedelta = " + str(timezone.now() - response_data["datetime"]))
-	# if timezone.now() - response_data["datetime"] > timezone.timedelta(seconds=5):
-	# 	# HMI와 통신에러
-	# 	pass
-	# else: 
-
-	t = timezone.now()		
-	while response_data["error"] != None:
-		response_data.update(controller.read_data_from_json(op_mode, temp_mode, total_rt))
-	op_mode = response_data["op_mode"]
-	temp_mode = response_data["temp_mode"]
-	# if response_data.has_key("error"):
-	# 	log.debug("read_data_from_json error")
-	try:
-		COP = total_rt/response_data["power"]["currentPowerConsumption"]
-	except ZeroDivisionError:
-		COP = 0
-	response_data.update({"COP": COP})
-	
-	# 기기 동작 내역
-	# selected = int(request.POST.get('page', 1))
-	# response_data.update(controller.get_operation_log(selected))
-
-	# save time 주기마다 DB에 저장
-	# global save_time
-	# log.debug("save_time: " + str(save_time))
-	# if (timezone.now() - save_time) > timezone.timedelta(minutes=save_interval):
-		# log.debug(timezone.now() - save_time)
-
-	# t = timezone.now()	
-	# log.debug(str(t))	
-	if save_interval == 10:
-		if t.minute % 10 == 0 and t.second < 6: 
-			save_data(response_data)
-	elif save_interval == 30:
-		if t.minute % 30 == 0 and t.second < 6:
-			save_data(response_data)
-	elif save_interval == 60:
-		if t.minute == 0 and t.second < 6:
-			save_data(response_data)
-	else:
-		if t.minute % 5 == 0 and t.second < 6:
-			save_data(response_data)
-
-
-	# log.debug(response_data)
-	page = request.POST.get('page','error')
-	if page == 'fullscreen':
-		url = 'monitor/container.html'
-	elif page == 'control':
-		url = 'monitor/content_control.html'
-	else:
-		url = 'monitor/container.html'
-
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	html = render_to_string(url, response_data, RequestContext(request))
-	return HttpResponse(html)
-
-@login_required
-def specs(request):
-	response_data = controller.get_device_specs()
-	global op_mode, temp_mode
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	# log.debug(op_mode + ", " + temp_mode)
-	url = 'monitor/specs.html'
-	return render(request, url, response_data)
-
-@login_required
-def setting_cp(request):
-	# 순환펌프 설정을 눌렀을 때 뜨는 페이지
-	response_data = {}
-	global op_mode, temp_mode
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	# log.debug(op_mode + ", " + temp_mode)
-	response_data.update(controller.read_cp_operating())
-
-	url = 'monitor/setting_cp.html'
-	return render(request, url, response_data)
-
-@login_required
-def setting_cp_done(request):
-	# 순환펌프 동작을 설정했을 때 적용
-	response_data = {}
-
-	global op_mode, temp_mode
-	op_mode = request.POST.get('opMode', 'error').encode('utf-8')
-	if op_mode == 'error':
-		log.debug("setting_cp_done, op_mode: error")
-	temp_mode = request.POST.get('tempMode', 'error').encode('utf-8')
-	if temp_mode == 'error':
-		log.debug("setting_cp_done, temp_mode: error")
-
-	cp_operating = int(request.POST.get('cpOperating',0))
-	cp1switch = request.POST.get('cp1switch', 'error').encode('utf-8')
-	cp1hz = int(request.POST.get('cp1hz', 0))
-	cp1flux = int(request.POST.get('cp1flux', 0))
-	cp2switch = request.POST.get('cp2switch', 'error').encode('utf-8')
-	cp2hz = int(request.POST.get('cp2hz', 0))
-	cp2flux = int(request.POST.get('cp2flux', 0))
-
-	# 설정 값 db에 저장
-	controller.set_cp(1, op_mode, cp1switch, cp1hz, cp1flux)
-	controller.set_cp(2, op_mode, cp2switch, cp2hz, cp2flux)
-	# cmdmain에 기록
-	# ######## 	controller.write_cmd(temp_mode, op_mode)
-	cp1 = CirculatingPump1Logger.objects.latest('id')
-	cp2 = CirculatingPump2Logger.objects.latest('id')
-	dwp1 = DeepwellPump1Logger.objects.latest('id')
-	dwp2 = DeepwellPump2Logger.objects.latest('id')
-	dwp3 = DeepwellPump3Logger.objects.latest('id')
-	dwp4 = DeepwellPump4Logger.objects.latest('id')
-	rt = RefrigerationTonLogger.objects.latest('id')
-	datetime = str(timezone.now())[:-7]
-	if cp1.switch == "OFF":
-		cp1.Hz = 0
-		cp1.flux = 0
-	if cp2.switch == "OFF":
-		cp2.Hz = 0
-		cp2.flux = 0
-	cmd_text = {
-		'temp_mode': temp_mode,
-		'op_mode': op_mode,
-		'cp_operating': cp_operating,
-		'cp1': cp1.switch,
-		'cp1_hz': cp1.Hz,
-		'cp1_flux': cp1.flux,
-		'cp2': cp2.switch,
-		'cp2_hz': cp2.Hz,
-		'cp2_flux': cp2.flux,
-		'dwp1': dwp1.switch,
-		'dwp2': dwp2.switch,
-		'dwp3': dwp3.switch,
-		'dwp4': dwp4.switch,
-		'datetime':datetime,
-		'rt': rt.RT,
-	}
-	log.debug("command written")
-	log.debug(cmd_text)
-	log.debug("write_cmd from setting_cp_done")
-	try:
-		with open(file_path + 'cmdmain.json', 'w') as fp:
-			json.dump(cmd_text, fp)
-	except Exception, e:
-		log.error(str(e))
-
-	# check if error exist
-	response_data = check_if_error_exist()
-	
-
-	global flag_command 
-	if flag_command: # command를 준 후에 파일을 잠시 읽지 않는다.
-		import time
-		time.sleep(2)
-		flag_command = 0
-
-	# 센서값 읽어오기
-	response_data.update(controller.read_data_from_json(op_mode, temp_mode, total_rt))
-	# if response_data == False:
-	# 	response_data = {"error":"file read error"}
-	# 	url = 'error/read.html'
-	# 	html = render_to_string(url, response_data)
-	# 	return HttpResponse(html)
-
-	# 기기 동작 내역
-	selected = int(request.POST.get('page', 1))
-	response_data.update(controller.get_operation_log(selected))
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-
-	html = render_to_string('monitor/container.html', response_data, RequestContext(request))
-	return HttpResponse(html)
-
-@login_required
-def show_database(request):
-	# 지금 안쓰임
-	response_data = {}
-	global op_mode, temp_mode
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	# log.debug(op_mode + ", " + temp_mode)
-	url = 'monitor/show_database.html'
-	return render(request, url, response_data)
-
-@login_required
-def page_request(request):
-	if not request.POST:
-		return render_to_response('monitor/container.html',context_instance=RequestContext(request))
-
-	# 기기 동작 내역
-	selected = int(request.POST.get('page', 1))
-	response_data = controller.get_operation_log(selected)
-
-	html = render_to_string('monitor/right_bottom.html', response_data, RequestContext(request))
-    	return HttpResponse(html)
-
-@login_required
-def toggle_switch(request):
-	# 동작제어에서 심정펌프 스위치 on/off 버튼 클릭시 제어
-	if not request.POST:
-		return render_to_response('monitor/container.html', context_instance=RequestContext(request))
-
-	location = request.POST.get('id', 'error').split('-')[0]
-	loc = location.upper()
-	switch_status = request.POST.get('status', 'error').encode('utf-8').upper()
-	if switch_status == 'error':
-		log.debug("toggle_switch, switch_status: error")
-
-	global op_mode, temp_mode
-	op_mode = request.POST.get('opMode', 'error').encode('utf-8')
-	if op_mode == 'error':
-		log.debug("toggle_switch, op_mode: error")
-	temp_mode = request.POST.get('tempMode', 'error').encode('utf-8')
-	if temp_mode == 'error':
-		log.debug("toggle_switch, temp_mode: error")
-
-	# 심정 펌프 갱신
-	dwp = ''
-	if loc == 'DWP1': 
-		dwp = DeepwellPump1Logger(
-			dateTime=timezone.now(), opMode=op_mode, switch=switch_status
-		)
-	elif loc == 'DWP2':
-		dwp = DeepwellPump2Logger(
-			dateTime=timezone.now(), opMode=op_mode, switch=switch_status
-		)
-	elif loc == 'DWP3':
-		dwp = DeepwellPump3Logger(
-			dateTime=timezone.now(), opMode=op_mode, switch=switch_status
-		)
-	elif loc == 'DWP4':
-		dwp = DeepwellPump4Logger(
-			dateTime=timezone.now(), opMode=op_mode, switch=switch_status
-		)
-	if dwp != '':
-		dwp.save()
-
-
-	# 기기 동작 내역 갱신
-	try:
-		new_cmd = OperationSwitchControl(
-				dateTime=timezone.now(), location=loc, switch=switch_status
-			)
-		new_cmd.save()
-	except Exception, e:
-		log.error(str(e))
-
-	# 커맨드 파일 작성
-	controller.write_cmd(temp_mode, op_mode)
-	log.debug("write_cmd from toggle_switch")
-	# 커맨드 후 hmidata를 잠시동안 읽지 않는다.
-	global flag_command 
-	flag_command = int(request.POST.get('flag_command', '0'))
-
-	# 기기 동작 내역
-	response_data = controller.get_operation_log(1)
-
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	html = render_to_string('monitor/right_top.html', response_data, RequestContext(request))
-	return HttpResponse(html)
-
-
-def floor_change(request):
-	if not request.POST:
-		return render_to_response('monitor/container.html', context_instance=RequestContext(request))
-
-	response_data = {}
-	# 실내기 정보 읽어오기
-	floor = request.POST.get('floor', '1')
-	response_data.update(controller.get_CIU_from_json(floor))
-	response_data.update({'floor':floor})
-	total_rt = response_data["cooling_rt"]
-	
-	html = render_to_string('monitor/right_bottom.html', response_data, RequestContext(request))
-	return HttpResponse(html)
-
-
-def change_ciuonhp(request):
-	if not request.POST:
-		return render_to_response('monitor/container.html', context_instance=RequestContext(request))
-
-	response_data = {}
-	# ciu - hp 정보
-	no_hp = request.POST.get('no_hp','1')
-	response_data.update(controller.get_CIU_on_HP_from_json(no_hp))
-
-	html = render_to_string('monitor/right_top.html', response_data, RequestContext(request))
-	return HttpResponse(html)
-
-
-@login_required
-def setting_mode(request):
-	response_data = {}
-	global op_mode, temp_mode
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	# log.debug(op_mode + ", " + temp_mode)
-	url = 'monitor/setting_mode.html'
-	html = render_to_response(url, response_data, RequestContext(request))
-	return HttpResponse(html)
-
-@login_required
-def setting_mode_confirm(request):
-	global op_mode, temp_mode
-	op_mode_local = request.POST.get('opMode', 'error')
-	if op_mode_local == 'error':
-		log.debug("setting_mode_confirm, op_mode: error")
-	temp_mode = request.POST.get('tempMode', 'error')
-	if temp_mode == 'error':
-		log.debug("setting_mode_confirm, temp_mode: error")
-
-	# log.debug("setting_mode_confirm: " + op_mode + ", " + temp_mode)
-	if op_mode != op_mode_local:
-		op_mode = op_mode_local
-		controller.write_cmd(temp_mode,op_mode)
-		log.debug("write_cmd from settimg_mode_confirm")
-
-	if op_mode == 'AT':
-		# log.debug("setting_mode_confirm: " + op_mode + ", " + temp_mode)
-		global	flag_reload_display
-		flag_reload_display = True
-		# 전체화면
-		return reload_display(request)
-	else :# op_mode == 'MN'
-		# 동작제어화면
-		return operation_control(request)
-
-@login_required	
-def operation_control(request):
-	# check if error exist
-	response_data = check_if_error_exist()
-	
-
-	# RT 값을 받기 위해 get_ciu_from_json 필요
-	response_data.update(controller.get_CIU_from_json(1))
-	total_rt = response_data["cooling_rt"]
-
-	response_data.update(controller.read_data_from_json(op_mode, temp_mode, total_rt))
-	# global op_mode, temp_mode
-	# response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	# log.debug(op_mode + ", " + temp_mode)
-
-	if response_data.has_key("error"):
-		log.debug("read_data_from_json error")
-	# 	log.debug("error")
-	# 	response_data = {"error":"file read error"}
-	# 	url = 'error/read.html'
-	# 	html = render_to_string(url, response_data)
-	# 	return HttpResponse(html)
-
-	url = 'monitor/operation_control.html'
-	html = render_to_string(url, response_data, RequestContext(request))
-	return HttpResponse(html)
-
 
 ###################### DB 검색 ######################
 
@@ -686,6 +638,7 @@ def search_db_excel(request):
 
 
 import mimetypes
+@login_required
 def download_result(request, o):
 	obj_type = o
 	# obj_type = request.GET['o']
@@ -700,6 +653,8 @@ def download_result(request, o):
 				content_type = 'application/octet-stream'
 			response['Content-Type'] = content_type
 			response['Content-Length'] = str(os.stat(filename).st_size)
+		else:
+			response = HttpResponse("올바른 접근이 아닙니다.", content_type="text/plain")
 		if encoding is not None:
 			response['Content-Encoding'] = encoding
 		# if u'WebKit'in request.META.get('HTTP_USER_AGENT', u'Webkit'):
@@ -718,18 +673,18 @@ def download_result(request, o):
 	return response
 
 
+@login_required
 def search_db_ciu(request):
 	response_data = {}
-	global op_mode, temp_mode
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	# log.debug(op_mode + ", " + temp_mode)
 	url = 'monitor/search_db_ciu.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
+@login_required
 def search_db_ciu_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
+	# log.debug(str(start_date)+', '+ str(end_date))
 	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
 	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
 	end_date = dt.strftime(end, date_format)
@@ -946,15 +901,14 @@ def search_db_ciu_result(request):
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
+@login_required
 def search_db_hp(request):
 	response_data = {}
-	global op_mode, temp_mode
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	# log.debug(op_mode + ", " + temp_mode)
 	url = 'monitor/search_db_hp.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
+@login_required
 def search_db_hp_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
@@ -982,15 +936,14 @@ def search_db_hp_result(request):
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
+@login_required
 def search_db_cp(request):
 	response_data = {}
-	global op_mode, temp_mode
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	# log.debug(op_mode + ", " + temp_mode)
 	url = 'monitor/search_db_cp.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
+@login_required
 def search_db_cp_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
@@ -1014,15 +967,14 @@ def search_db_cp_result(request):
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
+@login_required
 def search_db_dwp(request):
 	response_data = {}
-	global op_mode, temp_mode
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	# log.debug(op_mode + ", " + temp_mode)
 	url = 'monitor/search_db_dwp.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
+@login_required
 def search_db_dwp_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
@@ -1049,15 +1001,14 @@ def search_db_dwp_result(request):
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
+@login_required
 def search_db_fm(request):
 	response_data = {}
-	global op_mode, temp_mode
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	# log.debug(op_mode + ", " + temp_mode)
 	url = 'monitor/search_db_fm.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
+@login_required
 def search_db_fm_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
@@ -1107,15 +1058,14 @@ def search_db_fm_result(request):
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
+@login_required
 def search_db_power(request):
 	response_data = {}
-	global op_mode, temp_mode
-	response_data.update({"op_mode":op_mode, "temp_mode":temp_mode})
-	# log.debug(op_mode + ", " + temp_mode)
 	url = 'monitor/search_db_power.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
+@login_required
 def search_db_power_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
@@ -1160,75 +1110,94 @@ def search_db_power_result(request):
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
+@login_required
+def search_db_cop(request):
+	response_data = {}
+	url = 'monitor/search_db_cop.html'
+	html = render_to_string(url, response_data, RequestContext(request))
+	return HttpResponse(html)
+
+@login_required
+def search_db_cop_result(request):
+	start_date = request.POST.get('startDate', 'error')
+	end_date = request.POST.get('endDate', 'error')
+	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
+	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
+	end_date = dt.strftime(end, date_format)
+	name = request.POST.get('name', '0')
+	count = 0
+
+	cop = CoefficientOfPerformanceLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+	count += cop.count()
+
+	database_list = list(cop)
+	response_data = {
+		'database_list':database_list,
+		'count': count,
+	}
+
+	url = 'monitor/search_db_cop_result.html'
+	html = render_to_string(url, response_data, RequestContext(request))
+	return HttpResponse(html)
+
+@login_required
+def search_db_tw(request):
+	response_data = {}
+	url = 'monitor/search_db_tw.html'
+	html = render_to_string(url, response_data, RequestContext(request))
+	return HttpResponse(html)
+
+@login_required
+def search_db_tw_result(request):
+	start_date = request.POST.get('startDate', 'error')
+	end_date = request.POST.get('endDate', 'error')
+	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
+	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
+	end_date = dt.strftime(end, date_format)
+	name = request.POST.get('name', '0')
+	count = 0
+
+	tw = TubeWellLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+	count += tw.count()
+
+	database_list = list(tw)
+	response_data = {
+		'database_list':database_list,
+		'count': count,
+	}
+
+	url = 'monitor/search_db_tw_result.html'
+	html = render_to_string(url, response_data, RequestContext(request))
+	return HttpResponse(html)
+
+@login_required
+def search_db_alarm(request):
+	response_data = {}
+	url = 'monitor/search_db_alarm.html'
+	html = render_to_string(url, response_data, RequestContext(request))
+	return HttpResponse(html)
+
+@login_required
+def search_db_alarm_result(request):
+	start_date = request.POST.get('startDate', 'error')
+	end_date = request.POST.get('endDate', 'error')
+	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
+	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
+	end_date = dt.strftime(end, date_format)
+	name = request.POST.get('name', '0')
+	count = 0
+
+	al = AlarmLogger.objects.filter(Q(occurTime__gte=start_date), Q(closedTime__lte=end_date)).order_by('-occurTime')
+	count += al.count()
+
+	database_list = list(al)
+	response_data = {
+		'database_list':database_list,
+		'count': count,
+	}
+
+	url = 'monitor/search_db_alarm_result.html'
+	html = render_to_string(url, response_data, RequestContext(request))
+	return HttpResponse(html)
 
 
-
-
-
-
-# @login_required
-# def show_database(request):
-# 	if not request.POST:
-# 		return render_to_response('monitor/container.html', context_instance=RequestContext(request))
-
-# 	response_data = {}
-# 	id = request.POST.get('id', 'None')
-# 	start_date = timezone.now() - datetime.timedelta(days=7)
-# 	end_date = timezone.now()
-
-# 	# 온도 센서
-# 	if id == 'TempHEIn1':
-# 		database = TempHEIn1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	elif id == 'TempHEIn2':
-# 		database = TempHEIn2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	elif id == 'TempHEOut1'\
-# 	or id == 'TempHPIn1' or id == 'TempHPIn2' or id == 'TempHPIn3'\
-# 	or id == 'TempHPIn4' or id == 'TempHPIn5' or id == 'TempHPIn6':
-# 		database = TempHEOut1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	elif id == 'TempHEOut2':
-# 		database = TempHEOut2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	elif id == 'TempHPOut1':
-# 		database = TempHPOut1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	elif id == 'TempHPOut2':
-# 		database = TempHPOut2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	elif id == 'TempHPOut3':
-# 		database = TempHPOut3Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	elif id == 'TempHPOut4':
-# 		database = TempHPOut4Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	elif id == 'TempHPOut5':
-# 		database = TempHPOut5Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	elif id == 'TempHPOut6':
-# 		database = TempHPOut6Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	# 순환 펌프
-# 	elif id == 'CirculatingPump':
-# 		database = CirculatingPumpLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	# 순환 유량계
-# 	elif id == 'CPFlowmeter':
-# 		database = CPFlowmeterLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	# 심정 유량계
-# 	elif id == 'DWPFlowmeter':
-# 		database = DWPFlowmeterLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	# 심정 펌프
-# 	elif id == 'DeepwellPump1':
-# 		database = DeepwellPump1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	elif id == 'DeepwellPump2':
-# 		database = DeepwellPump2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	elif id == 'DeepwellPump3':
-# 		database = DeepwellPump3Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	elif id == 'DeepwellPump4':
-# 		database = DeepwellPump4Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	# rt
-# 	elif id == 'RefrigerationTon':
-# 		database = RefrigerationTonLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	# 전력량
-# 	elif id == 'PowerConsumption':
-# 		database = PowerConsumptionLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-# 	else:
-# 		database = 'None'
-# 	response_data.update({'id': id})
-# 	response_data.update({'database': database})
-# 	# csrf token
-# 	response_data.update(csrf(request))
-# 	html = render_to_string('monitor/sensor_data.html', response_data, RequestContext(request))
-# 	# log.debug(html)
-# 	return HttpResponse(html)

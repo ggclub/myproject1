@@ -1,8 +1,5 @@
 {% load staticfiles %}
 <!DOCTYPE HTML>
-<div style="display:none;"><p id='operation-mode'>{{ op_mode }}</p><p id='temperature-mode'>{{ temp_mode }}</p></div>
-
-
 <img id ="nav-mode" src="{% static 'base/nav-manual-cool.png' %}">
 <script type="text/javascript">
 $(document).ready(function (){
@@ -59,7 +56,7 @@ $(document).ready(function (){
 			<tr><td colspan="2">
 				<p class="device" id="cp{{ pump.get_CPID_display }}"><b>순환 펌프 {{ pump.get_CPID_display }}
 				</b></p>
-				<button class="btn btn-default btn-sm control setting-cp" style="display:inline; float:right;">설정</button>
+				<button class="btn btn-default btn-sm setting-cp" style="display:inline; float:right;">설정</button>
 			</td></tr>
 		</thead>
 		<tbody>
@@ -214,8 +211,6 @@ $(document).ready(function (){
 
 <script type="text/javascript">
 	// 초기 세팅
-	var opMode = $('#operation-mode').text();
-	var tempMode = $('#temperature-mode').text();
 	var btns = $('.control');
 
 	$.each(btns, function(i, val) {
@@ -280,7 +275,7 @@ $(document).ready(function (){
 				'id': id,
 				'status': status,
 				'tempMode': tempMode,
-				'opMode': opMode,
+				
 				'flag': 1,
 			},
 			success: function(data) {

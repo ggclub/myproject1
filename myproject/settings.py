@@ -31,6 +31,16 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
+
+
+
+
+
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -41,6 +51,9 @@ SECRET_KEY = 'h$^fjem)bkmnq#elgkrx+1$ds*h!98@#-o&l(gfbkve6hpw&52'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+LOGIN_URL = (
+    '/login/',
+)
 
 
 # Application definition

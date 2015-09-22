@@ -38,7 +38,7 @@ $('.floor-nav > li > a').on('click', function () {
 	var floor = this.id;
 	// console.log("floor, floor: " + floor);
 	$.ajax({
-		url: "/monitor/floor_change/",
+		url: "/monitor/change_floor/",
 		type: "POST",
 		data : {
 			'csrfmiddlewaretoken': '{{ csrf_token }}',

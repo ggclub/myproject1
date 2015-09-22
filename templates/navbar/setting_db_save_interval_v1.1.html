@@ -1,0 +1,73 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<div class="setting-db-save-interval">
+<form class="form" id="setting-save-interval-form">
+	<div class="form-group">
+		<label for="savetime">데이터 저장 주기를 설정합니다.</label><br>
+		{# 라디오버튼 10/30/60분 #}
+		<input type="radio" name="savetime" value="10"> 10분<br>
+		<input type="radio" name="savetime" value="30"> 30분<br>
+		<input type="radio" name="savetime" value="60"> 60분<br>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-default" id="apply">적용</button>
+	</div>
+</form>
+</div>
+
+<script type="text/javascript">
+$('#setting-save-interval-form').on('submit', function() {
+	var savetime = $('input:radio[name=savetime]:checked').val();
+	if(typeof(savetime) == 'undefined'){
+		alert("데이터 저장 주기를 선택해주세요");
+		return false;
+	}
+	$.ajax({
+		url: "/monitor/set_db_save_interval_confirm/",
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'savetime': savetime,
+		},
+		success: function(data){
+			alert("데이터 저장 주기를 " + savetime + "분으로 설정하였습니다.");
+			$('.content').empty();
+
+			// 전체화면 선택 이펙트
+			$('#nav-mode').attr('src', "{% static 'navbar/mode/auto-cooling.jpg' %}");
+			clickFullscreen();
+			// 내용 갱신
+			$('.content').html("<div class='container' id='container'>" + data + "</div>");
+			// $('.content').append(data);
+			// $('.content').append("</div>");
+
+			// 초기 세팅
+			var btns = $('.btn-status');
+			$.each(btns, function(i, val) {
+				// alert(val.value);
+				if(val.innerText === "OFF") {
+					$(this).removeClass('status-on');
+					$(this).addClass('status-off');
+				} else if (val.innerText === "ON") {
+					$(this).removeClass('status-off');
+					$(this).addClass('status-on');
+				}
+				$(this).attr('disabled', true);
+				$(this).removeClass('btn-default');
+			});
+			$.each($('.hp-status, btn-cp'), function(i, val) {
+				if(val.innerText === "OFF"){
+					$(this).removeClass('status-on');
+					$(this).addClass('status-off');
+				} else {
+					$(this).removeClass('status-off');
+					$(this).addClass('status-on');
+				}
+				$(this).attr('disabled', true);
+				$(this).removeClass('btn-default');
+			});
+		}
+	});
+	return false;
+});
+</script>

@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<head>
+	<meta charset="utf-8">
+	<script src="{% static "jquery/jquery-1.11.3.min.js" %}"></script>
+	<script src="{% static "bootstrap-3.3.4-dist/js/bootstrap.min.js" %}"></script>
+	<link rel="stylesheet" href="{% static "bootstrap-3.3.4-dist/css/bootstrap.min.css" %}">
+	<link rel="stylesheet" href="{% static "navbar/setting-save-interval.css" %}">
+</head>
+<body>
+<div class="content pos-abs">
+	<div class="div-radio pos-abs">
+		<input type="radio" name="interval" value="10">
+		<input type="radio" name="interval" value="30">
+		<input type="radio" name="interval" value="60">
+	</div>
+	<div class="div-ok pos-abs">
+		<img id="ok" src="{% static "navbar/ok.png" %}">
+	</div>
+</div>
+</body>
+
+
+

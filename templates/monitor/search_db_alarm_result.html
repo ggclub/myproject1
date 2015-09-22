@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+
+<table class="table table-bordered table-result">
+	<thead id="query-title">
+		<tr>
+			<td class="result-class"><b>분류</b></td>
+			<td class="result-location"><b>발생 위치</b></td>
+			<td class="result-state"><b>경보 상태</b></td>
+			<td class="result-occur"><b>발생 시각</b></td>
+			<td class="result-closed"><b>해제 시각</b></td>
+		</tr>
+	</thead>
+	<tbody id="query-result">
+		{% for alarm in database_list %}
+		<tr>
+			<td class="result-alarm">{{ alarm.get_classification_display }}</td>
+			<td class="result-alarm">{{ alarm.get_location_display }}</td>
+			<td class="result-alarm">{{ alarm.get_state_display }}</td>
+			<td class="result-datetime">{{ alarm.occurTime|date:"Y-m-d H:i" }}</td>
+			<td class="result-datetime">{{ alarm.closedTime|date:"Y-m-d H:i" }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div id="found" style="display:none;">{{ count }}</div>

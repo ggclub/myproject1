@@ -6,28 +6,31 @@
 	
 	<link rel="stylesheet" href="{% static "bootstrap-3.3.4-dist/css/bootstrap.css" %}">
 	<link rel="stylesheet" href="{% static "base/base.css" %}" type="text/css">
-	<link rel="stylesheet" href="{% static "base/navbar.css" %}" type="text/css">
+	<link rel="stylesheet" href="{% static "navbar/navbar.css" %}" type="text/css">
 	<link rel="stylesheet" href="{% static "monitor/index.css" %}" type="text/css">
-	<link rel="stylesheet" href="{% static "jquery/jquery-ui.min.css" %}" type="text/css">
+	{# 달력 #}
+	{# <link rel="stylesheet" href="{% static "jquery/jquery-ui.min.css" %}" type="text/css"> #}
 	<link rel="shortcut icon" href="{% static "favicon.ico" %}">
 
 	<script src="{% static "jquery/jquery-1.11.3.min.js" %}"></script>
-	<script src="{% static "jquery/jquery-ui.min.js" %}"></script>
-	<script src="{% static "jquery/jquery-dateFormat.min.js" %}"></script>
+	{# 달력 #}
+	{# <script src="{% static "jquery/jquery-ui.min.js" %}"></script> #}
+	{# <script src="{% static "jquery/jquery-dateFormat.min.js" %}"></script> #}
 	<script src="{% static "bootstrap-3.3.4-dist/js/bootstrap.min.js" %}"></script>
-	<script src="{% static "JSON-js-master/json2.js" %}"></script>
+	{# ?? excel 때문에 필요한가? 기억이 안나네... #}
+	{# <script src="{% static "JSON-js-master/json2.js" %}"></script> #}
 
 	{% block script %}{% endblock %}
 	{% block header %}{% endblock %}
 	<title>{% block title %}{% endblock %}</title>  	
 </head>
 <body class="body">
-	<div id='ajax-loader'>
-		<img src="{% static 'base/ajax-loader.gif' %}">
-	</div>
 	<div class="navbar">
 		{% block navbar %}{% endblock %}
 	</div>
+	{# <div id='ajax-loader'> #}
+		{# <img src="{% static 'monitor/ajax-loader.gif' %}"> #}
+	{# </div> #}
 	<div class="content">
 		{% block content %}{% endblock %}
 	</div>

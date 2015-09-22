@@ -1,0 +1,153 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<div class="movements-title pos-abs">
+	<p>ON {{ ciu_on_count }}</p>
+</div>
+<div class="unit-info pos-abs">
+	{% if ciu_nav == "f1" %}
+		{% include "monitor/unit-info-f1.html" %}
+	{% elif ciu_nav == "f2" %}
+		{% include "monitor/unit-info-f2.html" %}
+	{% elif ciu_nav == "f3" %}
+		{% include "monitor/unit-info-f3.html" %}
+	{% elif ciu_nav == "h1" %}
+		{% include "monitor/unit-info-h1.html" %}
+	{% elif ciu_nav == "h2" %}
+		{% include "monitor/unit-info-h2.html" %}
+	{% elif ciu_nav == "h3" %}
+		{% include "monitor/unit-info-h3.html" %}
+	{% elif ciu_nav == "h4" %}
+		{% include "monitor/unit-info-h4.html" %}
+	{% elif ciu_nav == "h5" %}
+		{% include "monitor/unit-info-h5.html" %}
+	{% elif ciu_nav == "h6" %}
+		{% include "monitor/unit-info-h6.html" %}
+	{% endif %}
+</div>
+<div class="slider pos-abs">
+	<table class="table-hp-ciu">
+		<tbody>
+		<tr>
+			<td>
+				<img class="hp-ciu" id="h1" src="{% static "monitor/right/hp1.png" %}">
+			</td>
+			<td>
+				<img class="hp-ciu" id="h2" src="{% static "monitor/right/hp2.png" %}">
+			</td>
+			<td>
+				<img class="hp-ciu" id="h3" src="{% static "monitor/right/hp3.png" %}">
+			</td>
+			<td>
+				<img class="hp-ciu" id="h4" src="{% static "monitor/right/hp4.png" %}">
+			</td>
+			<td>
+				<img class="hp-ciu" id="h5" src="{% static "monitor/right/hp5.png" %}">
+			</td>
+			<td>
+				<img class="hp-ciu" id="h6" src="{% static "monitor/right/hp6.png" %}">
+			</td>
+		</tbody>
+	</table>
+	<table class="table-floor">
+		<tbody>
+		<tr>
+			<td>
+				<img class="floor" id="f1" src="{% static "monitor/right/floor1.png" %}">
+			</td>
+			<td id="td2">
+				<img class="floor" id="f2" src="{% static "monitor/right/floor2.png" %}">
+			</td>
+			<td id="td3">
+				<img class="floor" id="f3" src="{% static "monitor/right/floor3.png" %}">
+			</td>
+		</tbody>
+	</table>
+</div>
+
+<script type="text/javascript">
+// 실내기 변경
+$('.hp-ciu').on('click', changeCiuHp);
+function changeCiuHp() {
+	var ciu_nav = this.id;
+	console.log(ciu_nav);
+	$.ajax({
+		url: "/monitor/change_ciu/",
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'ciu_nav': ciu_nav,
+		},
+		success: function(data){	
+			$("#right").html(data);
+			if (ciu_nav == "h1") {
+				$('#h1').attr('src', "{% static 'monitor/right/hp1-sel.png' %}");
+			} else if (ciu_nav == "h2") {
+				$('#h2').attr('src', "{% static 'monitor/right/hp2-sel.png' %}");
+			} else if (ciu_nav == "h3") {
+				$('#h3').attr('src', "{% static 'monitor/right/hp3-sel.png' %}");
+			} else if (ciu_nav == "h4") {
+				$('#h4').attr('src', "{% static 'monitor/right/hp4-sel.png' %}");
+			} else if (ciu_nav == "h5") {
+				$('#h5').attr('src', "{% static 'monitor/right/hp5-sel.png' %}");
+			} else {	// ciu_nav == h6
+				$('#h6').attr('src', "{% static 'monitor/right/hp6-sel.png' %}");
+			}
+		}
+	});
+	return false;
+}
+
+$('.floor').on('click', changeCiuFloor);
+function changeCiuFloor() {
+	var ciu_nav = this.id;
+	console.log(ciu_nav);
+	$.ajax({
+		url: "/monitor/change_ciu/",
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'ciu_nav': ciu_nav,
+		},
+		success: function(data){	
+			$("#right").html(data);
+			if (ciu_nav == "f1") {
+				$('#f1').attr('src', "{% static 'monitor/right/floor1-sel.png' %}");
+			} else if (ciu_nav == "f2") {
+				$('#f2').attr('src', "{% static 'monitor/right/floor2-sel.png' %}");
+			} else {	 // no == 3
+				$('#f3').attr('src', "{% static 'monitor/right/floor3-sel.png' %}");
+			}
+		}
+	});
+	return false;
+}
+
+
+
+// 실내기 층 변경
+// $('.slider > div > a').on('click', function () {
+// 	var floor = this.id;
+// 	// console.log("floor, floor: " + floor);
+// 	$.ajax({
+// 		url: "/monitor/change_ciu/",
+// 		type: "POST",
+// 		data : {
+// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
+// 			'floor': floor,
+// 		},
+// 		success: function(data){	
+// 			$("#right-bottom").html(data);
+// 			$('.fl-selected').removeClass('fl-selected');
+// 			$('.floor-nav').find('#'+floor).addClass('fl-selected');
+// 			if (floor == "1") {
+// 				$('.unit-info').css('background-image', "url({% static 'monitor/right/ciu-1F.png' %})");
+// 			} else if (floor == "2") {
+// 				$('.unit-info').css('background-image', "url({% static 'monitor/right/ciu-2F.png' %})");
+// 			} else {	 // floor == 3
+// 				$('.unit-info').css('background-image', "url({% static 'monitor/right/ciu-3F.png' %})");
+// 			}
+// 		}
+// 	});
+// 	return false;
+// });
+</script>

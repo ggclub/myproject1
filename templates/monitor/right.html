@@ -1,0 +1,95 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<div class="movements-title pos-abs">
+	<p>ON {{ on_total }}</p>
+</div>
+<div class="unit-info pos-abs">
+	{% if ciu_nav == "f1" %}
+		{% include "monitor/unit-info-f1.html" %}
+	{% elif ciu_nav == "f2" %}
+		{% include "monitor/unit-info-f2.html" %}
+	{% elif ciu_nav == "f3" %}
+		{% include "monitor/unit-info-f3.html" %}
+	{% elif ciu_nav == "h1" %}
+		{% include "monitor/unit-info-h1.html" %}
+	{% elif ciu_nav == "h2" %}
+		{% include "monitor/unit-info-h2.html" %}
+	{% elif ciu_nav == "h3" %}
+		{% include "monitor/unit-info-h3.html" %}
+	{% elif ciu_nav == "h4" %}
+		{% include "monitor/unit-info-h4.html" %}
+	{% elif ciu_nav == "h5" %}
+		{% include "monitor/unit-info-h5.html" %}
+	{% elif ciu_nav == "h6" %}
+		{% include "monitor/unit-info-h6.html" %}
+	{% else %} {# total #}
+		{% include "monitor/unit-total.html" %}
+	{% endif %}
+</div>
+<div class="slider pos-abs">
+	<div class="div-hp pos-abs">
+		<img class="hp-ciu" id="h1" src="{% static "monitor/right/hp1.png" %}">
+		<img class="hp-ciu" id="h2" src="{% static "monitor/right/hp2.png" %}">
+		<img class="hp-ciu" id="h3" src="{% static "monitor/right/hp3.png" %}">
+		<img class="hp-ciu" id="h4" src="{% static "monitor/right/hp4.png" %}">
+		<img class="hp-ciu" id="h5" src="{% static "monitor/right/hp5.png" %}">
+		<img class="hp-ciu" id="h6" src="{% static "monitor/right/hp6.png" %}">
+	</div>
+	<div class="div-fl pos-abs">
+		<img class="floor ciu-sel" id="f1" src="{% static "monitor/right/floor1-sel.png" %}">
+		<img class="floor" id="f2" src="{% static "monitor/right/floor2.png" %}">
+		<img class="floor" id="f3" src="{% static "monitor/right/floor3.png" %}">
+	</div>
+	<div class="div-total pos-abs">
+		<p id="total"><b>전&nbsp; &nbsp; &nbsp;체</b></p>
+	</div>
+</div>
+
+<script type="text/javascript">
+// 실내기 변경
+$('.hp-ciu, .floor, #total').on('click', changeCiu);
+function changeCiu() {
+	var ciu_nav = this.id;
+	// console.log(ciu_nav);
+	$.ajax({
+		url: "/monitor/change_ciu/",
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'ciu_nav': ciu_nav,
+		},
+		success: function(data){	
+			$("#right").html(data);
+			$('#f1').attr('src', "{% static 'monitor/right/floor1.png' %}");
+
+			$('.div-hp').find('.ciu-sel').removeClass('ciu-sel');
+			$('.div-fl').find('.ciu-sel').removeClass('ciu-sel');
+			$('#total').css('color', '#e2e4e3');
+
+			if (ciu_nav == "h1") {
+				$('#h1').addClass('ciu-sel').attr('src', "{% static 'monitor/right/hp1-sel.png' %}");
+			} else if (ciu_nav == "h2") {
+				$('#h2').addClass('ciu-sel').attr('src', "{% static 'monitor/right/hp2-sel.png' %}");
+			} else if (ciu_nav == "h3") {
+				$('#h3').addClass('ciu-sel').attr('src', "{% static 'monitor/right/hp3-sel.png' %}");
+			} else if (ciu_nav == "h4") {
+				$('#h4').addClass('ciu-sel').attr('src', "{% static 'monitor/right/hp4-sel.png' %}");
+			} else if (ciu_nav == "h5") {
+				$('#h5').addClass('ciu-sel').attr('src', "{% static 'monitor/right/hp5-sel.png' %}");
+			} else if (ciu_nav == "h6") {	
+				$('#h6').addClass('ciu-sel').attr('src', "{% static 'monitor/right/hp6-sel.png' %}");
+			} else if (ciu_nav == "f1") {
+				$('#f1').addClass('ciu-sel').attr('src', "{% static 'monitor/right/floor1-sel.png' %}");
+			} else if (ciu_nav == "f2") {
+				$('#f2').addClass('ciu-sel').attr('src', "{% static 'monitor/right/floor2-sel.png' %}");
+			} else if (ciu_nav == "f3") {
+				$('#f3').addClass('ciu-sel').attr('src', "{% static 'monitor/right/floor3-sel.png' %}");
+			} else {
+				// total information
+				$('#total').css('color', 'rgb(241, 150, 0)');
+			}
+		}
+	});
+	return false;
+}
+</script>

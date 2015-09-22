@@ -1,9 +1,8 @@
+{% extends "monitor/database_base.html" %}
 {% load staticfiles %}
-<!DOCTYPE HTML> 
+{% block content %}
 <div class="container-search-db">
 <div class="conditions">
-	{# op_mode, temp_mode #}
-	<div style="display:none;"><p id='operation-mode'>{{ op_mode }}</p><p id='temperature-mode'>{{ temp_mode }}</p></div>
 	<table class="table table-bordered table-conditions" id="search-conditions">
 		<tr>
 			<td rowspan="2" style="vertical-align: middle;"><b>검색조건</b></td>
@@ -20,16 +19,18 @@
 		<button class="btn-search-db">검색</button>
 		<button class='btn-excel' onclick='Result2excel();'><img src="{% static "monitor/excel.png" %}" width="20"> 저장</button>
 	</div>
-	<table class="table table-bordered table-conditions" id="show-conditions">
-		<tr>
-			<td>
-				<input type="radio" name='power' value='cur' onclick="CheckRadioValue();"><p>순시전력량</p>
-			</td>
-			<td>
-				<input type="radio" name='power' value='int' onclick="CheckRadioValue();"><p>적산전력량</p>
-			</td>
-		</tr>
-	</table>
+	<div class="cur-int">
+		<table class="table table-bordered table-conditions" id="show-conditions">
+			<tr>
+				<td>
+					<input type="radio" name='power' value='cur' onclick="CheckRadioValue();"> 순시전력량
+				</td>
+				<td>
+					<input type="radio" name='power' value='int' onclick="CheckRadioValue();"> 적산전력량
+				</td>
+			</tr>
+		</table>
+	</div>
 	{# <div style="display:inline; float:right;"> #}
 		{# <button class="btn-show-conditions">확인</button> #}
 	{# </div> #}
@@ -67,8 +68,6 @@ $(document).ready(function() {
 
 // 검색 버튼 클릭
 $('.btn-search-db').on('click', function() {
-	var opMode = $('#operation-mode').text();
-	var tempMode = $('#temperature-mode').text();
 	var startDate = $('#datepicker1').val();
 	var endDate = $('#datepicker2').val();
 	var name = $('select[name=name] option:selected').val();
@@ -78,7 +77,6 @@ $('.btn-search-db').on('click', function() {
 		type: "POST",
 		data : {
 			'csrfmiddlewaretoken': '{{ csrf_token }}',
-			'opMode': opMode,
 			'startDate': startDate,
 			'endDate': endDate,
 			'name': name,
@@ -93,7 +91,7 @@ $('.btn-search-db').on('click', function() {
 	return false;
 });
 
-// 순시유량 적산유량 check
+// 순시전력 적산전력량 check
 function CheckRadioValue() {
 	var radio = $(":radio[name=power]:checked").val();
 	if(radio == 'cur') {
@@ -175,10 +173,11 @@ function Result2excel() {
 		complete: function() {  },
 		success: function(data){
 			$('#ajax-loader').hide();
-			window.location.href = 'monitor/download_result/' + data.obj_type + '/';
+			window.location.pathname = 'monitor/download_result/' + data.obj_type + '/';
 		}
 	});
 	return false;
 }
 
 </script>
+{% endblock %}

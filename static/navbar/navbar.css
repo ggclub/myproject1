@@ -1,0 +1,71 @@
+.navbar {
+	background-image: url("nav-bar.jpg");
+	min-height: 167px;
+	margin-bottom: 0;
+	border: none;
+}
+
+/* 자동 수동 모드 */
+/* 전광판 */
+.navbar-now {
+	position: absolute;
+	display: inline;
+	top: 108px;
+	left: 75px;
+}
+#nav-mode {
+	width: 276px;
+	height: 44px;
+}
+/* 자동 수동 모드 선택 */
+.mode-select {
+	margin: 0px 17px;
+}
+.mode-select:hover {
+	cursor: pointer;
+}
+
+/* 메뉴 */
+.navbar-menu {
+	position: absolute;
+	top: 107px;
+	left: 755px;
+	width: 680px;
+}
+.menu {
+	display: inline;
+	margin-right: 33px;
+}
+.menu:hover {
+	cursor: pointer;
+}
+
+/* Database 메뉴 */
+.navbar-search-db {
+	top: 181px;
+	left: 797px;
+	width: 600px;
+	font-family: "Malgun Gothic";
+}
+.none {
+	display: none;
+}
+.nav-db {
+	position: relative;
+	display: inline;
+	z-index: 123;
+}
+.nav-db:hover {
+	cursor: pointer;
+}
+#nav-db-search:hover {
+	cursor: pointer;
+}
+
+
+
+
+
+/*#div-fullscreen, #div-search-db, #div-manage-alarm, #div-manual {
+	height: 14px;
+}*/

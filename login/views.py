@@ -32,7 +32,8 @@ def index(request):
 				login(request, user)
 
 				if not request.POST.get('remember', None):
-					request.session.set_expiry(0)
+					# request.session.set_expiry(0)
+					pass
 
 
 				state = "Login success."

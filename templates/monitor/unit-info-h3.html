@@ -1,0 +1,67 @@
+{% load staticfiles %}
+<table class="ciu">
+<tbody><tr>
+	{# 조정실 #}
+	{% if us.0.switch == "ON" %}
+		<td style="background-image: url('{% static 'monitor/right/h3/1-on.png' %}');">
+			{{ us.0.temperature }}
+		</td>
+	{% else %}
+		<td style="background-image: url('{% static 'monitor/right/h3/1-off.png' %}');">
+			{{ us.0.temperature }}
+		</td>
+	{% endif %}
+	{# 준비실 #}
+	{% if us.1.switch == "ON" %}
+		<td style="background-image: url('{% static 'monitor/right/h3/2-on.png' %}');">
+			{{ us.1.temperature }}
+		</td>
+	{% else %}
+		<td style="background-image: url('{% static 'monitor/right/h3/2-off.png' %}');">
+			{{ us.1.temperature }}
+		</td>
+	{% endif %}
+	{# 면장실 #}
+	{% if us.2.switch == "ON" %}
+		<td style="background-image: url('{% static 'monitor/right/h3/3-on.png' %}');">
+			{{ us.2.temperature }}
+		</td>
+	{% else %}
+		<td style="background-image: url('{% static 'monitor/right/h3/3-off.png' %}');">
+			{{ us.2.temperature }}
+		</td>
+	{% endif %}
+</tr>
+<tr>
+	{# 교육실1 #}
+	{% if us.3.switch == "ON" %}
+		<td style="background-image: url('{% static 'monitor/right/h3/4-on.png' %}');">
+			{{ us.3.temperature }}
+		</td>
+	{% else %}
+		<td style="background-image: url('{% static 'monitor/right/h3/4-off.png' %}');">
+			{{ us.3.temperature }}
+		</td>
+	{% endif %}
+	{# 교육실2 #}
+	{% if us.4.switch == "ON" %}
+		<td style="background-image: url('{% static 'monitor/right/h3/5-on.png' %}');">
+			{{ us.4.temperature }}
+		</td>
+	{% else %}
+		<td style="background-image: url('{% static 'monitor/right/h3/5-off.png' %}');">
+			{{ us.4.temperature }}
+		</td>
+	{% endif %}
+	{# 교육실3 #}
+	{% if us.5.switch == "ON" %}
+		<td style="background-image: url('{% static 'monitor/right/h3/6-on.png' %}');">
+			{{ us.5.temperature }}
+		</td>
+	{% else %}
+		<td style="background-image: url('{% static 'monitor/right/h3/6-off.png' %}');">
+			{{ us.5.temperature }}
+		</td>
+	{% endif %}
+</tr></tbody>
+</table>

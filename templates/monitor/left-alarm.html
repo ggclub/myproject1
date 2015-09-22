@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<div class="alarm-left pos-abs">
+	{% if error_msg %}
+	<img id="alarm-left" src="{% static "monitor/alarm/alarm-status-active.png" %}">
+	{% else %}
+	<img id="alarm-left" src="{% static "monitor/alarm/alarm-status.png" %}">
+	{% endif %}
+</div>
+<div class="alarm-content pos-abs">
+	<table class="error-msg">
+		<tbody>
+		<tr>
+			{# <td>{{ forloop.counter }}</td> #}
+			<td>{{ error_msg.0.status }}</td> 
+			<td>{{ error_msg.0.location }}</td>
+			<td>{{ error_msg.0.OT }}</td> 
+			{# <td>{{ error.CT }}</td> #}
+		</tr>
+		</tbody>
+	</table>
+
+</div>
+<div class="alarm-right pos-abs">
+	{% if error_msg %}
+	<img id="alarm-right" src="{% static "monitor/alarm/alarm-off-active.png" %}">
+	{% else %}
+	<img id="alarm-right" src="{% static "monitor/alarm/alarm-off.png" %}">
+	{% endif %}
+
+</div>

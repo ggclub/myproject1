@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+
+<table class="table table-bordered table-result">
+	<thead id="query-title">
+		<tr>
+			<td class="result-datetime" rowspan="2"><b>시간</b></td>
+			<td class="result-tw1" colspan="2"><b>관정센서 1 </b></td>
+			<td class="result-tw2" colspan="2"><b>관정센서 2 </b></td>
+			<td class="result-tw3" colspan="2"><b>관정센서 3 </b></td>
+			<td class="result-tw4" colspan="2"><b>관정센서 4 </b></td>
+		</tr>
+		<tr>
+		{% for i in 1234|make_list %}
+			<td class="result-tw{{ i }}">수위</td>
+			<td class="result-tw{{ i }}">온도</td>
+		{% endfor %}
+		</tr>
+	</thead>
+	<tbody id="query-result">
+		{% for tw in database_list %}
+		<tr>
+			<td class="result-datetime">{{ tw.dateTime|date:"Y-m-d H:i" }}</td>
+			<td class="result-tw1">{{ tw.T1level }}</td>
+			<td class="result-tw1">{{ tw.T1temp }}</td>
+			<td class="result-tw2">{{ tw.T2level }}</td>
+			<td class="result-tw2">{{ tw.T2temp }}</td>
+			<td class="result-tw3">{{ tw.T3level }}</td>
+			<td class="result-tw3">{{ tw.T3temp }}</td>
+			<td class="result-tw4">{{ tw.T4level }}</td>
+			<td class="result-tw4">{{ tw.T4temp }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div id="found" style="display:none;">{{ count }}</div>

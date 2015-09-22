@@ -1,21 +1,20 @@
+{% load staticfiles %}
 <!DOCTYPE HTML>
-{# <div class="container"> #}
-	<div style="display:none;"><p id='operation-mode'>{{ op_mode }}</p><p id='temperature-mode'>{{ temp_mode }}</p></div>
-	<div class="left" id="left">
-		<div class="left-status" id="left-status">
-			{% include "monitor/left-status.html" %}
-		</div>
-		<div class="left-footer" id="left-footer">
-
-		</div>
+<div class="left pos-abs" id="left">
+	<div class="left-status pos-abs" id="left-status">
+		{% include "monitor/left-status.html" %}
 	</div>
-	<div class="right">
-		<div class="right-top" id="right-top">
-			{% include "monitor/right_top.html" %}
-		</div>
-		<div class="right-bottom" id="right-bottom">
-			{% include "monitor/right_bottom.html" %}
-		</div>
+	<div class="left-footer pos-abs" id="left-footer">
+		{% include "monitor/left-alarm.html" %}
 	</div>
-{# </div> #}
+</div>
+<div class="right pos-abs" id="right">
+	{% include "monitor/right.html" %}
+</div>
+	{# <div class="right-top" id="right-top"> #}
+		{# {% include "monitor/right_top.html" %} #}
+	{# </div> #}
+	{# <div class="right-bottom" id="right-bottom"> #}
+		{# {% include "monitor/right_bottom.html" %} #}
+	{# </div> #}
 

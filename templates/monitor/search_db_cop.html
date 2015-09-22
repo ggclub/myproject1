@@ -1,0 +1,133 @@
+{% extends "monitor/database_base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container-search-db">
+<div class="conditions">
+	<table class="table table-bordered table-conditions" id="search-conditions">
+		<tr>
+			<td rowspan="2" style="vertical-align: middle;"><b>검색조건</b></td>
+			<td rowspan="1">날짜 <input type="text" id="datepicker1" class="datepicker"> ~ <input type="text" id="datepicker2" class="datepicker">
+			</a></td>
+		</tr>
+		<tr class="search-conditions-detail">
+			<td>
+				<div>COP</div>
+			</td>
+		</tr>
+	</table>
+	<div style="display:inline;">
+		<button class="btn-search-db">검색</button>
+		<button class='btn-excel' onclick='Result2excel();'><img src="{% static "monitor/excel.png" %}" width="20"> 저장</button>
+	</div>
+
+	{# <div style="display:inline; float:right;"> #}
+		{# <button class="btn-show-conditions">확인</button> #}
+	{# </div> #}
+</div>
+
+<div class="search-results">
+	{% include 'monitor/search_db_cop_result.html' %}
+</div>
+</div>
+
+
+<script>
+// 달력 한글화
+$(function() {
+	$( ".datepicker" ).datepicker({
+		dateFormat: 'yy-mm-dd',
+		prevText: '이전 달',
+		nextText: '다음 달',
+		monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		dayNames: ['일','월','화','수','목','금','토'],
+		dayNamesShort: ['일','월','화','수','목','금','토'],
+		dayNamesMin: ['일','월','화','수','목','금','토'],
+		showMonthAfterYear: true,
+		yearSuffix: '년',
+		dateFormat: 'yy-mm-dd'
+	});
+	$(".datepicker").datepicker("setDate", new Date());
+});
+
+
+// 검색 버튼 클릭
+$('.btn-search-db').on('click', function() {
+	var startDate = $('#datepicker1').val();
+	var endDate = $('#datepicker2').val();
+	var name = $('select[name=name] option:selected').val();
+
+	$.ajax({
+		url: '/monitor/search_db_cop_result/',
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'startDate': startDate,
+			'endDate': endDate,
+			'name': name,
+		},
+		beforeSend: function() { $('#ajax-loader').show(); },
+		complete: function() { $('#ajax-loader').hide(); },
+		success: function(data){
+			$('.search-results').html(data);
+		}
+	});
+	return false;
+});
+
+
+function Result2excel() {
+	var found = $('#found').text();
+	if(found == '0' || found == ''){
+		alert('검색된 내용이 없습니다.');
+		return;
+	}
+	var numRow = parseInt(found);
+	var numCol = 2;
+
+
+	console.log(numRow, numCol);
+
+
+	var columns = [];
+	$('#query-title tr').find('td').each(function (i) {
+		columns.push($(this).text());
+	});
+	// console.log(columns);
+
+	var rows = new Array(numRow);
+	for (var i = 0; i < numRow; i++){
+		rows[i] = new Array(numCol);
+	}
+
+	$('#query-result tr').map(function (i) {
+		$(this).find('td').each(function (j) {
+			rows[i][j] = $(this).text();
+		});
+	});
+	// console.log(rows);
+
+	$.ajax({
+		url: '/monitor/search_db_excel/',
+		type: "POST",
+		dataType: "json",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'columns': JSON.stringify(columns),
+			'rows' : JSON.stringify(rows),
+			'numRow' : numRow,
+			'numCol' : numCol,
+			'objType' : 'ciu',
+		},
+		beforeSend: function() { $('#ajax-loader').show(); },
+		complete: function(data) { $('#ajax-loader').hide(); },
+		success: function(data){
+			$('#ajax-loader').hide();
+			window.location.pathname = 'monitor/download_result/' + data.obj_type + '/';
+		}
+	});
+	return false;
+}
+
+</script>
+{% endblock %}
