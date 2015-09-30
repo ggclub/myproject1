@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<head>
+	<meta charset="utf-8">
+	<script src="{% static "jquery/jquery-1.11.3.min.js" %}"></script>
+	<script src="{% static "bootstrap-3.3.4-dist/js/bootstrap.min.js" %}"></script>
+	<link rel="stylesheet" href="{% static "bootstrap-3.3.4-dist/css/bootstrap.min.css" %}">
+	<link rel="stylesheet" href="{% static "monitor/alarm/alarm.css" %}">
+</head>
+<body>
+	<div class="content">
+	<table class="table table-bordered alarm-status bold">
+		<thead>
+			<tr>
+				<td>경보 종류</td>
+				<td>발생 위치</td>
+				<td>발생 시각</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for err in error_msg %}
+			<tr>
+				<td>{{ err.status }}</td>
+				<td>{{ err.location }}</td>
+				<td>{{ err.OT }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	</div>
+</body>

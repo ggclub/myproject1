@@ -1,9 +1,16 @@
 {% load staticfiles %}
+{% if error_msg %}
+<div id="sound">
+	<audio autoplay="autoplay" loop="loop">
+		<source  type="audio/wav" src="{% static 'monitor/alarm/alarm.wav' %}">
+	</audio>
+</div>
+{% endif %}
 <div class="alarm-left pos-abs">
 	{% if error_msg %}
-	<img id="alarm-left" src="{% static "monitor/alarm/alarm-status-active.png" %}">
+	<img id="alarm-status-active" src="{% static "monitor/alarm/alarm-status-active.png" %}">
 	{% else %}
-	<img id="alarm-left" src="{% static "monitor/alarm/alarm-status.png" %}">
+	<img id="alarm-status" src="{% static "monitor/alarm/alarm-status.png" %}">
 	{% endif %}
 </div>
 <div class="alarm-content pos-abs">
@@ -11,9 +18,10 @@
 		<tbody>
 		<tr>
 			{# <td>{{ forloop.counter }}</td> #}
-			<td>{{ error_msg.0.status }}</td> 
-			<td>{{ error_msg.0.location }}</td>
-			<td>{{ error_msg.0.OT }}</td> 
+			{# <td>{{ error_msg }}</td> #}
+			<td id="status">{{ error_msg.0.status }}</td> 
+			<td id="location">{{ error_msg.0.location }}</td>
+			<td id="ot">{{ error_msg.0.OT }}</td> 
 			{# <td>{{ error.CT }}</td> #}
 		</tr>
 		</tbody>
@@ -22,9 +30,23 @@
 </div>
 <div class="alarm-right pos-abs">
 	{% if error_msg %}
-	<img id="alarm-right" src="{% static "monitor/alarm/alarm-off-active.png" %}">
+	<img id="alarm-sound-active" src="{% static "monitor/alarm/alarm-off-active.png" %}">
 	{% else %}
-	<img id="alarm-right" src="{% static "monitor/alarm/alarm-off.png" %}">
+	<img id="alarm-sound" src="{% static "monitor/alarm/alarm-off.png" %}">
+	<script type="text/javascript">stopsound = false;</script>
 	{% endif %}
 
 </div>
+
+<script type="text/javascript">
+$('#alarm-status-active').on('click', clickAlarmStatus);
+var popAlarmStatus;
+function clickAlarmStatus () {
+	popAlarmStatus = window.open('/monitor/alarm_status/','pop',
+		'width=350,height=208,left=400,top=260,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=yes');
+		popAlarmStatus.resizeTo(800,600);
+}
+$('#alarm-sound-active').on('click', function () {
+	stopsound = true;
+});
+</script>

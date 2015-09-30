@@ -46,4 +46,6 @@ urlpatterns = [
 	url(r'^search_db_alarm_result/$', search_db_alarm_result, name='search_db_alarm_result'),
 	# 결과 다운로드
 	url(r'^download_result/(?P<o>.*)/$', download_result, name='download_result'),
+	# 경보 알람
+	url(r'^alarm_status/$', alarm_status, name='alarm_status'),
 ]

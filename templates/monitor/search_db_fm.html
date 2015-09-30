@@ -11,19 +11,17 @@
 		</tr>
 		<tr class="search-conditions-detail">
 			<td>
-				<div>유량계</div>
-			</td>
-		</tr>
-		<tr class="search-conditions-detail" style="display:none;">
-			<td>
-				<div>순환펌프명
-				<select name="name" id="name">
-					<option value='0'>(전체)</option>
-					<option value='1'>순환 IN</option>
-					<option value='2'>순환 OUT</option>
-					<option value='3'>심정 IN</option>
-					<option value='4'>심정 OUT</option>
-				</select></div>
+				<div class="select">
+					<select name="type" id="type">
+						<option value="fm">유량계</option>
+						<option value="hp">히트펌프</option>
+						<option value="cp">순환펌프</option>
+						<option value="dwp">심정펌프</option>
+						<option value="power">전력량계</option>
+						<option value="cop">COP</option>
+						<option value="tw">관측센서</option>
+					</select>
+				</div>
 			</td>
 		</tr>
 	</table>

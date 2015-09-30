@@ -1,4 +1,4 @@
-{% load staticfiles %}
+﻿{% load staticfiles %}
 <!DOCTYPE HTML>
 <head>
 	<meta charset="utf-8">
@@ -119,7 +119,9 @@ function keyupHz () {
 }
 
 // 확인
-$('#ok').on('click', function() {
+$('#ok').on('click', clickSetCpOk);
+function clickSetCpOk () {
+	var tempMode = "{{ temp_mode }}";
 	// 명령을 준 순환펌프
 	var cpOperating = $(':radio[name=cp]:checked').val();
 	// 순환펌프 1
@@ -148,8 +150,6 @@ $('#ok').on('click', function() {
 		type: "POST",
 		data: {
 			'csrfmiddlewaretoken': '{{ csrf_token }}',
-			'opMode' : opMode,
-			'tempMode' : tempMode,
 			'cpOperating' : cpOperating,
 			'cp1switch' : cp1switch,
 			'cp1hz' : cp1hz,
@@ -160,11 +160,48 @@ $('#ok').on('click', function() {
 		},
 		success: function(data) {
 			alert('설정 되었습니다.');
-			$('.container-control', window.parent.document).removeClass('show-spec');
-			$('#cp-setting-frame', window.parent.document).css('display', 'none');	
-			$('.container-control').html(data)
+			var parent = window.opener;
+			
+			// 순환펌프 버튼 변경
+			if (cpOperating == 1) {
+				if (cp1switch == "ON") {
+					parent.$('#cp-switch').attr('src', "{% static 'monitor/left/switch-on.jpg' %}");
+				} else {
+					parent.$('#cp-switch').attr('src', "{% static 'monitor/left/switch-off.jpg' %}");
+				}
+			} else {
+				if (cp2switch == "ON") {
+					parent.$('#cp-switch').attr('src', "{% static 'monitor/left/switch-on.jpg' %}");
+				} else {
+					parent.$('#cp-switch').attr('src', "{% static 'monitor/left/switch-off.jpg' %}");
+				}
+			}
+
+			// 순환펌프 프로펠러 변경
+			if (cpOperating == 1) {
+				if (cp1switch == "ON") {
+					if (tempMode == "CL"){
+						parent.$('.cp-status').attr('src', "{% static 'monitor/left/cp-on-cl.gif' %}");
+					} else {
+						parent.$('.cp-status').attr('src', "{% static 'monitor/left/cp-on-ht.gif' %}");
+					}
+				} else {
+					parent.$('.cp-status').attr('src', "{% static 'monitor/left/cp-off.png' %}");
+				}
+			} else {
+				if (cp2switch == "ON") {
+					if (tempMode == "CL"){
+						parent.$('.cp-status').attr('src', "{% static 'monitor/left/cp-on-cl.gif' %}");
+					} else {
+						parent.$('.cp-status').attr('src', "{% static 'monitor/left/cp-on-ht.gif' %}");
+					}
+				} else {
+					parent.$('.cp-status').attr('src', "{% static 'monitor/left/cp-off.png' %}");
+				}
+			}
+			window.close();
 		}
 	});
-	// return false;
-});
+	return false;
+}
 </script>

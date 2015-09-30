@@ -33,7 +33,7 @@
 	{% endif %}
 </tr>
 <tr>
-	{# 사무대기실 #}
+	{# 수유실 #}
 	{% if us.3.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/f1/4-on.png' %}');">
 			{{ us.3.temperature }}
@@ -53,7 +53,7 @@
 			{{ us.4.temperature }}
 		</td>
 	{% endif %}
-	{# 주민등록실 #}
+	{# 민원실1 #}
 	{% if us.5.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/f1/6-on.png' %}');">
 			{{ us.5.temperature }}
@@ -65,7 +65,7 @@
 	{% endif %}
 </tr>
 <tr>
-	{# 민원실1 #}
+	{# 민원실2 #}
 	{% if us.6.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/f1/7-on.png' %}');">
 			{{ us.6.temperature }}
@@ -75,7 +75,7 @@
 			{{ us.6.temperature }}
 		</td>
 	{% endif %}
-	{# 민원실2 #}
+	{# 민원실3 #}
 	{% if us.7.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/f1/8-on.png' %}');">
 			{{ us.7.temperature }}
@@ -85,7 +85,7 @@
 			{{ us.7.temperature }}
 		</td>
 	{% endif %}
-	{# 민원실3 #}
+	{# 민원실4 #}
 	{% if us.8.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/f1/9-on.png' %}');">
 			{{ us.8.temperature }}
@@ -107,7 +107,7 @@
 			{{ us.9.temperature }}
 		</td>
 	{% endif %}
-	{# 진료실 #}
+	{# 주민등록실 #}
 	{% if us.10.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/f1/11-on.png' %}');">
 			{{ us.10.temperature }}
@@ -129,7 +129,7 @@
 	{% endif %}
 </tr>
 <tr>
-	{# 수유실 #}
+	{# 진료실 #}
 	{% if us.12.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/f1/13-on.png' %}');">
 			{{ us.12.temperature }}
@@ -139,7 +139,7 @@
 			{{ us.12.temperature }}
 		</td>
 	{% endif %}
-	{# 회의실 #}
+	{# 사무대기실 #}
 	{% if us.13.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/f1/14-on.png' %}');">
 			{{ us.13.temperature }}

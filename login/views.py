@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+﻿#-*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
@@ -26,15 +26,13 @@ def index(request):
 			username = request.POST.get('username')
 			password = request.POST.get('password')
 
-			
+			# request.session.set_expiry(0)
 			user = authenticate(username=username, password=password)
 			if user is not None:
 				login(request, user)
 
-				if not request.POST.get('remember', None):
+				# if request.POST.get('remember', None):
 					# request.session.set_expiry(0)
-					pass
-
 
 				state = "Login success."
 				return index(request)

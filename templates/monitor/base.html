@@ -20,15 +20,16 @@ $('.btn-status').removeClass('btn-default');
 $('#cp-setting').attr('disabled', true);
 $('#cp-setting').removeClass('btn-default');
 
-function playSound(){
+function playSound () {
 	$('#sound').html(
-		'<audio autoplay="autoplay" loop="loop"><source src="{% static 'monitor/alarm.wav' %}" type="audio/wav" /></audio>'
+		'<audio autoplay="autoplay" loop="loop">'+
+		'<source type="audio/wav" src="{% static "monitor/alarm/alarm.wav" %}" />' +
+		'</audio>'
 		);
-	$('#error-msg > p').text('에러');
 }
-function stopSound(){
+var stopsound = false;
+function stopSound () {
 	$('#sound').html('');
-	$('#error-msg > p').text('정상');
 }
 function changePassword() {
 	// $.post("/monitor/change_password_page/", function(data) {
@@ -37,12 +38,18 @@ function changePassword() {
 }
 
 var displayTime = 3000;
-// var displayVar = setTimeout(function(){reloadDisplay();}, displayTime);
+var displayVar = setTimeout(function(){reloadDisplay();}, displayTime);
 function reloadDisplay() {
 	// 실내기 상태창 선택된 버튼 찾기
+	// 층
 	var ciu_nav = $('.div-fl').find('.ciu-sel').attr('id');
 	if (typeof(ciu_nav) == 'undefined') {
+		// 히트펌프
 		ciu_nav = $('.div-hp').find('.ciu-sel').attr('id');
+	}
+	if (typeof(ciu_nav) == 'undefined') {
+		// 전체
+		ciu_nav = "total";
 	}
 	// console.log(ciu_nav);
 	var src, srcSel;
@@ -96,12 +103,21 @@ function reloadDisplay() {
 			setTimeout(function(){reloadDisplay();}, displayTime);
 			// 전체화면
 			$('#container').html(data);
-
+			
 			// 실내기 상태창 맞추기
+			$('#total').css('color', '#e2e4e3');
 			$('.div-hp').find('.ciu-sel').removeClass('ciu-sel');
 			$('.div-fl').find('.ciu-sel').removeClass('ciu-sel');
 			$('.div-hp').find('#'+ciu_nav).addClass('ciu-sel').attr('src', srcSel);
 			$('.div-fl').find('#'+ciu_nav).addClass('ciu-sel').attr('src', srcSel);
+			if (ciu_nav == "total") {
+				// total information
+				$('#total').css('color', 'rgb(241, 150, 0)');
+			}
+
+			if (stopsound) {
+				$('#sound').html('');
+			}
 		},
 	}).fail(function() {
 		var dt = new Date();

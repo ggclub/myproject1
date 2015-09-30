@@ -36,12 +36,12 @@
 		<img class="hp-ciu" id="h6" src="{% static "monitor/right/hp6.png" %}">
 	</div>
 	<div class="div-fl pos-abs">
-		<img class="floor ciu-sel" id="f1" src="{% static "monitor/right/floor1-sel.png" %}">
+		<img class="floor" id="f1" src="{% static "monitor/right/floor1.png" %}">
 		<img class="floor" id="f2" src="{% static "monitor/right/floor2.png" %}">
 		<img class="floor" id="f3" src="{% static "monitor/right/floor3.png" %}">
 	</div>
 	<div class="div-total pos-abs">
-		<p id="total"><b>전&nbsp; &nbsp; &nbsp;체</b></p>
+		<p id="total" style="color: rgb(214,150,0);"><b>전&nbsp; &nbsp; &nbsp;체</b></p>
 	</div>
 </div>
 
@@ -60,7 +60,6 @@ function changeCiu() {
 		},
 		success: function(data){	
 			$("#right").html(data);
-			$('#f1').attr('src', "{% static 'monitor/right/floor1.png' %}");
 
 			$('.div-hp').find('.ciu-sel').removeClass('ciu-sel');
 			$('.div-fl').find('.ciu-sel').removeClass('ciu-sel');

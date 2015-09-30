@@ -27,3 +27,6 @@ input[type=radio] {
 	top: 225px;
 	left: 105px;
 }
+#ok:hover {
+	cursor: pointer;
+}

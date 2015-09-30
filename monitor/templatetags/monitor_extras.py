@@ -22,7 +22,7 @@ def multiply( value, arg ):
     '''
     try:
         value = int( value )
-        arg = float( arg )
+        arg = int( arg )
         if arg: return value * arg
     except: pass
     return ''

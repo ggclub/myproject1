@@ -83,3 +83,6 @@ div > .switch {
 	top: 244px;
 	left: 250px;
 }
+#ok:hover {
+	cursor: pointer;
+}

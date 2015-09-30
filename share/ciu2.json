@@ -1,13 +1,14 @@
 ﻿{
-  "datetime": "2015-08-07 18:52:51",
-  "rt_f2": 0.0,
-  "rt_total": 9.0,
+  "datetime": "2015-09-24 17:57:59",
+  "on_total": 0,
+  "temp_mode": "CL",
   "on_f2": 0,
-  "on_total": 2,
+  "rt_f2": 0.0,
+  "rt_total": 0.0,
   "us": [
     {
       "switch": "OFF",
-      "temperature": 33.0,
+      "temperature": 28.0,
       "set_temp": 18.0,
       "op_mode": "냉방",
       "air_flow": "강풍",
@@ -17,7 +18,7 @@
     },
     {
       "switch": "OFF",
-      "temperature": 29.5,
+      "temperature": 24.0,
       "set_temp": 18.0,
       "op_mode": "냉방",
       "air_flow": "강풍",
@@ -26,18 +27,18 @@
       "floor": 2
     },
     {
-      "switch": "ON",
-      "temperature": 31.0,
+      "switch": "OFF",
+      "temperature": 26.0,
       "set_temp": 18.0,
       "op_mode": "냉방",
       "air_flow": "강풍",
       "state": "정상",
-      "get_location_display": "홀(2층)",
+      "get_location_display": "2층 홀",
       "floor": 2
     },
     {
       "switch": "OFF",
-      "temperature": 30.0,
+      "temperature": 26.0,
       "set_temp": 18.0,
       "op_mode": "냉방",
       "air_flow": "강풍",
@@ -47,7 +48,27 @@
     },
     {
       "switch": "OFF",
-      "temperature": 32.0,
+      "temperature": 27.5,
+      "set_temp": 18.0,
+      "op_mode": "냉방",
+      "air_flow": "강풍",
+      "state": "정상",
+      "get_location_display": "교육실3",
+      "floor": 2
+    },
+    {
+      "switch": "OFF",
+      "temperature": 27.0,
+      "set_temp": 18.0,
+      "op_mode": "냉방",
+      "air_flow": "강풍",
+      "state": "정상",
+      "get_location_display": "교육실2",
+      "floor": 2
+    },
+    {
+      "switch": "OFF",
+      "temperature": 26.5,
       "set_temp": 18.0,
       "op_mode": "냉방",
       "air_flow": "강풍",
@@ -57,27 +78,7 @@
     },
     {
       "switch": "OFF",
-      "temperature": 31.0,
-      "set_temp": 18.0,
-      "op_mode": "냉방",
-      "air_flow": "강풍",
-      "state": "정상",
-      "get_location_display": "교육실2",
-      "floor": 2
-    },
-    {
-      "switch": "ON",
-      "temperature": 31.0,
-      "set_temp": 18.0,
-      "op_mode": "냉방",
-      "air_flow": "강풍",
-      "state": "정상",
-      "get_location_display": "교육실3",
-      "floor": 2
-    },
-    {
-      "switch": "ON",
-      "temperature": 29.0,
+      "temperature": 23.0,
       "set_temp": 18.0,
       "op_mode": "냉방",
       "air_flow": "강풍",
@@ -87,42 +88,42 @@
     },
     {
       "switch": "OFF",
-      "temperature": 30.5,
+      "temperature": 26.5,
       "set_temp": 18.0,
       "op_mode": "냉방",
       "air_flow": "강풍",
       "state": "정상",
-      "get_location_display": "농업인상담실1-1",
-      "floor": 2
-    },
-    {
-      "switch": "ON",
-      "temperature": 31.0,
-      "set_temp": 18.0,
-      "op_mode": "냉방",
-      "air_flow": "강풍",
-      "state": "정상",
-      "get_location_display": "농업인상담실1-2",
+      "get_location_display": "농업인상담실1",
       "floor": 2
     },
     {
       "switch": "OFF",
-      "temperature": 30.5,
+      "temperature": 28.0,
       "set_temp": 18.0,
       "op_mode": "냉방",
       "air_flow": "강풍",
       "state": "정상",
-      "get_location_display": "농업인상담실2-1",
+      "get_location_display": "농업인상담실2",
       "floor": 2
     },
     {
       "switch": "OFF",
-      "temperature": 32.0,
+      "temperature": 26.5,
       "set_temp": 18.0,
       "op_mode": "냉방",
       "air_flow": "강풍",
       "state": "정상",
-      "get_location_display": "농업인상담실2-2",
+      "get_location_display": "면대1",
+      "floor": 2
+    },
+    {
+      "switch": "OFF",
+      "temperature": 28.5,
+      "set_temp": 18.0,
+      "op_mode": "냉방",
+      "air_flow": "강풍",
+      "state": "정상",
+      "get_location_display": "면대2",
       "floor": 2
     }
   ]

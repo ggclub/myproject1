@@ -1,4 +1,4 @@
-.bold {
+﻿.bold {
 	font-weight: bold;
 }
 .pos-abs {
@@ -47,7 +47,7 @@
 
 /********************************* 실시간 정보 *********************************/
 .real-time-information {
-	top: 62px;
+	top: 61.5px;
 	left: 192px;
 	width: 114px;
 	height: 176px;
@@ -57,8 +57,11 @@
 }
 .table-real-time > tbody > tr > td {
 	padding: 9px;
+	height: 37px;
 }
-
+.table-real-time > tbody > tr > #p-cur {
+	padding: 8px;
+}
 /********************************* 히트펌프 *********************************/
 .heat-pump {
 	top: 16px;
@@ -130,6 +133,9 @@
 	top: 254px;
 	left: 1110px;
 }
+.CP-Flowmeter {
+	font-size: smaller;
+}
 .fm-dwp-he-in {
 	top: 422px;
 	left: 780px;
@@ -153,8 +159,8 @@
 }
 /********************************* 심정펌프 *********************************/
 .deepwell-pump {
-	top: 597px;
-	left: 65px;
+	top: 596px;
+	left: 64px;
 	width: 580px;
 	height: 75px;
 }
@@ -162,19 +168,19 @@
 	display: inline-table;
 	width: 73px;
 	height: 65px;
-	margin: 6px 8.5px 0px 59px;
+	margin: 5px 8.5px 0px 59px;
 	font-size: small;
 }
 .table-deepwell-pump > tbody > tr {
 	margin: 1px 0px;
 }
 .deepwell-pump-status {
-	top: 524px;
-	left: 114px;
+	top: 434px;
+	left: 110px;
 }
 .table-dwp-status {
 	display: inline-table;
-	margin-right: 102px;
+	margin-right: 95px;
 }
 
 /******************************** 경보창 *********************************/
@@ -183,27 +189,51 @@
 	width: 1398px;
 	height: 82px;
 }
+/* 경보음 */
+#sound {
+	display: none;
+}
+
+/* 경보 상태 버튼 */
 .alarm-left {
 	top: 12px;
 	left: 73px;
 }
+#alarm-status-active:hover {
+	cursor: pointer;
+}
+
+/* 경보 내용*/
 .alarm-content {
 	top: 37px;
-	left: 176px;
+	left: 177px;
 	width: 1066px;
 	height: 35px;
 }
 .error-msg {
 	border: none;
+	width: 1065px;
 	height: 33px;
-	margin-top: 32px;
 	margin-bottom: 0px;
 	text-align: center;
 }
+.error-msg > tbody > tr > #status {
+	width: 359px;
+}
+.error-msg > tbody > tr > #locatioin {
+	width: 384px;
+}
+.error-msg > tbody > tr > #ot {
+	width: 319px;
+}
 
+/* 경보음 해제 */
 .alarm-right {
 	top: 12px;
 	left: 1266px;
+}
+#alarm-sound-active:hover {
+	cursor: pointer;
 }
 
 /********************************* 실내기 ********************************/
@@ -278,7 +308,7 @@
 	width: 350px;
 }
 .div-total {
-	top: 133px;
+	top: 130px;
 	left: 227px;
 	width: 80px;
 }

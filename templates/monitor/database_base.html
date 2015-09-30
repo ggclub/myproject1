@@ -21,7 +21,7 @@
 		<img src="{% static 'monitor/ajax-loader.gif' %}">
 	</div>
 	<div class="content">
-			{% block content %}{% endblock %}
+		{% block content %}{% endblock %}
 	</div>
 </body>
 </html>
@@ -42,19 +42,10 @@
 // 	</div>
 // </div>
 
-// $('select[name=type]').on('change', function () {
-// 	var device = $(this).val();
-// 	$.ajax({
-// 		url: '/monitor/search_db_'+device + '/',
-// 		type: "POST",
-// 		data : {
-// 			'csrfmiddlewaretoken': '{{ csrf_token }}',
-// 		},
-// 		success: function(data){
-// 			$('.content').html(data);
-// 		}
-// 	});
-// 	return false;
-// });
+$('select[name=type]').on('change', selectDbType);
+function selectDbType () {
+	var device = $(this).val();
+	window.location.href = '/monitor/search_db_'+device + '/';
+}
 </script>
 

@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+﻿#-*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
@@ -28,7 +28,7 @@ flag_command = 0
 file_path = os.path.join(myproject.settings.BASE_DIR, 'share/')
 
 date_format = "%Y-%m-%d"				# db search
-datetime_format = "%Y-%m-%d %H:%M:%S"	# check if error exist
+datetime_format = "%Y-%m-%d %H:%M"			# check if error exist
 
 @csrf_exempt
 @login_required
@@ -37,35 +37,57 @@ def index(request):
 	request.session['name'] = 'admin'
 	# log.debug(str(request.session['name']))
 
-	log.debug("index: program started.")
+	log.debug("K-ATES program started.")
+
+	# sub program start
+	# AirconMonitor, DataSender
+	# sub_path = myproject.settings.BASE_DIR
+	# os.system("C:\Users\Admin\Documents\Django\myprojezct\AirconMonitor/AirconMonitor.exe")
+	# log.debug("AirconMonitoring program started")
+	# os.system("C:\Users\Admin\Documents\Django\myproject\LobbyDisplayer/DataSender.exe")
+	# log.debug("DataSender program started")
+
 	response_data = check_if_error_exist()
 	
 	# 실내기
-	ciu_nav = request.POST.get('ciu_nav','f1')
+	ciu_nav = request.POST.get('ciu_nav','total')
 	response_data.update({'ciu_nav':ciu_nav})
 	if ciu_nav[0] == "f":
 		response_data.update(controller.get_CIU_from_json(ciu_nav[1]))
-	else: # ciu_nav[0] == "h"
+	elif ciu_nav[0] == "h":
 		response_data.update(controller.get_CIU_on_HP_from_json(ciu_nav[1]))
+	else: # total
+		response_data.update(controller.get_CIU_total())
+	# 읽기 실패할 경우 읽을때까지 반복
+	while response_data["ciu_error"] != None:
+		if ciu_nav[0] == "f":
+			response_data.update(controller.get_CIU_from_json(ciu_nav[1]))
+		elif ciu_nav[0] == "h":
+			response_data.update(controller.get_CIU_on_HP_from_json(ciu_nav[1]))
+		else: # total
+			response_data.update(controller.get_CIU_total())
 	rt = response_data["rt_total"]
 
-	# 센서값 읽어오기
-	response_data.update(controller.read_data_from_json(rt))
-	while response_data["error"] != None:
-		response_data.update(controller.read_data_from_json(rt))
-
-	# 임시 COP
-	try:
-		COP = rt/response_data["power"]["currentPowerConsumption"]
-	except ZeroDivisionError:
-		COP = 0
-	response_data.update({"COP": COP})
+	# 냉난방모드 확인
+	temp_mode = response_data["temp_mode"]
+	old_temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
+	if temp_mode != old_temp_mode:
+		tm = TemperatureModeLogger(
+			dateTime=timezone.now(), tempMode=temp_mode
+			).save()
+	response_data.update({"temp_mode": temp_mode})
 
 	# 처음 프로그램 실행시 모드는 수동
 	response_data.update({"op_mode":"MN"})
 	oml = OperationModeLogger(
 		dateTime=timezone.now(), opMode="MN"
 	).save()
+
+	# 센서값 읽어오기
+	response_data.update(controller.read_data_from_json(rt))
+	while response_data["hmidata_error"] != None:
+		response_data.update(controller.read_data_from_json(rt))
+
 	# 처음 프로그램 실행시 hmi도 수동모드로 명령
 	controller.write_cmd()
 	log.debug("program start - Manual command")
@@ -94,7 +116,7 @@ def save_data(response_data):
 @login_required
 def reload_display(request):
 	###########################################
-	# 5초마다 갱신해서 왼쪽 상태창, 오른쪽 실내기 정보 갱신
+	# 3초마다 갱신해서 왼쪽 상태창, 오른쪽 실내기 정보 갱신
 	# 자동제어시, 자동제어 로직에 따라 hmi에 명령을 줌
 	# 수동인 경우 데이터 값만 갱신함.
 	###########################################
@@ -107,14 +129,39 @@ def reload_display(request):
 	response_data.update({'ciu_nav':ciu_nav})
 	if ciu_nav[0] == "f":
 		response_data.update(controller.get_CIU_from_json(ciu_nav[1]))
-	else: # ciu_nav[0] == "h"
+	elif ciu_nav[0] == "h":
 		response_data.update(controller.get_CIU_on_HP_from_json(ciu_nav[1]))
+	else: # total
+		response_data.update(controller.get_CIU_total())
+	# 읽기 실패할 경우 읽을때까지 반복
+	while response_data["ciu_error"] != None:
+		if ciu_nav[0] == "f":
+			response_data.update(controller.get_CIU_from_json(ciu_nav[1]))
+		elif ciu_nav[0] == "h":
+			response_data.update(controller.get_CIU_on_HP_from_json(ciu_nav[1]))
+		else: # total
+			response_data.update(controller.get_CIU_total())
 	rt = response_data["rt_total"]
+
+	# 냉난방모드 확인
+	temp_mode = response_data["temp_mode"]
+	old_temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
+	if temp_mode != old_temp_mode:
+		tm = TemperatureModeLogger(
+			dateTime=timezone.now(), tempMode=temp_mode
+			).save()
+
+	# 운전 모드 정보
+	op_mode = OperationModeLogger.objects.latest('id').opMode
+	response_data.update({
+		"op_mode": op_mode,
+		"temp_mode": temp_mode,
+	})
 	
 	global flag_command 
 	if flag_command: # command를 준 후에 파일을 잠시 읽지 않는다.
 		import time
-		time.sleep(2)
+		time.sleep(9)
 		flag_command = 0
 
 	# hmi에서 데이터 읽고 (자동)제어
@@ -129,38 +176,26 @@ def reload_display(request):
 
 	t = timezone.now()		
 	# log.debug(str(response_data["error"]))
-	while response_data["error"] != None:
-		response_data.update(controller.read_data_from_json(rt))
 
-	# COP
-	try:
-		COP = rt/response_data["power"]["currentPowerConsumption"]
-	except ZeroDivisionError:
-		COP = 0
-	response_data.update({"COP": COP})
+	# 읽기 실패할 경우 읽을때까지 반복
+	while response_data["hmidata_error"] != None:
+		response_data.update(controller.read_data_from_json(rt))
 
 	# 저장 주기마다 data save
 	save_interval = SaveIntervalLogger.objects.latest('id').interval
 	if save_interval == 10:
-		if t.minute % 10 == 0 and t.second < 6: 
+		if t.minute % 10 == 0 and t.second < 4: 
 			save_data(response_data)
 	elif save_interval == 30:
-		if t.minute % 30 == 0 and t.second < 6:
+		if t.minute % 30 == 0 and t.second < 4:
 			save_data(response_data)
 	elif save_interval == 60:
-		if t.minute == 0 and t.second < 6:
+		if t.minute == 0 and t.second < 4:
 			save_data(response_data)
 	else:
-		if t.minute % 5 == 0 and t.second < 6:
+		if t.minute % 5 == 0 and t.second < 4:
 			save_data(response_data)
 
-	op_mode = OperationModeLogger.objects.latest('id').opMode
-	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
-	response_data.update({
-		"op_mode": op_mode,
-		"temp_mode": temp_mode,
-	})
-	# log.debug(str(response_data))
 
 	url = 'monitor/container.html'
 	html = render_to_string(url, response_data, RequestContext(request))
@@ -194,13 +229,13 @@ def setting_cp_done(request):
 	cp2hz = int(request.POST.get('cp2hz', 0))
 	cp2flux = int(request.POST.get('cp2flux', 0))
 
+	op_mode = OperationModeLogger.objects.latest('id').opMode
+	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
 	# 설정 값 db에 저장
 	controller.set_cp(1, op_mode, cp1switch, cp1hz, cp1flux)
 	controller.set_cp(2, op_mode, cp2switch, cp2hz, cp2flux)
 	# cmdmain에 기록
 	# ######## 	controller.write_cmd()
-	op_mode = OperationModeLogger.objects.latest('id').opMode
-	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
 	cp1 = CirculatingPump1Logger.objects.latest('id')
 	cp2 = CirculatingPump2Logger.objects.latest('id')
 	dwp1 = DeepwellPump1Logger.objects.latest('id')
@@ -245,22 +280,20 @@ def setting_cp_done(request):
 	response_data = check_if_error_exist()
 	
 
+	# 커맨드 후 hmidata를 잠시동안 읽지 않는다.
 	global flag_command 
-	if flag_command: # command를 준 후에 파일을 잠시 읽지 않는다.
-		import time
-		time.sleep(2)
-		flag_command = 0
+	flag_command = 1
 
 	# 센서값 읽어오기
-	response_data.update(controller.read_data_from_json(rt))
+	# response_data.update(controller.read_data_from_json(rt))
 	# if response_data == False:
 	# 	response_data = {"error":"file read error"}
 	# 	url = 'error/read.html'
 	# 	html = render_to_string(url, response_data)
 	# 	return HttpResponse(html)
 
-	html = render_to_string('monitor/container.html', response_data, RequestContext(request))
-	return HttpResponse(html)
+	# html = render_to_string('monitor/container.html', response_data, RequestContext(request))
+	return HttpResponse('')
 
 @login_required
 def set_db_save_interval(request):
@@ -274,9 +307,10 @@ def set_db_save_interval_confirm(request):
 	save_interval = SaveIntervalLogger.objects.latest('id').interval
 	if save_interval != new_save_interval:
 		sil = SaveIntervalLogger(
-				dateTime=timezone.now(), interval=new_save_interval
-			).save()
-	return reload_display(request)
+			dateTime=timezone.now(), interval=new_save_interval
+		).save()
+	# return reload_display(request)
+	return HttpResponse('')
 
 
 
@@ -308,9 +342,9 @@ def toggle_switch(request):
 
 	location = request.POST.get('id', 'error')
 	loc = location.upper()
-	toggle = request.POST.get('toggle', 'error').encode('utf-8').upper()
-	if toggle == 'error':
-		log.debug("toggle_switch, toggle: error")
+	switch = request.POST.get('switch', 'error').encode('utf-8').upper()
+	if switch == 'error':
+		log.debug("toggle_switch, switch: error")
 
 	op_mode = OperationModeLogger.objects.latest('id').opMode
 	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
@@ -320,19 +354,19 @@ def toggle_switch(request):
 	try:
 		if loc == 'DWP1': 
 			dwp = DeepwellPump1Logger(
-				dateTime=timezone.now(), opMode=op_mode, switch=toggle
+				dateTime=timezone.now(), opMode=op_mode, switch=switch
 			)
 		elif loc == 'DWP2':
 			dwp = DeepwellPump2Logger(
-				dateTime=timezone.now(), opMode=op_mode, switch=toggle
+				dateTime=timezone.now(), opMode=op_mode, switch=switch
 			)
 		elif loc == 'DWP3':
 			dwp = DeepwellPump3Logger(
-				dateTime=timezone.now(), opMode=op_mode, switch=toggle
+				dateTime=timezone.now(), opMode=op_mode, switch=switch
 			)
 		elif loc == 'DWP4':
 			dwp = DeepwellPump4Logger(
-				dateTime=timezone.now(), opMode=op_mode, switch=toggle
+				dateTime=timezone.now(), opMode=op_mode, switch=switch
 			)
 		if dwp != '':
 			dwp.save()
@@ -343,7 +377,7 @@ def toggle_switch(request):
 	# 기기 동작 내역 갱신
 	try:
 		new_cmd = OperationSwitchControl(
-				dateTime=timezone.now(), location=loc, switch=toggle
+				dateTime=timezone.now(), location=loc, switch=switch
 			)
 		new_cmd.save()
 	except Exception, e:
@@ -355,7 +389,7 @@ def toggle_switch(request):
 
 	# 커맨드 후 hmidata를 잠시동안 읽지 않는다.
 	global flag_command 
-	flag_command = int(request.POST.get('flag', '0'))
+	flag_command = 1
 
 	# html = render_to_string('monitor/right_top.html', response_data, RequestContext(request))
 	# return HttpResponseBadRequest
@@ -601,6 +635,12 @@ def check_if_error_exist(error_count = 0):
 		# error_alarm.append(check_if_error_exist(error_count))
 
 	return {"error_msg": error_alarm}
+
+def alarm_status(request):
+	response_data = check_if_error_exist()
+	url = 'monitor/alarm_status.html'
+	html = render_to_response(url, response_data, RequestContext(request))
+	return HttpResponse(html)
 
 
 ###################### DB 검색 ######################

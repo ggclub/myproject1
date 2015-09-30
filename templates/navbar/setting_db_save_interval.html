@@ -6,6 +6,7 @@
 	<script src="{% static "bootstrap-3.3.4-dist/js/bootstrap.min.js" %}"></script>
 	<link rel="stylesheet" href="{% static "bootstrap-3.3.4-dist/css/bootstrap.min.css" %}">
 	<link rel="stylesheet" href="{% static "navbar/setting-save-interval.css" %}">
+	<title>데이터 저장 주기를 선택합니다.</title>
 </head>
 <body>
 <div class="content pos-abs">
@@ -20,5 +21,30 @@
 </div>
 </body>
 
-
+<script type="text/javascript">
+$('#ok').on('click', setIntervalOk);
+function setIntervalOk () {
+	var interval = $('input[name=interval]:checked').val();
+	if (typeof(interval) == 'undefined') {
+		alert("데이터 저장 주기를 선택해주세요.");
+		return false;
+	}
+	$.ajax({
+		url: "/monitor/set_db_save_interval_confirm/",
+		type: "POST",
+		data: {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'savetime': interval,
+		},
+		success: function(data) {
+			alert('설정 되었습니다.');
+			// $('.container-control', window.parent.document).removeClass('show-spec');
+			// $('#cp-setting-frame', window.parent.document).css('display', 'none');	
+			// $('.container-control').html(data);
+			window.close();
+		}
+	});
+	return false;
+}
+</script>
 

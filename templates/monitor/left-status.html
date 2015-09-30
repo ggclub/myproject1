@@ -1,4 +1,4 @@
-{% load staticfiles %}
+﻿{% load staticfiles %}
 {% load monitor_extras %}
 <!DOCTYPE HTML>
 {# 실시간 정보 #}
@@ -7,22 +7,22 @@
 		<tbody>
 			<tr>
 				{# <td class="table-title">COP</td> #}
-				<td class="table-value" id="PowerConsumption">{{ COP|floatformat:2 }}</td>
+				<td class="table-value" id="CoefficientOfPerformance">{{ COP|floatformat:2 }}</td>
 			</tr>
 			<tr>
 				{# <td class="table-title">RT</td> #}
-				<td class="table-value" id="RefrigerationTon">{{ rt.RT }}</td>
+				<td class="table-value" id="RefrigerationTon">{{ rt_total }}</td>
 			</tr>
 			<tr>
 				<td class="table-value" id="flux-int">{{ DWPFM.integralFlux|floatformat:0 }}</td>
 			</tr>
 			<tr>
-				{# <td class="table-title">적산 전력</td> #}
-				<td class="table-value" id="PowerConsumption" style="font-size:12px;">{{ power.integralPowerConsumption|floatformat:2 }}</td>
+				{# <td class="table-title">순시 전력</td> #}
+				<td class="table-value PowerConsumption" id="p-cur">{{ power.currentPowerConsumption|floatformat:2 }}</td>
 			</tr>
 			<tr>
-				{# <td class="table-title">순시 전력</td> #}
-				<td class="table-value" id="PowerConsumption">{{ power.currentPowerConsumption|floatformat:2 }}</td>
+				{# <td class="table-title">적산 전력</td> #}
+				<td class="table-value PowerConsumption">{{ power.integralPowerConsumption|floatformat:2 }}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -51,7 +51,7 @@
 			<tr>
 				<td class="table-value td-hp-status">
 				{% if pump.switch == "OFF" %}
-					<img class="hp-status{{ forloop.counter }}" src="{% static "monitor/left/hp-off.jpg" %}">
+					<img class="hp-status{{ forloop.counter }}" src="{% static "monitor/left/hp-off.png" %}">
 				{% else %} {# switch == "ON" #}
 					{% if temp_mode == "CL" %}
 					{# 냉방모드 #}
@@ -88,33 +88,33 @@
 		<tbody>
 			<tr>
 				<td>
-				{% if cp_operating == "1" %}
+				{% if cp_operating == 1 %}
 					{% if CP.0.switch == "ON" %}
-						<img class="switch-status" src="{% static "monitor/left/switch-on.jpg" %}">
+						<img class="switch-status" id="cp-switch" src="{% static "monitor/left/switch-on.jpg" %}">
 					{% else %} {# switch == "OFF" #}
-						<img class="switch-status" src="{% static "monitor/left/switch-off.jpg" %}">
+						<img class="switch-status" id="cp-switch" src="{% static "monitor/left/switch-off.jpg" %}">
 					{% endif %}
-				{% else %}	{# cp_operating == "2" #}
+				{% else %}	{# cp_operating == 2 #}
 					{% if CP.1.switch == "ON" %}
-						<img class="switch-status" src="{% static "monitor/left/switch-on.jpg" %}">
+						<img class="switch-status" id="cp-switch" src="{% static "monitor/left/switch-on.jpg" %}">
 					{% else %} {# switch == "OFF" #}
-						<img class="switch-status" src="{% static "monitor/left/switch-off.jpg" %}">
+						<img class="switch-status" id="cp-switch" src="{% static "monitor/left/switch-off.jpg" %}">
 					{% endif %}
 				{% endif %}
 				</td>
 			</tr>
 			<tr>
-				{% if cp_operating == "1" %}
-				<td class="table-value" id="CirculatingPump">{{ CP.0.Hz }} Hz</td>
-				{% else %}
-				<td class="table-value" id="CirculatingPump">{{ CP.1.Hz }} Hz</td>
-				{% endif %}
-			</tr>
-			<tr>
-				{% if cp_operating == "1" %}
+				{% if cp_operating == 1 %}
 				<td class="table-value" id="CirculatingPump">{{ CP.0.flux|floatformat:0 }} LPM</td>
 				{% else %}
 				<td class="table-value" id="CirculatingPump">{{ CP.1.flux|floatformat:0 }} LPM</td>
+				{% endif %}
+			</tr>
+			<tr>
+				{% if cp_operating == 1 %}
+				<td class="table-value" id="CirculatingPump">{{ CP.0.Hz }} Hz</td>
+				{% else %}
+				<td class="table-value" id="CirculatingPump">{{ CP.1.Hz }} Hz</td>
 				{% endif %}
 			</tr>
 		</tbody>
@@ -123,7 +123,7 @@
 </div>
 {# 순환펌프 프로펠러 #}
 <div class="circulating-pump-status pos-abs">
-	{% if cp_operating == "1" %}
+	{% if cp_operating == 1 %}
 		{% if CP.0.switch == "ON" %}
 			{% if temp_mode == "CL" %}
 			{# 냉방모드 #}
@@ -135,7 +135,7 @@
 		{% else %} {# switch == "OFF" #}
 			<img class="cp-status" src="{% static "monitor/left/cp-off.png" %}">
 		{% endif %}
-	{% else %}	{# cp_operating == "2" #}
+	{% else %}	{# cp_operating == 2 #}
 		{% if CP.1.switch == "ON" %}
 			{% if temp_mode == "CL" %}
 			{# 냉방모드 #}
@@ -155,7 +155,7 @@
 	<table class="left-table table-flowmeter">
 		<tbody>
 			<tr>
-				<td class="table-value" id="CPFlowmeter">{{ CPFM.currentFlux|floatformat:2 }} LPM</td>
+				<td class="table-value CP-Flowmeter">{{ CPFM.currentFlux|floatformat:2 }} LPM</td>
 			</tr>
 			<tr>
 				<td class="table-value" id="TempHEOut1">{{ temp_HEOut1.temperature|floatformat:2 }} °C</td>
@@ -168,7 +168,7 @@
 	<tbody>
 		<tr>
 			{# <td class="table-title">순시 유량</td> #}
-			<td class="table-value" id="CPtable-flowmeter">{{ CPFM.currentFlux|floatformat:2 }} LPM</td>
+			<td class="table-value CP-Flowmeter">{{ CPFM.currentFlux|floatformat:2 }} LPM</td>
 		</tr>
 		<tr>
 			{# <td class="table-title">수온</td> #}
@@ -191,7 +191,7 @@
 	<table class="left-table table-flowmeter">
 		<tbody>
 			<tr>
-				<td class="table-value" id="DWPtable-flowmeter">{{ DWPFM.currentFlux|floatformat:2 }} T/hr</td>
+				<td class="table-value" id="DWP-flowmeter">{{ DWPFM.currentFlux|floatformat:2 }} T/hr</td>
 			</tr>
 			<tr>
 				<td class="table-value" id="TempHEIn2">{{ temp_HEIn2.temperature|floatformat:2 }} °C</td>
@@ -203,7 +203,7 @@
 	<table class="left-table table-flowmeter">
 		<tbody>
 			<tr>
-				<td class="table-value" id="DWPtable-flowmeter">{{ DWPFM.currentFlux|floatformat:2 }} T/hr</td>
+				<td class="table-value" id="DWP-flowmeter">{{ DWPFM.currentFlux|floatformat:2 }} T/hr</td>
 			</tr>
 			<tr>
 				<td class="table-value" id="TempHEOut2">{{ temp_HEOut2.temperature|floatformat:2 }} °C</td>
@@ -312,7 +312,7 @@ function clickPumpSwitch () {
 		data: {
 			'csrfmiddlewaretoken': '{{ csrf_token }}',
 			'id': id,
-			'toggle': toggle,
+			'switch': toggle,
 		},
 		success: function(data) {
 			if (toggle == "ON") {
@@ -341,4 +341,10 @@ function clickPumpSwitch () {
 
 }
 
+$('.table-heat-pump').on('click', clickDatabaseHp);
+$('.table-circulating-pump').on('click', clickDatabaseCp);
+$('.table-flowmeter, #flux-int').on('click', clickDatabaseFm);
+$('.table-deepwell-pump').on('click', clickDatabaseDwp);
+$('#CoefficientOfPerformance').on('click', clickDatabaseCop);
+$('.PowerConsumption').on('click', clickDatabasePower);
 </script>
