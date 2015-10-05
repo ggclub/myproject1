@@ -48,9 +48,11 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SECRET_KEY = 'h$^fjem)bkmnq#elgkrx+1$ds*h!98@#-o&l(gfbkve6hpw&52'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost', '127.0.0.1'
+]
 LOGIN_URL = (
     '/login/',
 )

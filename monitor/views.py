@@ -181,20 +181,24 @@ def reload_display(request):
 	while response_data["hmidata_error"] != None:
 		response_data.update(controller.read_data_from_json(rt))
 
-	# 저장 주기마다 data save
-	save_interval = SaveIntervalLogger.objects.latest('id').interval
-	if save_interval == 10:
-		if t.minute % 10 == 0 and t.second < 4: 
-			save_data(response_data)
-	elif save_interval == 30:
-		if t.minute % 30 == 0 and t.second < 4:
-			save_data(response_data)
-	elif save_interval == 60:
-		if t.minute == 0 and t.second < 4:
-			save_data(response_data)
-	else:
-		if t.minute % 5 == 0 and t.second < 4:
-			save_data(response_data)
+	# 데이터베이스 저장
+	# 중복 저장 방지
+	latest_data = HeatPump1Logger.objects.latest('id').dateTime
+	if (timezone.now() - latest_data).seconds > 5:
+		# 저장 주기마다 data save
+		save_interval = SaveIntervalLogger.objects.latest('id').interval
+		if save_interval == 10:
+			if t.minute % 10 == 0 and t.second < 4: 
+				save_data(response_data)
+		elif save_interval == 30:
+			if t.minute % 30 == 0 and t.second < 4:
+				save_data(response_data)
+		elif save_interval == 60:
+			if t.minute == 0 and t.second < 4:
+				save_data(response_data)
+		else:
+			if t.minute % 5 == 0 and t.second < 4:
+				save_data(response_data)
 
 
 	url = 'monitor/container.html'
