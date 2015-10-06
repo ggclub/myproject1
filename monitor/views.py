@@ -380,10 +380,10 @@ def toggle_switch(request):
 
 	# 기기 동작 내역 갱신
 	try:
-		new_cmd = OperationSwitchControl(
-				dateTime=timezone.now(), location=loc, switch=switch
-			)
-		new_cmd.save()
+		# new_cmd = OperationSwitchControl(
+		# 		dateTime=timezone.now(), location=loc, switch=switch
+		# 	)
+		# new_cmd.save()
 	except Exception, e:
 		log.error(str(e))
 

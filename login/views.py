@@ -13,8 +13,8 @@ import logging
 # Create your views here.
 def index(request):
 	username = password = state = ''
-	from monitor.views import index
 
+	from monitor.views import index
 	# if already logged in
 	if request.user.is_authenticated():
 		return index(request)

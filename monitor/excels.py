@@ -10,6 +10,7 @@ import logging
 log = logging.getLogger(__name__)
 
 def make_excel_file(obj_type, columns, rows, fail=0):
+     # html 화면에서 받아온 정보들
      num_col = len(columns)
      num_row = len(rows)
 
@@ -229,7 +230,8 @@ def make_excel_file(obj_type, columns, rows, fail=0):
 
           workbook.close()
      except Exception, e:
-     # maybe permission denied error
+          # if permission denied error
+          # 지금은 일어나지 않음
           log.debug(str(e))
           fail += 1
           make_excel_file(obj_type, columns, rows, fail)

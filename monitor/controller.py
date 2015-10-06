@@ -12,12 +12,15 @@ log = logging.getLogger(__name__)
 import os, myproject.settings
 file_path = os.path.join(myproject.settings.BASE_DIR, 'share/')
 
-rt = 0.0
+# rt = 0.0
+
 # rt값 다운될 때 버퍼 (껏다켰다 반복되지 않게)
 # a~e, rt 구분에 따른 5구간
 prev_section = 'a' 	
+
 # rt 다운될 때 구간별 버퍼
 buf_a = 0; buf_b = 0; buf_c = 0; buf_d = 0;	
+
 # rt값 다운될 때 완충값 (껏다켰다 반복되지 않게)
 pump_buffer = 2 		
 
@@ -27,6 +30,7 @@ pump_off_delay = 30 # seconds
 
 
 def get_operation_log(page):
+	# 사용하지 않음
 	# 기기 동작 내역
 	logs_per_page = 10
 	page_no = 5
@@ -63,6 +67,7 @@ def get_operation_log(page):
 	return data
 
 def get_sensors():
+	# 사용하지 않음
 	# db에 저장된 값을 읽어옴
 	heat_pump_1 = HeatPump1Logger.objects.latest('id')
 	heat_pump_2 = HeatPump2Logger.objects.latest('id')
@@ -173,6 +178,7 @@ def get_sensors():
 
 
 def get_device_specs():
+	# 사용하지 않음
 	######## Device Info ################
 	flowmeter_info = FlowmeterInfo.objects.all()
 	Inverter_info = InverterInfo.objects.all()
@@ -217,6 +223,7 @@ def read_cp_operating():
 	return data
 
 def write_cmd():
+	# hmi에 줄 명령을 파일에 적는다.
 	####### create json file
 	op_mode = OperationModeLogger.objects.latest('id').opMode
 	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
@@ -262,7 +269,7 @@ def write_cmd():
 
 
 def read_data_from_json(rt):
-	# hmi에서 데이터 읽어 옴
+	# hmi에서 데이터를 읽어 온다.
 	data = {}
 	try:
 		with open(file_path + 'hmidata.json') as data_file:
@@ -285,7 +292,9 @@ def read_data_from_json(rt):
 	# 	COP = 0
 
 	data = {
+		# hmi와의 통신 에러를 확인하기 위해 필요함.
 		"datetime": dt.strptime(datetime, "%Y-%m-%d %H:%M:%S"),
+		# 히트 펌프 6개 list
 		"heat_pump": [
 			{
 				"switch":_data["hp1"],
@@ -318,6 +327,7 @@ def read_data_from_json(rt):
 				"tempOut":_data["hpo6"],
 			}
 		],
+		# 심정 펌프 4개 list
 		"DWP": [
 			{
 				"switch":_data["dwp1"],
@@ -336,6 +346,7 @@ def read_data_from_json(rt):
 				"get_waterLevel_display":_data["dwp4_lv"],
 			}
 		],
+		# 순환 펌프 2개 list
 		"CP": [
 			{
 				"get_CPID_display": 1,
@@ -350,21 +361,23 @@ def read_data_from_json(rt):
 				"flux":_data["cp2_flux"],
 			}
 		],
-		# 실제 작동중인 번호
+		# 실제 작동중인 순환 펌프 번호
 		"cp_operating": cp_operating+1,
+		# 지하수 쪽 유량계
 		"DWPFM": {
 			"temperature":_data["dwpfm_temp"],
 			"currentFlux":_data["dwpfm_cur"],
 			"integralFlux":_data["dwpfm_int"],
 			"velocity":_data["dwpfm_vel"],
 		},
+		# 순환수 쪽 유량계
 		"CPFM": {
 			"temperature":_data["cpfm_temp"],
 			"currentFlux":_data["cpfm_cur"],
 			"integralFlux":_data["cpfm_int"],
 			"velocity":_data["cpfm_vel"],
 		},
-
+		# 온도 센서 10개
 		"temp_HEIn1": {
 			"temperature":_data["hei1"],
 		},
@@ -389,19 +402,30 @@ def read_data_from_json(rt):
 		"temp_HPOut4": _data["hpo4"],
 		"temp_HPOut5": _data["hpo5"],
 		"temp_HPOut6": _data["hpo6"],
+		# 전력량계
 		"power": {
 			"currentPowerConsumption":_data["pow_cur"],
 			"integralPowerConsumption":_data["pow_int"],
 		}, 
-		"dateTime":_data["datetime"],
+		# "dateTime":_data["datetime"],
+		# hmi에 보내준 rt값을 받음.
 		"rt": {
 			"RT":_data["rt"],
 			# "RT":rt,
 		},
+		# COP
 		"COP": _data["cop"],
 		# "COP": COP,
 		"op_mode": op_mode,
 		"temp_mode": temp_mode,
+		###### error 처리 #####
+		# 정상적으로 받은 경우 error:none. 
+		# 읽기를 실패한 경우 위의 try except에서 error msg를 return하고
+		# hmidata_error가 none이 될 때가지 계속 다시 읽는다.
+		# hmidata.json 읽기 실패의 경우는 
+		# 1. key-value error
+		# 2. hmi pc에서 파일을 쓰고있어 main pc에서 파일을 읽지 못한 경우 뿐이다.
+		######################
 		"hmidata_error": None,
 	}
 
@@ -428,7 +452,7 @@ def read_data_from_json(rt):
 		# ##########################################
 		# # ver_2015.09.22
 		# # 현장 주차장에 주입정 물이 아스팔트 위로 넘쳤음
-		# # 현재의 자동운전모드 로직은 지우지 말것.
+		# # 기존의 자동운전모드 로직은 지우지 말것.
 		# # 이번에 적용하게 되는 자동 운전모드 로직 변경 내용
 		# #
 		# # ~45rt 
@@ -850,7 +874,7 @@ def read_data_from_json(rt):
 			flux_need = flux_need + 96
 			data["CP"][cp_operating]["switch"] = "ON"
 
-		# log.debug("flux_need: " + str(flux_need));
+		# 필요 유량
 		flux_need = int(flux_need + flux_need*0.1)
 		# log.debug("flux_need_complement: " + str(flux_need));
 
@@ -871,7 +895,7 @@ def read_data_from_json(rt):
 			hz_need = 60
 
 		if hz_need > 60:
-			log.debug("if hz_need > 60: " + str(hz_need) + ", make it to 60.")
+			# log.debug("if hz_need > 60: " + str(hz_need) + ", make it to 60.")
 			hz_need = 60
 
 		# log.debug("flux_need: " + str(int(flux_need)));
@@ -890,6 +914,7 @@ def read_data_from_json(rt):
 						data["CP"][cp_operating]["Hz"] = 0
 						data["CP"][cp_operating]["flux"] = 0
 						if cp_operating == 0:
+							# 순환 펌프 1번
 							cp = CirculatingPump1Logger(
 								dateTime=timezone.now(), 
 								CPID=cp_operating+1, 
@@ -899,6 +924,7 @@ def read_data_from_json(rt):
 								flux=0
 								).save()
 						else:
+							# 순환 펌프 2번
 							cp = CirculatingPump2Logger(
 								dateTime=timezone.now(), 
 								CPID=cp_operating+1, 
@@ -907,9 +933,9 @@ def read_data_from_json(rt):
 								Hz=0, 
 								flux=0
 								).save()
-						new_cmd = OperationSwitchControl(
-								dateTime=timezone.now(), location="CP"+str(cp_operating+1), switch="OFF"
-							).save()
+						# new_cmd = OperationSwitchControl(
+						# 		dateTime=timezone.now(), location="CP"+str(cp_operating+1), switch="OFF"
+						# 	).save()
 						write_cmd()
 						log.debug("write_cmd from hmidata(cp, off)")
 					except Exception, e:
@@ -923,6 +949,7 @@ def read_data_from_json(rt):
 						# log.debug("hz: " + str(hz_need))
 						data["CP"][cp_operating]["flux"] = flux_need
 						if cp_operating == 0:
+							# 순환 펌프 1번
 							cp = CirculatingPump1Logger(
 								dateTime=timezone.now(), 
 								CPID=cp_operating+1, 
@@ -932,6 +959,7 @@ def read_data_from_json(rt):
 								flux=flux_need
 								).save()
 						else:
+							# 순환 펌프 2번
 							cp = CirculatingPump2Logger(
 								dateTime=timezone.now(), 
 								CPID=cp_operating+1, 
@@ -940,9 +968,9 @@ def read_data_from_json(rt):
 								Hz=hz_need, 
 								flux=flux_need
 								).save()
-						new_cmd = OperationSwitchControl(
-								dateTime=timezone.now(), location="CP"+str(cp_operating+1), switch="OFF"
-							).save()
+						# new_cmd = OperationSwitchControl(
+						# 		dateTime=timezone.now(), location="CP"+str(cp_operating+1), switch="OFF"
+						# 	).save()
 						write_cmd()
 						log.debug("write_cmd from hmidata(cp, on)")
 					except Exception, e:
@@ -1011,29 +1039,31 @@ def read_data_from_json(rt):
 					dwp1 = DeepwellPump1Logger(
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][0]["switch"]
 					    )
-					new_cmd1 = OperationSwitchControl(
-						dateTime=timezone.now(), location="DWP1", switch=data["DWP"][0]["switch"]
-					)
-					dwp1.save(); new_cmd1.save();
+					# new_cmd1 = OperationSwitchControl(
+					# 	dateTime=timezone.now(), location="DWP1", switch=data["DWP"][0]["switch"]
+					# )
+					dwp1.save(); 
+					# new_cmd1.save();
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
 				log.debug("write_cmd from hmidata(dwp1, on)")
-				return data # 심정펌프 제어시 delay를 위해
+				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			else: # ON >> OFF
 				try:
 					dwp1 = DeepwellPump1Logger(
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][0]["switch"]
 					    )
-					new_cmd1 = OperationSwitchControl(
-						dateTime=timezone.now(), location="DWP1", switch=data["DWP"][0]["switch"]
-					)
-					dwp1.save(); new_cmd1.save();
+					# new_cmd1 = OperationSwitchControl(
+					# 	dateTime=timezone.now(), location="DWP1", switch=data["DWP"][0]["switch"]
+					# )
+					dwp1.save(); 
+					# new_cmd1.save();
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
 				log.debug("write_cmd from hmidata(dwp1, off)")
-				return data # 심정펌프 제어시 delay를 위해
+				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 				# dwp.json 파일에 on으로 명시되어있었던 경우만 시간 적음
 				# if dwp["dwp1"] == 0:
 				# 	dwp.update({'dwp1':timenow})
@@ -1049,29 +1079,31 @@ def read_data_from_json(rt):
 					dwp2 = DeepwellPump2Logger(
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][1]["switch"]
 					    )
-					new_cmd2 = OperationSwitchControl(
-						dateTime=timezone.now(), location="DWP2", switch=data["DWP"][1]["switch"]
-					)
-					dwp2.save(); new_cmd2.save();
+					# new_cmd2 = OperationSwitchControl(
+					# 	dateTime=timezone.now(), location="DWP2", switch=data["DWP"][1]["switch"]
+					# )
+					dwp2.save(); 
+					# new_cmd2.save();
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
 				log.debug("write_cmd from hmidata(dwp2, on)")
-				return data # 심정펌프 제어시 delay를 위해
+				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			else: # ON >> OFF
 				try:
 					dwp2 = DeepwellPump2Logger(
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][1]["switch"]
 					    )
-					new_cmd2 = OperationSwitchControl(
-						dateTime=timezone.now(), location="DWP2", switch=data["DWP"][1]["switch"]
-					)
-					dwp2.save(); new_cmd2.save();
+					# new_cmd2 = OperationSwitchControl(
+					# 	dateTime=timezone.now(), location="DWP2", switch=data["DWP"][1]["switch"]
+					# )
+					dwp2.save();
+					 # new_cmd2.save();
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
 				log.debug("write_cmd from hmidata(dwp2, off)")
-				return data # 심정펌프 제어시 delay를 위해
+				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			# dwp.json 파일에 on으로 명시되어있었던 경우만 시간 적음
 				# if dwp["dwp2"] == 0:
 				# 	dwp.update({'dwp2':timenow})
@@ -1087,29 +1119,31 @@ def read_data_from_json(rt):
 					dwp3 = DeepwellPump3Logger(
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][2]["switch"]
 					    )
-					new_cmd3 = OperationSwitchControl(
-						dateTime=timezone.now(), location="DWP3", switch=data["DWP"][2]["switch"]
-					)
-					dwp3.save(); new_cmd3.save();
+					# new_cmd3 = OperationSwitchControl(
+					# 	dateTime=timezone.now(), location="DWP3", switch=data["DWP"][2]["switch"]
+					# )
+					dwp3.save(); 
+					# new_cmd3.save();
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
 				log.debug("write_cmd from hmidata(dwp3, on)")
-				return data # 심정펌프 제어시 delay를 위해
+				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			else: # ON >> OFF
 				try:
 					dwp3 = DeepwellPump3Logger(
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][2]["switch"]
 					    )
-					new_cmd3 = OperationSwitchControl(
-						dateTime=timezone.now(), location="DWP3", switch=data["DWP"][2]["switch"]
-					)
-					dwp3.save(); new_cmd3.save();
+					# new_cmd3 = OperationSwitchControl(
+					# 	dateTime=timezone.now(), location="DWP3", switch=data["DWP"][2]["switch"]
+					# )
+					dwp3.save(); 
+					# new_cmd3.save();
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
 				log.debug("write_cmd from hmidata(dwp3, off)")
-				return data # 심정펌프 제어시 delay를 위해
+				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			# dwp.json 파일에 on으로 명시되어있었던 경우만 시간 적음
 				# if dwp["dwp3"] == 0:
 				# 	dwp.update({'dwp3':timenow})
@@ -1125,29 +1159,31 @@ def read_data_from_json(rt):
 					dwp4 = DeepwellPump4Logger(
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][3]["switch"]
 					    )
-					new_cmd4 = OperationSwitchControl(
-						dateTime=timezone.now(), location="DWP4", switch=data["DWP"][3]["switch"]
-					)
-					dwp4.save(); new_cmd4.save();
+					# new_cmd4 = OperationSwitchControl(
+					# 	dateTime=timezone.now(), location="DWP4", switch=data["DWP"][3]["switch"]
+					# )
+					dwp4.save(); 
+					# new_cmd4.save();
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
 				log.debug("write_cmd from hmidata(dwp4, on)")
-				return data # 심정펌프 제어시 delay를 위해
+				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			else: # ON >> OFF
 				try:
 					dwp4 = DeepwellPump4Logger(
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][3]["switch"]
 					    )
-					new_cmd4 = OperationSwitchControl(
-						dateTime=timezone.now(), location="DWP4", switch=data["DWP"][3]["switch"]
-					)
-					dwp4.save(); new_cmd4.save();
+					# new_cmd4 = OperationSwitchControl(
+					# 	dateTime=timezone.now(), location="DWP4", switch=data["DWP"][3]["switch"]
+					# )
+					dwp4.save(); 
+					# new_cmd4.save();
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
 				log.debug("write_cmd from hmidata(dwp4, off)")
-				return data # 심정펌프 제어시 delay를 위해
+				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			# dwp.json 파일에 on으로 명시되어있었던 경우만 시간 적음
 				# if dwp["dwp4"] == 0:
 				# 	dwp.update({'dwp4':timenow})
@@ -1273,6 +1309,7 @@ def apply_rt_to_dwp(data, rt):
 
 # 심정펌프 전원 off시 delay
 def check_off_delay1(dwp, data):
+	# 사용하지 않음
 	off1 = str(dwp["dwp1"])
 	if off1 != "0":
 		offtime = dt.strptime(off1, "%Y-%m-%d %H:%M:%S")
@@ -1281,10 +1318,11 @@ def check_off_delay1(dwp, data):
 				dwp1 = DeepwellPump1Logger(
 				    dateTime=timezone.now(), opMode=data["op_mode"], switch="OFF"
 				    )
-				new_cmd = OperationSwitchControl(
-					dateTime=timezone.now(), location="DWP1", switch="OFF"
-				)
-				dwp1.save(); new_cmd.save();
+				# new_cmd = OperationSwitchControl(
+				# 	dateTime=timezone.now(), location="DWP1", switch="OFF"
+				# )
+				dwp1.save(); 
+				# new_cmd.save();
 			except Exception, e:
 				log.error(str(e))
 			write_cmd()
@@ -1293,6 +1331,7 @@ def check_off_delay1(dwp, data):
 			data["DWP"][0]["switch"] = "ON"
 
 def check_off_delay2(dwp, data):
+	# 사용하지 않음
 	off2 = str(dwp["dwp2"])
 	# log.debug("off2: " + off2)
 	if off2 != "0":
@@ -1302,10 +1341,11 @@ def check_off_delay2(dwp, data):
 				dwp2 = DeepwellPump2Logger(
 				    dateTime=timezone.now(), opMode=data["op_mode"], switch="OFF"
 				    )
-				new_cmd = OperationSwitchControl(
-					dateTime=timezone.now(), location="DWP2", switch="OFF"
-				)
-				dwp2.save(); new_cmd.save();
+				# new_cmd = OperationSwitchControl(
+				# 	dateTime=timezone.now(), location="DWP2", switch="OFF"
+				# )
+				dwp2.save();
+				 # new_cmd.save();
 			except Exception, e:
 				log.error(str(e))
 			write_cmd()
@@ -1314,6 +1354,7 @@ def check_off_delay2(dwp, data):
 			data["DWP"][1]["switch"] = "ON"
 
 def check_off_delay3(dwp, data):
+	# 사용하지 않음
 	off3 = str(dwp["dwp3"])
 	if off3 != "0":
 		offtime = dt.strptime(off3, "%Y-%m-%d %H:%M:%S")
@@ -1322,10 +1363,11 @@ def check_off_delay3(dwp, data):
 				dwp3 = DeepwellPump3Logger(
 				    dateTime=timezone.now(), opMode=data["op_mode"], switch="OFF"
 				    )
-				new_cmd = OperationSwitchControl(
-					dateTime=timezone.now(), location="DWP3", switch="OFF"
-				)
-				dwp3.save(); new_cmd.save();
+				# new_cmd = OperationSwitchControl(
+				# 	dateTime=timezone.now(), location="DWP3", switch="OFF"
+				# )
+				dwp3.save(); 
+				# new_cmd.save();
 			except Exception, e:
 				log.error(str(e))
 			write_cmd()
@@ -1334,6 +1376,7 @@ def check_off_delay3(dwp, data):
 			data["DWP"][2]["switch"] = "ON"
 
 def check_off_delay4(dwp, data):
+	# 사용하지 않음
 	off4 = str(dwp["dwp4"])
 	if off4 != "0":
 		offtime = dt.strptime(off4, "%Y-%m-%d %H:%M:%S")
@@ -1342,10 +1385,11 @@ def check_off_delay4(dwp, data):
 				dwp4 = DeepwellPump4Logger(
 				    dateTime=timezone.now(), opMode=data["op_mode"], switch="OFF"
 				    )
-				new_cmd = OperationSwitchControl(
-					dateTime=timezone.now(), location="DWP4", switch="OFF"
-				)
-				dwp4.save(); new_cmd.save();
+				# new_cmd = OperationSwitchControl(
+				# 	dateTime=timezone.now(), location="DWP4", switch="OFF"
+				# )
+				dwp4.save(); 
+				# new_cmd.save();
 			except Exception, e:
 				log.error(str(e))
 			write_cmd()
@@ -1387,6 +1431,7 @@ def save_data(data):
 		hpo1.save();hpo2.save();hpo3.save();hpo4.save();hpo5.save();hpo6.save();
 
 		# Heat pump
+		# 히트 펌프
 		hp1 = HeatPump1Logger(
 		    dateTime=timezone.now(), opMode=data['op_mode'], switch=data["heat_pump"][0]["switch"], 
 		    tempIn=hpi1, tempOut=hpo1
@@ -1414,6 +1459,7 @@ def save_data(data):
 		hp1.save();hp2.save();hp3.save();hp4.save();hp5.save();hp6.save()
 
 		# Deep well pump
+		# 심정 펌프
 		dwp1 = DeepwellPump1Logger(
 		    dateTime=timezone.now(), opMode=data['op_mode'], 
 		    switch=data["DWP"][0]["switch"],
@@ -1436,6 +1482,7 @@ def save_data(data):
 		    )
 		dwp1.save();dwp2.save();dwp3.save();dwp4.save();
 
+		# 순환 펌프
 		cp1 = CirculatingPump1Logger(
 			dateTime=timezone.now(), 
 			CPID=data["CP"][0]["get_CPID_display"], 
@@ -1454,34 +1501,32 @@ def save_data(data):
 			)
 		cp1.save(); cp2.save();
 
+		# 지하수 유량계
 		dwpfm = DWPFlowmeterLogger(
 			dateTime=timezone.now(), 
 			temperature=data["DWPFM"]["temperature"], 
 			currentFlux=data["DWPFM"]["currentFlux"], 
 			integralFlux=data["DWPFM"]["integralFlux"],
 			velocity=data["DWPFM"]["velocity"]
-			)
-		dwpfm.save()
+			).save()
+		# 순환수 유량계
 		cpfm = CPFlowmeterLogger(
 	    		dateTime=timezone.now(), 
 			temperature=data["CPFM"]["temperature"], 
 			currentFlux=data["CPFM"]["currentFlux"], 
 			integralFlux=data["CPFM"]["integralFlux"],
 			velocity=data["CPFM"]["velocity"]
-			)
-		cpfm.save()
-
+			).save()
+		# 전력량계
 		power = PowerConsumptionLogger(
 			dateTime=timezone.now(), 
 			currentPowerConsumption=data["power"]["currentPowerConsumption"], 
 			integralPowerConsumption=data["power"]["integralPowerConsumption"]
-			)
-		power.save()
-
+			).save()
+		# COP
 		cop = CoefficientOfPerformanceLogger(
 			dateTime=timezone.now(), COP=data["COP"]
-			)
-		cop.save()
+			).save()
 
 		# tw = TubewellLogger(
 		# 	dateTime=timezone.now(),
@@ -1492,10 +1537,10 @@ def save_data(data):
 		# 	)
 		# tw.save()
 
+		# RT
 		rtl = RefrigerationTonLogger(
 			dateTime=timezone.now(), RT=data["rt"]["RT"]
-			)
-		rt.save()
+			).save()
 	except Exception, e:
 		log.error(str(e))
 	
@@ -1513,15 +1558,16 @@ def set_cp(id, opMode, switch, hz, flux):
 			cp = CirculatingPump2Logger(
 				dateTime=timezone.now(), CPID=id, opMode=opMode, switch=switch, Hz=hz, flux=flux
 				).save()
-		new_cmd = OperationSwitchControl(
-				dateTime=timezone.now(), location="CP"+str(id), switch=switch
-			).save()
+		# new_cmd = OperationSwitchControl(
+		# 		dateTime=timezone.now(), location="CP"+str(id), switch=switch
+		# 	).save()
 	except Exception, e:
 		log.error(str(e))
 	return
 
 
 def get_CIU_from_json(floor):
+	# 층별 실내기 정보
 	# ciu_dict = {}
 	ciu_list = []
 	count = 0
@@ -1601,6 +1647,7 @@ def get_CIU_from_json(floor):
 
 
 def get_CIU_on_HP_from_json(no):
+	# 히트 펌프별 실내기 정보
 	ciu_dict = {}
 	ciu_on_hp = []
 	file1 = file_path +'ciu1.json'
@@ -1677,6 +1724,7 @@ def get_CIU_on_HP_from_json(no):
 	return ciu_dict
 
 def get_CIU_total():
+	# 실내기 전체 정보
 	# total information
 	file1 = file_path +'ciu1.json'
 	file2 = file_path +'ciu2.json'
@@ -1717,6 +1765,7 @@ def get_CIU_total():
 
 def write_rt(rt):
 	# rt 파일 작성
+	# rt값과 관측센서 값을 보내준다.
 	datetime = str(timezone.now())[:-7]
 	content = {
 		"datetime" : datetime,
@@ -1735,6 +1784,7 @@ def write_rt(rt):
 	return
 
 def get_CIU_on_HP(no):
+	# 사용하지 않음
 	if no == "1":
 		ret = CiuOnHeatPump1.objects.latest('id')
 	elif no == "2":
@@ -1754,6 +1804,7 @@ def get_CIU_on_HP(no):
 
 
 def get_CIU(floor):
+	# 사용하지 않음
 	# 실내기 정보 db에서 읽어옴
 	if floor == 1:
 		us = Floor1CIUs.objects.latest('id')
@@ -1984,6 +2035,7 @@ def get_CIU(floor):
 	return data
 
 def save_ciu1(data):
+	# 1층 실내기 상태 저장
 	f1 = [None]*14
 	try:
 		f1[0] = Floor1CIU1(
@@ -2068,6 +2120,7 @@ def save_ciu1(data):
 	return True
 
 def save_ciu2(data):
+	# 2층 실내기 상태 저장
 	f2 = [None]*12
 	try:
 		f2[0] = Floor2CIU1(
@@ -2140,6 +2193,7 @@ def save_ciu2(data):
 	return True
 
 def save_ciu3(data):
+	# 3층 실내기 상태 저장
 	f3 = [None]*12
 	try:
 		f3[0] = Floor3CIU1(
