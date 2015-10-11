@@ -1,0 +1,47 @@
+.content {
+	background-image: url('login.jpg');
+	width: 1920px;
+	height: 979px;
+}
+
+.pos-abs {
+	position: absolute;
+}
+.login-width {
+	width: 398px;
+}
+/************ login 정보 입력범위 ************/
+.div-login {
+	top: 439px;
+	left: 761px;
+	height: 175px;
+}
+/************ input ************/
+.input {
+	top: 29px;
+	left: 134px;
+	width: 235px;
+}
+.form-control {
+	height: 30px;
+}
+#username {
+	margin-bottom: 8px;
+}
+
+/************ error ************/
+.error {
+	top: 97px;
+	left: 136px;
+}
+
+/************ submit 버튼 ************/
+.submit {
+	top: 140px;
+	left: 102px;
+}
+button {
+	width: 89px;
+	border: 0px;
+	padding: 0px;
+}

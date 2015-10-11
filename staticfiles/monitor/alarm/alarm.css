@@ -1,0 +1,11 @@
+.bold {
+	font-weight: bold;
+}
+
+.alarm-status {
+	text-align: center;
+}
+
+.alarm-status > thead {
+	border-bottom: 3px double;
+}

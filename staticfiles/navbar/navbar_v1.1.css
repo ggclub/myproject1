@@ -1,0 +1,97 @@
+.navbar {
+	margin: 0px;
+	background-image: url("nav-bar.jpg");
+	border: none;
+	height: 17.05vh;
+}
+.navbar-home {
+	display: inline-block;
+}
+
+.navbar-now {
+	display: inline-block;
+	width: 245px;
+	position: relative;
+}
+#nav-date {
+	font-size: x-large;
+	font-weight: bold;
+	position: absolute;
+	top: -45px;
+	left: 8px;
+}
+#nav-mode {
+	position: absolute;
+}
+
+.navbar-menus {
+	display: inline;
+	position: absolute;
+	left: 780px;
+	width: 670px;
+	/*height: 113px;*/
+}
+
+#div-fullscreen {
+/*	position: absolute;
+	left: 0px;
+	width: 160px;
+	height: 113px;*/
+}
+#div-operation-setting {
+/*	position: absolute;
+	left: 167px;
+	width: 160px;
+	height: 113px;*/
+}
+#div-search-db {
+/*	position: absolute;
+	left: 330px;
+	width: 163px;
+	height: 113px;*/
+}
+#div-manage-alarm {
+/*	position: absolute;
+	left: 494px;
+	width: 160px;
+	height: 113px;*/
+}
+
+.menu:hover, .menu-right:hover,
+#nav-fullscreen:hover, #nav-operation-setting:hover,
+#nav-search-db:hover, #nav-manage-alarm:hover {
+	cursor: pointer;
+}
+
+.navbar-operation-setting {
+/*	position: absolute;
+	top: 87px;
+	left: 1108px;
+	font-size: 15px;
+	display: inline;
+	z-index: 123;*/
+}
+.nav-op, .nav-db {
+	display: inline;
+}
+.nav-op:hover, .nav-db:hover {
+	cursor: pointer;
+}
+.nav-op-selected, .nav-db-selected {
+	font-weight: bold;
+}
+.navbar-search-db {
+/*	position: absolute;
+	top: 87px;
+	left: 1275px;
+	font-size: 15px;
+	z-index: 123;*/
+}
+
+.navbar-menu-right {
+/*	display: inline;
+	position: fixed;
+	left: 1550px;
+	width: 350px;
+	height: 113px;*/
+}

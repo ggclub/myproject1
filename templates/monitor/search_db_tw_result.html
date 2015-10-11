@@ -3,31 +3,98 @@
 <table class="table table-bordered table-result">
 	<thead id="query-title">
 		<tr>
-			<td class="result-datetime" rowspan="2"><b>시간</b></td>
-			<td class="result-tw1" colspan="2"><b>관정센서 1 </b></td>
-			<td class="result-tw2" colspan="2"><b>관정센서 2 </b></td>
-			<td class="result-tw3" colspan="2"><b>관정센서 3 </b></td>
-			<td class="result-tw4" colspan="2"><b>관정센서 4 </b></td>
+			<td class="result-datetime" rowspan="3"><b>시간</b></td>
+			<td class="result-ab1" colspan="4"><b>AB-1 </b></td>
+			<td class="result-ab2" colspan="4"><b>AB-2 </b></td>
+			<td class="result-ib1" colspan="5"><b>IB-1 </b></td>
+			<td class="result-ij1" colspan="4"><b>IJ-1 </b></td>
+			<td class="result-sb1" colspan="5"><b>SB-1 </b></td>
+			<td class="result-sb2" colspan="5"><b>SB-2 </b></td>
 		</tr>
 		<tr>
-		{% for i in 1234|make_list %}
-			<td class="result-tw{{ i }}">수위</td>
-			<td class="result-tw{{ i }}">온도</td>
-		{% endfor %}
+			<td class="result-ab1" rowspan="2">수위</td>
+			<td class="result-ab1">10m</td>
+			<td class="result-ab1">20m</td>
+			<td class="result-ab1">30m</td>
+			<td class="result-ab2" rowspan="2">수위</td>
+			<td class="result-ab2">10m</td>
+			<td class="result-ab2">20m</td>
+			<td class="result-ab2">30m</td>
+			<td class="result-ib1" rowspan="2">수위</td>
+			<td class="result-ib1">10m</td>
+			<td class="result-ib1">30m</td>
+			<td class="result-ib1">50m</td>
+			<td class="result-ib1">70m</td>
+			<td class="result-ij1" rowspan="2">수위</td>
+			<td class="result-ij1">10m</td>
+			<td class="result-ij1">30m</td>
+			<td class="result-ij1">50m</td>
+			<td class="result-sb1" rowspan="2">수위</td>
+			<td class="result-sb1">10m</td>
+			<td class="result-sb1">15m</td>
+			<td class="result-sb1">20m</td>
+			<td class="result-sb1">25m</td>
+			<td class="result-sb2" rowspan="2">수위</td>
+			<td class="result-sb2">10m</td>
+			<td class="result-sb2">15m</td>
+			<td class="result-sb2">20m</td>
+			<td class="result-sb2">25m</td>
+		</tr>
+		<tr>
+			<td class="result-ab1">온도</td>
+			<td class="result-ab1">온도</td>
+			<td class="result-ab1">온도</td>
+			<td class="result-ab2">온도</td>
+			<td class="result-ab2">온도</td>
+			<td class="result-ab2">온도</td>
+			<td class="result-ib1">온도</td>
+			<td class="result-ib1">온도</td>
+			<td class="result-ib1">온도</td>
+			<td class="result-ib1">온도</td>
+			<td class="result-ij1">온도</td>
+			<td class="result-ij1">온도</td>
+			<td class="result-ij1">온도</td>
+			<td class="result-sb1">온도</td>
+			<td class="result-sb1">온도</td>
+			<td class="result-sb1">온도</td>
+			<td class="result-sb1">온도</td>
+			<td class="result-sb2">온도</td>
+			<td class="result-sb2">온도</td>
+			<td class="result-sb2">온도</td>
+			<td class="result-sb2">온도</td>
 		</tr>
 	</thead>
 	<tbody id="query-result">
-		{% for tw in database_list %}
+		{% for ab1, ab2, ib1, ij1, sb1, sb2 in database_list %}
 		<tr>
-			<td class="result-datetime">{{ tw.dateTime|date:"Y-m-d H:i" }}</td>
-			<td class="result-tw1">{{ tw.T1level }}</td>
-			<td class="result-tw1">{{ tw.T1temp }}</td>
-			<td class="result-tw2">{{ tw.T2level }}</td>
-			<td class="result-tw2">{{ tw.T2temp }}</td>
-			<td class="result-tw3">{{ tw.T3level }}</td>
-			<td class="result-tw3">{{ tw.T3temp }}</td>
-			<td class="result-tw4">{{ tw.T4level }}</td>
-			<td class="result-tw4">{{ tw.T4temp }}</td>
+			<td class="result-datetime">{{ ab1.dateTime|date:"Y-m-d H:i" }}</td>
+			<td class="result-ab1">{{ ab1.level|floatformat:2 }}</td>
+			<td class="result-ab1">{{ ab1.temp10|floatformat:2 }}</td>
+			<td class="result-ab1">{{ ab1.temp20|floatformat:2 }}</td>
+			<td class="result-ab1">{{ ab1.temp30|floatformat:2 }}</td>
+			<td class="result-ab2">{{ ab1.level|floatformat:2 }}</td>
+			<td class="result-ab2">{{ ab2.temp10|floatformat:2 }}</td>
+			<td class="result-ab2">{{ ab2.temp20|floatformat:2 }}</td>
+			<td class="result-ab2">{{ ab2.temp30|floatformat:2 }}</td>
+			<td class="result-ib1">{{ ib1.level|floatformat:2 }}</td>
+			<td class="result-ib1">{{ ib1.temp10|floatformat:2 }}</td>
+			<td class="result-ib1">{{ ib1.temp30|floatformat:2 }}</td>
+			<td class="result-ib1">{{ ib1.temp50|floatformat:2 }}</td>
+			<td class="result-ib1">{{ ib1.temp70|floatformat:2 }}</td>
+			<td class="result-ij1">{{ ij1.level|floatformat:2 }}</td>
+			<td class="result-ij1">{{ ij1.temp10|floatformat:2 }}</td>
+			<td class="result-ij1">{{ ij1.temp30|floatformat:2 }}</td>
+			<td class="result-ij1">{{ ij1.temp50|floatformat:2 }}</td>
+			<td class="result-sb1">{{ sb1.level|floatformat:2 }}</td>
+			<td class="result-sb1">{{ sb1.temp10|floatformat:2 }}</td>
+			<td class="result-sb1">{{ sb1.temp15|floatformat:2 }}</td>
+			<td class="result-sb1">{{ sb1.temp20|floatformat:2 }}</td>
+			<td class="result-sb1">{{ sb1.temp25|floatformat:2 }}</td>
+			<td class="result-sb2">{{ sb2.level|floatformat:2 }}</td>
+			<td class="result-sb2">{{ sb2.temp10|floatformat:2 }}</td>
+			<td class="result-sb2">{{ sb2.temp15|floatformat:2 }}</td>
+			<td class="result-sb2">{{ sb2.temp20|floatformat:2 }}</td>
+			<td class="result-sb2">{{ sb2.temp25|floatformat:2 }}</td>
 		</tr>
 		{% endfor %}
 	</tbody>

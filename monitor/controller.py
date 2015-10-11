@@ -5,6 +5,7 @@ from django.core.paginator import Paginator, EmptyPage
 from django.utils import timezone
 import simplejson as json
 from datetime import datetime as dt
+from django.db.models import Q
 
 import logging
 log = logging.getLogger(__name__)
@@ -442,8 +443,8 @@ def read_data_from_json(rt):
 		except Exception, e:
 			log.error(str(e))
 
-		# hmi에 rt값 전달
-		write_rt(rt)
+	# hmi에 rt값 전달
+	write_rt(rt)
 
 
 	# 자동 모드인 경우 자동제어
@@ -1766,14 +1767,17 @@ def get_CIU_total():
 def write_rt(rt):
 	# rt 파일 작성
 	# rt값과 관측센서 값을 보내준다.
-	datetime = str(timezone.now())[:-7]
+	n = timezone.now()
+	datetime = str(n)[:-7]
+	ago = n-timezone.timedelta(days=30)
 	content = {
 		"datetime" : datetime,
 		"rt" : rt,
-		"level1" : TubeWellLogger.objects.latest('id').T1level,
-		"level2" : TubeWellLogger.objects.latest('id').T2level,
-		"level3" : TubeWellLogger.objects.latest('id').T3level,
-		"level4" : TubeWellLogger.objects.latest('id').T4level,
+		"level1" : TWSB1Logger.objects.filter(Q(dateTime__gt=ago))[:1].get().level,
+		"level2" : TWAB1Logger.objects.filter(Q(dateTime__gt=ago))[:1].get().level,
+		"level3" : TWAB2Logger.objects.filter(Q(dateTime__gt=ago))[:1].get().level,
+		"level4" : TWSB2Logger.objects.filter(Q(dateTime__gt=ago))[:1].get().level,
+		# "datetime" : str(TWSB1Logger.objects.filter(Q(dateTime__gt=ago))[:1].get().dateTime)[:-3],
 	}
 	filename = file_path + 'rt.json'
 	try:

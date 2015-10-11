@@ -65,6 +65,10 @@ $('.btn-search-db').on('click', function() {
 	var startDate = $('#datepicker1').val();
 	var endDate = $('#datepicker2').val();
 	var name = $('select[name=name] option:selected').val();
+	if (startDate == '' | endDate == '') {
+		alert("날짜를 선택해주세요.");
+		return;
+	}
 
 	$.ajax({
 		url: '/monitor/search_db_tw_result/',
@@ -92,7 +96,7 @@ function Result2excel() {
 		return;
 	}
 	var numRow = parseInt(found);
-	var numCol = 9;
+	var numCol = 28;
 
 
 	console.log(numRow, numCol);

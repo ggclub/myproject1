@@ -1,0 +1,33 @@
+/* 자동수동 팝업창 */
+.pop-AT {
+	width: 350px;
+	height: 208px;
+	background-image: url("mode/auto.png")
+}
+.pop-MN {
+	width: 350px;
+	height: 208px;
+	background-image: url("mode/manual.png")
+}
+.pop-table {
+	position: absolute;
+	top: 134px;
+	left: 96px;
+	width: 120px;
+	height: 19px;
+}
+
+#left {
+	position: absolute;
+	top: 131px;
+	left: 97px;
+	width: 18px;
+	height: 18px;
+}
+#right {
+	position: absolute;
+	top: 131px;
+	left: 198px;
+	width: 18px;
+	height: 18px;
+}

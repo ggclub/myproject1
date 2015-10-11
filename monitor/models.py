@@ -462,19 +462,143 @@ class CoefficientOfPerformanceLogger(models.Model):
 	def __str__(self):
 		return '{}, COP: {}'.format(str(self.dateTime.replace(microsecond=0)), self.COP)
 
+
 # 관정센서
+# AB-1
+class AB110Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+	level = models.FloatField()
+class AB120Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+class AB130Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+# AB-2
+class AB210Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+	level = models.FloatField()
+class AB220Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+class AB230Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+# IB-1
+class IB110Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+	level = models.FloatField()
+class IB130Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+class IB150Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+class IB170Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+# IJ-1
+class IJ110Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+	level = models.FloatField()
+class IJ130Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+class IJ150Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+# SB-1
+class SB110Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+	level = models.FloatField()
+class SB115Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+class SB120Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+class SB125Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+# SB-2
+class SB210Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+	level = models.FloatField()
+class SB215Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+class SB220Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+class SB225Logger(models.Model):
+	dateTime = models.DateTimeField()
+	temp = models.FloatField()
+
+# 심정 펌프 2
+class TWAB1Logger(models.Model):
+	dateTime = models.DateTimeField()
+	level = models.FloatField(null=True, blank=True, default = None)
+	temp10 = models.FloatField(null=True, blank=True, default = None)
+	temp20 = models.FloatField(null=True, blank=True, default = None)
+	temp30 = models.FloatField(null=True, blank=True, default = None)
+
+# 심정 펌프 3
+class TWAB2Logger(models.Model):
+	dateTime = models.DateTimeField()
+	level = models.FloatField(null=True, blank=True, default = None)
+	temp10 = models.FloatField(null=True, blank=True, default = None)
+	temp20 = models.FloatField(null=True, blank=True, default = None)
+	temp30 = models.FloatField(null=True, blank=True, default = None)
+
+# ?
+class TWIB1Logger(models.Model):
+	dateTime = models.DateTimeField()
+	level = models.FloatField(null=True, blank=True, default = None)
+	temp10 = models.FloatField(null=True, blank=True, default = None)
+	temp30 = models.FloatField(null=True, blank=True, default = None)
+	temp50 = models.FloatField(null=True, blank=True, default = None)
+	temp70 = models.FloatField(null=True, blank=True, default = None)
+
+# ?
+class TWIJ1Logger(models.Model):
+	dateTime = models.DateTimeField()
+	level = models.FloatField(null=True, blank=True, default = None)
+	temp10 = models.FloatField(null=True, blank=True, default = None)
+	temp30 = models.FloatField(null=True, blank=True, default = None)
+	temp50 = models.FloatField(null=True, blank=True, default = None)
+
+# 심정 펌프 1
+class TWSB1Logger(models.Model):
+	dateTime = models.DateTimeField()
+	level = models.FloatField(null=True, blank=True, default = None)
+	temp10 = models.FloatField(null=True, blank=True, default = None)
+	temp15 = models.FloatField(null=True, blank=True, default = None)
+	temp20 = models.FloatField(null=True, blank=True, default = None)
+	temp25 = models.FloatField(null=True, blank=True, default = None)
+
+# 심정 펌프 4
+class TWSB2Logger(models.Model):
+	dateTime = models.DateTimeField()
+	level = models.FloatField(null=True, blank=True, default = None)
+	temp10 = models.FloatField(null=True, blank=True, default = None)
+	temp15 = models.FloatField(null=True, blank=True, default = None)
+	temp20 = models.FloatField(null=True, blank=True, default = None)
+	temp25 = models.FloatField(null=True, blank=True, default = None)
+
 class TubeWellLogger(models.Model):
 	dateTime = models.DateTimeField()
-	T1level = models.FloatField()
-	T1temp = models.FloatField()
-	T2level = models.FloatField()
-	T2temp = models.FloatField()
-	T3level = models.FloatField()
-	T3temp = models.FloatField()
-	T4level = models.FloatField()
-	T4temp = models.FloatField()
-	# def __unicode__(self):
-	# 	return unicode(self.TubeWellLogger)
+	AB1 = models.ForeignKey(TWAB1Logger, null=True, blank=True, default = None)
+	AB2 = models.ForeignKey(TWAB2Logger, null=True, blank=True, default = None)
+	IB1 = models.ForeignKey(TWIB1Logger, null=True, blank=True, default = None)
+	IJ1 = models.ForeignKey(TWIJ1Logger, null=True, blank=True, default = None)
+	SB1 = models.ForeignKey(TWSB1Logger, null=True, blank=True, default = None)
+	SB2 = models.ForeignKey(TWSB2Logger, null=True, blank=True, default = None)
 
 
 ################ ERROR LOG  #########################

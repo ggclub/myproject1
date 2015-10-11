@@ -18,8 +18,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 
-STATIC_ROOT= ''
 STATIC_URL = '/static/'
+STATIC_ROOT= 'staticfiles'
 
 
 STATICFILES_DIRS = (
@@ -48,7 +48,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SECRET_KEY = 'h$^fjem)bkmnq#elgkrx+1$ds*h!98@#-o&l(gfbkve6hpw&52'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost', '127.0.0.1'
@@ -87,7 +87,6 @@ ROOT_URLCONF = 'myproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': [os.path.join(STATIC_ROOT, 'templates')],
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -111,8 +110,12 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'myproject',
+        'USER': 'root',
+        'PASSWORD': '2345',
+        'HOST': '127.0.0.1',
+        'PORT': '',
     }
 }
 

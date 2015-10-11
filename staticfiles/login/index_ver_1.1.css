@@ -1,0 +1,29 @@
+.container {
+	width: 600px;
+}
+
+.title {
+	margin-top: 100px;
+	margin-bottom: 50px;
+}
+.login-form {
+	width: 350px;
+	margin-left: 40px;
+
+}
+label {
+
+}
+
+.forgot {
+	display: block;
+	float: right;
+}
+.checkbox {
+	margin-left: 40%;
+	display: inline;
+}
+.submit {
+	display: inline;
+	margin-left: 30px;
+}

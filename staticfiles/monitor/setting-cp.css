@@ -1,0 +1,88 @@
+.pos-abs {
+	position: absolute;
+}
+
+.content {
+	background-image: url("setting-cp.png");
+	top: 0px;
+	left: 0px;
+	width: 574px;
+	height: 298px;
+}
+
+input[type=radio] {
+	width: 17px;
+	height: 17px;
+}
+.round {
+	border-radius: 11px;
+	width: 57px;
+	text-align: center;
+}
+
+/********************************* 동작 순환펌프 선택 *********************************/
+.operation {
+	top: 40px;
+	left: 94px;
+	width: 295px;
+}
+#cp1 {
+	margin-right: 257px;
+}
+
+
+/********************************* 1번 순환펌프 *********************************/
+.cp1 {
+	top: 20px;
+	left: 100px;
+}
+.cp1-switch {
+	top: 71px;
+	left: 9px;
+	width: 90px;
+}
+div > .switch {
+	margin-right: 51px;
+}
+.cp1-hz {
+	top: 105px;
+	left: 10px;
+}
+.cp1-flux {
+	top: 152px;
+	left: 13px;
+	width: 53px;
+	text-align: center;
+}
+
+
+
+/********************************* 2번 순환펌프 *********************************/
+.cp2 {
+	top: 20px;
+	left: 350px;
+}
+.cp2-switch {
+	top: 70px;
+	left: 38px;
+	width: 90px;
+}
+.cp2-hz {
+	top: 105px;
+	left: 40px;
+}
+.cp2-flux {
+	top: 152px;
+	left: 42px;
+	width: 53px;
+	text-align: center;
+}
+
+/********************************* 확인버튼 *********************************/
+.div-ok {
+	top: 244px;
+	left: 250px;
+}
+#ok:hover {
+	cursor: pointer;
+}

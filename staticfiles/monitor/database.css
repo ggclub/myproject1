@@ -1,0 +1,77 @@
+.pos-abs {
+	position: absolute;
+}
+
+#ajax-loader {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	display: none;
+}
+
+.content {
+	margin: 5px;
+}
+
+/********************************* 검색조건 *********************************/
+.table-conditions {
+	display: inline-table;
+	width: 500px;
+	margin-bottom: 20px;
+}
+.datepicker {
+	text-align: center;
+}
+
+.btn-search-db, .btn-excel {
+	position: absolute;
+	width: 82px;
+	height: 82px;
+}
+.btn-search-db {
+	left: 510px;
+}
+.btn-excel {
+	right: 5px;
+}
+
+td > div {
+	display: inline;
+}
+
+
+.option {
+	margin-right: 20px;
+}
+
+.show-conditions-detail {
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+
+.cur-int {
+
+}
+
+/********************************* 검색 내용 *********************************/
+.table {
+	text-align: center;
+}
+
+.table-result {
+	min-width: 1220px;
+}
+/*
+.query-title {
+	text-align: center;
+}
+.query-result {
+	text-align: center;
+}
+.table-result > thead > tr > td, .table-result > tbody > tr > td {
+	text-align: center;
+}
+*/
+.result-datetime {
+	min-width: 120px;
+}

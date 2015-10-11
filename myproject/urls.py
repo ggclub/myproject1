@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^monitor/', include('monitor.urls', namespace="monitor")),
     url(r'^login/', include('login.urls', namespace="login")),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL,
+    document_root=settings.STATIC_ROOT)
 

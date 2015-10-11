@@ -63,6 +63,11 @@ $('.btn-search-db').on('click', function() {
 	var endDate = $('#datepicker2').val();
 	var name = $('select[name=name] option:selected').val();
 	// console.log(startDate + ", " + endDate + ", " +  floor + ", " +  name);
+	if (startDate == '' | endDate == '') {
+		alert("날짜를 선택해주세요.");
+		return;
+	}
+	
 	$.ajax({
 		url: '/monitor/search_db_cp_result/',
 		type: "POST",

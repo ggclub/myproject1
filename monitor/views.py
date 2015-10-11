@@ -183,7 +183,7 @@ def reload_display(request):
 
 	# 데이터베이스 저장
 	# 중복 저장 방지
-	latest_data = HeatPump1Logger.objects.latest('id').dateTime
+	latest_data = DeepwellPump1Logger.objects.latest('id').dateTime
 	if (timezone.now() - latest_data).seconds > 5:
 		# 저장 주기마다 data save
 		save_interval = SaveIntervalLogger.objects.latest('id').interval
@@ -380,6 +380,7 @@ def toggle_switch(request):
 
 	# 기기 동작 내역 갱신
 	try:
+		pass
 		# new_cmd = OperationSwitchControl(
 		# 		dateTime=timezone.now(), location=loc, switch=switch
 		# 	)
@@ -1201,10 +1202,16 @@ def search_db_tw_result(request):
 	name = request.POST.get('name', '0')
 	count = 0
 
-	tw = TubeWellLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-	count += tw.count()
+	# tw = TubeWellLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+	ab1 = TWAB1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+	ab2 = TWAB2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+	ib1 = TWIB1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+	ij1 = TWIJ1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+	sb1 = TWSB1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+	sb2 = TWSB2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+	count += ab1.count()
 
-	database_list = list(tw)
+	database_list = zip(list(ab1),list(ab2),list(ib1),list(ij1),list(sb1),list(sb2))
 	response_data = {
 		'database_list':database_list,
 		'count': count,
@@ -1213,6 +1220,7 @@ def search_db_tw_result(request):
 	url = 'monitor/search_db_tw_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
+	# return HttpResponse('')
 
 @login_required
 def search_db_alarm(request):

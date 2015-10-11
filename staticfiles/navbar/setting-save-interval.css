@@ -1,0 +1,32 @@
+.pos-abs {
+	position: absolute;
+}
+
+.content {
+	background-image: url("setting-save-interval.png");
+	top: 0px;
+	left: 0px;
+	width: 280px;
+	height: 271px;
+}
+
+input[type=radio] {
+	width: 17px;
+	height: 17px;
+	margin-bottom: 9px;
+}
+
+.div-radio {
+	top: 105px;
+	left: 103px;
+	width: 17px;
+	height: 80px;
+}
+
+.div-ok {
+	top: 225px;
+	left: 105px;
+}
+#ok:hover {
+	cursor: pointer;
+}

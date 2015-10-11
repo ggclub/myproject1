@@ -178,18 +178,33 @@ def make_excel_file(obj_type, columns, rows, fail=0):
                          col = 1; row += 1;
           elif obj_type == 'tw':
                # 관측센서
-               num_col = 9
+               num_col = 28
                for title in columns:
                     if row == 0 and col == 0:
                          # 시간
+                         worksheet.merge_range(row, col, row+2, col, title.encode('utf-8'), merge_format)
+                    elif row == 0 and (col==1 or col==5 or col==14):
+                         # ab, ij
+                         worksheet.merge_range(row, col, row, col+3, title.encode('utf-8'), merge_format)
+                         col += 3
+                    elif row == 0 and (col==9 or col==18 or col==23):
+                         # ib, sb
+                         worksheet.merge_range(row, col, row, col+4, title.encode('utf-8'), merge_format)
+                         col += 4
+                    elif row == 1 and (col==1 or col==5 or col==9 or col==14 or col==18 or col==23):
+                         # 수위
                          worksheet.merge_range(row, col, row+1, col, title.encode('utf-8'), merge_format)
-                    elif row == 0 and col != 0:
-                         # 관정센서 1~4
-                         worksheet.merge_range(row, col, row, col+1, title.encode('utf-8'), merge_format)
-                         col += 1
-                    else:
-                         # 수위, 온도
+                    elif row == 1:
+                         # 수심
                          worksheet.write(row, col, title.encode('utf-8'), title_format)
+                    elif row == 2 and (col==1 or col==5 or col==9 or col==14 or col==18 or col==23):
+                         # 온도
+                         col += 1
+                         worksheet.write(row, col, title.encode('utf-8'), title_format)
+                    else:
+                         # 온도
+                         worksheet.write(row, col, title.encode('utf-8'), title_format)
+
                     col += 1
                     if col == num_col:
                          col = 1; row += 1;
@@ -201,6 +216,8 @@ def make_excel_file(obj_type, columns, rows, fail=0):
           # 내용
           if obj_type == 'ciu' or 'power' in obj_type or 'cop' in obj_type:
                row = 1
+          elif obj_type == 'tw':
+               row = 3
           else:
                row = 2
           col = 0
