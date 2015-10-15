@@ -28,7 +28,7 @@ pump_buffer = 2
 # 심정펌프가 꺼질 때 다른 펌프가 풀가동 될 때까지 기다렸다 꺼짐
 pump_off_delay = 30 # seconds
 
-
+datetime_format = "%Y-%m-%d %H:%M:%S"
 
 def get_operation_log(page):
 	# 사용하지 않음
@@ -280,7 +280,7 @@ def read_data_from_json(rt):
 		log.error(str(e))
 		return { "hmidata_error": e }
 
-	datetime = _data["datetime"]
+	datetime = dt.strptime(_data["datetime"], datetime_format)
 	op_mode = OperationModeLogger.objects.latest('id').opMode
 	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
 	# 작동중인 순환펌프; id 1: 0, id 2: 1
@@ -292,9 +292,12 @@ def read_data_from_json(rt):
 	# except ZeroDivisionError:
 	# 	COP = 0
 
+	# 관측센서 (한달 전 데이터 찾기)
+	# month_ago = datetime - timezone.timedelta(days=30)
+
 	data = {
 		# hmi와의 통신 에러를 확인하기 위해 필요함.
-		"datetime": dt.strptime(datetime, "%Y-%m-%d %H:%M:%S"),
+		"datetime": datetime,
 		# 히트 펌프 6개 list
 		"heat_pump": [
 			{
@@ -333,18 +336,22 @@ def read_data_from_json(rt):
 			{
 				"switch":_data["dwp1"],
 				"get_waterLevel_display":_data["dwp1_lv"],
+				"level" : TWSB1Logger.objects.filter(Q(dateTime__gte=datetime))[:1].get().level,
 			},
 			{
 				"switch":_data["dwp2"],
 				"get_waterLevel_display":_data["dwp2_lv"],
+				"level" : TWAB1Logger.objects.filter(Q(dateTime__gte=datetime))[:1].get().level,
 			},
 			{
 				"switch":_data["dwp3"],
 				"get_waterLevel_display":_data["dwp3_lv"],
+				"level" : TWAB2Logger.objects.filter(Q(dateTime__gte=datetime))[:1].get().level,
 			},
 			{
 				"switch":_data["dwp4"],
 				"get_waterLevel_display":_data["dwp4_lv"],
+				"level" : TWSB2Logger.objects.filter(Q(dateTime__gte=datetime))[:1].get().level,
 			}
 		],
 		# 순환 펌프 2개 list
@@ -429,7 +436,6 @@ def read_data_from_json(rt):
 		######################
 		"hmidata_error": None,
 	}
-
 	# buf_a, buf_b, buf_c, buf_d = set_section_buffer()
 	# data["rt"]["RT"] = rt
 	
@@ -438,7 +444,7 @@ def read_data_from_json(rt):
 	if str(float(rt)) != str(float(data["rt"]["RT"])): # data["rt"]["RT"] == 0 or
 		try:
 			rtl = RefrigerationTonLogger(
-				dateTime=timezone.now(), RT=rt
+				dateTime=datetime, RT=rt
 				).save()
 		except Exception, e:
 			log.error(str(e))
@@ -470,7 +476,7 @@ def read_data_from_json(rt):
 		# 			    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 			    )
 		# 			new_cmd = OperationSwitchControl(
-		# 				dateTime=timezone.now(), location="DWP1", switch="OFF"
+		# 				dateTime=datetime, location="DWP1", switch="OFF"
 		# 			)
 		# 			dwp.save(); new_cmd.save();
 		# 		except Exception, e:
@@ -485,7 +491,7 @@ def read_data_from_json(rt):
 		# 			    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 			    )
 		# 			new_cmd = OperationSwitchControl(
-		# 				dateTime=timezone.now(), location="DWP2", switch="OFF"
+		# 				dateTime=datetime, location="DWP2", switch="OFF"
 		# 			)
 		# 			dwp.save(); new_cmd.save();
 		# 		except Exception, e:
@@ -500,7 +506,7 @@ def read_data_from_json(rt):
 		# 			    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 			    )
 		# 			new_cmd = OperationSwitchControl(
-		# 				dateTime=timezone.now(), location="DWP3", switch="OFF"
+		# 				dateTime=datetime, location="DWP3", switch="OFF"
 		# 			)
 		# 			dwp.save(); new_cmd.save();
 		# 		except Exception, e:
@@ -515,7 +521,7 @@ def read_data_from_json(rt):
 		# 			    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 			    )
 		# 			new_cmd = OperationSwitchControl(
-		# 				dateTime=timezone.now(), location="DWP4", switch="OFF"
+		# 				dateTime=datetime, location="DWP4", switch="OFF"
 		# 			)
 		# 			dwp.save(); new_cmd.save();
 		# 		except Exception, e:
@@ -534,7 +540,7 @@ def read_data_from_json(rt):
 		# 			data["CP"][cp_operating]["flux"] = 0
 		# 			if cp_operating == 0:
 		# 				cp = CirculatingPump1Logger(
-		# 					dateTime=timezone.now(), 
+		# 					dateTime=datetime, 
 		# 					CPID=cp_operating+1, 
 		# 					opMode=op_mode, 
 		# 					switch="OFF", 
@@ -543,7 +549,7 @@ def read_data_from_json(rt):
 		# 					).save()
 		# 			else:
 		# 				cp = CirculatingPump2Logger(
-		# 					dateTime=timezone.now(), 
+		# 					dateTime=datetime, 
 		# 					CPID=cp_operating+1, 
 		# 					opMode=op_mode, 
 		# 					switch="OFF", 
@@ -551,7 +557,7 @@ def read_data_from_json(rt):
 		# 					flux=0
 		# 					).save()
 		# 			new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="CP"+str(cp_operating+1), switch="OFF"
+		# 					dateTime=datetime, location="CP"+str(cp_operating+1), switch="OFF"
 		# 				).save()
 		# 		except Exception, e:
 		# 			log.error(str(e))
@@ -568,7 +574,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="ON"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP1", switch="ON"
+		# 					dateTime=datetime, location="DWP1", switch="ON"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -583,7 +589,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP2", switch="OFF"
+		# 					dateTime=datetime, location="DWP2", switch="OFF"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -596,7 +602,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP3", switch="OFF"
+		# 					dateTime=datetime, location="DWP3", switch="OFF"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -609,7 +615,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP4", switch="OFF"
+		# 					dateTime=datetime, location="DWP4", switch="OFF"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -624,7 +630,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="ON"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP4", switch="ON"
+		# 					dateTime=datetime, location="DWP4", switch="ON"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -639,7 +645,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP1", switch="OFF"
+		# 					dateTime=datetime, location="DWP1", switch="OFF"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -652,7 +658,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP2", switch="OFF"
+		# 					dateTime=datetime, location="DWP2", switch="OFF"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -665,7 +671,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP3", switch="OFF"
+		# 					dateTime=datetime, location="DWP3", switch="OFF"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -678,7 +684,7 @@ def read_data_from_json(rt):
 		# 		try:
 		# 			if cp_operating == 0:
 		# 				cp = CirculatingPump1Logger(
-		# 					dateTime=timezone.now(), 
+		# 					dateTime=datetime, 
 		# 					CPID=cp_operating+1, 
 		# 					opMode=op_mode, 
 		# 					switch="ON", 
@@ -687,7 +693,7 @@ def read_data_from_json(rt):
 		# 					).save()
 		# 			else:
 		# 				cp = CirculatingPump2Logger(
-		# 					dateTime=timezone.now(), 
+		# 					dateTime=datetime, 
 		# 					CPID=cp_operating+1, 
 		# 					opMode=op_mode, 
 		# 					switch="ON", 
@@ -695,7 +701,7 @@ def read_data_from_json(rt):
 		# 					flux=834
 		# 					).save()
 		# 			new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="CP"+str(cp_operating+1), switch="OFF"
+		# 					dateTime=datetime, location="CP"+str(cp_operating+1), switch="OFF"
 		# 				).save()
 		# 			write_cmd()
 		# 			log.debug("write_cmd from hmidata(cp, off)")
@@ -710,7 +716,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="ON"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP1", switch="ON"
+		# 					dateTime=datetime, location="DWP1", switch="ON"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -723,7 +729,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="ON"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP2", switch="ON"
+		# 					dateTime=datetime, location="DWP2", switch="ON"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -739,7 +745,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP3", switch="OFF"
+		# 					dateTime=datetime, location="DWP3", switch="OFF"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -752,7 +758,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP4", switch="OFF"
+		# 					dateTime=datetime, location="DWP4", switch="OFF"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -769,7 +775,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="ON"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP3", switch="ON"
+		# 					dateTime=datetime, location="DWP3", switch="ON"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -782,7 +788,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="ON"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP4", switch="ON"
+		# 					dateTime=datetime, location="DWP4", switch="ON"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -797,7 +803,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP1", switch="OFF"
+		# 					dateTime=datetime, location="DWP1", switch="OFF"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -810,7 +816,7 @@ def read_data_from_json(rt):
 		# 				    dateTime=datetime, opMode=op_mode, switch="OFF"
 		# 				    )
 		# 				new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="DWP2", switch="OFF"
+		# 					dateTime=datetime, location="DWP2", switch="OFF"
 		# 				)
 		# 				dwp.save(); new_cmd.save();
 		# 			except Exception, e:
@@ -823,7 +829,7 @@ def read_data_from_json(rt):
 		# 		try:
 		# 			if cp_operating == 0:
 		# 				cp = CirculatingPump1Logger(
-		# 					dateTime=timezone.now(), 
+		# 					dateTime=datetime, 
 		# 					CPID=cp_operating+1, 
 		# 					opMode=op_mode, 
 		# 					switch="ON", 
@@ -832,7 +838,7 @@ def read_data_from_json(rt):
 		# 					).save()
 		# 			else:
 		# 				cp = CirculatingPump2Logger(
-		# 					dateTime=timezone.now(), 
+		# 					dateTime=datetime, 
 		# 					CPID=cp_operating+1, 
 		# 					opMode=op_mode, 
 		# 					switch="ON", 
@@ -840,7 +846,7 @@ def read_data_from_json(rt):
 		# 					flux=834
 		# 					).save()
 		# 			new_cmd = OperationSwitchControl(
-		# 					dateTime=timezone.now(), location="CP"+str(cp_operating+1), switch="OFF"
+		# 					dateTime=datetime, location="CP"+str(cp_operating+1), switch="OFF"
 		# 				).save()
 		# 			write_cmd()
 		# 			log.debug("write_cmd from hmidata(cp, off)")
@@ -917,7 +923,7 @@ def read_data_from_json(rt):
 						if cp_operating == 0:
 							# 순환 펌프 1번
 							cp = CirculatingPump1Logger(
-								dateTime=timezone.now(), 
+								dateTime=datetime, 
 								CPID=cp_operating+1, 
 								opMode=data['op_mode'], 
 								switch="OFF", 
@@ -927,7 +933,7 @@ def read_data_from_json(rt):
 						else:
 							# 순환 펌프 2번
 							cp = CirculatingPump2Logger(
-								dateTime=timezone.now(), 
+								dateTime=datetime, 
 								CPID=cp_operating+1, 
 								opMode=data['op_mode'], 
 								switch="OFF", 
@@ -935,7 +941,7 @@ def read_data_from_json(rt):
 								flux=0
 								).save()
 						# new_cmd = OperationSwitchControl(
-						# 		dateTime=timezone.now(), location="CP"+str(cp_operating+1), switch="OFF"
+						# 		dateTime=datetime, location="CP"+str(cp_operating+1), switch="OFF"
 						# 	).save()
 						write_cmd()
 						log.debug("write_cmd from hmidata(cp, off)")
@@ -952,7 +958,7 @@ def read_data_from_json(rt):
 						if cp_operating == 0:
 							# 순환 펌프 1번
 							cp = CirculatingPump1Logger(
-								dateTime=timezone.now(), 
+								dateTime=datetime, 
 								CPID=cp_operating+1, 
 								opMode=data['op_mode'], 
 								switch="ON", 
@@ -962,7 +968,7 @@ def read_data_from_json(rt):
 						else:
 							# 순환 펌프 2번
 							cp = CirculatingPump2Logger(
-								dateTime=timezone.now(), 
+								dateTime=datetime, 
 								CPID=cp_operating+1, 
 								opMode=data['op_mode'], 
 								switch="ON", 
@@ -970,7 +976,7 @@ def read_data_from_json(rt):
 								flux=flux_need
 								).save()
 						# new_cmd = OperationSwitchControl(
-						# 		dateTime=timezone.now(), location="CP"+str(cp_operating+1), switch="OFF"
+						# 		dateTime=datetime, location="CP"+str(cp_operating+1), switch="OFF"
 						# 	).save()
 						write_cmd()
 						log.debug("write_cmd from hmidata(cp, on)")
@@ -983,7 +989,7 @@ def read_data_from_json(rt):
 		# if data["CP"][cp_operating]["switch"] == "ON" and data["CP"][cp_operating]["Hz"] != 60:
 		# 	try:
 		# 		cp = CirculatingPumpLogger(
-		# 			dateTime=timezone.now(), 
+		# 			dateTime=datetime, 
 		# 			CPID=data["CP"][cp_operating]["get_CPID_display"], 
 		# 			opMode=data['op_mode'], 
 		# 			switch=data["CP"][cp_operating]["switch"], 
@@ -991,7 +997,7 @@ def read_data_from_json(rt):
 		# 			flux=1000
 		# 			).save()
 		# 		new_cmd = OperationSwitchControl(
-		# 				dateTime=timezone.now(), location="CP"+str(data["CP"][cp_operating]["get_CPID_display"]), switch="ON"
+		# 				dateTime=datetime, location="CP"+str(data["CP"][cp_operating]["get_CPID_display"]), switch="ON"
 		# 			).save()
 		# 	except Exception, e:
 		# 		log.error(str(e))
@@ -1030,7 +1036,7 @@ def read_data_from_json(rt):
 		# 		dwp = json.load(fp)
 		# except Exception, e:
 		# 	log.error(str(e))
-		timenow = str(timezone.now())[:-7] #milisecond 제외
+		timenow = str(datetime)[:-7] #milisecond 제외
 
 		if _data["dwp1"] != data["DWP"][0]["switch"]:
 			if data["DWP"][0]["switch"] == "ON": # OFF >> ON
@@ -1041,7 +1047,7 @@ def read_data_from_json(rt):
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][0]["switch"]
 					    )
 					# new_cmd1 = OperationSwitchControl(
-					# 	dateTime=timezone.now(), location="DWP1", switch=data["DWP"][0]["switch"]
+					# 	dateTime=datetime, location="DWP1", switch=data["DWP"][0]["switch"]
 					# )
 					dwp1.save(); 
 					# new_cmd1.save();
@@ -1056,7 +1062,7 @@ def read_data_from_json(rt):
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][0]["switch"]
 					    )
 					# new_cmd1 = OperationSwitchControl(
-					# 	dateTime=timezone.now(), location="DWP1", switch=data["DWP"][0]["switch"]
+					# 	dateTime=datetime, location="DWP1", switch=data["DWP"][0]["switch"]
 					# )
 					dwp1.save(); 
 					# new_cmd1.save();
@@ -1081,7 +1087,7 @@ def read_data_from_json(rt):
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][1]["switch"]
 					    )
 					# new_cmd2 = OperationSwitchControl(
-					# 	dateTime=timezone.now(), location="DWP2", switch=data["DWP"][1]["switch"]
+					# 	dateTime=datetime, location="DWP2", switch=data["DWP"][1]["switch"]
 					# )
 					dwp2.save(); 
 					# new_cmd2.save();
@@ -1096,7 +1102,7 @@ def read_data_from_json(rt):
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][1]["switch"]
 					    )
 					# new_cmd2 = OperationSwitchControl(
-					# 	dateTime=timezone.now(), location="DWP2", switch=data["DWP"][1]["switch"]
+					# 	dateTime=datetime, location="DWP2", switch=data["DWP"][1]["switch"]
 					# )
 					dwp2.save();
 					 # new_cmd2.save();
@@ -1121,7 +1127,7 @@ def read_data_from_json(rt):
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][2]["switch"]
 					    )
 					# new_cmd3 = OperationSwitchControl(
-					# 	dateTime=timezone.now(), location="DWP3", switch=data["DWP"][2]["switch"]
+					# 	dateTime=datetime, location="DWP3", switch=data["DWP"][2]["switch"]
 					# )
 					dwp3.save(); 
 					# new_cmd3.save();
@@ -1136,7 +1142,7 @@ def read_data_from_json(rt):
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][2]["switch"]
 					    )
 					# new_cmd3 = OperationSwitchControl(
-					# 	dateTime=timezone.now(), location="DWP3", switch=data["DWP"][2]["switch"]
+					# 	dateTime=datetime, location="DWP3", switch=data["DWP"][2]["switch"]
 					# )
 					dwp3.save(); 
 					# new_cmd3.save();
@@ -1161,7 +1167,7 @@ def read_data_from_json(rt):
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][3]["switch"]
 					    )
 					# new_cmd4 = OperationSwitchControl(
-					# 	dateTime=timezone.now(), location="DWP4", switch=data["DWP"][3]["switch"]
+					# 	dateTime=datetime, location="DWP4", switch=data["DWP"][3]["switch"]
 					# )
 					dwp4.save(); 
 					# new_cmd4.save();
@@ -1176,7 +1182,7 @@ def read_data_from_json(rt):
 					    dateTime=datetime, opMode=data['op_mode'], switch=data["DWP"][3]["switch"]
 					    )
 					# new_cmd4 = OperationSwitchControl(
-					# 	dateTime=timezone.now(), location="DWP4", switch=data["DWP"][3]["switch"]
+					# 	dateTime=datetime, location="DWP4", switch=data["DWP"][3]["switch"]
 					# )
 					dwp4.save(); 
 					# new_cmd4.save();
@@ -1314,7 +1320,7 @@ def check_off_delay1(dwp, data):
 	off1 = str(dwp["dwp1"])
 	if off1 != "0":
 		offtime = dt.strptime(off1, "%Y-%m-%d %H:%M:%S")
-		if (timezone.now() - offtime) > timezone.timedelta(seconds=pump_off_delay):
+		if (datetime - offtime) > timezone.timedelta(seconds=pump_off_delay):
 			try:
 				dwp1 = DeepwellPump1Logger(
 				    dateTime=timezone.now(), opMode=data["op_mode"], switch="OFF"
@@ -1769,15 +1775,15 @@ def write_rt(rt):
 	# rt값과 관측센서 값을 보내준다.
 	n = timezone.now()
 	datetime = str(n)[:-7]
-	ago = n-timezone.timedelta(days=30)
+	# month_ago = n-timezone.timedelta(days=30)
 	content = {
 		"datetime" : datetime,
 		"rt" : rt,
-		"level1" : TWSB1Logger.objects.filter(Q(dateTime__gt=ago))[:1].get().level,
-		"level2" : TWAB1Logger.objects.filter(Q(dateTime__gt=ago))[:1].get().level,
-		"level3" : TWAB2Logger.objects.filter(Q(dateTime__gt=ago))[:1].get().level,
-		"level4" : TWSB2Logger.objects.filter(Q(dateTime__gt=ago))[:1].get().level,
-		# "datetime" : str(TWSB1Logger.objects.filter(Q(dateTime__gt=ago))[:1].get().dateTime)[:-3],
+		"level1" : TWSB1Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level,
+		"level2" : TWAB1Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level,
+		"level3" : TWAB2Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level,
+		"level4" : TWSB2Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level,
+		# "tube_date" : str(TWSB1Logger.objects.filter(Q(dateTime__gte=n))[:1].get().dateTime)[:-3],
 	}
 	filename = file_path + 'rt.json'
 	try:

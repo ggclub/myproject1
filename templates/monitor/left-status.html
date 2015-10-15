@@ -251,7 +251,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="table-value" id="DeepwellPump{{ forloop.counter }}">6 m</td>
+				<td class="table-value" id="DeepwellPump{{ forloop.counter }}">{{ pump.level|floatformat:2 }} m</td>
 			</tr>
 			<tr>
 				<td class="table-value" id="DeepwellPump{{ forloop.counter }}">{{ pump.get_waterLevel_display }}</td>
