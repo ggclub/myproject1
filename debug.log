@@ -4056,3 +4056,857 @@ NameError: global name 'ago' is not defined
 [15/Oct/2015 16:30:56] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-15 16:30:56', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'ON', 'op_mode': u'MN', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
 [15/Oct/2015 16:30:56] DEBUG [monitor.views:93] program start - Manual command
 [15/Oct/2015 16:40:12] DEBUG [monitor.views:111] database updated
+[19/Oct/2015 09:35:31] WARNING [django.request:170] Not Found: /favicon.ico
+[19/Oct/2015 09:35:35] DEBUG [monitor.views:40] K-ATES program started.
+[19/Oct/2015 09:35:36] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 09:35:36] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 09:35:36', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'ON', 'op_mode': u'MN', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 09:35:36] DEBUG [monitor.views:93] program start - Manual command
+[19/Oct/2015 09:40:05] DEBUG [monitor.views:111] database updated
+[19/Oct/2015 09:45:45] ERROR [django.request:256] Internal Server Error: /monitor/reload_display/
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Anaconda\lib\site-packages\django\core\urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "C:\Anaconda\lib\site-packages\django\core\urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "C:\Anaconda\lib\site-packages\django\core\urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "C:\Anaconda\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "C:\Django\myproject\myproject\urls.py", line 29, in <module>
+    url(r'^login/', include('login.urls', namespace="login")),
+  File "C:\Anaconda\lib\site-packages\django\conf\urls\__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "C:\Anaconda\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "C:\Django\myproject\login\urls.py", line 11, in <module>
+    url(r'^on_mode_change/$', views.on_mode_change, name='on_mode_change'),
+AttributeError: 'module' object has no attribute 'on_mode_change'
+[19/Oct/2015 10:34:03] DEBUG [monitor.views:40] K-ATES program started.
+[19/Oct/2015 10:34:03] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:34:03] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:34:03', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'ON', 'op_mode': u'MN', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:34:03] DEBUG [monitor.views:93] program start - Manual command
+[19/Oct/2015 10:35:03] ERROR [django.request:256] Internal Server Error: /login/on_mode_change/
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Django\myproject\login\views.py", line 111, in on_mode_change
+    return render(request, 'login/on_mode_change.html')
+  File "C:\Anaconda\lib\site-packages\django\shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "C:\Anaconda\lib\site-packages\django\template\loader.py", line 98, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Anaconda\lib\site-packages\django\template\loader.py", line 35, in get_template
+    return engine.get_template(template_name, dirs)
+  File "C:\Anaconda\lib\site-packages\django\template\backends\django.py", line 30, in get_template
+    return Template(self.engine.get_template(template_name, dirs))
+  File "C:\Anaconda\lib\site-packages\django\template\engine.py", line 167, in get_template
+    template, origin = self.find_template(template_name, dirs)
+  File "C:\Anaconda\lib\site-packages\django\template\engine.py", line 141, in find_template
+    source, display_name = loader(name, dirs)
+  File "C:\Anaconda\lib\site-packages\django\template\loaders\base.py", line 13, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "C:\Anaconda\lib\site-packages\django\template\loaders\base.py", line 23, in load_template
+    template = Template(source, origin, template_name, self.engine)
+  File "C:\Anaconda\lib\site-packages\django\template\base.py", line 190, in __init__
+    self.nodelist = engine.compile_string(template_string, origin)
+  File "C:\Anaconda\lib\site-packages\django\template\engine.py", line 261, in compile_string
+    return parser.parse()
+  File "C:\Anaconda\lib\site-packages\django\template\base.py", line 339, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Anaconda\lib\site-packages\django\template\base.py", line 395, in invalid_block_tag
+    raise self.error(token, "Invalid block tag: '%s'" % command)
+TemplateSyntaxError: Invalid block tag: 'static'
+[19/Oct/2015 10:35:29] ERROR [django.request:256] Internal Server Error: /login/on_mode_change/
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Django\myproject\login\views.py", line 111, in on_mode_change
+    return render(request, 'login/on_mode_change.html')
+  File "C:\Anaconda\lib\site-packages\django\shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "C:\Anaconda\lib\site-packages\django\template\loader.py", line 98, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Anaconda\lib\site-packages\django\template\loader.py", line 35, in get_template
+    return engine.get_template(template_name, dirs)
+  File "C:\Anaconda\lib\site-packages\django\template\backends\django.py", line 30, in get_template
+    return Template(self.engine.get_template(template_name, dirs))
+  File "C:\Anaconda\lib\site-packages\django\template\engine.py", line 167, in get_template
+    template, origin = self.find_template(template_name, dirs)
+  File "C:\Anaconda\lib\site-packages\django\template\engine.py", line 141, in find_template
+    source, display_name = loader(name, dirs)
+  File "C:\Anaconda\lib\site-packages\django\template\loaders\base.py", line 13, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "C:\Anaconda\lib\site-packages\django\template\loaders\base.py", line 23, in load_template
+    template = Template(source, origin, template_name, self.engine)
+  File "C:\Anaconda\lib\site-packages\django\template\base.py", line 190, in __init__
+    self.nodelist = engine.compile_string(template_string, origin)
+  File "C:\Anaconda\lib\site-packages\django\template\engine.py", line 261, in compile_string
+    return parser.parse()
+  File "C:\Anaconda\lib\site-packages\django\template\base.py", line 339, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Anaconda\lib\site-packages\django\template\base.py", line 395, in invalid_block_tag
+    raise self.error(token, "Invalid block tag: '%s'" % command)
+TemplateSyntaxError: Invalid block tag: 'static'
+[19/Oct/2015 10:35:37] ERROR [django.request:256] Internal Server Error: /login/on_mode_change/
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Django\myproject\login\views.py", line 111, in on_mode_change
+    return render(request, 'login/on_mode_change.html')
+  File "C:\Anaconda\lib\site-packages\django\shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "C:\Anaconda\lib\site-packages\django\template\loader.py", line 98, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Anaconda\lib\site-packages\django\template\loader.py", line 35, in get_template
+    return engine.get_template(template_name, dirs)
+  File "C:\Anaconda\lib\site-packages\django\template\backends\django.py", line 30, in get_template
+    return Template(self.engine.get_template(template_name, dirs))
+  File "C:\Anaconda\lib\site-packages\django\template\engine.py", line 167, in get_template
+    template, origin = self.find_template(template_name, dirs)
+  File "C:\Anaconda\lib\site-packages\django\template\engine.py", line 141, in find_template
+    source, display_name = loader(name, dirs)
+  File "C:\Anaconda\lib\site-packages\django\template\loaders\base.py", line 13, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "C:\Anaconda\lib\site-packages\django\template\loaders\base.py", line 23, in load_template
+    template = Template(source, origin, template_name, self.engine)
+  File "C:\Anaconda\lib\site-packages\django\template\base.py", line 190, in __init__
+    self.nodelist = engine.compile_string(template_string, origin)
+  File "C:\Anaconda\lib\site-packages\django\template\engine.py", line 261, in compile_string
+    return parser.parse()
+  File "C:\Anaconda\lib\site-packages\django\template\base.py", line 339, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Anaconda\lib\site-packages\django\template\base.py", line 395, in invalid_block_tag
+    raise self.error(token, "Invalid block tag: '%s'" % command)
+TemplateSyntaxError: Invalid block tag: 'static'
+[19/Oct/2015 10:35:59] DEBUG [monitor.views:438] setting_mode_confirm: MN
+[19/Oct/2015 10:36:04] DEBUG [monitor.views:438] setting_mode_confirm: AT
+[19/Oct/2015 10:36:04] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:04] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:04', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'ON', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:04] DEBUG [monitor.views:448] write_cmd from settimg_mode_confirm
+[19/Oct/2015 10:36:05] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:05] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:05', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:05] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:08] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:08] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:08', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:08] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:09] DEBUG [monitor.views:438] setting_mode_confirm: MN
+[19/Oct/2015 10:36:09] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:09] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:09', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'MN', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:09] DEBUG [monitor.views:448] write_cmd from settimg_mode_confirm
+[19/Oct/2015 10:36:12] DEBUG [monitor.views:438] setting_mode_confirm: AT
+[19/Oct/2015 10:36:12] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:12] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:12', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:12] DEBUG [monitor.views:448] write_cmd from settimg_mode_confirm
+[19/Oct/2015 10:36:15] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:15] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:15', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:15] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:18] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:18] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:18', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:18] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:21] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:21] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:21', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:21] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:25] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:25] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:25', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:25] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:28] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:28] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:28', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:28] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:31] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:31] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:34] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:34] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:34', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:34] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:38] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:38] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:38', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:38] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:41] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:41] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:41', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:41] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:44] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:44] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:44', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:44] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:47] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:47] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:47', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:47] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:51] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:51] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:51', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:51] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:54] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:54] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:54', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:54] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:36:57] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:36:57] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:36:57', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:36:57] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:00] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:00] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:00', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:00] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:04] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:04] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:04', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:04] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:07] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:07] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:07', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:07] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:10] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:10] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:10', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:10] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:13] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:13] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:13', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:13] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:17] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:17] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:17', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:17] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:20] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:20] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:20', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:20] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:23] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:23] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:23', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:23] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:26] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:26] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:26', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:26] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:30] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:30] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:30', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:30] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:33] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:33] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:33', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:33] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:36] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:36] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:36', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:36] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:39] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:39] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:39', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:39] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:43] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:43] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:43', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:43] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:46] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:46] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:46', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:46] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:49] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:49] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:49', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:49] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:52] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:52] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:52', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:52] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:56] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:56] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:56', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:56] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:37:59] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:37:59] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:37:59', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:37:59] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:02] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:02] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:02', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:02] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:05] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:05] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:05', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:05] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:09] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:09] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:09', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:09] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:12] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:12] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:12', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:12] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:15] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:15] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:15', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:15] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:18] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:18] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:18', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:18] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:22] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:22] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:22', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:22] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:25] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:25] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:25', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:25] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:28] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:28] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:28', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:28] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:31] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:31] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:35] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:35] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:35', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:35] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:38] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:38] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:38', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:38] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:41] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:41] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:41', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:41] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:45] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:45] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:45', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:45] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:48] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:48] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:48', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:48] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:51] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:51] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:51', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:51] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:54] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:54] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:54', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:54] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:38:58] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:38:58] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:38:58', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:38:58] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:39:01] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:39:01] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:39:01', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:39:01] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:39:04] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:39:04] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:39:04', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:39:04] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 10:39:06] DEBUG [monitor.views:40] K-ATES program started.
+[19/Oct/2015 10:39:06] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 10:39:06] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 10:39:06', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'MN', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 10:39:06] DEBUG [monitor.views:93] program start - Manual command
+[19/Oct/2015 10:40:04] DEBUG [monitor.views:111] database updated
+[19/Oct/2015 10:50:03] DEBUG [monitor.views:111] database updated
+[19/Oct/2015 11:00:04] DEBUG [monitor.views:111] database updated
+[19/Oct/2015 11:10:03] DEBUG [monitor.views:111] database updated
+[19/Oct/2015 11:13:45] DEBUG [monitor.views:40] K-ATES program started.
+[19/Oct/2015 11:13:45] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:13:45] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:13:45', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'ON', 'op_mode': u'MN', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:13:45] DEBUG [monitor.views:93] program start - Manual command
+[19/Oct/2015 11:14:13] DEBUG [monitor.views:40] K-ATES program started.
+[19/Oct/2015 11:14:13] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:13] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:13', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'ON', 'op_mode': u'MN', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:13] DEBUG [monitor.views:93] program start - Manual command
+[19/Oct/2015 11:14:21] DEBUG [monitor.views:438] setting_mode_confirm: MN
+[19/Oct/2015 11:14:25] DEBUG [monitor.views:438] setting_mode_confirm: AT
+[19/Oct/2015 11:14:25] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:25] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:25', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'ON', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:25] DEBUG [monitor.views:448] write_cmd from settimg_mode_confirm
+[19/Oct/2015 11:14:25] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:25] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:25', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:26] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:14:29] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:29] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:29', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:29] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:14:32] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:32] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:32', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:32] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:14:32] DEBUG [monitor.views:438] setting_mode_confirm: MN
+[19/Oct/2015 11:14:32] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:32] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:32', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'MN', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:32] DEBUG [monitor.views:448] write_cmd from settimg_mode_confirm
+[19/Oct/2015 11:14:40] DEBUG [monitor.views:438] setting_mode_confirm: AT
+[19/Oct/2015 11:14:40] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:40] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:40', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:40] DEBUG [monitor.views:448] write_cmd from settimg_mode_confirm
+[19/Oct/2015 11:14:42] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:42] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:42', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:42] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:14:45] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:45] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:45', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:45] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:14:48] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:48] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:48', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:48] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:14:52] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:52] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:52', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:52] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:14:55] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:55] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:55', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:55] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:14:58] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:14:58] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:14:58', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:14:58] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:02] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:02] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:02', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:02] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:05] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:05] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:05', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:05] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:08] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:08] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:08', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:08] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:11] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:11] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:11', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:11] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:15] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:15] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:15', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:15] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:18] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:18] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:18', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:18] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:21] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:21] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:21', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:21] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:24] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:24] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:24', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:24] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:28] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:28] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:28', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:28] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:31] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:31] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:34] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:34] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:34', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:34] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:38] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:38] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:38', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:38] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:41] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:41] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:41', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:41] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:44] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:44] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:44', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:44] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:47] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:47] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:47', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:47] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:51] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:51] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:51', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:51] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:54] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:54] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:54', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:54] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:15:57] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:15:57] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:15:57', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:15:57] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:00] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:00] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:00', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:00] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:04] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:04] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:04', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:04] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:07] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:07] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:07', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:07] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:10] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:10] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:10', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:10] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:13] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:13] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:13', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:13] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:17] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:17] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:17', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:17] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:20] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:20] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:20', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:20] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:23] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:23] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:23', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:23] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:26] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:26] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:26', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:26] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:30] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:30] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:30', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:30] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:33] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:33] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:33', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:33] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:36] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:36] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:36', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:36] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:39] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:39] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:39', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:39] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:43] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:43] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:43', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:43] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:46] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:46] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:46', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:46] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:49] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:49] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:49', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:49] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:52] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:52] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:52', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:52] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:56] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:56] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:56', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:56] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:16:59] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:16:59] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:16:59', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:16:59] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:17:02] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:17:02] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:17:02', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:17:02] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:17:05] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:17:05] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:17:05', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:17:05] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:17:09] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:17:09] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:17:09', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:17:09] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:17:12] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:17:12] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:17:12', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:17:12] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:17:15] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:17:15] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:17:15', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:17:15] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:17:18] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:17:18] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:17:18', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:17:18] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:17:22] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:17:22] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:17:22', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:17:22] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:17:25] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:17:25] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:17:25', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:17:25] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:17:28] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:17:28] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:17:28', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:17:28] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:17:31] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:17:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:17:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:17:31] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:17:35] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:17:35] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:17:35', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'ON'}
+[19/Oct/2015 11:17:35] DEBUG [monitor.controller:1072] write_cmd from hmidata(dwp1, off)
+[19/Oct/2015 11:20:02] DEBUG [monitor.views:111] database updated
+[19/Oct/2015 11:26:57] ERROR [django.request:256] Internal Server Error: /monitor/reload_display/
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Anaconda\lib\site-packages\django\contrib\auth\decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Django\myproject\monitor\views.py", line 169, in reload_display
+    response_data.update(controller.read_data_from_json(rt))
+  File "C:\Django\myproject\monitor\controller.py", line 428, in read_data_from_json
+    "temp_mode": temp_mode,
+NameError: global name 'temp_mode' is not defined
+[19/Oct/2015 11:26:57] DEBUG [monitor.views:40] K-ATES program started.
+[19/Oct/2015 11:26:57] ERROR [django.request:256] Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Django\myproject\login\views.py", line 20, in index
+    return index(request)
+  File "C:\Anaconda\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Anaconda\lib\site-packages\django\contrib\auth\decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Django\myproject\monitor\views.py", line 87, in index
+    response_data.update(controller.read_data_from_json(rt))
+  File "C:\Django\myproject\monitor\controller.py", line 428, in read_data_from_json
+    "temp_mode": temp_mode,
+NameError: global name 'temp_mode' is not defined
+[19/Oct/2015 11:27:28] DEBUG [monitor.views:40] K-ATES program started.
+[19/Oct/2015 11:27:28] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:27:28] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:27:28', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:27:28] DEBUG [monitor.views:93] program start - Auto command
+[19/Oct/2015 11:27:36] DEBUG [monitor.views:438] setting_mode_confirm: MN
+[19/Oct/2015 11:27:36] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:27:36] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:27:36', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'MN', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:27:36] DEBUG [monitor.views:448] write_cmd from settimg_mode_confirm
+[19/Oct/2015 11:29:25] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:29:25] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:29:26] DEBUG [monitor.views:40] K-ATES program started.
+[19/Oct/2015 11:29:26] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:29:26] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:29:26', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:29:26] DEBUG [monitor.views:93] program start - Auto command
+[19/Oct/2015 11:29:29] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:29:29] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:29:32] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:29:32] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:29:35] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:29:35] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:29:38] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:29:38] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:29:41] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:29:41] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:29:45] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:29:45] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:29:48] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:29:48] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:29:51] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:29:51] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:29:54] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:29:54] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:29:57] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:29:57] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:01] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:01] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:03] DEBUG [monitor.views:111] database updated
+[19/Oct/2015 11:30:06] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:06] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:09] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:09] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:13] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:13] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:16] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:16] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:19] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:19] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:22] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:22] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:25] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:25] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:28] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:28] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:32] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:32] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:35] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:35] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:38] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:38] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:41] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:41] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:45] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:45] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:48] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:48] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:51] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:51] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:54] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:54] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:30:57] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:30:57] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:00] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:00] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:04] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:04] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:04] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:05] DEBUG [monitor.views:40] K-ATES program started.
+[19/Oct/2015 11:31:05] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:05] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:31:05] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:31:05', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:31:05] DEBUG [monitor.views:93] program start - Auto command
+[19/Oct/2015 11:31:09] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:09] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:09] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:12] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:12] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:12] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:15] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:15] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:15] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:18] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:18] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:18] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:21] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:21] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:21] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:24] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:24] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:24] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:28] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:28] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:28] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:31] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:31] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:31] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:34] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:34] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:34] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:37] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:37] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:37] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:40] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:40] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:40] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:44] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:44] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:44] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:47] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:47] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:47] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:50] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:50] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:50] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:53] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:53] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:53] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:31:56] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:31:56] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:31:57] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:00] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:00] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:00] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:03] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:03] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:03] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:06] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:06] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:06] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:09] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:09] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:09] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:12] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:12] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:12] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:16] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:16] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:16] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:19] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:19] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:19] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:22] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:22] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:22] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:25] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:25] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:25] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:29] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:29] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:29] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:32] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:32] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:32] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:35] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:35] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:35] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:38] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:38] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:38] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:41] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:41] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:41] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:41] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:32:44] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:44] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:45] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:45] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:32:48] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:48] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:48] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:48] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:32:51] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:51] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:51] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:51] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:32:54] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:54] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:54] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:54] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:32:57] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:32:57] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:32:57] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:32:57] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:33:01] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:33:01] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:33:01] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:33:01] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:33:04] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:33:04] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:33:04] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:33:04] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:33:07] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:33:07] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:33:07] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:33:07] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:33:10] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:33:10] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:33:10] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:33:10] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:33:13] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:33:13] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:33:13] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:33:13] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:33:16] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:33:16] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:33:17] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:33:17] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:33:20] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:33:20] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:33:20] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:33:20] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:33:23] DEBUG [monitor.views:149] temp_mode: CL
+[19/Oct/2015 11:33:23] DEBUG [monitor.views:150] old_temp_mode: CL
+[19/Oct/2015 11:33:23] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:33:23] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:33:27] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:33:27] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:33:27] DEBUG [monitor.views:165] temp_mode: HT
+[19/Oct/2015 11:33:27] DEBUG [monitor.views:166] old_temp_mode: CL
+[19/Oct/2015 11:33:30] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:33:30] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:33:30] DEBUG [monitor.views:165] temp_mode: HT
+[19/Oct/2015 11:33:30] DEBUG [monitor.views:166] old_temp_mode: HT
+[19/Oct/2015 11:33:34] DEBUG [monitor.controller:439] controller, temp_mode:HT
+[19/Oct/2015 11:33:34] DEBUG [monitor.controller:440] {'temp_HPOut6': 19.13, 'COP': 83.87, 'temp_HPOut4': 19.11, 'temp_HPOut5': 19.19, 'temp_HPOut2': 18.98, 'temp_HPOut3': 18.97, 'temp_HPOut1': 19.01, 'rt': {'RT': 0}, 'datetime': datetime.datetime(2015, 10, 15, 16, 58, 14), 'hmidata_error': None, 'temp_mode': u'HT', 'temp_HEIn1': {'temperature': 18.85}, 'temp_HEOut2': {'temperature': 18.38}, 'temp_HEOut1': {'temperature': 18.68}, 'temp_HEIn2': {'temperature': 18.44}, 'temp_HPIn6': 18.68, 'temp_HPIn4': 18.68, 'temp_HPIn5': 18.68, 'CPFM': {'integralFlux': 144989.89, 'velocity': 0, 'temperature': 0, 'currentFlux': 0}, 'heat_pump': [{'tempOut': 19.01, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.98, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 18.97, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.11, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.19, 'switch': u'OFF', 'tempIn': 18.68}, {'tempOut': 19.13, 'switch': u'OFF', 'tempIn': 18.68}], 'temp_HPIn2': 18.68, 'DWP': [{'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': -3.998}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 2.654}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 5.037}, {'switch': u'OFF', 'get_waterLevel_display': u'\uc801\uc815', 'level': 4.462}], 'power': {'integralPowerConsumption': 3.87, 'currentPowerConsumption': 0.29}, 'DWPFM': {'integralFlux': 188.3, 'velocity': 1.107, 'temperature': 0, 'currentFlux': 48.905}, 'temp_HPIn1': 18.68, 'CP': [{'Hz': 0, 'flux': 0, 'get_CPID_display': 1, 'switch': u'OFF'}, {'Hz': 0, 'flux': 0, 'get_CPID_display': 2, 'switch': u'OFF'}], 'op_mode': u'AT', 'temp_HPIn3': 18.68, 'cp_operating': 1}
+[19/Oct/2015 11:33:34] DEBUG [monitor.views:165] temp_mode: HT
+[19/Oct/2015 11:33:34] DEBUG [monitor.views:166] old_temp_mode: HT
+[19/Oct/2015 11:33:39] DEBUG [monitor.views:40] K-ATES program started.
+[19/Oct/2015 11:33:39] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:33:39] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-19 11:33:39', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:33:39] DEBUG [monitor.views:93] program start - Auto command
+[19/Oct/2015 11:33:55] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:33:55] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:33:55', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:33:55] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:33:58] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:33:58] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:33:58', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:33:58] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:01] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:01] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:01', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:01] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:04] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:04] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:04', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:04] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:04] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:04] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:04', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:04] DEBUG [monitor.controller:1154] write_cmd from hmidata(dwp3, off)
+[19/Oct/2015 11:34:08] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:08] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:08', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:08] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:08] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:08] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:08', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:08] DEBUG [monitor.controller:1154] write_cmd from hmidata(dwp3, off)
+[19/Oct/2015 11:34:11] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:11] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:11', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:11] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:11] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:11] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:11', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:11] DEBUG [monitor.controller:1154] write_cmd from hmidata(dwp3, off)
+[19/Oct/2015 11:34:14] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:14] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:14', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:14] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:15] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:15] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:15', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:15] DEBUG [monitor.controller:1154] write_cmd from hmidata(dwp3, off)
+[19/Oct/2015 11:34:18] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:18] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:18', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:18] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:18] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:18] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:18', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:18] DEBUG [monitor.controller:1154] write_cmd from hmidata(dwp3, off)
+[19/Oct/2015 11:34:21] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:21] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:21', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:21] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:21] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:21] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:21', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:21] DEBUG [monitor.controller:1154] write_cmd from hmidata(dwp3, off)
+[19/Oct/2015 11:34:24] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:24] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:24', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:24] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:24] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:24] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:24', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:24] DEBUG [monitor.controller:1154] write_cmd from hmidata(dwp3, off)
+[19/Oct/2015 11:34:28] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:28] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:28', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:28] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:28] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:28] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:28', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:28] DEBUG [monitor.controller:1154] write_cmd from hmidata(dwp3, off)
+[19/Oct/2015 11:34:31] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:31] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:31] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:31] DEBUG [monitor.controller:1154] write_cmd from hmidata(dwp3, off)
+[19/Oct/2015 11:34:34] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:34] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:34', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:34] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:38] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:38] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:37', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:38] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:41] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:41] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:41', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:41] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:44] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:44] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:44', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:44] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:47] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:47] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:47', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:47] DEBUG [monitor.controller:984] write_cmd from hmidata(cp, on)
+[19/Oct/2015 11:34:49] DEBUG [monitor.views:440] setting_mode_confirm: MN
+[19/Oct/2015 11:34:49] DEBUG [monitor.controller:262] command written
+[19/Oct/2015 11:34:49] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 60, 'datetime': '2015-10-19 11:34:49', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'MN', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 1000, 'hz2': 0, 'cp1': u'ON', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[19/Oct/2015 11:34:49] DEBUG [monitor.views:450] write_cmd from settimg_mode_confirm

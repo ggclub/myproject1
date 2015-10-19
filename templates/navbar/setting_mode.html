@@ -28,6 +28,10 @@
 	function setModeConfirm () {
 		var mode = $('div').first().attr('class').split("-")[1];
 		// console.log(mode);
+		// 수동 모드로 전환하는 경우 로그인 창을 띄움
+		if (mode == 'MN') {
+			window.location.replace("{% url 'login:on_mode_change' %}");
+		} else {
 		$.ajax({
 			url: '/monitor/setting_mode_confirm/',
 			type: "POST",
@@ -80,5 +84,7 @@
 				window.close();
 			}
 		});
+		// end of ajax
+		}
 	}
 </script>

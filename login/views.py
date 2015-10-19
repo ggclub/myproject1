@@ -106,5 +106,26 @@ def change_password_done(request):
 	logout(request)
 	logging.debug("logout on password change")
 	return render(request, "login/index.html", {})
+
+def on_mode_change(request):
+	return render(request, 'login/on_mode_change.html')
+
+def on_mode_confirm(request):
+	if request.method == 'POST':
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(username=username, password=password)
+		content = {}
+		if user is not None:
+	    		if user.is_active:
+	        			# login(request, user)
+	        			content = {'confirm': True}
+    			else:
+	        			# Return a 'disabled account' error message
+	        			content = {'error_msg': '사용 불가능한 계정입니다.'}
+		else:
+	    		# Return an 'invalid login' error message.
+	    		content = {'error_msg': '아이디 혹은 비밀번호가 일치하지 않습니다.'}
 	
+		return render(request, 'login/on_mode_change.html', content)
 

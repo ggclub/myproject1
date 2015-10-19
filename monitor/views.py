@@ -78,9 +78,9 @@ def index(request):
 	response_data.update({"temp_mode": temp_mode})
 
 	# 처음 프로그램 실행시 모드는 수동
-	response_data.update({"op_mode":"MN"})
+	response_data.update({"op_mode":"AT"})
 	oml = OperationModeLogger(
-		dateTime=timezone.now(), opMode="MN"
+		dateTime=timezone.now(), opMode="AT"
 	).save()
 
 	# 센서값 읽어오기
@@ -90,7 +90,7 @@ def index(request):
 
 	# 처음 프로그램 실행시 hmi도 수동모드로 명령
 	controller.write_cmd()
-	log.debug("program start - Manual command")
+	log.debug("program start - Auto command")
 
 	response_data.update(csrf(request))
 	url = 'monitor/index.html'
@@ -143,21 +143,6 @@ def reload_display(request):
 			response_data.update(controller.get_CIU_total())
 	rt = response_data["rt_total"]
 
-	# 냉난방모드 확인
-	temp_mode = response_data["temp_mode"]
-	old_temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
-	if temp_mode != old_temp_mode:
-		tm = TemperatureModeLogger(
-			dateTime=timezone.now(), tempMode=temp_mode
-			).save()
-
-	# 운전 모드 정보
-	op_mode = OperationModeLogger.objects.latest('id').opMode
-	response_data.update({
-		"op_mode": op_mode,
-		"temp_mode": temp_mode,
-	})
-	
 	global flag_command 
 	if flag_command: # command를 준 후에 파일을 잠시 읽지 않는다.
 		import time
@@ -174,6 +159,23 @@ def reload_display(request):
 	# 	pass
 	# else: 
 
+	# 냉난방모드 확인
+	temp_mode = response_data["temp_mode"]
+	old_temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
+	# log.debug("temp_mode: " +str(temp_mode))
+	# log.debug("old_temp_mode: " +str(old_temp_mode))
+	if temp_mode != old_temp_mode:
+		tm = TemperatureModeLogger(
+			dateTime=timezone.now(), tempMode=temp_mode
+			).save()
+
+	# 운전 모드 정보
+	op_mode = OperationModeLogger.objects.latest('id').opMode
+	response_data.update({
+		"op_mode": op_mode,
+		"temp_mode": temp_mode,
+	})
+	
 	t = timezone.now()		
 	# log.debug(str(response_data["error"]))
 

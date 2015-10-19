@@ -282,7 +282,7 @@ def read_data_from_json(rt):
 
 	datetime = dt.strptime(_data["datetime"], datetime_format)
 	op_mode = OperationModeLogger.objects.latest('id').opMode
-	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
+	# temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
 	# 작동중인 순환펌프; id 1: 0, id 2: 1
 	cp_operating = int(_data["cp_operating"]) - 1
 
@@ -425,7 +425,7 @@ def read_data_from_json(rt):
 		"COP": _data["cop"],
 		# "COP": COP,
 		"op_mode": op_mode,
-		"temp_mode": temp_mode,
+		"temp_mode": _data["temp_mode"],
 		###### error 처리 #####
 		# 정상적으로 받은 경우 error:none. 
 		# 읽기를 실패한 경우 위의 try except에서 error msg를 return하고
@@ -436,6 +436,8 @@ def read_data_from_json(rt):
 		######################
 		"hmidata_error": None,
 	}
+	# log.debug("controller, temp_mode:" + str(data["temp_mode"]))
+	# log.debug(str(data))
 	# buf_a, buf_b, buf_c, buf_d = set_section_buffer()
 	# data["rt"]["RT"] = rt
 	
