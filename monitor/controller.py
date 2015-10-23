@@ -282,6 +282,9 @@ def read_data_from_json(rt):
 
 	datetime = dt.strptime(_data["datetime"], datetime_format)
 	op_mode = OperationModeLogger.objects.latest('id').opMode
+	if op_mode != _data["op_mode"]:
+		write_cmd()
+
 	# temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
 	# 작동중인 순환펌프; id 1: 0, id 2: 1
 	cp_operating = int(_data["cp_operating"]) - 1
@@ -888,7 +891,7 @@ def read_data_from_json(rt):
 		# log.debug("flux_need_complement: " + str(flux_need));
 
 		# 최소유량
-		if flux_need != 0 and data["CP"][cp_operating]["flux"] < 1000:
+		if flux_need != 0 and data["CP"][cp_operating]["flux"] <= 1000:
 			# flux_need = int(30*16.67)
 			# 임시.. 최대로(테스트용)
 			flux_need = 1000

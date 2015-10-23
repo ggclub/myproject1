@@ -78,10 +78,11 @@ def index(request):
 	response_data.update({"temp_mode": temp_mode})
 
 	# 처음 프로그램 실행시 모드는 수동
-	response_data.update({"op_mode":"AT"})
-	oml = OperationModeLogger(
-		dateTime=timezone.now(), opMode="AT"
-	).save()
+	response_data.update({"op_mode": "AT"})
+	if OperationModeLogger.objects.latest('id').opMode != "AT":
+		oml = OperationModeLogger(
+			dateTime=timezone.now(), opMode="AT"
+		).save()
 
 	# 센서값 읽어오기
 	response_data.update(controller.read_data_from_json(rt))
@@ -170,9 +171,9 @@ def reload_display(request):
 			).save()
 
 	# 운전 모드 정보
-	op_mode = OperationModeLogger.objects.latest('id').opMode
+	# op_mode = OperationModeLogger.objects.latest('id').opMode
 	response_data.update({
-		"op_mode": op_mode,
+		# "op_mode": op_mode,
 		"temp_mode": temp_mode,
 	})
 	

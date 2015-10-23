@@ -10,7 +10,7 @@
   <script src="{% static "jquery/jquery-1.11.3.min.js" %}"></script>
   <title>수동 모드로 변경</title>
   <style>
-  p { color:red; }
+  /*p { color:red; }*/
   .form-horizontal > .form-group { margin:-2px 5px; }
   </style>
 </head>
@@ -18,60 +18,61 @@
 {% if confirm %}
 <script type="text/javascript">
 $.ajax({
-      url: '/monitor/setting_mode_confirm/',
-      type: "POST",
-      data : {
-        'csrfmiddlewaretoken': '{{ csrf_token }}',
-        'mode': 'MN',
-      },
-      success: function(data){
-        // window.opener.location.reload();
-        var parent = window.opener;
+  url: '/monitor/setting_mode_confirm/',
+  type: "POST",
+  data : {
+    'csrfmiddlewaretoken': '{{ csrf_token }}',
+    'mode': 'MN',
+  },
+  success: function(data){
+    // window.opener.location.reload();
+    var parent = window.opener;
 
-        // 전광판 변경
-        // 모드 선택 이펙트
-        // console.log(data);
-        // console.log(data.op_mode, data.temp_mode);
-        var opMode = data.op_mode;
-        var tempMode = data.temp_mode;
-        // console.log(opMode, tempMode);
-        if (opMode == "MN" && tempMode == "CL") {
-          // 전광판
-          parent.$('#nav-mode').attr('src', "{% static 'navbar/mode/manual-cooling.jpg' %}");
-          // 모드 선택 이펙트
-          parent.$('#mode-auto').attr('src', "{% static 'navbar/mode/auto.jpg' %}");
-          parent.$('#mode-manual').attr('src', "{% static 'navbar/mode/manual-sel.jpg' %}");
-        } else if (opMode == "MN" && tempMode == "HT") {
-          // 전광판
-          parent.$('#nav-mode').attr('src', "{% static 'navbar/mode/manual-heating.jpg' %}");
-          // 모드 선택 이펙트
-          parent.$('#mode-auto').attr('src', "{% static 'navbar/mode/auto.jpg' %}");
-          parent.$('#mode-manual').attr('src', "{% static 'navbar/mode/manual-sel.jpg' %}");
-        } else if (opMode == "AT" && tempMode == "CL") {
-          // 전광판
-          parent.$('#nav-mode').attr('src', "{% static 'navbar/mode/auto-cooling.jpg' %}");
-          // 모드 선택 이펙트
-          parent.$('#mode-auto').attr('src', "{% static 'navbar/mode/auto-sel.jpg' %}");
-          parent.$('#mode-manual').attr('src', "{% static 'navbar/mode/manual.jpg' %}");
-        } else {  // AT & HT
-          // 전광판
-          parent.$('#nav-mode').attr('src', "{% static 'navbar/mode/auto-heating.jpg' %}");
-          // 모드 선택 이펙트
-          parent.$('#mode-auto').attr('src', "{% static 'navbar/mode/auto-sel.jpg' %}");
-          parent.$('#mode-manual').attr('src', "{% static 'navbar/mode/manual.jpg' %}");
-        }
+    // 전광판 변경
+    // 모드 선택 이펙트
+    // console.log(data);
+    // console.log(data.op_mode, data.temp_mode);
+    var opMode = data.op_mode;
+    var tempMode = data.temp_mode;
+    // console.log(opMode, tempMode);
+    if (opMode == "MN" && tempMode == "CL") {
+      // 전광판
+      parent.$('#nav-mode').attr('src', "{% static 'navbar/mode/manual-cooling.jpg' %}");
+      // 모드 선택 이펙트
+      parent.$('#mode-auto').attr('src', "{% static 'navbar/mode/auto.jpg' %}");
+      parent.$('#mode-manual').attr('src', "{% static 'navbar/mode/manual-sel.jpg' %}");
+    } else if (opMode == "MN" && tempMode == "HT") {
+      // 전광판
+      parent.$('#nav-mode').attr('src', "{% static 'navbar/mode/manual-heating.jpg' %}");
+      // 모드 선택 이펙트
+      parent.$('#mode-auto').attr('src', "{% static 'navbar/mode/auto.jpg' %}");
+      parent.$('#mode-manual').attr('src', "{% static 'navbar/mode/manual-sel.jpg' %}");
+    } else if (opMode == "AT" && tempMode == "CL") {
+      // 전광판
+      parent.$('#nav-mode').attr('src', "{% static 'navbar/mode/auto-cooling.jpg' %}");
+      // 모드 선택 이펙트
+      parent.$('#mode-auto').attr('src', "{% static 'navbar/mode/auto-sel.jpg' %}");
+      parent.$('#mode-manual').attr('src', "{% static 'navbar/mode/manual.jpg' %}");
+    } else {  // AT & HT
+      // 전광판
+      parent.$('#nav-mode').attr('src', "{% static 'navbar/mode/auto-heating.jpg' %}");
+      // 모드 선택 이펙트
+      parent.$('#mode-auto').attr('src', "{% static 'navbar/mode/auto-sel.jpg' %}");
+      parent.$('#mode-manual').attr('src', "{% static 'navbar/mode/manual.jpg' %}");
+    }
 
-        parent.chkBtnActive();
+    parent.chkBtnActive();
 
-        // reload_display 화면 갱신
-        // $('#container').html(data);
-        
-        window.close();
-      }
-    });
+    // reload_display 화면 갱신
+    // $('#container').html(data);
+    
+    window.close();
+  }
+});
+// end of ajax
 </script>
 {% else %}
-<p>수동 모드로 변경하기 위해 관리자 아이디로 로그인 해 주십시오.</p>
+<p><b>수동 모드로 변경하기 위해 관리자 아이디로 로그인 해 주십시오.</b></p>
 <div id="login">
   <form class="form-horizontal" name="LoginForm" action="{% url 'login:on_mode_confirm' %}" method="post">{% csrf_token %}
   <div class="form-group">
@@ -94,5 +95,10 @@ $.ajax({
   </div>
   </form>
 </div>
+<script type="text/javascript">
+(function () {
+  window.resizeTo(366,295);
+})();
+</script>
 {% endif %}
 </body>

@@ -117,12 +117,12 @@ def on_mode_confirm(request):
 		user = authenticate(username=username, password=password)
 		content = {}
 		if user is not None:
-	    		if user.is_active:
+	    		if user.username == 'iljoog':
 	        			# login(request, user)
 	        			content = {'confirm': True}
     			else:
 	        			# Return a 'disabled account' error message
-	        			content = {'error_msg': '사용 불가능한 계정입니다.'}
+	        			content = {'error_msg': '수동 모드 변경 권한이 없는 계정입니다.'}
 		else:
 	    		# Return an 'invalid login' error message.
 	    		content = {'error_msg': '아이디 혹은 비밀번호가 일치하지 않습니다.'}

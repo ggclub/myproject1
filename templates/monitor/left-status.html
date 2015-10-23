@@ -11,7 +11,7 @@
 			</tr>
 			<tr>
 				{# <td class="table-title">RT</td> #}
-				<td class="table-value" id="RefrigerationTon">{{ rt_total }}</td>
+				<td class="table-value" id="RefrigerationTon">{{ rt_total|floatformat:2 }}</td>
 			</tr>
 			<tr>
 				<td class="table-value" id="flux-int">{{ DWPFM.integralFlux|floatformat:0 }}</td>
