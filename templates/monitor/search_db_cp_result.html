@@ -17,6 +17,7 @@
 		</tr>
 	</thead>
 	<tbody id="query-result">
+		{{ error }}
 		{% for cp1, cp2 in database_list %}
 		<tr>
 			<td class="result-datetime">{{ cp1.dateTime|date:"Y-m-d H:i" }}</td>

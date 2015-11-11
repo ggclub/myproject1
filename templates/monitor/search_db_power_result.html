@@ -9,6 +9,7 @@
 		</tr>
 	</thead>
 	<tbody id="query-result">
+		{{ error }}
 		{% for power in database_list %}
 		<tr>
 			<td class="result-datetime">{{ power.dateTime|date:"Y-m-d H:i" }}</td>
@@ -30,6 +31,7 @@
 		</tr>
 	</thead>
 	<tbody id="query-result-int">
+		{{ error }}
 		{% for power in database_list_int %}
 		<tr>
 			<td class="result-datetime">{{ power.dateTime|date:"Y-m-d" }}</td>

@@ -19,6 +19,7 @@
 		</tr>
 	</thead>
 	<tbody id="query-result">
+		{{ error }}
 		{% for hp1, hp2, hp3, hp4, hp5, hp6 in database_list %}
 		<tr>
 			<td class="result-datetime">{{ hp1.dateTime|date:"Y-m-d H:i" }}</td>

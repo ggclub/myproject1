@@ -489,7 +489,7 @@ def check_if_error_exist(error_count = 0):
 	# file = file_path + 'errorlog' + str(error_count) + '.json'
 	# errorlog 파일이 있는지 확인한다.
 	from glob import glob
-	for file in glob(file_path + 'errorlog?.*'):
+	for file in glob(file_path + 'errorlog[0-9]*'):
 		# 파일이 있으면 에러를 처리한다.
 		with open(file) as data_file:
 			_data = json.load(data_file)
@@ -720,6 +720,11 @@ def download_result(request, o):
 		response = HttpResponse("obj_type ??", content_type="text/plain")
 	return response
 
+@login_required
+def search_db_error(url):
+	response_data = {'error': 'Error! 다시 검색해 주세요.'}
+	html = render_to_string(url, response_data, RequestContext(request))
+	return HttpResponse(html)
 
 @login_required
 def search_db_ciu(request):
@@ -732,6 +737,11 @@ def search_db_ciu(request):
 def search_db_ciu_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
+
+	if start_date=='error' or end_date=='error':
+		url = 'monitor/search_db_ciu_result.html'
+		search_db_error(url)
+
 	# log.debug(str(start_date)+', '+ str(end_date))
 	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
 	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
@@ -960,6 +970,10 @@ def search_db_hp(request):
 def search_db_hp_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
+
+	if start_date=='error' or end_date=='error':
+		url = 'monitor/search_db_hp_result.html'
+		search_db_error(url)
 	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
 	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
 	end_date = dt.strftime(end, date_format)
@@ -979,7 +993,7 @@ def search_db_hp_result(request):
 		'database_list':database_list,
 		'count': count,
 	}
-
+	
 	url = 'monitor/search_db_hp_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
@@ -995,6 +1009,11 @@ def search_db_cp(request):
 def search_db_cp_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
+
+	if start_date=='error' or end_date=='error':
+		url = 'monitor/search_db_cp_result.html'
+		search_db_error(url)
+
 	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
 	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
 	end_date = dt.strftime(end, date_format)
@@ -1026,6 +1045,11 @@ def search_db_dwp(request):
 def search_db_dwp_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
+
+	if start_date=='error' or end_date=='error':
+		url = 'monitor/search_db_dwp_result.html'
+		search_db_error(url)
+
 	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
 	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
 	end_date = dt.strftime(end, date_format)
@@ -1060,6 +1084,11 @@ def search_db_fm(request):
 def search_db_fm_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
+
+	if start_date=='error' or end_date=='error':
+		url = 'monitor/search_db_fm_result.html'
+		search_db_error(url)
+
 	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
 	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
 	end_date = dt.strftime(end, date_format)
@@ -1088,8 +1117,8 @@ def search_db_fm_result(request):
 	for date in date_list:
 		d = dt.strftime(date, date_format)
 		try:
-			cpfm2.append(CPFlowmeterLogger.objects.filter(Q(dateTime__day=date.day)).latest('dateTime'))
-			dwpfm2.append(DWPFlowmeterLogger.objects.filter(Q(dateTime__day=date.day)).latest('dateTime'))
+			cpfm2.append(CPFlowmeterLogger.objects.filter(Q(dateTime__year=date.year), Q(dateTime__month=date.month), Q(dateTime__day=date.day)).latest('dateTime'))
+			dwpfm2.append(DWPFlowmeterLogger.objects.filter(Q(dateTime__year=date.year), Q(dateTime__month=date.month), Q(dateTime__day=date.day)).latest('dateTime'))
 		except:
 			pass
 	count_int = len(cpfm2)
@@ -1117,6 +1146,11 @@ def search_db_power(request):
 def search_db_power_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
+
+	if start_date=='error' or end_date=='error':
+		url = 'monitor/search_db_power_result.html'
+		search_db_error(url)
+
 	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
 	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
 	end_date = dt.strftime(end, date_format)
@@ -1141,7 +1175,7 @@ def search_db_power_result(request):
 		d = dt.strftime(date, date_format)
 		# log.debug(str(date.day))
 		try:
-			power2.append(PowerConsumptionLogger.objects.filter(Q(dateTime__day=date.day)).latest('dateTime'))
+			power2.append(PowerConsumptionLogger.objects.filter(Q(dateTime__year=date.year), Q(dateTime__month=date.month), Q(dateTime__day=date.day)).latest('dateTime'))
 		except:
 			pass
 	count_int = len(power2)
@@ -1169,6 +1203,11 @@ def search_db_cop(request):
 def search_db_cop_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
+
+	if start_date=='error' or end_date=='error':
+		url = 'monitor/search_db_cop_result.html'
+		search_db_error(url)
+
 	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
 	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
 	end_date = dt.strftime(end, date_format)
@@ -1199,6 +1238,11 @@ def search_db_tw(request):
 def search_db_tw_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
+
+	if start_date=='error' or end_date=='error':
+		url = 'monitor/search_db_tw_result.html'
+		search_db_error(url)
+
 	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
 	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
 	end_date = dt.strftime(end, date_format)
@@ -1206,6 +1250,7 @@ def search_db_tw_result(request):
 	count = 0
 
 	# tw = TubeWellLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+
 	ab1 = TWAB1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
 	ab2 = TWAB2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
 	ib1 = TWIB1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
@@ -1236,6 +1281,11 @@ def search_db_alarm(request):
 def search_db_alarm_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
+
+	if start_date=='error' or end_date=='error':
+		url = 'monitor/search_db_alarm_result.html'
+		search_db_error(url)
+
 	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
 	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
 	end_date = dt.strftime(end, date_format)

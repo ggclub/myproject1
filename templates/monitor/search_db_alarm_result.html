@@ -11,6 +11,7 @@
 		</tr>
 	</thead>
 	<tbody id="query-result">
+		{{ error }}
 		{% for alarm in database_list %}
 		<tr>
 			<td class="result-alarm">{{ alarm.get_classification_display }}</td>

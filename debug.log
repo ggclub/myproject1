@@ -106,3 +106,370 @@ SyntaxError: invalid syntax
 [23/Oct/2015 17:47:32] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-23 17:47:32', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
 [23/Oct/2015 17:47:35] DEBUG [monitor.controller:262] command written
 [23/Oct/2015 17:47:35] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-10-23 17:47:35', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:49:58] WARNING [django.request:170] Not Found: /favicon.ico
+[02/Nov/2015 12:50:02] DEBUG [monitor.views:40] K-ATES program started.
+[02/Nov/2015 12:50:02] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:02] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:02', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:03] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:03] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:03', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:03] DEBUG [monitor.views:94] program start - Auto command
+[02/Nov/2015 12:50:06] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:06] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:06', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:10] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:10] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:10', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:13] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:13] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:13', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:16] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:16] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:16', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:19] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:19] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:19', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:22] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:22] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:22', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:25] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:25] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:25', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:29] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:29] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:29', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:32] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:32] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:32', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:35] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:35] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:35', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:38] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:38] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:38', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:41] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:41] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:41', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:45] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:45] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:45', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:48] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:48] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:48', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:51] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:51] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:51', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:54] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:54] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:54', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:50:58] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:50:58] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:50:58', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:01] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:01] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:01', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:04] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:04] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:04', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:07] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:07] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:07', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:10] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:10] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:10', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:13] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:13] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:13', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:17] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:17] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:17', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:20] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:20] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:20', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:23] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:23] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:23', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:26] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:26] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:26', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:30] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:30] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:30', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:33] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:33] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:33', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:36] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:36] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:36', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:39] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:39] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:39', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:42] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:42] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:42', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:46] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:46] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:46', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:49] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:49] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:49', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:52] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:52] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:52', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:55] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:55] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:55', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:51:58] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:51:58] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:51:58', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:02] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:02] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:02', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:05] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:05] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:05', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:08] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:08] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:08', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:11] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:11] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:11', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:15] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:15] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:15', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:19] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:19] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:19', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:23] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:23] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:23', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:27] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:27] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:27', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:31] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:35] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:35] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:35', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:39] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:39] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:39', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:43] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:43] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:43', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:47] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:47] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:47', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:51] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:51] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:51', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:55] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:55] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:55', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:52:59] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:52:59] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:52:59', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:03] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:03] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:03', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:07] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:07] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:07', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:11] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:11] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:11', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:15] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:15] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:15', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:19] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:19] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:19', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:23] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:23] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:23', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:27] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:27] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:27', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:31] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:35] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:35] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:35', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:39] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:39] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:39', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:43] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:43] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:43', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:47] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:47] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:47', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:51] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:51] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:51', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:55] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:55] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:55', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:53:59] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:53:59] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:53:59', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:03] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:03] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:03', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:07] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:07] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:07', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:11] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:11] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:11', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:15] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:15] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:15', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:19] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:19] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:19', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:23] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:23] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:23', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:27] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:27] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:27', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:31] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:35] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:35] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:35', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:39] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:39] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:39', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:43] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:43] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:43', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:47] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:47] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:47', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:51] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:51] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:51', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:55] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:55] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:55', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:54:59] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:54:59] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:54:59', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:03] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:03] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:03', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:07] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:07] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:07', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:11] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:11] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:11', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:15] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:15] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:15', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:19] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:19] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:19', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:23] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:23] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:23', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:27] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:27] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:27', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:31] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:35] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:35] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:35', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:39] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:39] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:39', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:43] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:43] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:43', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:47] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:47] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:47', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:51] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:51] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:51', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:55] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:55] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:55', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:55:59] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:55:59] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:55:59', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:03] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:03] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:03', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:07] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:07] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:07', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:11] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:11] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:11', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:15] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:15] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:15', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:19] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:19] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:19', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:23] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:23] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:23', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:27] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:27] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:27', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:31] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:35] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:35] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:35', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:39] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:39] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:39', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:43] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:43] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:43', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:47] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:47] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:47', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:51] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:51] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:51', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:55] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:55] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:55', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:56:59] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:56:59] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:56:59', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:57:03] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:57:03] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:57:03', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:57:06] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:57:06] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:57:06', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[02/Nov/2015 12:57:09] DEBUG [monitor.controller:262] command written
+[02/Nov/2015 12:57:09] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-02 12:57:09', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:08:40] ERROR [django.request:256] Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Anaconda\lib\site-packages\django\core\urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "C:\Anaconda\lib\site-packages\django\core\urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "C:\Anaconda\lib\site-packages\django\core\urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "C:\Anaconda\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "C:\Django\myproject\myproject\urls.py", line 28, in <module>
+    url(r'^monitor/', include('monitor.urls', namespace="monitor")),
+  File "C:\Anaconda\lib\site-packages\django\conf\urls\__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "C:\Anaconda\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "C:\Django\myproject\monitor\urls.py", line 5, in <module>
+    from .views import *
+  File "C:\Django\myproject\monitor\views.py", line 19, in <module>
+    import controller
+  File "C:\Django\myproject\monitor\controller.py", line 1459
+    hp4 = HeatPump4Logger(
+      ^
+SyntaxError: invalid syntax
+[03/Nov/2015 16:08:56] ERROR [django.request:256] Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Anaconda\lib\site-packages\django\core\urlresolvers.py", line 366, in resolve
+    for pattern in self.url_patterns:
+  File "C:\Anaconda\lib\site-packages\django\core\urlresolvers.py", line 402, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "C:\Anaconda\lib\site-packages\django\core\urlresolvers.py", line 396, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "C:\Anaconda\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "C:\Django\myproject\myproject\urls.py", line 28, in <module>
+    url(r'^monitor/', include('monitor.urls', namespace="monitor")),
+  File "C:\Anaconda\lib\site-packages\django\conf\urls\__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "C:\Anaconda\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "C:\Django\myproject\monitor\urls.py", line 5, in <module>
+    from .views import *
+  File "C:\Django\myproject\monitor\views.py", line 19, in <module>
+    import controller
+  File "C:\Django\myproject\monitor\controller.py", line 1459
+    hp4 = HeatPump4Logger(
+      ^
+SyntaxError: invalid syntax
+[03/Nov/2015 16:10:31] DEBUG [monitor.views:40] K-ATES program started.
+[03/Nov/2015 16:10:31] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:10:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:10:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:10:31] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:10:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:10:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:10:31] DEBUG [monitor.views:94] program start - Auto command
+[03/Nov/2015 16:10:36] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:10:36] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:10:36', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:10:55] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:10:55] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:10:55', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:10:59] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:10:59] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:10:59', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:02] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:02] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:02', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:05] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:05] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:05', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:09] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:09] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:09', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:12] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:12] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:12', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:15] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:15] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:15', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:18] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:18] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:18', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:21] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:21] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:21', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:25] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:25] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:25', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:28] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:28] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:28', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:31] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:31] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:31', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:34] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:34] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:34', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:38] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:38] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:38', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:11:41] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:11:41] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:11:41', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:12:48] DEBUG [monitor.views:40] K-ATES program started.
+[03/Nov/2015 16:12:48] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:12:48] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:12:48', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:12:48] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:12:48] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:12:48', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:12:48] DEBUG [monitor.views:94] program start - Auto command
+[03/Nov/2015 16:12:51] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:12:51] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:12:51', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:12:54] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:12:54] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:12:54', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:12:57] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:12:57] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:12:57', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:00] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:00] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:00', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:03] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:03] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:03', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:07] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:07] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:07', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:10] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:10] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:10', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:13] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:13] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:13', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:16] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:16] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:16', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:19] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:19] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:19', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:23] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:23] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:23', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:26] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:26] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:26', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:29] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:29] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:29', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:32] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:32] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:32', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:36] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:36] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:36', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:39] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:39] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:39', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
+[03/Nov/2015 16:13:42] DEBUG [monitor.controller:262] command written
+[03/Nov/2015 16:13:42] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-03 16:13:42', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'HT', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}

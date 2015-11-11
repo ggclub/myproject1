@@ -277,7 +277,7 @@ def read_data_from_json(rt):
 			_data = json.load(data_file)
 
 	except Exception, e:
-		log.error(str(e))
+		# log.error(str(e))
 		return { "hmidata_error": e }
 
 	datetime = dt.strptime(_data["datetime"], datetime_format)
@@ -295,8 +295,18 @@ def read_data_from_json(rt):
 	# except ZeroDivisionError:
 	# 	COP = 0
 
-	# 관측센서 (한달 전 데이터 찾기)
-	# month_ago = datetime - timezone.timedelta(days=30)
+	# 관측센서 DB
+	try:
+		level1 = TWSB1Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level
+		level2 = TWAB1Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level
+		level3 = TWAB2Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level
+		level4 = TWSB2Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level
+	except:
+		level1 = TWSB1Logger.objects.latest('id').level
+		level2 = TWAB1Logger.objects.latest('id').level
+		level3 = TWAB2Logger.objects.latest('id').level
+		level4 = TWSB2Logger.objects.latest('id').level
+
 
 	data = {
 		# hmi와의 통신 에러를 확인하기 위해 필요함.
@@ -339,22 +349,23 @@ def read_data_from_json(rt):
 			{
 				"switch":_data["dwp1"],
 				"get_waterLevel_display":_data["dwp1_lv"],
-				"level" : TWSB1Logger.objects.filter(Q(dateTime__gte=datetime))[:1].get().level,
+				"level" : level1,
+
 			},
 			{
 				"switch":_data["dwp2"],
 				"get_waterLevel_display":_data["dwp2_lv"],
-				"level" : TWAB1Logger.objects.filter(Q(dateTime__gte=datetime))[:1].get().level,
+				"level" : level2,
 			},
 			{
 				"switch":_data["dwp3"],
 				"get_waterLevel_display":_data["dwp3_lv"],
-				"level" : TWAB2Logger.objects.filter(Q(dateTime__gte=datetime))[:1].get().level,
+				"level" : level3,
 			},
 			{
 				"switch":_data["dwp4"],
 				"get_waterLevel_display":_data["dwp4_lv"],
-				"level" : TWSB2Logger.objects.filter(Q(dateTime__gte=datetime))[:1].get().level,
+				"level" : level4,
 			}
 		],
 		# 순환 펌프 2개 list
@@ -1454,9 +1465,9 @@ def save_data(data):
 		    )
 		hp3 = HeatPump3Logger(
 		    dateTime=timezone.now(), opMode=data['op_mode'], switch=data["heat_pump"][2]["switch"], 
-		    tempIn=hpi3, tempOut=hpo3
-		    )
-	    	hp4 = HeatPump4Logger(
+			tempIn=hpi3, tempOut=hpo3
+			)
+		hp4 = HeatPump4Logger(
 		    dateTime=timezone.now(), opMode=data['op_mode'], switch=data["heat_pump"][3]["switch"], 
 		    tempIn=hpi4, tempOut=hpo4
 		    )
@@ -1780,15 +1791,24 @@ def write_rt(rt):
 	# rt값과 관측센서 값을 보내준다.
 	n = timezone.now()
 	datetime = str(n)[:-7]
-	# month_ago = n-timezone.timedelta(days=30)
+	# 관측센서 DB
+	try:
+		level1 = TWSB1Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level
+		level2 = TWAB1Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level
+		level3 = TWAB2Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level
+		level4 = TWSB2Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level
+	except:
+		level1 = TWSB1Logger.objects.latest('id').level
+		level2 = TWAB1Logger.objects.latest('id').level
+		level3 = TWAB2Logger.objects.latest('id').level
+		level4 = TWSB2Logger.objects.latest('id').level
 	content = {
 		"datetime" : datetime,
 		"rt" : rt,
-		"level1" : TWSB1Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level,
-		"level2" : TWAB1Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level,
-		"level3" : TWAB2Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level,
-		"level4" : TWSB2Logger.objects.filter(Q(dateTime__gte=n))[:1].get().level,
-		# "tube_date" : str(TWSB1Logger.objects.filter(Q(dateTime__gte=n))[:1].get().dateTime)[:-3],
+		"level1" : level1,
+		"level2" : level2,
+		"level3" : level3,
+		"level4" : level4,
 	}
 	filename = file_path + 'rt.json'
 	try:

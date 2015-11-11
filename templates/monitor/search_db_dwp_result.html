@@ -18,6 +18,7 @@
 		</tr>
 	</thead>
 	<tbody id="query-result">
+		{{ error }}
 		{% for dwp1, dwp2, dwp3, dwp4, temp in database_list %}
 		<tr>
 			<td class="result-datetime">{{ dwp1.dateTime|date:"Y-m-d H:i" }}</td>

@@ -9,6 +9,7 @@
 		</tr>
 	</thead>
 	<tbody id="query-result">
+		{{ error }}
 		{% for cop in database_list %}
 		<tr>
 			<td class="result-datetime">{{ cop.dateTime|date:"Y-m-d H:i" }}</td>
