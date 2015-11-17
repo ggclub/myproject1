@@ -11609,3 +11609,36 @@ NoReverseMatch: Reverse for '('/login/',)' with arguments '()' and keyword argum
 [17/Nov/2015 10:51:04] DEBUG [monitor.controller:262] command written
 [17/Nov/2015 10:51:04] DEBUG [monitor.controller:263] {'flux1': 0, 'cp1_hz': 0, 'datetime': '2015-11-17 10:51:04', 'dwp4': u'OFF', 'dwp3': u'OFF', 'temp_mode': u'CL', 'dwp1': u'OFF', 'op_mode': u'AT', 'cp2_hz': 0, 'flux2': 0, 'cp2_flux': 0, 'switch1': u'OFF', 'switch2': u'OFF', 'hz1': 0, 'cp1_flux': 0, 'hz2': 0, 'cp1': u'OFF', 'cp2': u'OFF', 'cp_operating': 1, 'dwp2': u'OFF'}
 [17/Nov/2015 10:51:04] DEBUG [monitor.views:94] program start - Auto command
+[17/Nov/2015 11:00:02] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 11:10:03] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 11:12:37] DEBUG [monitor.views:986] start
+[17/Nov/2015 11:12:37] DEBUG [monitor.views:994] search done
+[17/Nov/2015 11:12:37] DEBUG [monitor.views:997] zip done
+[17/Nov/2015 11:20:03] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 11:30:05] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 11:40:03] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 11:50:05] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 12:00:03] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 12:10:05] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 12:20:02] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 12:29:04] DEBUG [monitor.views:986] start
+[17/Nov/2015 12:29:04] DEBUG [monitor.views:994] search done
+[17/Nov/2015 12:29:04] DEBUG [monitor.views:997] zip done
+[17/Nov/2015 12:30:04] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 12:30:06] DEBUG [monitor.views:986] start
+[17/Nov/2015 12:30:06] DEBUG [monitor.views:994] search done
+[17/Nov/2015 12:30:06] DEBUG [monitor.views:997] zip done
+[17/Nov/2015 12:40:02] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 12:50:04] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 13:00:02] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 13:10:03] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 13:20:04] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 13:30:02] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 13:40:04] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 13:50:02] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 14:00:02] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 14:10:03] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 14:20:04] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 14:30:02] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 14:40:04] DEBUG [monitor.views:112] database updated
+[17/Nov/2015 14:50:04] DEBUG [monitor.views:112] database updated
