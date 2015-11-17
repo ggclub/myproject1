@@ -203,6 +203,9 @@ def reload_display(request):
 			if t.minute % 5 == 0 and t.second < 4:
 				save_data(response_data)
 
+	""" for test """
+	# save_data(response_data)
+
 
 	url = 'monitor/container.html'
 	html = render_to_string(url, response_data, RequestContext(request))
@@ -980,6 +983,7 @@ def search_db_hp_result(request):
 	name = request.POST.get('name', '0')
 	count = 0
 
+	log.debug("start")
 	hp1 = HeatPump1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
 	hp2 = HeatPump2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
 	hp3 = HeatPump3Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
@@ -987,8 +991,11 @@ def search_db_hp_result(request):
 	hp5 = HeatPump5Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
 	hp6 = HeatPump6Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
 	count += hp1.count()
+	log.debug("search done")
 
 	database_list = zip(list(hp1), list(hp2), list(hp3), list(hp4), list(hp5), list(hp6))
+	log.debug("zip done")
+
 	response_data = {
 		'database_list':database_list,
 		'count': count,
@@ -1020,6 +1027,7 @@ def search_db_cp_result(request):
 	name = request.POST.get('name', '0')
 	count = 0
 
+	log.debug(start_date)
 	cp1 = CirculatingPump1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
 	cp2 = CirculatingPump2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
 	count += cp1.count()
