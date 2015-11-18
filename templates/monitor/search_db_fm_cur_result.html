@@ -1,0 +1,27 @@
+{% load monitor_extras %}
+<!DOCTYPE HTML>
+<div class="cur">
+<div class="found" style="display:none;">{{ count }}</div>
+<table class="table table-bordered" style="margin-bottom:0px;">
+	<tbody id="query-result">
+		{{ error }}
+		{% for cpfm, dwpfm, in1, in2, out1, out2 in database_list %}
+		<tr>
+			<td class="result-datetime">{{ cpfm.dateTime|date:"Y-m-d H:i" }}</td>
+			<td class="result-cpfm">{{ cpfm.currentFlux|div:16.67 }}</td>
+			<td class="result-cpfm">{{ cpfm.currentFlux }}</td>
+			<td class="result-temp">{{ out1.temperature }}</td>
+			<td class="result-cpfm">{{ cpfm.currentFlux|div:16.67 }}</td>
+			<td class="result-cpfm">{{ cpfm.currentFlux }}</td>
+			<td class="result-temp">{{ in1.temperature }}</td>
+			<td class="result-dwpfm">{{ dwpfm.currentFlux }}</td>
+			<td class="result-dwpfm">{{ dwpfm.currentFlux|multiply:16.67 }}</td>
+			<td class="result-temp">{{ in2.temperature }}</td>
+			<td class="result-dwpfm">{{ dwpfm.currentFlux }}</td>
+			<td class="result-dwpfm">{{ dwpfm.currentFlux|multiply:16.67 }}</td>
+			<td class="result-temp">{{ out2.temperature }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+</div>

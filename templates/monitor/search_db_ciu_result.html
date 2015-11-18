@@ -1,19 +1,6 @@
 <!DOCTYPE HTML>
-
-<table class="table table-bordered  table-result">
-	<thead id="query-title">
-		<tr>
-			<td class="result-datetime"><b>시간</b></td>
-			<td class="result-floor"><b>층 수</b></td>
-			<td class="result-location"><b>실내기명</b></td>
-			<td class="result-switch"><b>동작상태</b></td>
-			<td class="result-set-temp"><b>설정온도</b></td>
-			<td class="result-temperature"><b>실내온도</b></td>
-			<td class="result-op-mode"><b>운전모드</b></td>
-			{# <td class="result-air-flow"><b>풍량</b></td> #}
-			{# <td class="result-state"><b>에러</b></td> #}
-		</tr>
-	</thead>
+<div class="found" style="display:none;">{{ count }}</div>
+<table class="table table-bordered" style="margin-bottom:0px;">
 	<tbody id="query-result">
 		{{ error }}
 		{% if database_list %}
@@ -53,4 +40,3 @@
 		{% endif %}
 	</tbody>
 </table>
-<div id="found" style="display:none;">{{ count }}</div>

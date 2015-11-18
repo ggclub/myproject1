@@ -1,22 +1,6 @@
 <!DOCTYPE HTML>
-
-<table class="table table-bordered table-result">
-	<thead id="query-title">
-		<tr>
-			<td class="result-datetime" rowspan="2"><b>시간</b></td>
-			<td class="result-dwp1" colspan="3"><b>심정펌프 1 (SB-1)/(7.5HP)</b></td>
-			<td class="result-dwp2" colspan="3"><b>심정펌프 2 (AB-1)/(5HP)</b></td>
-			<td class="result-dwp3" colspan="3"><b>심정펌프 3 (AB-2)/(5HP)</b></td>
-			<td class="result-dwp4" colspan="3"><b>심정펌프 4 (SB-2)/(7.5HP)</b></td>
-		</tr>
-		<tr>
-		{% for i in 1234|make_list %}
-			<td class="result-dwp{{ i }}">동작상태</td>
-			<td class="result-dwp{{ i }}">온도</td>
-			<td class="result-dwp{{ i }}">운전모드</td>
-		{% endfor %}
-		</tr>
-	</thead>
+<div class="found" style="display:none;">{{ count }}</div>
+<table class="table table-bordered" style="margin-bottom:0px;">
 	<tbody id="query-result">
 		{{ error }}
 		{% for dwp1, dwp2, dwp3, dwp4, temp in database_list %}
@@ -38,4 +22,3 @@
 		{% endfor %}
 	</tbody>
 </table>
-<div id="found" style="display:none;">{{ count }}</div>

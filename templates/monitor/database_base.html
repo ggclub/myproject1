@@ -27,21 +27,6 @@
 </html>
 
 <script type="text/javascript">
-// <div class="select">
-// 	<div>선  택
-// 		<select name="type" id="type">
-// 			<option value="ciu">실내기</option>
-// 			<option value="hp">히트펌프</option>
-// 			<option value="cp">순환펌프</option>
-// 			<option value="dwp">심정펌프</option>
-// 			<option value="fm">유량계</option>
-// 			<option value="power">전력량계</option>
-// 			<option value="cop">COP</option>
-// 			<option value="tw">관측센서</option>
-// 		</select>
-// 	</div>
-// </div>
-
 $('select[name=type]').on('change', selectDbType);
 function selectDbType () {
 	var device = $(this).val();

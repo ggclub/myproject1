@@ -72,8 +72,25 @@
 	</div>
 </div>
 
-<div class="search-results">
-	{% include 'monitor/search_db_ciu_result.html' %}
+<div>
+	<table class="table table-bordered  table-header">
+	<thead id="query-title">
+		<tr>
+			<td class="result-datetime"><b>시간</b></td>
+			<td class="result-floor"><b>층 수</b></td>
+			<td class="result-location"><b>실내기명</b></td>
+			<td class="result-switch"><b>동작상태</b></td>
+			<td class="result-set-temp"><b>설정온도</b></td>
+			<td class="result-temperature"><b>실내온도</b></td>
+			<td class="result-op-mode"><b>운전모드</b></td>
+			{# <td class="result-air-flow"><b>풍량</b></td> #}
+			{# <td class="result-state"><b>에러</b></td> #}
+		</tr>
+	</thead>
+	</table>
+	<div class="search-results">
+		{% include 'monitor/search_db_ciu_result.html' %}
+	</div>
 </div>
 </div>
 
@@ -255,6 +272,7 @@ $('.btn-search-db').on('click', function() {
 		complete: function() { $('#ajax-loader').hide(); },
 		success: function(data){
 			$('.search-results').html(data);
+			$('.table-bordered').last().find('tbody').find('tr').find('td').css('width','14%');
 		}
 	});
 	return false;
@@ -314,5 +332,54 @@ function Result2excel() {
 	return false;
 }
 
+// infinite scroll
+$(document).ready(function(){
+	$('.table-header').find('thead').find('tr').find('td').css('width','14%');
+    function addToLast()
+    {
+    	var startDate = $('#datepicker1').val();
+		var endDate = $('#datepicker2').val();
+		var count = $('.found').last().text();
+		var floor = $('select[name=floor] option:selected').val();
+		var name = $('select[name=name] option:selected').val();
+
+        $.ajax({
+			url: '/monitor/search_db_ciu_result/',
+			type: "POST",
+			data : {
+				'csrfmiddlewaretoken': '{{ csrf_token }}',
+				'startDate': startDate,
+				'endDate': endDate,
+				'name': name,
+				'floor': floor,
+				'count': count,
+			},
+			beforeSend: function() { $('#ajax-loader').show(); },
+			complete: function() { $('#ajax-loader').hide(); },
+			success: function(data){
+				// console.log(count);
+				if (count % 50 == 0) {
+					$('.search-results').last().append(data);
+					$('.table-bordered').last().find('tbody').find('tr').find('td').css('width','14%');
+				}
+			}
+		});
+    };
+
+    //addToLast();
+    $(window).scroll(function(){
+
+        var wintop = $(window).scrollTop();
+        var docheight = $(document).height();
+        var winheight = $(window).height();
+        var scrolltrigger = 0.999;
+
+        if  ((wintop/(docheight-winheight)) > scrolltrigger) {
+         // console.log('scroll bottom');
+        	console.log((wintop/(docheight-winheight)));
+        	addToLast();
+        }
+    });
+});
 </script>
 {% endblock %}

@@ -1,16 +1,6 @@
 <!DOCTYPE HTML>
-
-<table class="table table-bordered table-result">
-	<thead id="query-title">
-		<tr>
-			<td class="result-class"><b>분류</b></td>
-			<td class="result-location"><b>발생 위치</b></td>
-			<td class="result-state"><b>경보 상태</b></td>
-			<td class="result-occur"><b>발생 시각</b></td>
-			<td class="result-closed"><b>해제 시각</b></td>
-		</tr>
-	</thead>
-	<tbody id="query-result">
+<div class="found" style="display:none;">{{ count }}</div>
+<table class="table table-bordered" style="margin-bottom:0px;">
 		{{ error }}
 		{% for alarm in database_list %}
 		<tr>
@@ -23,4 +13,3 @@
 		{% endfor %}
 	</tbody>
 </table>
-<div id="found" style="display:none;">{{ count }}</div>

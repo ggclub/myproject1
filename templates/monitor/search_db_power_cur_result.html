@@ -1,14 +1,17 @@
 {% load monitor_extras %}
 <!DOCTYPE HTML>
+<div class="cur">
 <div class="found" style="display:none;">{{ count }}</div>
 <table class="table table-bordered" style="margin-bottom:0px;">
 	<tbody id="query-result">
 		{{ error }}
-		{% for cop in database_list %}
+		{% for power in database_list %}
 		<tr>
-			<td class="result-datetime">{{ cop.dateTime|date:"Y-m-d H:i" }}</td>
-			<td class="result-cop">{{ cop.COP }}</td>
+			<td class="result-datetime">{{ power.dateTime|date:"Y-m-d H:i" }}</td>
+			<td class="result-power">{{ power.currentPowerConsumption }}</td>
 		</tr>
 		{% endfor %}
 	</tbody>
 </table>
+</div>
+

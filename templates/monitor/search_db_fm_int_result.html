@@ -1,0 +1,19 @@
+{% load monitor_extras %}
+<!DOCTYPE HTML>
+<div class="int">
+<div class="found-int" style="display:none;">{{ count }}</div>
+<table class="table table-bordered" style="margin-bottom:0px;">
+	<tbody id="query-result-int">
+		{{ error }}
+		{% for cpfm, dwpfm in database_list %}
+		<tr>
+			<td class="result-datetime">{{ cpfm.dateTime|date:"Y-m-d" }}</td>
+			<td class="result-cpfm">{{ cpfm.integralFlux|div:1000 }}</td>
+			<td class="result-cpfm">{{ cpfm.integralFlux|div:1000 }}</td>
+			<td class="result-dwpfm">{{ dwpfm.integralFlux }}</td>
+			<td class="result-dwpfm">{{ dwpfm.integralFlux }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+</div>

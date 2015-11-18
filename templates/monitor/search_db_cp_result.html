@@ -1,21 +1,6 @@
 <!DOCTYPE HTML>
-
-<table class="table table-bordered table-result">
-	<thead id="query-title">
-		<tr>
-			<td class="result-datetime" rowspan="2"><b>시간</b></td>
-			<td class="result-cp1" colspan="4"><b>순환펌프 1</b></td>
-			<td class="result-cp2" colspan="4"><b>순환펌프 2</b></td>
-		</tr>
-		<tr>
-		{% for i in 12|make_list %}
-			<td class="result-cp{{ i }}">동작상태</td>
-			<td class="result-cp{{ i }}">운전모드</td>
-			<td class="result-cp{{ i }}">유량(Lpm)</td>
-			<td class="result-cp{{ i }}">회전수(Hz)</td>
-		{% endfor %}
-		</tr>
-	</thead>
+<div class="found" style="display:none;">{{ count }}</div>
+<table class="table table-bordered" style="margin-bottom:0px;">
 	<tbody id="query-result">
 		{{ error }}
 		{% for cp1, cp2 in database_list %}
@@ -33,4 +18,3 @@
 		{% endfor %}
 	</tbody>
 </table>
-<div id="found" style="display:none;">{{ count }}</div>
