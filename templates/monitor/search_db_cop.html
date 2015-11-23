@@ -101,7 +101,7 @@ $('.btn-search-db').on('click', function() {
 
 
 function Result2excel() {
-	var found = $('#found').text();
+	var found = $('.found').text();
 	if(found == '0' || found == ''){
 		alert('검색된 내용이 없습니다.');
 		return;
@@ -110,7 +110,7 @@ function Result2excel() {
 	var numCol = 2;
 
 
-	console.log(numRow, numCol);
+	// console.log(numRow, numCol);
 
 
 	var columns = [];
@@ -131,6 +131,9 @@ function Result2excel() {
 	});
 	// console.log(rows);
 
+	var startDate = $('#datepicker1').val();
+	var endDate = $('#datepicker2').val();
+	
 	$.ajax({
 		url: '/monitor/search_db_excel/',
 		type: "POST",
@@ -141,7 +144,9 @@ function Result2excel() {
 			'rows' : JSON.stringify(rows),
 			'numRow' : numRow,
 			'numCol' : numCol,
-			'objType' : 'ciu',
+			'objType' : 'cop',
+			'startDate': startDate,
+			'endDate': endDate,
 		},
 		beforeSend: function() { $('#ajax-loader').show(); },
 		complete: function(data) { $('#ajax-loader').hide(); },
@@ -194,7 +199,7 @@ $(document).ready(function(){
 
         if  ((wintop/(docheight-winheight)) > scrolltrigger) {
          // console.log('scroll bottom');
-        	console.log((wintop/(docheight-winheight)));
+        	// console.log((wintop/(docheight-winheight)));
         	addToLast();
         }
     });

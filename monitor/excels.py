@@ -14,6 +14,7 @@ def make_excel_file(obj_type, columns, rows, fail=0):
      num_col = len(columns)
      num_row = len(rows)
 
+     # log.debug(rows)
      try:
           # Create a workbook and add a worksheet.
           # file_dir = u'C:/Users/hsinh_000/Desktop/지열 냉난방 시스템/'.encode('utf-8')
@@ -87,7 +88,7 @@ def make_excel_file(obj_type, columns, rows, fail=0):
           # Write some data headers.
           col = 0
           row = 0
-          if obj_type == 'ciu' or 'power' in obj_type:
+          if obj_type == 'ciu' or 'power' in obj_type or 'cop' in obj_type:
                # 실내기 제목 / 전력량계 제목
                for title in columns:
                     worksheet.write(row, col, title.encode('utf-8'), title_format)
@@ -251,6 +252,297 @@ def make_excel_file(obj_type, columns, rows, fail=0):
           # 지금은 일어나지 않음
           log.debug(str(e))
           fail += 1
-          make_excel_file(obj_type, columns, rows, fail)
+          # make_excel_file(obj_type, columns, rows, fail)
 
           
+def rows_hp(n_col, n_row, data):
+     row_mat = [[None for x in range(n_col)] for x in range(n_row)]
+     i=0;j=0;
+     for x in data:
+          if j == 0:
+               row_mat[i][j] = str(x[0].dateTime)[:-10]; j+=1
+          # hp1
+          row_mat[i][j] = str(x[0].switch); j+=1
+          row_mat[i][j] = float(x[0].tempIn.temperature); j+=1
+          row_mat[i][j] = float(x[0].tempOut.temperature); j+=1
+          # hp2
+          row_mat[i][j] = str(x[1].switch); j+=1
+          row_mat[i][j] = float(x[1].tempIn.temperature); j+=1
+          row_mat[i][j] = float(x[1].tempOut.temperature); j+=1
+          # hp3
+          row_mat[i][j] = str(x[2].switch); j+=1
+          row_mat[i][j] = float(x[2].tempIn.temperature); j+=1
+          row_mat[i][j] = float(x[2].tempOut.temperature); j+=1
+          # hp4
+          row_mat[i][j] = str(x[3].switch); j+=1
+          row_mat[i][j] = float(x[3].tempIn.temperature); j+=1
+          row_mat[i][j] = float(x[3].tempOut.temperature); j+=1
+          # hp5
+          row_mat[i][j] = str(x[4].switch); j+=1
+          row_mat[i][j] = float(x[4].tempIn.temperature); j+=1
+          row_mat[i][j] = float(x[4].tempOut.temperature); j+=1
+          # hp6
+          row_mat[i][j] = str(x[5].switch); j+=1
+          row_mat[i][j] = float(x[5].tempIn.temperature); j+=1
+          row_mat[i][j] = float(x[5].tempOut.temperature); j+=1
+          i+=1;j=0;
+     return row_mat
+def rows_cp(n_col, n_row, data):
+     row_mat = [[None for x in range(n_col)] for x in range(n_row)]
+     i=0;j=0;
+     for x in data:
+          if j == 0:
+               row_mat[i][j] = str(x[0].dateTime)[:-10]; j+=1
+          # cp1
+          row_mat[i][j] = str(x[0].switch); j+=1
+          row_mat[i][j] = str(x[0].opMode); j+=1
+          row_mat[i][j] = float(x[0].flux); j+=1
+          row_mat[i][j] = float(x[0].Hz); j+=1
+          # cp2
+          row_mat[i][j] = str(x[1].switch); j+=1
+          row_mat[i][j] = str(x[1].opMode); j+=1
+          row_mat[i][j] = float(x[1].flux); j+=1
+          row_mat[i][j] = float(x[1].Hz); j+=1
+          i+=1;j=0;
+     return row_mat
+def rows_dwp(n_col, n_row, data):
+     row_mat = [[None for x in range(n_col)] for x in range(n_row)]
+     i=0;j=0;
+     for x in data:
+          if j == 0:
+               row_mat[i][j] = str(x[0].dateTime)[:-10]; j+=1
+          # dwp1
+          row_mat[i][j] = str(x[0].switch); j+=1
+          row_mat[i][j] = float(x[4].temperature); j+=1
+          row_mat[i][j] = str(x[0].opMode); j+=1
+          # dwp2
+          row_mat[i][j] = str(x[1].switch); j+=1
+          row_mat[i][j] = float(x[4].temperature); j+=1
+          row_mat[i][j] = str(x[1].opMode); j+=1
+          # dwp3
+          row_mat[i][j] = str(x[2].switch); j+=1
+          row_mat[i][j] = float(x[4].temperature); j+=1
+          row_mat[i][j] = str(x[2].opMode); j+=1
+          # dwp4
+          row_mat[i][j] = str(x[3].switch); j+=1
+          row_mat[i][j] = float(x[4].temperature); j+=1
+          row_mat[i][j] = str(x[3].opMode); j+=1
+          i+=1;j=0;
+     return row_mat
+def rows_fm_cur(n_col, n_row, data):
+     row_mat = [[None for x in range(n_col)] for x in range(n_row)]
+     i=0;j=0;
+     for x in data:
+          if j == 0:
+               row_mat[i][j] = str(x[0].dateTime)[:-10]; j+=1
+          # 순환수 열교환 후
+          row_mat[i][j] = float(x[0].currentFlux/16.67); j+=1
+          row_mat[i][j] = int(x[0].currentFlux); j+=1
+          row_mat[i][j] = float(x[4].temperature); j+=1
+          # 순환수 열교환 전
+          row_mat[i][j] = float(x[0].currentFlux/16.67); j+=1
+          row_mat[i][j] = int(x[0].currentFlux); j+=1
+          row_mat[i][j] = float(x[2].temperature); j+=1
+          # 지하수 공급(양수)
+          row_mat[i][j] = float(x[1].currentFlux); j+=1
+          row_mat[i][j] = float(x[1].currentFlux*16.67); j+=1
+          row_mat[i][j] = float(x[3].temperature); j+=1
+          # 지하수 환수(주입)
+          row_mat[i][j] = float(x[1].currentFlux); j+=1
+          row_mat[i][j] = float(x[1].currentFlux*16.67); j+=1
+          row_mat[i][j] = float(x[5].temperature); j+=1
+          i+=1;j=0;
+     return row_mat
+def rows_fm_int(n_col, n_row, data):
+     row_mat = [[None for x in range(n_col)] for x in range(n_row)]
+     i=0;j=0;
+     for x in data:
+          if j == 0:
+               row_mat[i][j] = str(x[0].dateTime)[:-10]; j+=1
+          # 순환수 열교환 후
+          row_mat[i][j] = float(x[0].integralFlux/1000); j+=1
+          # 순환수 열교환 전
+          row_mat[i][j] = float(x[0].integralFlux/1000); j+=1
+          # 지하수 공급(양수)
+          row_mat[i][j] = float(x[1].integralFlux); j+=1
+          # 지하수 환수(주입)
+          row_mat[i][j] = float(x[1].integralFlux); j+=1
+          i+=1;j=0;
+     return row_mat
+def rows_tw(n_col, n_row, data):
+     row_mat = [[None for x in range(n_col)] for x in range(n_row)]
+     i=0;j=0;
+     for x in data:
+          if j == 0:
+               row_mat[i][j] = str(x[0].dateTime)[:-10]; j+=1
+          # ab1
+          row_mat[i][j] = float(x[0].level); j+=1
+          row_mat[i][j] = float(x[0].temp10); j+=1
+          row_mat[i][j] = float(x[0].temp20); j+=1
+          row_mat[i][j] = float(x[0].temp30); j+=1
+          # ab2
+          row_mat[i][j] = float(x[1].level); j+=1
+          row_mat[i][j] = float(x[1].temp10); j+=1
+          row_mat[i][j] = float(x[1].temp20); j+=1
+          row_mat[i][j] = float(x[1].temp30); j+=1
+          # ib1
+          row_mat[i][j] = float(x[2].level); j+=1
+          row_mat[i][j] = float(x[2].temp10); j+=1
+          row_mat[i][j] = float(x[2].temp30); j+=1
+          row_mat[i][j] = float(x[2].temp50); j+=1
+          row_mat[i][j] = float(x[2].temp70); j+=1
+          # ij1
+          row_mat[i][j] = float(x[3].level); j+=1
+          row_mat[i][j] = float(x[3].temp10); j+=1
+          row_mat[i][j] = float(x[3].temp30); j+=1
+          row_mat[i][j] = float(x[3].temp50); j+=1
+          # sb1
+          row_mat[i][j] = float(x[4].level); j+=1
+          row_mat[i][j] = float(x[4].temp10); j+=1
+          row_mat[i][j] = float(x[4].temp15); j+=1
+          row_mat[i][j] = float(x[4].temp20); j+=1
+          row_mat[i][j] = float(x[4].temp25); j+=1
+          # sb2
+          row_mat[i][j] = float(x[5].level); j+=1
+          row_mat[i][j] = float(x[5].temp10); j+=1
+          row_mat[i][j] = float(x[5].temp15); j+=1
+          row_mat[i][j] = float(x[5].temp20); j+=1
+          row_mat[i][j] = float(x[5].temp25); j+=1
+          i+=1;j=0;
+     return row_mat
+def rows_power_cur(n_col, n_row, data):
+     row_mat = [[None for x in range(n_col)] for x in range(n_row)]
+     i=0;j=0;
+     for x in data:
+          if j == 0:
+               row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+          # 순시전력
+          row_mat[i][j] = float(x.currentPowerConsumption); j+=1
+          i+=1;j=0;
+     return row_mat
+def rows_power_int(n_col, n_row, data):
+     row_mat = [[None for x in range(n_col)] for x in range(n_row)]
+     i=0;j=0;
+     for x in data:
+          if j == 0:
+               row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+          # 적산전력
+          row_mat[i][j] = float(x.integralPowerConsumption); j+=1
+          i+=1;j=0;
+     return row_mat
+def rows_cop(n_col, n_row, data):
+     row_mat = [[None for x in range(n_col)] for x in range(n_row)]
+     i=0;j=0;
+     for x in data:
+          if j == 0:
+               row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+          # COP
+          row_mat[i][j] = float(x.COP); j+=1
+          i+=1;j=0;
+     return row_mat
+def rows_ciu(n_col, n_row, data):
+     # log.debug(n_row)
+     # log.debug(len(data))
+     # log.debug(len(data[0]))
+     # log.debug(len(data[0][0]))
+
+
+     i=0;j=0;
+     if len(data) == 1:
+          # 단일 실내기 검색 결과
+          row_mat = [[None for x in range(n_col)] for x in range(n_row+1)]
+          try:
+               for x in data[0]:
+                    if j == 0:
+                         row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+                    # 층 수
+                    row_mat[i][j] = int(x.floor); j+=1
+                    row_mat[i][j] = str(x.location); j+=1
+                    row_mat[i][j] = str(x.switch); j+=1
+                    row_mat[i][j] = float(x.setTemp); j+=1
+                    row_mat[i][j] = float(x.temperature); j+=1
+                    row_mat[i][j] = str(x.opMode); j+=1
+                    i+=1;j=0;
+          except:
+               log.debug(str(i) +', ' + str(j))
+     elif len(data) == 14:
+          # 층 별 실내기 검색 결과 - 1층
+          log.debug("1floor")
+          row_mat = [[None for x in range(n_col)] for x in range((n_row+1)*14)]
+          try:
+               for d in data:
+                    for x in d:
+                         if j == 0:
+                              row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+                         row_mat[i][j] = int(x.floor); j+=1
+                         row_mat[i][j] = str(x.location); j+=1
+                         row_mat[i][j] = str(x.switch); j+=1
+                         row_mat[i][j] = float(x.setTemp); j+=1
+                         row_mat[i][j] = float(x.temperature); j+=1
+                         row_mat[i][j] = str(x.opMode); j+=1
+                         i+=1;j=0;
+          except:
+               log.debug(str(i) +', ' + str(j))
+     elif len(data) == 12:
+          # 층 별 실내기 검색 결과 - 2,3층
+          log.debug("2-3floor")
+          row_mat = [[None for x in range(n_col)] for x in range((n_row+1)*12)]
+          try:
+               for d in data:
+                    for x in d:
+                         if j == 0:
+                              row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+                         row_mat[i][j] = int(x.floor); j+=1
+                         row_mat[i][j] = str(x.location); j+=1
+                         row_mat[i][j] = str(x.switch); j+=1
+                         row_mat[i][j] = float(x.setTemp); j+=1
+                         row_mat[i][j] = float(x.temperature); j+=1
+                         row_mat[i][j] = str(x.opMode); j+=1
+                         i+=1;j=0;
+          except:
+               log.debug(str(i) +', ' + str(j))
+     elif len(data) == 3:
+          # 전체 실내기 검색 결과
+          log.debug("all")
+          row_mat = [[None for x in range(n_col)] for x in range((n_row+1)*(14+12+12))]
+          try:
+               for floor in data:
+                    for d in floor:
+                         for x in d:
+                              if j == 0:
+                                   row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+                              row_mat[i][j] = int(x.floor); j+=1
+                              row_mat[i][j] = str(x.location); j+=1
+                              row_mat[i][j] = str(x.switch); j+=1
+                              row_mat[i][j] = float(x.setTemp); j+=1
+                              row_mat[i][j] = float(x.temperature); j+=1
+                              row_mat[i][j] = str(x.opMode); j+=1
+                              i+=1;j=0;
+          except:
+               log.debug(str(i) +', ' + str(j))
+     else:
+          log.debug("??")
+     return row_mat
+
+def make_rows(obj, n_col, n_row, data):
+     if obj == 'hp':
+          return rows_hp(n_col, n_row, data)
+     elif obj == 'cp':
+          return rows_cp(n_col, n_row, data)
+     elif obj == 'dwp':
+          return rows_dwp(n_col, n_row, data)
+     elif obj == 'fm-cur':
+          return rows_fm_cur(n_col, n_row, data)
+     elif obj == 'fm-int':
+          return rows_fm_int(n_col, n_row, data)
+     elif obj == 'tw':
+          return rows_tw(n_col, n_row, data)
+     elif obj == 'power-cur':
+          return rows_power_cur(n_col, n_row, data)
+     elif obj == 'power-int':
+          return rows_power_int(n_col, n_row, data)
+     elif obj == 'cop':
+          return rows_cop(n_col, n_row, data)
+     else: # ciu
+          return rows_ciu(n_col, n_row, data)
+

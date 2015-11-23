@@ -15,7 +15,7 @@ import os, myproject.settings
 from os.path import isfile
 from django.db.models import Q
 from .models import *
-from .excels import make_excel_file
+from .excels import make_excel_file, make_rows
 import controller
 from django.views.decorators.csrf import csrf_exempt
 
@@ -27,7 +27,7 @@ log = logging.getLogger(__name__)
 flag_command = 0
 file_path = os.path.join(myproject.settings.BASE_DIR, 'share/')
 
-date_format = "%Y-%m-%d"				# db search
+date_format = "%Y-%m-%d"					# db search
 datetime_format = "%Y-%m-%d %H:%M"			# check if error exist
 
 @csrf_exempt
@@ -655,30 +655,58 @@ def alarm_status(request):
 
 def search_db_excel(request):
 	obj_type = request.POST.get('objType','error')
+	# get table header
 	columns = request.POST.get('columns', 'error').encode('utf-8')
-	rows = request.POST.get('rows', 'error').encode('utf-8')
-	num_row = int(request.POST.get('numRow', 'error'))
 	num_col = int(request.POST.get('numCol', 'error'))
-
 	col_mat = columns.replace('"', '').replace('[', '').replace(']', '').split(",")
-	row_split = rows.replace('"', '').replace('[', '').replace(']', '').split(",")
-	row_mat = [[None for x in range(num_col)] for x in range(num_row)]
 
-	i=0;j=0;
-	for r in row_split:
-		# log.debug("i: " + str(i) + ", j: " + str(j))
-		if '.' in r:
-			# type = float
-			row_mat[i][j] = float(r)
-		elif r.isdigit():
-			row_mat[i][j] = int(r)
+	# table content
+	# rows = request.POST.get('rows', 'error').encode('utf-8')
+	# num_row = int(request.POST.get('numRow', 'error'))
+	# row_split = rows.replace('"', '').replace('[', '').replace(']', '').split(",")
+	# row_mat = [[None for x in range(num_col)] for x in range(num_row)]
+
+
+
+	# search db accord. to obj_type & start~end date
+	start_date = request.POST.get('startDate', 'error')
+	end_date = request.POST.get('endDate', 'error')
+	# date exception
+	if start_date=='error' or end_date=='error':
+		if 'cur' in obj_type:
+			url = 'monitor/search_db_'+obj_type+'_cur_result.html'
+		elif 'int' in obj_type:
+			url = 'monitor/search_db_'+obj_type+'_int_result.html'
 		else:
-			row_mat[i][j] = r
-		j += 1
-		if j == num_col:
-			j = 0; i += 1;
-			if i == num_row: break;
+			url = 'monitor/search_db_'+obj_type+'_result.html'
+		search_db_error(url, request)
 
+	floor = request.POST.get('floor', '0')
+	name = request.POST.get('name', '0')
+	data = controller.search_database(obj_type, start_date, end_date, count=0, floor=floor, name=name, excel=True)
+
+	if 'database' in data.keys():
+		# most of ciu cases
+		row_mat = make_rows(obj_type, num_col, data["count"], data["database"])
+	else:
+		# all cases except ciu, and 'ciu all' cases
+		row_mat = make_rows(obj_type, num_col, data["count"], data["database_list"])
+	
+
+
+		# if '.' in r:
+		# 	# type = float
+		# 	row_mat[i][j] = float(r)
+		# elif r.isdigit():
+		# 	row_mat[i][j] = int(r)
+		# else:
+		# 	row_mat[i][j] = r
+		# j += 1
+		# if j == num_col:
+		# 	j = 0; i += 1;
+		# 	if i == num_row: break;
+
+	# create excel file
 	make_excel_file(obj_type, col_mat, row_mat)
 
 	response_data = {"obj_type":obj_type}
@@ -720,7 +748,8 @@ def download_result(request, o):
 		response = HttpResponse("obj_type ??", content_type="text/plain")
 	return response
 
-def search_db_error(url):
+
+def search_db_error(url, request):
 	response_data = {'error': 'Error! 다시 검색해 주세요.'}
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
@@ -736,225 +765,19 @@ def search_db_ciu(request):
 def search_db_ciu_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
-
 	if start_date=='error' or end_date=='error':
 		url = 'monitor/search_db_ciu_result.html'
-		search_db_error(url)
-
-	# log.debug(str(start_date)+', '+ str(end_date))
-	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
-	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
-	end_date = dt.strftime(end, date_format)
+		search_db_error(url, request)
 
 	floor = request.POST.get('floor', '0')
 	name = request.POST.get('name', '0')
-
 	count = request.POST.get('count', 0)
 	try:
 		count = int(count)
 	except:
 		count = 0
 
-	if floor == '1':
-		if name == '1':
-			database = Floor1CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-		elif name == '2':
-			database = Floor1CIU2.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-		elif name == '3':
-			database = Floor1CIU3.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '4':
-			database = Floor1CIU4.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '5':
-			database = Floor1CIU5.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '6':
-			database = Floor1CIU6.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '7':
-			database = Floor1CIU7.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '8':
-			database = Floor1CIU8.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '9':
-			database = Floor1CIU9.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '10':
-			database = Floor1CIU10.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '11':
-			database = Floor1CIU11.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '12':
-			database = Floor1CIU12.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '13':
-			database = Floor1CIU13.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '14':
-			database = Floor1CIU14.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		else: # (전체)
-			d1 = Floor1CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-			d2 = Floor1CIU2.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-			d3 = Floor1CIU3.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d4 = Floor1CIU4.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d5 = Floor1CIU5.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d6 = Floor1CIU6.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d7 = Floor1CIU7.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d8 = Floor1CIU8.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d9 = Floor1CIU9.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d10 = Floor1CIU10.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d11 = Floor1CIU11.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d12 = Floor1CIU12.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d13 = Floor1CIU13.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d14 = Floor1CIU14.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			database1 = [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14]
-			
-			count += d1.count()
-			response_data = {
-				"database":database1,
-				"count":count,
-			}
-
-	elif floor == '2':
-		if name == '1':
-			database = Floor2CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-		elif name == '2':
-			database = Floor2CIU2.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-		elif name == '3':
-			database = Floor2CIU3.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '4':
-			database = Floor2CIU4.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '5':
-			database = Floor2CIU5.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '6':
-			database = Floor2CIU6.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '7':
-			database = Floor2CIU7.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '8':
-			database = Floor2CIU8.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '9':
-			database = Floor2CIU9.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '10':
-			database = Floor2CIU10.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '11':
-			database = Floor2CIU11.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '12':
-			database = Floor2CIU12.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		else: # (전체)
-			d1 = Floor2CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-			d2 = Floor2CIU2.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-			d3 = Floor2CIU3.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d4 = Floor2CIU4.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d5 = Floor2CIU5.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d6 = Floor2CIU6.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d7 = Floor2CIU7.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d8 = Floor2CIU8.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d9 = Floor2CIU9.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d10 = Floor2CIU10.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d11 = Floor2CIU11.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d12 = Floor2CIU12.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			database2 = [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12]
-			
-			count += d1.count()
-			response_data = {
-				"database":database2,
-				"count":count,
-			}
-	elif floor == '3':
-		if name == '1':
-			database = Floor3CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-		elif name == '2':
-			database = Floor3CIU2.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-		elif name == '3':
-			database = Floor3CIU3.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '4':
-			database = Floor3CIU4.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '5':
-			database = Floor3CIU5.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '6':
-			database = Floor3CIU6.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '7':
-			database = Floor3CIU7.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '8':
-			database = Floor3CIU8.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '9':
-			database = Floor3CIU9.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '10':
-			database = Floor3CIU10.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '11':
-			database = Floor3CIU11.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		elif name == '12':
-			database = Floor3CIU12.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		else: # (전체)
-			d1 = Floor3CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-			d2 = Floor3CIU2.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-			d3 = Floor3CIU3.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d4 = Floor3CIU4.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d5 = Floor3CIU5.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d6 = Floor3CIU6.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d7 = Floor3CIU7.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d8 = Floor3CIU8.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d9 = Floor3CIU9.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d10 = Floor3CIU10.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d11 = Floor3CIU11.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			d12 = Floor3CIU12.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-			database3 = [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12]
-			
-			count += d1.count()
-			response_data = {
-				"database":database3,
-				"count":count,
-			}
-	else: # (전체)
-		d1 = Floor1CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-		d2 = Floor1CIU2.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-		d3 = Floor1CIU3.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d4 = Floor1CIU4.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d5 = Floor1CIU5.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d6 = Floor1CIU6.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d7 = Floor1CIU7.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d8 = Floor1CIU8.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d9 = Floor1CIU9.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d10 = Floor1CIU10.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d11 = Floor1CIU11.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d12 = Floor1CIU12.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d13 = Floor1CIU13.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d14 = Floor1CIU14.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		database1 = [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14]
-		d1 = Floor2CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-		d2 = Floor2CIU2.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-		d3 = Floor2CIU3.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d4 = Floor2CIU4.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d5 = Floor2CIU5.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d6 = Floor2CIU6.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d7 = Floor2CIU7.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d8 = Floor2CIU8.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d9 = Floor2CIU9.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d10 = Floor2CIU10.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d11 = Floor2CIU11.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d12 = Floor2CIU12.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		database2 = [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12]
-		d1 = Floor3CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-		d2 = Floor3CIU2.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50] 
-		d3 = Floor3CIU3.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d4 = Floor3CIU4.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d5 = Floor3CIU5.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d6 = Floor3CIU6.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d7 = Floor3CIU7.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d8 = Floor3CIU8.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d9 = Floor3CIU9.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d10 = Floor3CIU10.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d11 = Floor3CIU11.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		d12 = Floor3CIU12.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-		database3 = [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12]
-		database_list = [database1,database2,database3]
-		
-		count += d1.count()
-		response_data = {
-			"database_list":database_list,
-			"count":count,
-		}
-
-	if 'response_data' not in locals():
-		count += database.count()
-		response_data = {
-			"database":[database],
-			"count":count,
-		}
-
-	# log.debug("found: " + str(count))
+	response_data = controller.search_database('ciu', start_date, end_date, count=count, floor=floor, name=name)
 	url = 'monitor/search_db_ciu_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
@@ -970,13 +793,9 @@ def search_db_hp(request):
 def search_db_hp_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
-
 	if start_date=='error' or end_date=='error':
 		url = 'monitor/search_db_hp_result.html'
-		search_db_error(url)
-	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
-	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
-	end_date = dt.strftime(end, date_format)
+		search_db_error(url, request)
 
 	count = request.POST.get('count', 0)
 	try:
@@ -984,20 +803,7 @@ def search_db_hp_result(request):
 	except:
 		count = 0
 
-	hp1 = HeatPump1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	hp2 = HeatPump2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	hp3 = HeatPump3Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	hp4 = HeatPump4Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	hp5 = HeatPump5Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	hp6 = HeatPump6Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	count += hp1.count()
-
-	database_list = zip(list(hp1), list(hp2), list(hp3), list(hp4), list(hp5), list(hp6))
-	response_data = {
-		'database_list':database_list,
-		'count': count,
-	}
-	
+	response_data = controller.search_database('hp', start_date, end_date, count)
 	url = 'monitor/search_db_hp_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
@@ -1014,14 +820,9 @@ def search_db_cp(request):
 def search_db_cp_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
-
 	if start_date=='error' or end_date=='error':
 		url = 'monitor/search_db_cp_result.html'
-		search_db_error(url)
-
-	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
-	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
-	end_date = dt.strftime(end, date_format)
+		search_db_error(url, request)
 
 	count = request.POST.get('count', 0)
 	try:
@@ -1029,16 +830,7 @@ def search_db_cp_result(request):
 	except:
 		count = 0
 
-	cp1 = CirculatingPump1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	cp2 = CirculatingPump2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	count += cp1.count()
-
-	database_list = zip(list(cp1), list(cp2))
-	response_data = {
-		'database_list':database_list,
-		'count': count,
-	}
-
+	response_data = controller.search_database('cp', start_date, end_date, count)
 	url = 'monitor/search_db_cp_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
@@ -1054,14 +846,9 @@ def search_db_dwp(request):
 def search_db_dwp_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
-
 	if start_date=='error' or end_date=='error':
 		url = 'monitor/search_db_dwp_result.html'
-		search_db_error(url)
-
-	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
-	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
-	end_date = dt.strftime(end, date_format)
+		search_db_error(url, request)
 
 	count = request.POST.get('count', 0)
 	try:
@@ -1069,19 +856,7 @@ def search_db_dwp_result(request):
 	except:
 		count = 0
 
-	dwp1 = DeepwellPump1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	dwp2 = DeepwellPump2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	dwp3 = DeepwellPump3Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	dwp4 = DeepwellPump4Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	temp = TempHEIn2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	count += dwp1.count()
-
-	database_list = zip(list(dwp1), list(dwp2), list(dwp3), list(dwp4), list(temp))
-	response_data = {
-		'database_list':database_list,
-		'count': count,
-	}
-
+	response_data = controller.search_database('dwp', start_date, end_date, count)
 	url = 'monitor/search_db_dwp_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
@@ -1097,34 +872,17 @@ def search_db_fm(request):
 def search_db_fm_cur_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
-
 	if start_date=='error' or end_date=='error':
 		url = 'monitor/search_db_fm_cur_result.html'
-		search_db_error(url)
+		search_db_error(url, request)
 
-	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
-	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
-	end_date = dt.strftime(end, date_format)
 	count = request.POST.get('count', 0)
 	try:
 		count = int(count)
 	except:
 		count = 0
 
-	cpfm = CPFlowmeterLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	dwpfm = DWPFlowmeterLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	hein1 = TempHEIn1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	hein2 = TempHEIn2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	heout1 = TempHEOut1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	heout2 = TempHEOut2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	count += cpfm.count()
-	database_list = zip(list(cpfm), list(dwpfm), list(hein1), list(hein2), list(heout1), list(heout2))
-
-	response_data = {
-		'database_list': database_list,
-		'count': count,
-	}
-
+	response_data = controller.search_database('fm-cur', start_date, end_date, count)
 	url = 'monitor/search_db_fm_cur_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
@@ -1133,40 +891,17 @@ def search_db_fm_cur_result(request):
 def search_db_fm_int_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
-
 	if start_date=='error' or end_date=='error':
 		url = 'monitor/search_db_fm_int_result.html'
-		search_db_error(url)
+		search_db_error(url, request)
 
-	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
-	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
-	end_date = dt.strftime(end, date_format)
+	count = request.POST.get('count', 0)
+	try:
+		count = int(count)
+	except:
+		count = 0
 
-	# 적산유량
-	cpfm2 = []; dwpfm2 = [];
-	count = 0
-	
-	# 검색할 날짜 리스트
-	start = dt.strptime(start_date, date_format)
-	end = dt.strptime(end_date, date_format) - timezone.timedelta(days=1)
-	num_date = end - start
-	date_list = [end - timezone.timedelta(days=x) for x in range(num_date.days+1)]
-	# log.debug(str(date_list))
-	for date in date_list:
-		d = dt.strftime(date, date_format)
-		try:
-			cpfm2.append(CPFlowmeterLogger.objects.filter(Q(dateTime__year=date.year), Q(dateTime__month=date.month), Q(dateTime__day=date.day)).latest('dateTime'))
-			dwpfm2.append(DWPFlowmeterLogger.objects.filter(Q(dateTime__year=date.year), Q(dateTime__month=date.month), Q(dateTime__day=date.day)).latest('dateTime'))
-		except:
-			pass
-	count = len(cpfm2)
-	database_list = zip(cpfm2, dwpfm2)
-
-	response_data = {
-		'database_list': database_list,
-		'count': count,
-	}
-
+	response_data = controller.search_database('fm-int', start_date, end_date, count)
 	url = 'monitor/search_db_fm_int_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
@@ -1182,30 +917,17 @@ def search_db_power(request):
 def search_db_power_cur_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
-
 	if start_date=='error' or end_date=='error':
 		url = 'monitor/search_db_power_cur_result.html'
-		search_db_error(url)
+		search_db_error(url, request)
 
-	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
-	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
-	end_date = dt.strftime(end, date_format)
 	count = request.POST.get('count', 0)
 	try:
 		count = int(count)
 	except:
 		count = 0
 
-	# 순시전력
-	power = PowerConsumptionLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	count += power.count()
-	database_list = list(power)
-
-	response_data = {
-		'database_list': database_list,
-		'count': count,
-	}
-	# log.debug(response_data)
+	response_data = controller.search_database('power-cur', start_date, end_date, count)
 	url = 'monitor/search_db_power_cur_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
@@ -1214,40 +936,17 @@ def search_db_power_cur_result(request):
 def search_db_power_int_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
-
 	if start_date=='error' or end_date=='error':
 		url = 'monitor/search_db_power_int_result.html'
-		search_db_error(url)
+		search_db_error(url, request)
 
-	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
-	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
-	end_date = dt.strftime(end, date_format)
+	count = request.POST.get('count', 0)
+	try:
+		count = int(count)
+	except:
+		count = 0
 
-	# 적산전력
-	power2 = [];
-	count = 0
-	
-	# 검색할 날짜 리스트
-	start = dt.strptime(start_date, date_format)
-	end = dt.strptime(end_date, date_format) - timezone.timedelta(days=1)
-	num_date = end - start
-	date_list = [end - timezone.timedelta(days=x) for x in range(num_date.days+1)]
-	# log.debug(str(date_list))
-	for date in date_list:
-		d = dt.strftime(date, date_format)
-		# log.debug(str(date.day))
-		try:
-			power2.append(PowerConsumptionLogger.objects.filter(Q(dateTime__year=date.year), Q(dateTime__month=date.month), Q(dateTime__day=date.day)).latest('dateTime'))
-		except:
-			pass
-	count = len(power2)
-	database_list = power2
-
-	response_data = {
-		'database_list': database_list,
-		'count': count,
-	}
-	# log.debug(response_data)
+	response_data = controller.search_database('power-int', start_date, end_date, count)
 	url = 'monitor/search_db_power_int_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
@@ -1263,29 +962,17 @@ def search_db_cop(request):
 def search_db_cop_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
-
 	if start_date=='error' or end_date=='error':
 		url = 'monitor/search_db_cop_result.html'
-		search_db_error(url)
+		search_db_error(url, request)
 
-	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
-	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
-	end_date = dt.strftime(end, date_format)
 	count = request.POST.get('count', 0)
 	try:
 		count = int(count)
 	except:
 		count = 0
 
-	cop = CoefficientOfPerformanceLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	count += cop.count()
-
-	database_list = list(cop)
-	response_data = {
-		'database_list':database_list,
-		'count': count,
-	}
-
+	response_data = controller.search_database('cop', start_date, end_date, count)
 	url = 'monitor/search_db_cop_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
@@ -1301,40 +988,20 @@ def search_db_tw(request):
 def search_db_tw_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')
-
 	if start_date=='error' or end_date=='error':
 		url = 'monitor/search_db_tw_result.html'
-		search_db_error(url)
+		search_db_error(url, request)
 
-	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
-	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)
-	end_date = dt.strftime(end, date_format)
 	count = request.POST.get('count', 0)
 	try:
 		count = int(count)
 	except:
 		count = 0
 
-	# tw = TubeWellLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-
-	ab1 = TWAB1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	ab2 = TWAB2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	ib1 = TWIB1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	ij1 = TWIJ1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	sb1 = TWSB1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	sb2 = TWSB2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
-	count += ab1.count()
-
-	database_list = zip(list(ab1),list(ab2),list(ib1),list(ij1),list(sb1),list(sb2))
-	response_data = {
-		'database_list':database_list,
-		'count': count,
-	}
-
+	response_data = controller.search_database('tw', start_date, end_date, count)
 	url = 'monitor/search_db_tw_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
-	# return HttpResponse('')
 
 @login_required
 def search_db_alarm(request):
@@ -1350,7 +1017,7 @@ def search_db_alarm_result(request):
 
 	if start_date=='error' or end_date=='error':
 		url = 'monitor/search_db_alarm_result.html'
-		search_db_error(url)
+		search_db_error(url, request)
 
 	# 시간이 end_date 00:00:00이라 하루를 더해야 해당 날짜의 데이터가 검색됨
 	end = dt.strptime(end_date, date_format) + timezone.timedelta(days=1)

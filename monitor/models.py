@@ -165,10 +165,11 @@ class CirculatingPump2Logger(models.Model):
 
 # flowmeter
 class DWPFlowmeterLogger(models.Model):
+	# flux ton 기준
 	dateTime = models.DateTimeField()
 	temperature = models.FloatField()
-	currentFlux = models.SmallIntegerField()
-	integralFlux = models.IntegerField()
+	currentFlux = models.FloatField()
+	integralFlux = models.FloatField()
 	velocity = models.FloatField()
 	def __str__(self):
 		return '{}, current: {}'.format(str(self.dateTime.replace(microsecond=0)), self.currentFlux)
@@ -176,6 +177,7 @@ class DWPFlowmeterLogger(models.Model):
 	# 	return unicode(self.DWPFlowmeterLogger)
 
 class CPFlowmeterLogger(models.Model):
+	# flux lpm 기준
 	dateTime = models.DateTimeField()
 	temperature = models.FloatField()
 	currentFlux = models.SmallIntegerField()

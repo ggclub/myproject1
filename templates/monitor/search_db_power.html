@@ -149,7 +149,7 @@ function Result2excel() {
 	var radio = $(":radio[name=power]:checked").val();
 	var numCol = 2;
 	if(radio == 'cur'){
-		var found = $('#found').text();
+		var found = $('.found').text();
 
 		if(found == '0' || found == ''){
 			alert('검색된 내용이 없습니다.');
@@ -173,7 +173,7 @@ function Result2excel() {
 			});
 		});	
 	} else { // radio == 'int'
-		var found = $('#found-int').text();
+		var found = $('.found-int').text();
 
 		if(found == '0' || found == ''){
 			alert('검색된 내용이 없습니다.');
@@ -199,6 +199,9 @@ function Result2excel() {
 		});	
 	}
 
+	var startDate = $('#datepicker1').val();
+	var endDate = $('#datepicker2').val();
+	
 	$.ajax({
 		url: '/monitor/search_db_excel/',
 		type: "POST",
@@ -210,6 +213,8 @@ function Result2excel() {
 			'numRow' : numRow,
 			'numCol' : numCol,
 			'objType' : 'power-' + radio,
+			'startDate': startDate,
+			'endDate': endDate,
 		},
 		beforeSend: function() { $('#ajax-loader').show(); },
 		complete: function() {  },

@@ -280,16 +280,17 @@ $('.btn-search-db').on('click', function() {
 
 
 function Result2excel() {
-	var found = $('#found').text();
+	var found = $('.found').last().text();
 	if(found == '0' || found == ''){
 		alert('검색된 내용이 없습니다.');
 		return;
 	}
 	var numRow = parseInt(found);
 	var numCol = $('input[name=show-condition]:checkbox:checked').length;
+	var floor = $('select[name=floor] option:selected').val();
+	var name = $('select[name=name] option:selected').val();
 
-
-	console.log(numRow, numCol);
+	// console.log(numRow, numCol);
 
 
 	var columns = [];
@@ -298,18 +299,21 @@ function Result2excel() {
 	});
 	// console.log(columns);
 
-	var rows = new Array(numRow);
-	for (var i = 0; i < numRow; i++){
-		rows[i] = new Array(numCol);
-	}
+	// var rows = new Array(numRow);
+	// for (var i = 0; i < numRow; i++){
+	// 	rows[i] = new Array(numCol);
+	// }
 
-	$('#query-result tr').map(function (i) {
-		$(this).find('td').each(function (j) {
-			rows[i][j] = $(this).text();
-		});
-	});
+	// $('#query-result tr').map(function (i) {
+	// 	$(this).find('td').each(function (j) {
+	// 		rows[i][j] = $(this).text();
+	// 	});
+	// });
 	// console.log(rows);
 
+	var startDate = $('#datepicker1').val();
+	var endDate = $('#datepicker2').val();
+	
 	$.ajax({
 		url: '/monitor/search_db_excel/',
 		type: "POST",
@@ -317,10 +321,14 @@ function Result2excel() {
 		data : {
 			'csrfmiddlewaretoken': '{{ csrf_token }}',
 			'columns': JSON.stringify(columns),
-			'rows' : JSON.stringify(rows),
-			'numRow' : numRow,
+			// 'rows' : JSON.stringify(rows),
+			// 'numRow' : numRow,
 			'numCol' : numCol,
 			'objType' : 'ciu',
+			'startDate': startDate,
+			'endDate': endDate,
+			'floor': floor,
+			'name': name,
 		},
 		beforeSend: function() { $('#ajax-loader').show(); },
 		complete: function(data) { $('#ajax-loader').hide(); },
@@ -342,7 +350,7 @@ $(document).ready(function(){
 		var count = $('.found').last().text();
 		var floor = $('select[name=floor] option:selected').val();
 		var name = $('select[name=name] option:selected').val();
-
+		console.log(count);
         $.ajax({
 			url: '/monitor/search_db_ciu_result/',
 			type: "POST",
@@ -376,7 +384,7 @@ $(document).ready(function(){
 
         if  ((wintop/(docheight-winheight)) > scrolltrigger) {
          // console.log('scroll bottom');
-        	console.log((wintop/(docheight-winheight)));
+        	// console.log((wintop/(docheight-winheight)));
         	addToLast();
         }
     });
