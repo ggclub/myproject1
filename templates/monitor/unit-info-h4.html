@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <table class="ciu">
 <tbody><tr>
-	{# 수유실 #}
+	{# 방재실 #}
 	{% if us.0.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/h4/1-on.png' %}');">
 			{{ us.0.temperature }}
@@ -11,7 +11,7 @@
 			{{ us.0.temperature }}
 		</td>
 	{% endif %}
-	{# 민원실1 #}
+	{# 로비1 #}
 	{% if us.1.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/h4/2-on.png' %}');">
 			{{ us.1.temperature }}
@@ -21,7 +21,7 @@
 			{{ us.1.temperature }}
 		</td>
 	{% endif %}
-	{# 민원실2 #}
+	{# 로비2 #}
 	{% if us.2.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/h4/3-on.png' %}');">
 			{{ us.2.temperature }}
@@ -33,7 +33,7 @@
 	{% endif %}
 </tr>
 <tr>
-	{# 민원실3 #}
+	{# 수유실 #}
 	{% if us.3.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/h4/4-on.png' %}');">
 			{{ us.3.temperature }}
@@ -43,7 +43,7 @@
 			{{ us.3.temperature }}
 		</td>
 	{% endif %}
-	{# 민원실4 #}
+	{# 저소득상담실 #}
 	{% if us.4.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/h4/5-on.png' %}');">
 			{{ us.4.temperature }}
@@ -53,7 +53,7 @@
 			{{ us.4.temperature }}
 		</td>
 	{% endif %}
-	{# MDF실 #}
+	{# 2F 홀 #}
 	{% if us.5.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/h4/6-on.png' %}');">
 			{{ us.5.temperature }}
@@ -65,7 +65,7 @@
 	{% endif %}
 </tr>
 <tr>
-	{# 주민등록실 #}
+	{# 3F 홀 #}
 	{% if us.6.switch == "ON" %}
 		<td style="background-image: url('{% static 'monitor/right/h4/7-on.png' %}');">
 			{{ us.6.temperature }}
@@ -73,38 +73,6 @@
 	{% else %}
 		<td style="background-image: url('{% static 'monitor/right/h4/7-off.png' %}');">
 			{{ us.6.temperature }}
-		</td>
-	{% endif %}
-	{# 접종보건실 #}
-	{% if us.6.switch == "ON" %}
-		<td style="background-image: url('{% static 'monitor/right/h4/8-on.png' %}');">
-			{{ us.7.temperature }}
-		</td>
-	{% else %}
-		<td style="background-image: url('{% static 'monitor/right/h4/8-off.png' %}');">
-			{{ us.7.temperature }}
-		</td>
-	{% endif %}
-	{# 진료실 #}
-	{% if us.6.switch == "ON" %}
-		<td style="background-image: url('{% static 'monitor/right/h4/9-on.png' %}');">
-			{{ us.8.temperature }}
-		</td>
-	{% else %}
-		<td style="background-image: url('{% static 'monitor/right/h4/9-off.png' %}');">
-			{{ us.8.temperature }}
-		</td>
-	{% endif %}
-</tr>
-<tr>
-	{# 사무대기실 #}
-	{% if us.6.switch == "ON" %}
-		<td style="background-image: url('{% static 'monitor/right/h4/10-on.png' %}');">
-			{{ us.9.temperature }}
-		</td>
-	{% else %}
-		<td style="background-image: url('{% static 'monitor/right/h4/10-off.png' %}');">
-			{{ us.9.temperature }}
 		</td>
 	{% endif %}
 </tr></tbody>

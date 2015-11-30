@@ -1680,18 +1680,16 @@ def get_CIU_on_HP_from_json(no):
 	
 	try:
 		# ciu1.json
-		if no == "4":
+		if no == "5":
 			with open(file1, 'r') as data_file:
 				data = json.load(data_file)
-			# 수유실
-			ciu_on_hp.append(data["us"][3])
-			# 다목적실1~3
+			# 민원대기실1~3
 			for i in range(6, 9):
 				ciu_on_hp.append(data["us"][i])
-			# 다목적실4
+			# 민원대기실4
 			ciu_on_hp.append(data["us"][5])
 			# MDF ~ 사무대기실
-			for i in range(9,14):
+			for i in range(9, 14):
 				ciu_on_hp.append(data["us"][i])
 		# ciu2.json
 		elif no == "2":
@@ -1718,13 +1716,15 @@ def get_CIU_on_HP_from_json(no):
 				ciu_on_hp.append(i)
 			
 		# ciu1+2+3
-		else: # no == 5
+		else: # no == 4
 			with open(file1, 'r') as data_file:
 				data = json.load(data_file)
-			# 방재실 ~ 로비2
-			ciu_on_hp = data["us"][:3]
-			# 저소득 상담실
-			ciu_on_hp.append(data["us"][4])
+			# 방재실 ~ 저소득상담실
+			ciu_on_hp = data["us"][:5]
+			# # 수유실
+			# ciu_on_hp.append(data["us"][3])
+			# # 저소득 상담실
+			# ciu_on_hp.append(data["us"][4])
 			with open(file2, 'r') as data_file:
 				data = json.load(data_file)
 			# 2층 홀
