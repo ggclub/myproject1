@@ -72,6 +72,19 @@ td > div {
 	text-align: center;
 }
 */
-.result-datetime {
-	min-width: 120px;
+.table-header {
+	margin-bottom: 0px;
+}
+
+tr > .result-datetime, {
+	width: 200px;
+}
+
+tr > .result-hp1, 
+tr > .result-hp2, 
+tr > .result-hp3, 
+tr > .result-hp4, 
+tr > .result-hp5, 
+tr > .result-hp6 {
+	width: 80px;
 }

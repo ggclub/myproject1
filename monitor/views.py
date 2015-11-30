@@ -48,7 +48,8 @@ def index(request):
 	# log.debug("DataSender program started")
 
 	response_data = check_if_error_exist()
-	
+	# log.debug("error passed")
+
 	# 실내기
 	ciu_nav = request.POST.get('ciu_nav','total')
 	response_data.update({'ciu_nav':ciu_nav})
@@ -67,6 +68,7 @@ def index(request):
 		else: # total
 			response_data.update(controller.get_CIU_total())
 	rt = response_data["rt_total"]
+	# log.debug("ciu passed")
 
 	# 냉난방모드 확인
 	temp_mode = response_data["temp_mode"]
@@ -76,6 +78,7 @@ def index(request):
 			dateTime=timezone.now(), tempMode=temp_mode
 			).save()
 	response_data.update({"temp_mode": temp_mode})
+	# log.debug("temp mode passed")
 
 	# 처음 프로그램 실행시 모드는 수동
 	response_data.update({"op_mode": "AT"})
@@ -83,11 +86,13 @@ def index(request):
 		oml = OperationModeLogger(
 			dateTime=timezone.now(), opMode="AT"
 		).save()
+	# log.debug("AT check passed")
 
 	# 센서값 읽어오기
 	response_data.update(controller.read_data_from_json(rt))
 	while response_data["hmidata_error"] != None:
 		response_data.update(controller.read_data_from_json(rt))
+	# log.debug("hmidata.json passed")
 
 	# 처음 프로그램 실행시 hmi도 수동모드로 명령
 	controller.write_cmd()
@@ -800,7 +805,7 @@ def search_db_hp_result(request):
 		url = 'monitor/search_db_hp_result.html'
 		search_db_error(url, request)
 
-<<<<<<< HEAD
+# <<<<<<< HEAD
 	count = request.POST.get('count', 0)
 	try:
 		count = int(count)
@@ -808,26 +813,26 @@ def search_db_hp_result(request):
 		count = 0
 
 	response_data = controller.search_database('hp', start_date, end_date, count)
-=======
-	log.debug("start")
-	hp1 = HeatPump1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
-	hp2 = HeatPump2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
-	hp3 = HeatPump3Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
-	hp4 = HeatPump4Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
-	hp5 = HeatPump5Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
-	hp6 = HeatPump6Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
-	count += hp1.count()
-	log.debug("search done")
+# =======
+# 	log.debug("start")
+# 	hp1 = HeatPump1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
+# 	hp2 = HeatPump2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
+# 	hp3 = HeatPump3Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
+# 	hp4 = HeatPump4Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
+# 	hp5 = HeatPump5Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
+# 	hp6 = HeatPump6Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
+# 	count += hp1.count()
+# 	log.debug("search done")
 
-	database_list = zip(list(hp1), list(hp2), list(hp3), list(hp4), list(hp5), list(hp6))
-	log.debug("zip done")
+# 	database_list = zip(list(hp1), list(hp2), list(hp3), list(hp4), list(hp5), list(hp6))
+# 	log.debug("zip done")
 
-	response_data = {
-		'database_list':database_list,
-		'count': count,
-	}
+# 	response_data = {
+# 		'database_list':database_list,
+# 		'count': count,
+# 	}
 	
->>>>>>> hp45
+# >>>>>>> hp45
 	url = 'monitor/search_db_hp_result.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
@@ -848,24 +853,24 @@ def search_db_cp_result(request):
 		url = 'monitor/search_db_cp_result.html'
 		search_db_error(url, request)
 
-<<<<<<< HEAD
+# <<<<<<< HEAD
 	count = request.POST.get('count', 0)
 	try:
 		count = int(count)
 	except:
 		count = 0
-=======
-	log.debug(start_date)
-	cp1 = CirculatingPump1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-	cp2 = CirculatingPump2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-	count += cp1.count()
+# =======
+# 	log.debug(start_date)
+# 	cp1 = CirculatingPump1Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+# 	cp2 = CirculatingPump2Logger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+# 	count += cp1.count()
 
-	database_list = zip(list(cp1), list(cp2))
-	response_data = {
-		'database_list':database_list,
-		'count': count,
-	}
->>>>>>> hp45
+# 	database_list = zip(list(cp1), list(cp2))
+# 	response_data = {
+# 		'database_list':database_list,
+# 		'count': count,
+# 	}
+# >>>>>>> hp45
 
 	response_data = controller.search_database('cp', start_date, end_date, count)
 	url = 'monitor/search_db_cp_result.html'

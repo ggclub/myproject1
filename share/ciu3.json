@@ -1,13 +1,13 @@
 ﻿{
   "datetime": "2015-09-24 17:57:59",
-  "on_total": 0,
+  "on_total": 6,
   "temp_mode": "CL",
-  "on_f3": 0,
+  "on_f3": 3,
   "rt_f3": 0.0,
   "rt_total": 0.0,
   "us": [
     {
-      "switch": "OFF",
+      "switch": "ON",
       "temperature": 23.0,
       "set_temp": 18.0,
       "op_mode": "냉방",
@@ -17,7 +17,7 @@
       "floor": 3
     },
     {
-      "switch": "OFF",
+      "switch": "ON",
       "temperature": 23.0,
       "set_temp": 18.0,
       "op_mode": "냉방",
@@ -37,7 +37,7 @@
       "floor": 3
     },
     {
-      "switch": "OFF",
+      "switch": "ON",
       "temperature": 28.0,
       "set_temp": 18.0,
       "op_mode": "냉방",

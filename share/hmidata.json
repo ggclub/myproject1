@@ -2,11 +2,7 @@
 	"datetime": "2015-10-15 16:58:14",
 	"cop": 83.87,
 	"op_mode": "AT",
-<<<<<<< HEAD
-	"temp_mode": "CL",
-=======
 	"temp_mode": "HT",
->>>>>>> hp45
 	"cp1": "OFF",
 	"cp2": "OFF",
 	"cp_operating": 1,

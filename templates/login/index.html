@@ -12,7 +12,7 @@
 		<div class="input pos-abs">
 		<form class="form-horizontal" action="." method="post">{% csrf_token %}
 			<input type="text" class="form-control" id="username" placeholder="username" name="username">
-			<input type="password"  class="form-control" name="password">
+			<input type="password"  class="form-control" placeholder="password" name="password">
 		</div>
 		<div class="error login-width pos-abs">
 		{% if state %}

@@ -7,16 +7,18 @@ from django.template.loader import render_to_string
 from django.shortcuts import render_to_response
 from django.template.context_processors import csrf
 
-import logging
+# import logging
 # log = logging.getLogger(__name__)
 
 # Create your views here.
 def index(request):
 	username = password = state = ''
+	# log.debug("index")
 
-	from monitor.views import index
 	# if already logged in
+	from monitor.views import index
 	if request.user.is_authenticated():
+		# log.debug("user authenticated")
 		return index(request)
 
 
