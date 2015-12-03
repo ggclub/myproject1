@@ -685,9 +685,11 @@ STATE_CHOICES = (
 	(ERROR, '응답없음'),
 )
 
+EMR='EMR'
+LBY1='LBY1'
 FL1_CHOICES = (
-	('EMR', '방재실'),
-	('LBY1', '로비1'),
+	(EMR, '방재실'),
+	(LBY1, '로비1'),
 	('LBY2', '로비2'),
 	('NUR', '수유실'),
 	('LIC', '저소득층상담실'),

@@ -13,12 +13,10 @@ from django.template.context_processors import csrf
 # Create your views here.
 def index(request):
 	username = password = state = ''
-	# log.debug("index")
 
 	# if already logged in
 	from monitor.views import index
 	if request.user.is_authenticated():
-		# log.debug("user authenticated")
 		return index(request)
 
 

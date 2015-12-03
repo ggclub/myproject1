@@ -37,7 +37,7 @@
       "floor": 2
     },
     {
-      "switch": "OFF",
+      "switch": "ON",
       "temperature": 26.0,
       "set_temp": 18.0,
       "op_mode": "냉방",

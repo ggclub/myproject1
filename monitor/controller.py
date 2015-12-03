@@ -260,8 +260,8 @@ def write_cmd():
 		# 'rt': rt.RT,
 	}
 	cmd_text.update(read_cp_operating())
-	log.debug("command written")
-	log.debug(cmd_text)
+	# log.debug("command written")
+	# log.debug(cmd_text)
 	try:
 		with open(file_path + 'cmdmain.json', 'w') as fp:
 			json.dump(cmd_text, fp)
@@ -929,7 +929,9 @@ def read_data_from_json(rt):
 
 
 		# log.debug("flux_need: " + str(int(flux_need)) + ", hmi flux: " + str(data["CP"][cp_operating]["flux"]));
+		# log.debug(int(data["CP"][cp_operating]["flux"]) != int(flux_need))
 		if int(data["CP"][cp_operating]["flux"]) != int(flux_need):
+			# log.debug(flux_need==0)
 			if flux_need == 0:
 				# 히트펌프 모두 꺼져있는 경우 순환펌프 OFF
 				if data["CP"][cp_operating]["switch"] != "OFF":
@@ -961,10 +963,13 @@ def read_data_from_json(rt):
 						# 		dateTime=datetime, location="CP"+str(cp_operating+1), switch="OFF"
 						# 	).save()
 						write_cmd()
-						log.debug("write_cmd from hmidata(cp, off)")
+						# log.debug("write_cmd from hmidata(cp, off)")
 					except Exception, e:
 						log.error(str(e))
 			else: # flux_need > 0 히트펌프 켜져있는 경우 순환펌프 Hz 조절
+				# log.debug(int(data["CP"][cp_operating]["Hz"]))
+				# log.debug(int(hz_need))
+				# log.debug(int(data["CP"][cp_operating]["Hz"]) != int(hz_need))
 				if int(data["CP"][cp_operating]["Hz"]) != int(hz_need):
 					try:
 						data["CP"][cp_operating]["switch"] = "ON"
@@ -982,6 +987,7 @@ def read_data_from_json(rt):
 								Hz=hz_need, 
 								flux=flux_need
 								).save()
+							# log.debug("cp1 save")
 						else:
 							# 순환 펌프 2번
 							cp = CirculatingPump2Logger(
@@ -992,13 +998,16 @@ def read_data_from_json(rt):
 								Hz=hz_need, 
 								flux=flux_need
 								).save()
+							# log.debug("cp2 save")
+
 						# new_cmd = OperationSwitchControl(
 						# 		dateTime=datetime, location="CP"+str(cp_operating+1), switch="OFF"
 						# 	).save()
 						write_cmd()
-						log.debug("write_cmd from hmidata(cp, on)")
+						# log.debug("write_cmd from hmidata(cp, on)")
 					except Exception, e:
 						log.error(str(e))
+						# log.debug(str(e))
 
 
 
@@ -1071,7 +1080,7 @@ def read_data_from_json(rt):
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
-				log.debug("write_cmd from hmidata(dwp1, on)")
+				# log.debug("write_cmd from hmidata(dwp1, on)")
 				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			else: # ON >> OFF
 				try:
@@ -1086,7 +1095,7 @@ def read_data_from_json(rt):
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
-				log.debug("write_cmd from hmidata(dwp1, off)")
+				# log.debug("write_cmd from hmidata(dwp1, off)")
 				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 				# dwp.json 파일에 on으로 명시되어있었던 경우만 시간 적음
 				# if dwp["dwp1"] == 0:
@@ -1111,7 +1120,7 @@ def read_data_from_json(rt):
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
-				log.debug("write_cmd from hmidata(dwp2, on)")
+				# log.debug("write_cmd from hmidata(dwp2, on)")
 				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			else: # ON >> OFF
 				try:
@@ -1126,7 +1135,7 @@ def read_data_from_json(rt):
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
-				log.debug("write_cmd from hmidata(dwp2, off)")
+				# log.debug("write_cmd from hmidata(dwp2, off)")
 				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			# dwp.json 파일에 on으로 명시되어있었던 경우만 시간 적음
 				# if dwp["dwp2"] == 0:
@@ -1151,7 +1160,7 @@ def read_data_from_json(rt):
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
-				log.debug("write_cmd from hmidata(dwp3, on)")
+				# log.debug("write_cmd from hmidata(dwp3, on)")
 				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			else: # ON >> OFF
 				try:
@@ -1166,7 +1175,7 @@ def read_data_from_json(rt):
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
-				log.debug("write_cmd from hmidata(dwp3, off)")
+				# log.debug("write_cmd from hmidata(dwp3, off)")
 				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			# dwp.json 파일에 on으로 명시되어있었던 경우만 시간 적음
 				# if dwp["dwp3"] == 0:
@@ -1191,7 +1200,7 @@ def read_data_from_json(rt):
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
-				log.debug("write_cmd from hmidata(dwp4, on)")
+				# log.debug("write_cmd from hmidata(dwp4, on)")
 				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			else: # ON >> OFF
 				try:
@@ -1206,7 +1215,7 @@ def read_data_from_json(rt):
 				except Exception, e:
 					log.error(str(e))
 				write_cmd()
-				log.debug("write_cmd from hmidata(dwp4, off)")
+				# log.debug("write_cmd from hmidata(dwp4, off)")
 				return data # 심정펌프 제어시 delay를 위해 (mc noise)
 			# dwp.json 파일에 on으로 명시되어있었던 경우만 시간 적음
 				# if dwp["dwp4"] == 0:
@@ -1816,7 +1825,8 @@ def write_rt(rt):
 		with open(filename, 'w') as fp:
 			json.dump(content, fp)
 	except Exception, e:
-		log.debug(str(e))
+		# log.debug(str(e))
+		pass
 	return
 
 def get_CIU_on_HP(no):
@@ -2568,8 +2578,8 @@ def search_ciu(start_date, end_date, count, floor, name, excel):
 					"database":database1,
 					"count":count,
 				}
-				log.debug(str(len([database1])))
-				log.debug(str(len([database1][0])))
+				# log.debug(str(len([database1])))
+				# log.debug(str(len([database1][0])))
 
 		elif floor == '2':
 			if name == '1':
@@ -2769,8 +2779,8 @@ def search_ciu(start_date, end_date, count, floor, name, excel):
 					"database":database1,
 					"count":count,
 				}
-				log.debug(str(len([database1])))
-				log.debug(str(len([database1][0])))
+				# log.debug(str(len([database1])))
+				# log.debug(str(len([database1][0])))
 
 		elif floor == '2':
 			if name == '1':

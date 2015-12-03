@@ -250,7 +250,7 @@ def make_excel_file(obj_type, columns, rows, fail=0):
      except Exception, e:
           # if permission denied error
           # 지금은 일어나지 않음
-          log.debug(str(e))
+          # log.debug(str(e))
           fail += 1
           # make_excel_file(obj_type, columns, rows, fail)
 
@@ -260,7 +260,7 @@ def rows_hp(n_col, n_row, data):
      i=0;j=0;
      for x in data:
           if j == 0:
-               row_mat[i][j] = str(x[0].dateTime)[:-10]; j+=1
+               row_mat[i][j] = str(x[0].dateTime)[:-3]; j+=1
           # hp1
           row_mat[i][j] = str(x[0].switch); j+=1
           row_mat[i][j] = float(x[0].tempIn.temperature); j+=1
@@ -292,7 +292,7 @@ def rows_cp(n_col, n_row, data):
      i=0;j=0;
      for x in data:
           if j == 0:
-               row_mat[i][j] = str(x[0].dateTime)[:-10]; j+=1
+               row_mat[i][j] = str(x[0].dateTime)[:-3]; j+=1
           # cp1
           row_mat[i][j] = str(x[0].switch); j+=1
           row_mat[i][j] = str(x[0].opMode); j+=1
@@ -310,7 +310,7 @@ def rows_dwp(n_col, n_row, data):
      i=0;j=0;
      for x in data:
           if j == 0:
-               row_mat[i][j] = str(x[0].dateTime)[:-10]; j+=1
+               row_mat[i][j] = str(x[0].dateTime)[:-3]; j+=1
           # dwp1
           row_mat[i][j] = str(x[0].switch); j+=1
           row_mat[i][j] = float(x[4].temperature); j+=1
@@ -334,7 +334,7 @@ def rows_fm_cur(n_col, n_row, data):
      i=0;j=0;
      for x in data:
           if j == 0:
-               row_mat[i][j] = str(x[0].dateTime)[:-10]; j+=1
+               row_mat[i][j] = str(x[0].dateTime)[:-3]; j+=1
           # 순환수 열교환 후
           row_mat[i][j] = float(x[0].currentFlux/16.67); j+=1
           row_mat[i][j] = int(x[0].currentFlux); j+=1
@@ -358,7 +358,7 @@ def rows_fm_int(n_col, n_row, data):
      i=0;j=0;
      for x in data:
           if j == 0:
-               row_mat[i][j] = str(x[0].dateTime)[:-10]; j+=1
+               row_mat[i][j] = str(x[0].dateTime)[:-3]; j+=1
           # 순환수 열교환 후
           row_mat[i][j] = float(x[0].integralFlux/1000); j+=1
           # 순환수 열교환 전
@@ -374,7 +374,7 @@ def rows_tw(n_col, n_row, data):
      i=0;j=0;
      for x in data:
           if j == 0:
-               row_mat[i][j] = str(x[0].dateTime)[:-10]; j+=1
+               row_mat[i][j] = str(x[0].dateTime)[:-3]; j+=1
           # ab1
           row_mat[i][j] = float(x[0].level); j+=1
           row_mat[i][j] = float(x[0].temp10); j+=1
@@ -415,7 +415,7 @@ def rows_power_cur(n_col, n_row, data):
      i=0;j=0;
      for x in data:
           if j == 0:
-               row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+               row_mat[i][j] = str(x.dateTime)[:-3]; j+=1
           # 순시전력
           row_mat[i][j] = float(x.currentPowerConsumption); j+=1
           i+=1;j=0;
@@ -425,7 +425,7 @@ def rows_power_int(n_col, n_row, data):
      i=0;j=0;
      for x in data:
           if j == 0:
-               row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+               row_mat[i][j] = str(x.dateTime)[:-3]; j+=1
           # 적산전력
           row_mat[i][j] = float(x.integralPowerConsumption); j+=1
           i+=1;j=0;
@@ -435,7 +435,7 @@ def rows_cop(n_col, n_row, data):
      i=0;j=0;
      for x in data:
           if j == 0:
-               row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+               row_mat[i][j] = str(x.dateTime)[:-3]; j+=1
           # COP
           row_mat[i][j] = float(x.COP); j+=1
           i+=1;j=0;
@@ -454,74 +454,79 @@ def rows_ciu(n_col, n_row, data):
           try:
                for x in data[0]:
                     if j == 0:
-                         row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+                         row_mat[i][j] = str(x.dateTime)[:-3]; j+=1
                     # 층 수
                     row_mat[i][j] = int(x.floor); j+=1
-                    row_mat[i][j] = str(x.location); j+=1
+                    row_mat[i][j] = str(x.get_location_display()); j+=1
                     row_mat[i][j] = str(x.switch); j+=1
                     row_mat[i][j] = float(x.setTemp); j+=1
                     row_mat[i][j] = float(x.temperature); j+=1
                     row_mat[i][j] = str(x.opMode); j+=1
                     i+=1;j=0;
           except:
-               log.debug(str(i) +', ' + str(j))
+               # log.debug(str(i) +', ' + str(j))
+               pass
      elif len(data) == 14:
           # 층 별 실내기 검색 결과 - 1층
-          log.debug("1floor")
+          # log.debug("1floor")
           row_mat = [[None for x in range(n_col)] for x in range((n_row+1)*14)]
           try:
                for d in data:
                     for x in d:
                          if j == 0:
-                              row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+                              row_mat[i][j] = str(x.dateTime)[:-3]; j+=1
                          row_mat[i][j] = int(x.floor); j+=1
-                         row_mat[i][j] = str(x.location); j+=1
+                         row_mat[i][j] = str(x.get_location_display()); j+=1
                          row_mat[i][j] = str(x.switch); j+=1
                          row_mat[i][j] = float(x.setTemp); j+=1
                          row_mat[i][j] = float(x.temperature); j+=1
                          row_mat[i][j] = str(x.opMode); j+=1
                          i+=1;j=0;
           except:
-               log.debug(str(i) +', ' + str(j))
+               # log.debug(str(i) +', ' + str(j))
+               pass
      elif len(data) == 12:
           # 층 별 실내기 검색 결과 - 2,3층
-          log.debug("2-3floor")
+          # log.debug("2-3floor")
           row_mat = [[None for x in range(n_col)] for x in range((n_row+1)*12)]
           try:
                for d in data:
                     for x in d:
                          if j == 0:
-                              row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+                              row_mat[i][j] = str(x.dateTime)[:-3]; j+=1
                          row_mat[i][j] = int(x.floor); j+=1
-                         row_mat[i][j] = str(x.location); j+=1
+                         row_mat[i][j] = str(x.get_location_display()); j+=1
                          row_mat[i][j] = str(x.switch); j+=1
                          row_mat[i][j] = float(x.setTemp); j+=1
                          row_mat[i][j] = float(x.temperature); j+=1
                          row_mat[i][j] = str(x.opMode); j+=1
                          i+=1;j=0;
           except:
-               log.debug(str(i) +', ' + str(j))
+               # log.debug(str(i) +', ' + str(j))
+               pass
      elif len(data) == 3:
           # 전체 실내기 검색 결과
-          log.debug("all")
+          # log.debug("all")
           row_mat = [[None for x in range(n_col)] for x in range((n_row+1)*(14+12+12))]
           try:
                for floor in data:
                     for d in floor:
                          for x in d:
                               if j == 0:
-                                   row_mat[i][j] = str(x.dateTime)[:-10]; j+=1
+                                   row_mat[i][j] = str(x.dateTime)[:-3]; j+=1
                               row_mat[i][j] = int(x.floor); j+=1
-                              row_mat[i][j] = str(x.location); j+=1
+                              row_mat[i][j] = str(x.get_location_display()); j+=1
                               row_mat[i][j] = str(x.switch); j+=1
                               row_mat[i][j] = float(x.setTemp); j+=1
                               row_mat[i][j] = float(x.temperature); j+=1
                               row_mat[i][j] = str(x.opMode); j+=1
                               i+=1;j=0;
           except:
-               log.debug(str(i) +', ' + str(j))
+               # log.debug(str(i) +', ' + str(j))
+               pass
      else:
-          log.debug("??")
+          # log.debug("??")
+          pass
      return row_mat
 
 def make_rows(obj, n_col, n_row, data):

@@ -37,7 +37,7 @@ def index(request):
 	request.session['name'] = 'admin'
 	# log.debug(str(request.session['name']))
 
-	log.debug("K-ATES program started.")
+	# log.debug("K-ATES program started.")
 
 	# sub program start
 	# AirconMonitor, DataSender
@@ -96,7 +96,7 @@ def index(request):
 
 	# 처음 프로그램 실행시 hmi도 수동모드로 명령
 	controller.write_cmd()
-	log.debug("program start - Auto command")
+	# log.debug("program start - Auto command")
 
 	response_data.update(csrf(request))
 	url = 'monitor/index.html'
@@ -114,7 +114,7 @@ def save_data(response_data):
 		controller.save_ciu2(response_data)
 		response_data.update(controller.get_CIU_from_json('3'))
 		controller.save_ciu3(response_data)
-		log.debug("database updated")
+		# log.debug("database updated")
 		# save_time = timezone.now()
 
 
@@ -282,9 +282,9 @@ def setting_cp_done(request):
 		'datetime':datetime,
 		# 'rt': rt.RT,
 	}
-	log.debug("command written")
-	log.debug(cmd_text)
-	log.debug("write_cmd from setting_cp_done")
+	# log.debug("command written")
+	# log.debug(cmd_text)
+	# log.debug("write_cmd from setting_cp_done")
 	try:
 		with open(file_path + 'cmdmain.json', 'w') as fp:
 			json.dump(cmd_text, fp)
@@ -359,7 +359,8 @@ def toggle_switch(request):
 	loc = location.upper()
 	switch = request.POST.get('switch', 'error').encode('utf-8').upper()
 	if switch == 'error':
-		log.debug("toggle_switch, switch: error")
+		# log.debug("toggle_switch, switch: error")
+		pass
 
 	op_mode = OperationModeLogger.objects.latest('id').opMode
 	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
@@ -386,7 +387,8 @@ def toggle_switch(request):
 		if dwp != '':
 			dwp.save()
 	except Exception, e:
-		log.debug(str(e))
+		# log.debug(str(e))
+		pass
 
 
 	# 기기 동작 내역 갱신
@@ -401,7 +403,7 @@ def toggle_switch(request):
 
 	# 커맨드 파일 작성
 	controller.write_cmd()
-	log.debug("write_cmd from toggle_switch")
+	# log.debug("write_cmd from toggle_switch")
 
 	# 커맨드 후 hmidata를 잠시동안 읽지 않는다.
 	global flag_command 
@@ -444,9 +446,10 @@ def setting_mode(request, mode):
 def setting_mode_confirm(request):
 	new_op_mode = request.POST.get('mode', 'error')
 	if new_op_mode == 'error':
-		log.debug("setting_mode_confirm, op_mode: error")
+		# log.debug("setting_mode_confirm, op_mode: error")
+		pass
 
-	log.debug("setting_mode_confirm: " + new_op_mode)
+	# log.debug("setting_mode_confirm: " + new_op_mode)
 	op_mode = OperationModeLogger.objects.latest('id').opMode
 	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
 	# op_mode가 변경된 경우 저장
@@ -456,7 +459,7 @@ def setting_mode_confirm(request):
 				dateTime=timezone.now(), opMode=op_mode
 			).save()
 		controller.write_cmd()
-		log.debug("write_cmd from settimg_mode_confirm")
+		# log.debug("write_cmd from settimg_mode_confirm")
 	response_data = {
 		"op_mode": op_mode,
 		"temp_mode": temp_mode,
@@ -752,7 +755,7 @@ def download_result(request, o):
 		response['Content-Disposition'] = 'attachment; ' + filename_header
 
 	else:	# obj_type ??
-		log.debug('obj_type:' + obj_type)
+		# log.debug('obj_type:' + obj_type)
 		response = HttpResponse("obj_type ??", content_type="text/plain")
 	return response
 
