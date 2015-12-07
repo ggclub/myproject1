@@ -123,7 +123,7 @@ function reloadDisplay() {
 		var dt = new Date();
 		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
 		console.log(time + " reload display error");
-		// alert("reload display error!");
+		reloadDisplay();
 	});
 	return false;
 }

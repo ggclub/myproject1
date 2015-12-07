@@ -256,7 +256,8 @@ $('.btn-search-db').on('click', function() {
 		alert("날짜를 선택해주세요.");
 		return;
 	}
-	
+	console.log(floor);
+	console.log(name);
 	$.ajax({
 		url: '/monitor/search_db_ciu_result/',
 		type: "POST",

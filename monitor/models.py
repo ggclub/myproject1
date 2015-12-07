@@ -80,6 +80,7 @@ WATERLEVEL_CHOICES = (
 	(APPROPRIATE, '적정'),
 	(NOTAPPROPRIATE, '부적정'),
 )
+# SB-1
 class DeepwellPump1Logger(models.Model):
 	dateTime = models.DateTimeField()
 	opMode = models.CharField(max_length=2, choices=OPMODE_CHOICES, default=AUTO)
@@ -89,7 +90,7 @@ class DeepwellPump1Logger(models.Model):
 		return u'{}, {}-{}'.format(str(self.dateTime.replace(microsecond=0)), self.opMode, self.switch)
 	# def __unicode__(self):
 	# 	return unicode(self.DeepwellPump1Logger)
-
+# AB-1
 class DeepwellPump2Logger(models.Model):
 	dateTime = models.DateTimeField()
 	opMode = models.CharField(max_length=2, choices=OPMODE_CHOICES, default=AUTO)
@@ -99,7 +100,7 @@ class DeepwellPump2Logger(models.Model):
 		return u'{}, {}-{}'.format(str(self.dateTime.replace(microsecond=0)), self.opMode, self.switch)
 	# def __unicode__(self):
 	# 	return unicode(self.DeepwellPump2Logger)
-
+# AB-2
 class DeepwellPump3Logger(models.Model):
 	dateTime = models.DateTimeField()
 	opMode = models.CharField(max_length=2, choices=OPMODE_CHOICES, default=AUTO)
@@ -109,7 +110,7 @@ class DeepwellPump3Logger(models.Model):
 		return u'{}, {}-{}'.format(str(self.dateTime.replace(microsecond=0)), self.opMode, self.switch)
 	# def __unicode__(self):
 	# 	return unicode(self.DeepwellPump3Logger)
-
+# SB-2
 class DeepwellPump4Logger(models.Model):
 	dateTime = models.DateTimeField()
 	opMode = models.CharField(max_length=2, choices=OPMODE_CHOICES, default=AUTO)
@@ -888,9 +889,9 @@ class Floor1CIU14(models.Model):
 
 
 FL2_CHOICES = (
-	('HAL2', '2층 홀'),
 	('CTR', '조정실'),
 	('PPR', '준비실'),
+	('HAL2', '2층 홀'),
 	('HOT', '면장실'),
 	('EDU1', '교육실1'),
 	('EDU2', '교육실2'),
@@ -910,7 +911,7 @@ class Floor2CIU1(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL2_CHOICES, default='HAL2')
+	location = models.CharField(max_length=4, choices=FL2_CHOICES, default='CTR')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -923,7 +924,7 @@ class Floor2CIU2(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL2_CHOICES, default='CTR')
+	location = models.CharField(max_length=4, choices=FL2_CHOICES, default='PPR')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -936,7 +937,7 @@ class Floor2CIU3(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL2_CHOICES, default='PPR')
+	location = models.CharField(max_length=4, choices=FL2_CHOICES, default='HAL2')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -1059,9 +1060,9 @@ class Floor2CIU12(models.Model):
 
 
 FL3_CHOICES = (
-	('HAL3', '3층 홀'),
 	('AUD1', '강당1'),
 	('AUD2', '강당2'),
+	('HAL3', '3층 홀'),
 	('MPR1', '다목적홀1'),
 	('MPR2', '다목적홀2'),
 	('MPR3', '다목적홀3'),
@@ -1081,7 +1082,7 @@ class Floor3CIU1(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL3_CHOICES, default='HAL3')
+	location = models.CharField(max_length=4, choices=FL3_CHOICES, default='AUD1')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -1094,7 +1095,7 @@ class Floor3CIU2(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL3_CHOICES, default='AUD1')
+	location = models.CharField(max_length=4, choices=FL3_CHOICES, default='AUD2')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -1107,7 +1108,7 @@ class Floor3CIU3(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL3_CHOICES, default='AUD2')
+	location = models.CharField(max_length=4, choices=FL3_CHOICES, default='HAL3')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 

@@ -48,7 +48,6 @@ def index(request):
 	# log.debug("DataSender program started")
 
 	response_data = check_if_error_exist()
-	# log.debug("error passed")
 
 	# 실내기
 	ciu_nav = request.POST.get('ciu_nav','total')
@@ -68,7 +67,6 @@ def index(request):
 		else: # total
 			response_data.update(controller.get_CIU_total())
 	rt = response_data["rt_total"]
-	# log.debug("ciu passed")
 
 	# 냉난방모드 확인
 	temp_mode = response_data["temp_mode"]
@@ -77,8 +75,6 @@ def index(request):
 		tm = TemperatureModeLogger(
 			dateTime=timezone.now(), tempMode=temp_mode
 			).save()
-	response_data.update({"temp_mode": temp_mode})
-	# log.debug("temp mode passed")
 
 	# 처음 프로그램 실행시 모드는 수동
 	response_data.update({"op_mode": "AT"})
@@ -86,17 +82,13 @@ def index(request):
 		oml = OperationModeLogger(
 			dateTime=timezone.now(), opMode="AT"
 		).save()
-	# log.debug("AT check passed")
+	# init cmd
+	controller.init_cmd()
 
 	# 센서값 읽어오기
 	response_data.update(controller.read_data_from_json(rt))
 	while response_data["hmidata_error"] != None:
 		response_data.update(controller.read_data_from_json(rt))
-	# log.debug("hmidata.json passed")
-
-	# 처음 프로그램 실행시 hmi도 수동모드로 명령
-	controller.write_cmd()
-	# log.debug("program start - Auto command")
 
 	response_data.update(csrf(request))
 	url = 'monitor/index.html'
@@ -149,6 +141,21 @@ def reload_display(request):
 			response_data.update(controller.get_CIU_total())
 	rt = response_data["rt_total"]
 
+	# 냉난방모드 확인
+	temp_mode = response_data["temp_mode"]
+	old_temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
+	# log.debug("temp_mode: " +str(temp_mode))
+	# log.debug("old_temp_mode: " +str(old_temp_mode))
+	if temp_mode != old_temp_mode:
+		tm = TemperatureModeLogger(
+			dateTime=timezone.now(), tempMode=temp_mode
+			).save()
+		cmd = controller.read_cmd()
+		now = str(timezone.now())[:-7]
+		cmd.update({'datetime':now,'temp_mode':temp_mode})
+		controller.write_cmd(cmd)
+
+
 	global flag_command 
 	if flag_command: # command를 준 후에 파일을 잠시 읽지 않는다.
 		import time
@@ -165,16 +172,7 @@ def reload_display(request):
 	# 	pass
 	# else: 
 
-	# 냉난방모드 확인
-	temp_mode = response_data["temp_mode"]
-	old_temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
-	# log.debug("temp_mode: " +str(temp_mode))
-	# log.debug("old_temp_mode: " +str(old_temp_mode))
-	if temp_mode != old_temp_mode:
-		tm = TemperatureModeLogger(
-			dateTime=timezone.now(), tempMode=temp_mode
-			).save()
-
+	
 	# 운전 모드 정보
 	# op_mode = OperationModeLogger.objects.latest('id').opMode
 	response_data.update({
@@ -207,9 +205,6 @@ def reload_display(request):
 		else:
 			if t.minute % 5 == 0 and t.second < 4:
 				save_data(response_data)
-
-	""" for test """
-	# save_data(response_data)
 
 
 	url = 'monitor/container.html'
@@ -244,52 +239,40 @@ def setting_cp_done(request):
 	cp2hz = int(request.POST.get('cp2hz', 0))
 	cp2flux = int(request.POST.get('cp2flux', 0))
 
-	op_mode = OperationModeLogger.objects.latest('id').opMode
-	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
+	# op_mode = OperationModeLogger.objects.latest('id').opMode
+	# temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
 	# 설정 값 db에 저장
-	controller.set_cp(1, op_mode, cp1switch, cp1hz, cp1flux)
-	controller.set_cp(2, op_mode, cp2switch, cp2hz, cp2flux)
+	# controller.set_cp(1, op_mode, cp1switch, cp1hz, cp1flux)
+	# controller.set_cp(2, op_mode, cp2switch, cp2hz, cp2flux)
 	# cmdmain에 기록
 	# ######## 	controller.write_cmd()
-	cp1 = CirculatingPump1Logger.objects.latest('id')
-	cp2 = CirculatingPump2Logger.objects.latest('id')
-	dwp1 = DeepwellPump1Logger.objects.latest('id')
-	dwp2 = DeepwellPump2Logger.objects.latest('id')
-	dwp3 = DeepwellPump3Logger.objects.latest('id')
-	dwp4 = DeepwellPump4Logger.objects.latest('id')
+	# cp1 = CirculatingPump1Logger.objects.latest('id')
+	# cp2 = CirculatingPump2Logger.objects.latest('id')
+	# dwp1 = DeepwellPump1Logger.objects.latest('id')
+	# dwp2 = DeepwellPump2Logger.objects.latest('id')
+	# dwp3 = DeepwellPump3Logger.objects.latest('id')
+	# dwp4 = DeepwellPump4Logger.objects.latest('id')
 	# rt = RefrigerationTonLogger.objects.latest('id')
-	datetime = str(timezone.now())[:-7]
-	if cp1.switch == "OFF":
-		cp1.Hz = 0
-		cp1.flux = 0
-	if cp2.switch == "OFF":
-		cp2.Hz = 0
-		cp2.flux = 0
-	cmd_text = {
-		'op_mode': op_mode,
-		'temp_mode': temp_mode,
+	cmd = controller.read_cmd()
+	now = str(timezone.now())[:-7]
+	if cp1switch == "OFF":
+		cp1hz = 0
+		cp1flux = 0
+	if cp2switch == "OFF":
+		cp2hz = 0
+		cp2flux = 0
+	cmd.update({
+		'datetime':now,
 		'cp_operating': cp_operating,
-		'cp1': cp1.switch,
-		'cp1_hz': cp1.Hz,
-		'cp1_flux': cp1.flux,
-		'cp2': cp2.switch,
-		'cp2_hz': cp2.Hz,
-		'cp2_flux': cp2.flux,
-		'dwp1': dwp1.switch,
-		'dwp2': dwp2.switch,
-		'dwp3': dwp3.switch,
-		'dwp4': dwp4.switch,
-		'datetime':datetime,
-		# 'rt': rt.RT,
-	}
-	# log.debug("command written")
-	# log.debug(cmd_text)
+		'cp1': cp1switch,
+		'cp1_hz': cp1hz,
+		'cp1_flux': cp1flux,
+		'cp2': cp2switch,
+		'cp2_hz': cp2hz,
+		'cp2_flux': cp2flux,
+	})
 	# log.debug("write_cmd from setting_cp_done")
-	try:
-		with open(file_path + 'cmdmain.json', 'w') as fp:
-			json.dump(cmd_text, fp)
-	except Exception, e:
-		log.error(str(e))
+	controller.write_cmd(cmd)
 
 	# check if error exist
 	response_data = check_if_error_exist()
@@ -362,47 +345,24 @@ def toggle_switch(request):
 		# log.debug("toggle_switch, switch: error")
 		pass
 
-	op_mode = OperationModeLogger.objects.latest('id').opMode
-	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
+	# op_mode = OperationModeLogger.objects.latest('id').opMode
+	# temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
 
+	cmd = controller.read_cmd()
+	now = str(timezone.now())[:-7]
+	cmd.update({'datetime':now})
 	# 심정 펌프 갱신
-	dwp = ''
-	try:
-		if loc == 'DWP1': 
-			dwp = DeepwellPump1Logger(
-				dateTime=timezone.now(), opMode=op_mode, switch=switch
-			)
-		elif loc == 'DWP2':
-			dwp = DeepwellPump2Logger(
-				dateTime=timezone.now(), opMode=op_mode, switch=switch
-			)
-		elif loc == 'DWP3':
-			dwp = DeepwellPump3Logger(
-				dateTime=timezone.now(), opMode=op_mode, switch=switch
-			)
-		elif loc == 'DWP4':
-			dwp = DeepwellPump4Logger(
-				dateTime=timezone.now(), opMode=op_mode, switch=switch
-			)
-		if dwp != '':
-			dwp.save()
-	except Exception, e:
-		# log.debug(str(e))
-		pass
-
-
-	# 기기 동작 내역 갱신
-	try:
-		pass
-		# new_cmd = OperationSwitchControl(
-		# 		dateTime=timezone.now(), location=loc, switch=switch
-		# 	)
-		# new_cmd.save()
-	except Exception, e:
-		log.error(str(e))
+	if loc == 'DWP1': 
+		cmd.update({'dwp1':switch})
+	elif loc == 'DWP2':
+		cmd.update({'dwp2':switch})
+	elif loc == 'DWP3':
+		cmd.update({'dwp3':switch})
+	elif loc == 'DWP4':
+		cmd.update({'dwp4':switch})
 
 	# 커맨드 파일 작성
-	controller.write_cmd()
+	controller.write_cmd(cmd)
 	# log.debug("write_cmd from toggle_switch")
 
 	# 커맨드 후 hmidata를 잠시동안 읽지 않는다.
@@ -458,7 +418,14 @@ def setting_mode_confirm(request):
 		oml = OperationModeLogger(
 				dateTime=timezone.now(), opMode=op_mode
 			).save()
-		controller.write_cmd()
+		cmd = controller.read_cmd()
+		now = str(timezone.now())[:-7]
+		cmd.update({
+			'datetime':now,
+			"op_mode":op_mode,
+			"temp_mode": temp_mode,
+			})
+		controller.write_cmd(cmd)
 		# log.debug("write_cmd from settimg_mode_confirm")
 	response_data = {
 		"op_mode": op_mode,
