@@ -18,6 +18,7 @@ from .models import *
 from .excels import make_excel_file, make_rows
 import controller
 from django.views.decorators.csrf import csrf_exempt
+import os.path
 
 
 import logging
@@ -113,6 +114,10 @@ def save_data(response_data):
 @csrf_exempt
 @login_required
 def reload_display(request):
+	# log.debug('HttpResponseRedirect !!!')
+	# return HttpResponseRedirect('/monitor/')
+
+
 	###########################################
 	# 3초마다 갱신해서 왼쪽 상태창, 오른쪽 실내기 정보 갱신
 	# 자동제어시, 자동제어 로직에 따라 hmi에 명령을 줌
@@ -159,18 +164,37 @@ def reload_display(request):
 	global flag_command 
 	if flag_command: # command를 준 후에 파일을 잠시 읽지 않는다.
 		import time
-		time.sleep(9)
+		time.sleep(5)
 		flag_command = 0
 
 	# hmi에서 데이터 읽고 (자동)제어
 	# 수동인 경우 데이터 값(디스플레이)만 갱신함.
 	response_data.update(controller.read_data_from_json(rt))
-	# log.debug("timedelta = " + str(timezone.now() - response_data["datetime"]))
 
-	# HMI와 통신에러 검출
-	# if timezone.now() - response_data["datetime"] > timezone.timedelta(seconds=5):
-	# 	pass
-	# else: 
+
+	############### 통신 에러 처리 ############################
+	timegap = response_data["datetime"] - timezone.now()
+	# log.debug(str(timegap.total_seconds()))
+	if timegap.total_seconds() < 15: # 일반적으로 25~27초
+		# log.debug("HMI not working or communication failed.")
+		create_CHP_file()
+	# 통신 에러 없는 경우	
+	else: 
+		# log.debug("HMI working")
+		error_file_name = 'errorlog_chp.json'
+		# 파일이 있다면
+		if os.path.isfile(file_path + error_file_name):
+			# log.debug("yes file")
+			# 파일에 closed time 적어준다.
+			with open(file_path + error_file_name) as data_file:
+				_data = json.load(data_file)
+			ct = dt.strftime(timezone.now(), datetime_format)
+			_data.update({"CT": ct})
+			with open(file_path + error_file_name, 'w') as fp:
+				json.dump(_data, fp)
+		# 없다면 그냥 pass
+		# log.debug("no file")
+	############### 통신 에러 처리 끝 #########################
 
 	
 	# 운전 모드 정보
@@ -210,6 +234,22 @@ def reload_display(request):
 	url = 'monitor/container.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
+
+def create_CHP_file():
+	error_file_name = 'errorlog_chp.json'
+	# 이미 에러가 있다면 skip
+	if os.path.isfile(file_path + error_file_name):
+		return
+	# 없다면 에러 파일 생성
+	ot = dt.strftime(timezone.now(), datetime_format)
+	error_text = {
+		"CODE": "CHP",
+		"OT": ot,
+		"CT": ""
+		}
+	with open(file_path + error_file_name, 'w') as fp:
+		json.dump(error_text, fp)
+	return
 
 @login_required
 def specs(request):
@@ -406,7 +446,7 @@ def setting_mode(request, mode):
 def setting_mode_confirm(request):
 	new_op_mode = request.POST.get('mode', 'error')
 	if new_op_mode == 'error':
-		# log.debug("setting_mode_confirm, op_mode: error")
+		log.debug("setting_mode_confirm, op_mode: error")
 		pass
 
 	# log.debug("setting_mode_confirm: " + new_op_mode)
@@ -414,21 +454,21 @@ def setting_mode_confirm(request):
 	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
 	# op_mode가 변경된 경우 저장
 	if op_mode != new_op_mode:
-		op_mode = new_op_mode
 		oml = OperationModeLogger(
-				dateTime=timezone.now(), opMode=op_mode
+				dateTime=timezone.now(), opMode=new_op_mode
 			).save()
-		cmd = controller.read_cmd()
-		now = str(timezone.now())[:-7]
-		cmd.update({
-			'datetime':now,
-			"op_mode":op_mode,
-			"temp_mode": temp_mode,
-			})
-		controller.write_cmd(cmd)
-		# log.debug("write_cmd from settimg_mode_confirm")
+	cmd = controller.read_cmd()
+	now = str(timezone.now())[:-7]
+	cmd.update({
+		"datetime":now,
+		"op_mode":new_op_mode,
+		"temp_mode": temp_mode,
+		})
+	controller.write_cmd(cmd)
+	# log.debug("write_cmd from settimg_mode_confirm")
+	# log.debug(cmd)
 	response_data = {
-		"op_mode": op_mode,
+		"op_mode": new_op_mode,
 		"temp_mode": temp_mode,
 	}
 
@@ -465,6 +505,49 @@ def operation_control(request):
 def check_if_error_exist(error_count = 0):
 	error_alarm = []
 	# file = file_path + 'errorlog' + str(error_count) + '.json'
+
+	# CHP error 처리
+	if os.path.isfile(file_path + 'errorlog_chp.json' ):
+		# log.debug("errorlog_chp exist")
+		with open(file_path + 'errorlog_chp.json') as data_file:
+			_data = json.load(data_file)
+		# 변수에 각 내용 저장
+		code = _data["CODE"]
+		ot = _data["OT"]
+		ct = _data["CT"]
+
+		# 경보 상황 해제
+		# database 저장
+		if ct != "":
+			# log.debug("ct in")
+
+			# occurTime, closedTime
+			occur_time = dt.strptime(ot, datetime_format)
+			closed_time = dt.strptime(ct, datetime_format)
+
+			classification = "COMM"
+			location = "HMI"
+			state = "CE"		# 통신 에러
+			try:
+				alarm = AlarmLogger(
+					classification = classification, location = location, state = state,
+					occurTime = occur_time, closedTime = closed_time
+					).save()
+			except Exception, e:
+				log.error(str(e))
+			
+			# errorlog 파일 삭제
+			os.remove(file_path + 'errorlog_chp.json')
+		# 경보 띄우기
+		else:
+			error_alarm.append({
+				"location": "HMI",
+				"status": "HMI 통신 에러(HMI 동작 이상)",
+				"OT": ot,
+				"CT": ct,
+			})
+
+	
 	# errorlog 파일이 있는지 확인한다.
 	from glob import glob
 	for file in glob(file_path + 'errorlog[0-9]*'):
@@ -512,11 +595,8 @@ def check_if_error_exist(error_count = 0):
 					location = "DAQ"
 				elif code == "CIV":	# 인버터
 					location = "IV"
-				elif code == "CFM":	# 유량계
+				else: # code == "CFM":	# 유량계
 					location = "FM"
-				else:				# HMI-PC
-					location = "HMI"
-				state = "CE"
 
 			try:
 				alarm = AlarmLogger(
@@ -529,6 +609,7 @@ def check_if_error_exist(error_count = 0):
 			# errorlog 파일 삭제
 			os.remove(file)
 
+		# 경보 띄우기
 		# 에러 분석
 		if code[0] == "T":			# 온도 안전범위 초과
 			# 에러 상태 파악
@@ -606,13 +687,14 @@ def check_if_error_exist(error_count = 0):
 					"OT": ot,
 					"CT": ct,
 				})
-		else: # code == "CFM"		# 유량계 통신 에러
+		else: # code == "CFM":			# 유량계 통신 에러
 			error_alarm.append({
 					"location": "HMI",
 					"status": "유량계 통신 에러",
 					"OT": ot,
 					"CT": ct,
 				})
+
 
 
 		# log.debug(code + ot + ct)

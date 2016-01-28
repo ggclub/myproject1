@@ -250,23 +250,30 @@ def init_cmd():
 	now = str(timezone.now())[:-7]
 	temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
 
-	cmd = {
-		"datetime": now, 
-		"op_mode": "AT", 
-		"temp_mode": temp_mode, 
-		"cp_operating": lcmd["cp_operating"], 
-		"cp1": "OFF", 
-		"cp1_hz": 0, 
-		"cp1_flux": 0, 
-		"cp2": "OFF", 
-		"cp2_hz": 0, 
-		"cp2_flux": 0, 
-		"dwp1": "OFF", 
-		"dwp2": "OFF",
-		"dwp3": "OFF", 
-		"dwp4": "OFF", 
-	}
-	write_cmd(cmd)
+	lcmd.update({
+		"datetime": now,
+		"op_mode": "AT",
+		"temp_mode": temp_mode,
+		})
+	write_cmd(lcmd)
+	# log.debug(lcmd)
+
+	# cmd = {
+	# 	"datetime": now, 
+	# 	"op_mode": "AT", 
+	# 	"temp_mode": temp_mode, 
+	# 	"cp_operating": lcmd["cp_operating"], 
+	# 	"cp1": "OFF", 
+	# 	"cp1_hz": 0, 
+	# 	"cp1_flux": 0, 
+	# 	"cp2": "OFF", 
+	# 	"cp2_hz": 0, 
+	# 	"cp2_flux": 0, 
+	# 	"dwp1": "OFF", 
+	# 	"dwp2": "OFF",
+	# 	"dwp3": "OFF", 
+	# 	"dwp4": "OFF", 
+	# }
 	return
 
 def read_data_from_json(rt):
@@ -282,13 +289,14 @@ def read_data_from_json(rt):
 
 	datetime = dt.strptime(_data["datetime"], datetime_format)
 	op_mode = OperationModeLogger.objects.latest('id').opMode
+	# log.debug("op_mode : " + op_mode)
 	now = str(timezone.now())[:-7]
 	if op_mode != _data["op_mode"]:
 		# write_cmd()
 		cmd = read_cmd()
-		cmd.update({"datetime":now,"op_mode":_data["op_mode"]})
+		cmd.update({"datetime":now,"op_mode":op_mode})
 		write_cmd(cmd)
-
+		# log.debug("_data: " + _data["op_mode"])
 
 	# temp_mode = TemperatureModeLogger.objects.latest('id').tempMode
 	# 작동중인 순환펌프; id 1: 0, id 2: 1
@@ -1337,7 +1345,7 @@ def check_off_delay1(dwp, data):
 	off1 = str(dwp["dwp1"])
 	if off1 != "0":
 		offtime = dt.strptime(off1, "%Y-%m-%d %H:%M:%S")
-		if (datetime - offtime) > timezone.timedelta(seconds=pump_off_delay):
+		if (timezone.now() - offtime) > timezone.timedelta(seconds=pump_off_delay):
 			try:
 				dwp1 = DeepwellPump1Logger(
 				    dateTime=timezone.now(), opMode=data["op_mode"], switch="OFF"

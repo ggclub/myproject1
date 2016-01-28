@@ -201,6 +201,10 @@ function clickSetCpOk () {
 			}
 			window.close();
 		}
+	}).fail(function() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		console.log(time + " setting_cp_done error");
 	});
 	return false;
 }

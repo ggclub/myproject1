@@ -21,11 +21,11 @@ $('#cp-setting').attr('disabled', true);
 $('#cp-setting').removeClass('btn-default');
 
 function playSound () {
-	$('#sound').html(
-		'<audio autoplay="autoplay" loop="loop">'+
-		'<source type="audio/wav" src="{% static "monitor/alarm/alarm.wav" %}" />' +
-		'</audio>'
-		);
+	// $('#sound').html(
+	// 	'<audio autoplay="autoplay" loop="loop">'+
+	// 	'<source type="audio/wav" src="{% static "monitor/alarm/alarm.wav" %}" />' +
+	// 	'</audio>'
+	// 	);
 }
 var stopsound = false;
 function stopSound () {

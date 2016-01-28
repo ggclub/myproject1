@@ -335,6 +335,11 @@ function clickPumpSwitch () {
 				$("#dwp-status" + id[3]).attr('src', "{% static 'monitor/left/dwp-off.png' %}");
 			}
 		}
+	}).fail(function() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		console.log(time + " reload display error");
+		reloadDisplay();
 	});
 	return false;
 

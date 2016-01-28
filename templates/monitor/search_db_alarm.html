@@ -79,6 +79,10 @@ $('.btn-search-db').on('click', function() {
 			$('.search-results').html(data);
 			$('.table-bordered').last().find('tbody').find('tr').find('td').css('width','20%');
 		}
+	}).fail(function() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		console.log(time + " search_alarm error");
 	});
 	return false;
 });
@@ -93,24 +97,28 @@ $(document).ready(function(){
 		var count = $('.found').last().text();
 
         $.ajax({
-			url: '/monitor/search_db_alarm_result/',
-			type: "POST",
-			data : {
-				'csrfmiddlewaretoken': '{{ csrf_token }}',
-				'startDate': startDate,
-				'endDate': endDate,
-				'count': count,
-			},
-			beforeSend: function() { $('#ajax-loader').show(); },
-			complete: function() { $('#ajax-loader').hide(); },
-			success: function(data){
-				// console.log(count);
-				if (count % 50 == 0) {
-					$('.search-results').last().append(data);
-					$('.table-bordered').last().find('tbody').find('tr').find('td').css('width','20%');
-				}
+		url: '/monitor/search_db_alarm_result/',
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'startDate': startDate,
+			'endDate': endDate,
+			'count': count,
+		},
+		beforeSend: function() { $('#ajax-loader').show(); },
+		complete: function() { $('#ajax-loader').hide(); },
+		success: function(data){
+			// console.log(count);
+			if (count % 50 == 0) {
+				$('.search-results').last().append(data);
+				$('.table-bordered').last().find('tbody').find('tr').find('td').css('width','20%');
 			}
-		});
+		}
+	}).fail(function() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		console.log(time + " infinite scroll error");
+	});
     };
 
     //addToLast();

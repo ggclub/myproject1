@@ -88,6 +88,10 @@ function changeCiu() {
 				$('#total').css('color', 'rgb(241, 150, 0)');
 			}
 		}
+	}).fail(function() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		console.log(time + " change_ciu error");
 	});
 	return false;
 }

@@ -62,6 +62,10 @@ $('.hp-ciu-nav > li > a').on('click', function() {
 			$('.hp-selected').removeClass('hp-selected');
 			$('.hp-ciu-nav').find('#'+id).addClass('hp-selected');
 		}
+	}).fail(function() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		console.log(time + " change_ciuonhp error");
 	});
 });
 </script>

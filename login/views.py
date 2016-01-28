@@ -47,7 +47,7 @@ def index(request):
 		# logout button
 		if 'logout' in request.POST:
 			logout(request)
-			return HttpResponseRedirect('/')
+			return HttpResponseRedirect('/login/')
 
 
 	url='login/index.html'
@@ -62,7 +62,7 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def log_out(request):
 	logout(request)
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect('/login/')
 
 
 def change_password_page(request):

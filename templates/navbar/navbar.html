@@ -119,6 +119,10 @@ function clickFullscreen() {
 			$('.content').html("<div class='container' id='container'>" + data + "</div>");
 			// $('.container').css('background-image', "url({% static 'monitor/main.jpg' %})");
 		}
+	}).fail(function() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		console.log(time + " clickFullscreen error");
 	});
 	return false;
 }

@@ -58,6 +58,10 @@ $('.floor-nav > li > a').on('click', function () {
 				$('.unit-info').css('background-image', "url({% static 'monitor/ciu-3F.png' %})");
 			}
 		}
+	}).fail(function() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		console.log(time + " change_floor error");
 	});
 	return false;
 });

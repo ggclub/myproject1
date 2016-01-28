@@ -171,6 +171,10 @@ function ClickSearchFM () {
 			}
 			
 		}
+	}).fail(function() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		console.log(time + " search_fm error");
 	});
 	return false;
 }
@@ -254,6 +258,10 @@ function Result2excel() {
 			$('#ajax-loader').hide();
 			window.location.pathname = 'monitor/download_result/' + data.obj_type + '/';
 		}
+	}).fail(function() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		console.log(time + "fm excel error");
 	});
 	return false;
 }
@@ -268,25 +276,29 @@ $(document).ready(function(){
 		var count = $('.found').last().text();
 
         $.ajax({
-			url: '/monitor/search_db_fm_cur_result/',
-			type: "POST",
-			data : {
-				'csrfmiddlewaretoken': '{{ csrf_token }}',
-				'startDate': startDate,
-				'endDate': endDate,
-				'count': count,
-			},
-			beforeSend: function() { $('#ajax-loader').show(); },
-			complete: function() { $('#ajax-loader').hide(); },
-			success: function(data){
-				// console.log(count);
-				if (count % 50 == 0) {
-					$('.cur').find('.search-results').last().append(data);
-					$('.cur').find('.table-bordered').last().find('tbody').find('tr').find('td').css('width','120px');
-					$('.result-datetime').css('width','193px');
-				}
+		url: '/monitor/search_db_fm_cur_result/',
+		type: "POST",
+		data : {
+			'csrfmiddlewaretoken': '{{ csrf_token }}',
+			'startDate': startDate,
+			'endDate': endDate,
+			'count': count,
+		},
+		beforeSend: function() { $('#ajax-loader').show(); },
+		complete: function() { $('#ajax-loader').hide(); },
+		success: function(data){
+			// console.log(count);
+			if (count % 50 == 0) {
+				$('.cur').find('.search-results').last().append(data);
+				$('.cur').find('.table-bordered').last().find('tbody').find('tr').find('td').css('width','120px');
+				$('.result-datetime').css('width','193px');
 			}
-		});
+		}
+	}).fail(function() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		console.log(time + " infinite scroll error");
+	});
     };
 
     //addToLast();

@@ -49,6 +49,10 @@ $('.floor-nav > li > a').on('click', function () {
 			$('.fl-selected').removeClass('fl-selected');
 			$('.floor-nav').find('#'+floor).addClass('fl-selected');
 		}
+	}).fail(function() {
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		console.log(time + " change_floor error");
 	});
 	return false;
 });
