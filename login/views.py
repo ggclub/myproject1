@@ -7,15 +7,15 @@ from django.template.loader import render_to_string
 from django.shortcuts import render_to_response
 from django.template.context_processors import csrf
 
-# import logging
+import logging
 # log = logging.getLogger(__name__)
 
 # Create your views here.
 def index(request):
 	username = password = state = ''
 
-	# if already logged in
 	from monitor.views import index
+	# if already logged in
 	if request.user.is_authenticated():
 		return index(request)
 
@@ -47,7 +47,7 @@ def index(request):
 		# logout button
 		if 'logout' in request.POST:
 			logout(request)
-			return HttpResponseRedirect('/login/')
+			return HttpResponseRedirect('/')
 
 
 	url='login/index.html'
@@ -62,7 +62,7 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def log_out(request):
 	logout(request)
-	return HttpResponseRedirect('/login/')
+	return HttpResponseRedirect('/')
 
 
 def change_password_page(request):
