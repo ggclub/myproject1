@@ -114,10 +114,6 @@ def save_data(response_data):
 @csrf_exempt
 @login_required
 def reload_display(request):
-	# log.debug('HttpResponseRedirect !!!')
-	# return HttpResponseRedirect('/monitor/')
-
-
 	###########################################
 	# 3초마다 갱신해서 왼쪽 상태창, 오른쪽 실내기 정보 갱신
 	# 자동제어시, 자동제어 로직에 따라 hmi에 명령을 줌
@@ -173,9 +169,13 @@ def reload_display(request):
 
 
 	############### 통신 에러 처리 ############################
-	timegap = response_data["datetime"] - timezone.now()
-	# log.debug(str(timegap.total_seconds()))
-	if timegap.total_seconds() < 15: # 일반적으로 25~27초
+	try:
+		timegap = response_data["datetime"] - timezone.now()
+		# log.debug(str(timegap.total_seconds()))
+		timegap_seconds = timegap.total_seconds()
+	except:
+		timegap_seconds = 15
+	if timegap_seconds < 15: # 일반적으로 25~27초
 		# log.debug("HMI not working or communication failed.")
 		create_CHP_file()
 	# 통신 에러 없는 경우	
@@ -196,6 +196,9 @@ def reload_display(request):
 		# log.debug("no file")
 	############### 통신 에러 처리 끝 #########################
 
+	# log.debug(str(response_data["us"][5]["state"]))
+	# log.debug(str(response_data["us"][6]["state"]))
+	# log.debug(str(response_data["us"][8]["state"]))
 	
 	# 운전 모드 정보
 	# op_mode = OperationModeLogger.objects.latest('id').opMode
@@ -218,18 +221,17 @@ def reload_display(request):
 		# 저장 주기마다 data save
 		save_interval = SaveIntervalLogger.objects.latest('id').interval
 		if save_interval == 10:
-			if t.minute % 10 == 0 and t.second < 4: 
+			if t.minute % 10 == 0 and t.second < 5: 
 				save_data(response_data)
 		elif save_interval == 30:
-			if t.minute % 30 == 0 and t.second < 4:
+			if t.minute % 30 == 0 and t.second < 5:
 				save_data(response_data)
 		elif save_interval == 60:
-			if t.minute == 0 and t.second < 4:
+			if t.minute == 0 and t.second < 5:
 				save_data(response_data)
 		else:
-			if t.minute % 5 == 0 and t.second < 4:
+			if t.minute % 5 == 0 and t.second < 5:
 				save_data(response_data)
-
 
 	url = 'monitor/container.html'
 	html = render_to_string(url, response_data, RequestContext(request))

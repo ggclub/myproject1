@@ -2306,3 +2306,5 @@ AttributeError: 'module' object has no attribute '_strptime'
 [28/Jan/2016 11:10:57] DEBUG [monitor.views:179] HMI not working or communication failed.
 [28/Jan/2016 11:11:01] DEBUG [monitor.views:179] HMI not working or communication failed.
 [28/Jan/2016 11:11:05] DEBUG [monitor.views:179] HMI not working or communication failed.
+[19/Mar/2016 16:38:39] WARNING [django.request:170] Not Found: /favicon.ico
+[19/Mar/2016 16:46:52] WARNING [django.request:98] Forbidden (CSRF token missing or incorrect.): /

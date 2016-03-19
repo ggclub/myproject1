@@ -2140,6 +2140,8 @@ def save_ciu1(data):
 			opMode=data["us"][13]["op_mode"],airFlow=data["us"][13]["air_flow"],state=data["us"][13]["state"],
 			)
 		for f in f1:
+			if f.state == "응답없음":
+				f.state="ER"
 			f.save()
 	except Exception, e:
 		log.error(str(e))
@@ -2172,52 +2174,90 @@ def save_ciu2(data):
 			dateTime=timezone.now(), switch=data["us"][0]["switch"],temperature=data["us"][0]["temperature"], setTemp=data["us"][0]["set_temp"],
 			opMode=data["us"][0]["op_mode"],airFlow=data["us"][0]["air_flow"],state=data["us"][0]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f2[1] = Floor2CIU2(
 			dateTime=timezone.now(), switch=data["us"][1]["switch"],temperature=data["us"][1]["temperature"], setTemp=data["us"][1]["set_temp"],
 			opMode=data["us"][1]["op_mode"],airFlow=data["us"][1]["air_flow"],state=data["us"][1]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f2[2] = Floor2CIU3(
 			dateTime=timezone.now(), switch=data["us"][2]["switch"],temperature=data["us"][2]["temperature"], setTemp=data["us"][2]["set_temp"],
 			opMode=data["us"][2]["op_mode"],airFlow=data["us"][2]["air_flow"],state=data["us"][2]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f2[3] = Floor2CIU4(
 			dateTime=timezone.now(), switch=data["us"][3]["switch"],temperature=data["us"][3]["temperature"], setTemp=data["us"][3]["set_temp"],
 			opMode=data["us"][3]["op_mode"],airFlow=data["us"][3]["air_flow"],state=data["us"][3]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f2[4] = Floor2CIU5(
 			dateTime=timezone.now(), switch=data["us"][4]["switch"],temperature=data["us"][4]["temperature"], setTemp=data["us"][4]["set_temp"],
 			opMode=data["us"][4]["op_mode"],airFlow=data["us"][4]["air_flow"],state=data["us"][4]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f2[5] = Floor2CIU6(
 			dateTime=timezone.now(), switch=data["us"][5]["switch"],temperature=data["us"][5]["temperature"], setTemp=data["us"][5]["set_temp"],
 			opMode=data["us"][5]["op_mode"],airFlow=data["us"][5]["air_flow"],state=data["us"][5]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f2[6] = Floor2CIU7(
 			dateTime=timezone.now(), switch=data["us"][6]["switch"],temperature=data["us"][6]["temperature"], setTemp=data["us"][6]["set_temp"],
 			opMode=data["us"][6]["op_mode"],airFlow=data["us"][6]["air_flow"],state=data["us"][6]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f2[7] = Floor2CIU8(
 			dateTime=timezone.now(), switch=data["us"][7]["switch"],temperature=data["us"][7]["temperature"], setTemp=data["us"][7]["set_temp"],
 			opMode=data["us"][7]["op_mode"],airFlow=data["us"][7]["air_flow"],state=data["us"][7]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f2[8] = Floor2CIU9(
 			dateTime=timezone.now(), switch=data["us"][8]["switch"],temperature=data["us"][8]["temperature"], setTemp=data["us"][8]["set_temp"],
 			opMode=data["us"][8]["op_mode"],airFlow=data["us"][8]["air_flow"],state=data["us"][8]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f2[9] = Floor2CIU10(
 			dateTime=timezone.now(), switch=data["us"][9]["switch"],temperature=data["us"][9]["temperature"], setTemp=data["us"][9]["set_temp"],
 			opMode=data["us"][9]["op_mode"],airFlow=data["us"][9]["air_flow"],state=data["us"][9]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f2[10] = Floor2CIU11(
 			dateTime=timezone.now(), switch=data["us"][10]["switch"],temperature=data["us"][10]["temperature"], setTemp=data["us"][10]["set_temp"],
 			opMode=data["us"][10]["op_mode"],airFlow=data["us"][10]["air_flow"],state=data["us"][10]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f2[11] = Floor2CIU12(
 			dateTime=timezone.now(), switch=data["us"][11]["switch"],temperature=data["us"][11]["temperature"], setTemp=data["us"][11]["set_temp"],
 			opMode=data["us"][11]["op_mode"],airFlow=data["us"][11]["air_flow"],state=data["us"][11]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 
 		for f in f2:
+			if f.state == "응답없음":
+				f.state="ER"
 			f.save()
 		f2s = Floor2CIUs (
 				u1=f2[0],
@@ -2234,6 +2274,8 @@ def save_ciu2(data):
 				u12=f2[11]
 			).save()
 	except Exception, e:
+		# log.debug(str(data["us"][5]["state"]))
+		# log.debug(str(data["us"][8]["state"]))
 		log.error(str(e))
 	return True
 
@@ -2245,52 +2287,90 @@ def save_ciu3(data):
 			dateTime=timezone.now(), switch=data["us"][0]["switch"],temperature=data["us"][0]["temperature"], setTemp=data["us"][0]["set_temp"],
 			opMode=data["us"][0]["op_mode"],airFlow=data["us"][0]["air_flow"],state=data["us"][0]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f3[1] = Floor3CIU2(
 			dateTime=timezone.now(), switch=data["us"][1]["switch"],temperature=data["us"][1]["temperature"], setTemp=data["us"][1]["set_temp"],
 			opMode=data["us"][1]["op_mode"],airFlow=data["us"][1]["air_flow"],state=data["us"][1]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f3[2] = Floor3CIU3(
 			dateTime=timezone.now(), switch=data["us"][2]["switch"],temperature=data["us"][2]["temperature"], setTemp=data["us"][2]["set_temp"],
 			opMode=data["us"][2]["op_mode"],airFlow=data["us"][2]["air_flow"],state=data["us"][2]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f3[3] = Floor3CIU4(
 			dateTime=timezone.now(), switch=data["us"][3]["switch"],temperature=data["us"][3]["temperature"], setTemp=data["us"][3]["set_temp"],
 			opMode=data["us"][3]["op_mode"],airFlow=data["us"][3]["air_flow"],state=data["us"][3]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f3[4] = Floor3CIU5(
 			dateTime=timezone.now(), switch=data["us"][4]["switch"],temperature=data["us"][4]["temperature"], setTemp=data["us"][4]["set_temp"],
 			opMode=data["us"][4]["op_mode"],airFlow=data["us"][4]["air_flow"],state=data["us"][4]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f3[5] = Floor3CIU6(
 			dateTime=timezone.now(), switch=data["us"][5]["switch"],temperature=data["us"][5]["temperature"], setTemp=data["us"][5]["set_temp"],
 			opMode=data["us"][5]["op_mode"],airFlow=data["us"][5]["air_flow"],state=data["us"][5]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f3[6] = Floor3CIU7(
 			dateTime=timezone.now(), switch=data["us"][6]["switch"],temperature=data["us"][6]["temperature"], setTemp=data["us"][6]["set_temp"],
 			opMode=data["us"][6]["op_mode"],airFlow=data["us"][6]["air_flow"],state=data["us"][6]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f3[7] = Floor3CIU8(
 			dateTime=timezone.now(), switch=data["us"][7]["switch"],temperature=data["us"][7]["temperature"], setTemp=data["us"][7]["set_temp"],
 			opMode=data["us"][7]["op_mode"],airFlow=data["us"][7]["air_flow"],state=data["us"][7]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f3[8] = Floor3CIU9(
 			dateTime=timezone.now(), switch=data["us"][8]["switch"],temperature=data["us"][8]["temperature"], setTemp=data["us"][8]["set_temp"],
 			opMode=data["us"][8]["op_mode"],airFlow=data["us"][8]["air_flow"],state=data["us"][8]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f3[9] = Floor3CIU10(
 			dateTime=timezone.now(), switch=data["us"][9]["switch"],temperature=data["us"][9]["temperature"], setTemp=data["us"][9]["set_temp"],
 			opMode=data["us"][9]["op_mode"],airFlow=data["us"][9]["air_flow"],state=data["us"][9]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f3[10] = Floor3CIU11(
 			dateTime=timezone.now(), switch=data["us"][10]["switch"],temperature=data["us"][10]["temperature"], setTemp=data["us"][10]["set_temp"],
 			opMode=data["us"][10]["op_mode"],airFlow=data["us"][10]["air_flow"],state=data["us"][10]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 		f3[11] = Floor3CIU12(
 			dateTime=timezone.now(), switch=data["us"][11]["switch"],temperature=data["us"][11]["temperature"], setTemp=data["us"][11]["set_temp"],
 			opMode=data["us"][11]["op_mode"],airFlow=data["us"][11]["air_flow"],state=data["us"][11]["state"],
 			)
+	except Exception, e:
+		log.error(str(e))
+	try:
 
 		for f in f3:
+			if f.state == "응답없음":
+				f.state="ER"
 			f.save()
 		f3s = Floor3CIUs (
 				u1=f3[0],
