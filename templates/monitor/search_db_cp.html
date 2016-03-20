@@ -111,7 +111,7 @@ $('.btn-search-db').on('click', function() {
 
 
 function Result2excel() {
-	var found = $('.found').text();
+	var found = $('.found').last().text();
 	if(found == '0' || found == ''){
 		alert('검색된 내용이 없습니다.');
 		return;

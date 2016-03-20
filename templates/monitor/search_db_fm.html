@@ -183,7 +183,7 @@ function Result2excel() {
 	var radio = $(":radio[name=flux]:checked").val();
 	if(radio == 'cur'){
 		var numCol = 13;
-		var found = $('.found').text();
+		var found = $('.found').last().text();
 
 		if(found == '0' || found == ''){
 			alert('검색된 내용이 없습니다.');
@@ -208,7 +208,7 @@ function Result2excel() {
 		});	
 	} else { // radio == 'int'
 		var numCol = 5;
-		var found = $('.found-int').text();
+		var found = $('.found-int').last().text();
 
 		if(found == '0' || found == ''){
 			alert('검색된 내용이 없습니다.');

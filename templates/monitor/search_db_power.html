@@ -153,7 +153,7 @@ function Result2excel() {
 	var radio = $(":radio[name=power]:checked").val();
 	var numCol = 2;
 	if(radio == 'cur') {
-		var found = $('.found').text();
+		var found = $('.found').last().text();
 
 		if(found == '0' || found == ''){
 			alert('검색된 내용이 없습니다.');
@@ -177,7 +177,7 @@ function Result2excel() {
 			});
 		});	
 	} else { // radio == 'int'
-		var found = $('.found-int').text();
+		var found = $('.found-int').last().text();
 
 		if(found == '0' || found == ''){
 			alert('검색된 내용이 없습니다.');
