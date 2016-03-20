@@ -241,10 +241,15 @@ $(document).ready(function(){
     {
     	var startDate = $('#datepicker1').val();
 		var endDate = $('#datepicker2').val();
-		var count = $('.found').last().text();
+		var radio = $(":radio[name=power]:checked").val();
+		if (radio == 'cur') {
+			var count = $('.found').last().text();
+		} else {
+			var count = $('.found-int').last().text();
+		}
 
         $.ajax({
-		url: '/monitor/search_db_power_cur_result/',
+		url: '/monitor/search_db_power_' + radio + '_result/',
 		type: "POST",
 		data : {
 			'csrfmiddlewaretoken': '{{ csrf_token }}',
@@ -257,8 +262,8 @@ $(document).ready(function(){
 		success: function(data){
 			// console.log(count);
 			if (count % 50 == 0) {
-				$('.cur').find('.search-results').last().append(data);
-				$('.cur').find('.table-bordered').last().find('tbody').find('tr').find('td').css('width','50%');
+				$('.' + radio).find('.search-results').last().append(data);
+				$('.' + radio).find('.table-bordered').last().find('tbody').find('tr').find('td').css('width','50%');
 			}
 		}
 	}).fail(function() {
@@ -271,9 +276,9 @@ $(document).ready(function(){
     //addToLast();
     $(window).scroll(function(){
 		var radio = $(":radio[name=power]:checked").val();
-		if (radio == 'int') {
-			return;
-		}
+		// if (radio == 'int') {
+		// 	return;
+		// }
         var wintop = $(window).scrollTop();
         var docheight = $(document).height();
         var winheight = $(window).height();
