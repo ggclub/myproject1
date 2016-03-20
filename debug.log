@@ -2386,3 +2386,4 @@ Traceback (most recent call last):
   File "c:\Django\myproject\monitor\controller.py", line 2565, in search_power_int
     database_list = list(power2)
 NameError: global name 'power2' is not defined
+[20/Mar/2016 21:38:47] WARNING [django.request:170] Not Found: /favicon.ico

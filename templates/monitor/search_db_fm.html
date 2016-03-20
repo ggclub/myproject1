@@ -196,16 +196,16 @@ function Result2excel() {
 			columns.push($(this).text());
 		});
 
-		var rows = new Array(numRow);
-		for (var i = 0; i < numRow; i++){
-			rows[i] = new Array(numCol);
-		}
+		// var rows = new Array(numRow);
+		// for (var i = 0; i < numRow; i++){
+		// 	rows[i] = new Array(numCol);
+		// }
 
-		$('#query-result tr').map(function (i) {
-			$(this).find('td').each(function (j) {
-				rows[i][j] = $(this).text();
-			});
-		});	
+		// $('#query-result tr').map(function (i) {
+		// 	$(this).find('td').each(function (j) {
+		// 		rows[i][j] = $(this).text();
+		// 	});
+		// });	
 	} else { // radio == 'int'
 		var numCol = 5;
 		var found = $('.found-int').last().text();
@@ -222,16 +222,16 @@ function Result2excel() {
 		});
 		// console.log(columns);
 
-		var rows = new Array(numRow);
-		for (var i = 0; i < numRow; i++){
-			rows[i] = new Array(numCol);
-		}
+		// var rows = new Array(numRow);
+		// for (var i = 0; i < numRow; i++){
+		// 	rows[i] = new Array(numCol);
+		// }
 
-		$('#query-result-int tr').map(function (i) {
-			$(this).find('td').each(function (j) {
-				rows[i][j] = $(this).text();
-			});
-		});	
+		// $('#query-result-int tr').map(function (i) {
+		// 	$(this).find('td').each(function (j) {
+		// 		rows[i][j] = $(this).text();
+		// 	});
+		// });	
 	}
 
 
@@ -245,8 +245,8 @@ function Result2excel() {
 		data : {
 			'csrfmiddlewaretoken': '{{ csrf_token }}',
 			'columns': JSON.stringify(columns),
-			'rows' : JSON.stringify(rows),
-			'numRow' : numRow,
+			// 'rows' : JSON.stringify(rows),
+			// 'numRow' : numRow,
 			'numCol' : numCol,
 			'objType' : 'fm-' + radio,
 			'startDate': startDate,
