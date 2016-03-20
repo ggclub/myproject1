@@ -2536,26 +2536,33 @@ def search_power_cur(start_date, end_date, count, excel):
 		'count': count,
 	}
 	return data
-def search_power_int(start_date, end_date, count):
+def search_power_int(start_date, end_date, count, excel):
 	# 적산전력
-	power2 = [];
-	count = 0
+	# power2 = [];
+	# count = 0
 	
-	# 검색할 날짜 리스트
-	start = dt.strptime(start_date, date_format)
-	end = dt.strptime(end_date, date_format) - timezone.timedelta(days=1)
-	num_date = end - start
-	date_list = [end - timezone.timedelta(days=x) for x in range(num_date.days+1)]
-	# log.debug(str(date_list))
-	for date in date_list:
-		d = dt.strftime(date, date_format)
-		# log.debug(str(date.day))
-		try:
-			power2.append(PowerConsumptionLogger.objects.filter(Q(dateTime__year=date.year), Q(dateTime__month=date.month), Q(dateTime__day=date.day)).latest('dateTime'))
-		except:
-			pass
-	count = len(power2)
-	database_list = power2
+	# # 검색할 날짜 리스트
+	# start = dt.strptime(start_date, date_format)
+	# end = dt.strptime(end_date, date_format) - timezone.timedelta(days=1)
+	# num_date = end - start
+	# date_list = [end - timezone.timedelta(days=x) for x in range(num_date.days+1)]
+	# # log.debug(str(date_list))
+	# for date in date_list:
+	# 	d = dt.strftime(date, date_format)
+	# 	# log.debug(str(date.day))
+	# 	try:
+	# 		power2.append(PowerConsumptionLogger.objects.filter(Q(dateTime__year=date.year), Q(dateTime__month=date.month), Q(dateTime__day=date.day)).latest('dateTime'))
+	# 	except:
+	# 		pass
+	# count = len(power2)
+	# database_list = power2
+
+	if excel:
+		power = PowerConsumptionLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
+	else:
+		power = PowerConsumptionLogger.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')[count:count+50]
+	count += power.count()
+	database_list = list(power)
 
 	data = {
 		'database_list': database_list,
@@ -2597,7 +2604,7 @@ def search_database(obj, start_date, end_date, count=0, floor=0, name=0, excel=F
 	elif obj == 'power-cur':
 		return search_power_cur(start_date, end_date, count=count, excel=excel)
 	elif obj == 'power-int':
-		return search_power_int(start_date, end_date, count=count)
+		return search_power_int(start_date, end_date, count=count, excel=excel)
 	elif obj == 'cop':
 		return search_cop(start_date, end_date, count=count, excel=excel)
 	else: # ciu

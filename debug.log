@@ -2308,3 +2308,81 @@ AttributeError: 'module' object has no attribute '_strptime'
 [28/Jan/2016 11:11:05] DEBUG [monitor.views:179] HMI not working or communication failed.
 [19/Mar/2016 16:38:39] WARNING [django.request:170] Not Found: /favicon.ico
 [19/Mar/2016 16:46:52] WARNING [django.request:98] Forbidden (CSRF token missing or incorrect.): /
+[19/Mar/2016 17:39:58] ERROR [django.request:256] Internal Server Error: /monitor/search_db_power_int_result/
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda\lib\site-packages\django\contrib\auth\decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "c:\Django\myproject\monitor\views.py", line 1045, in search_db_power_int_result
+    response_data = controller.search_database('power-int', start_date, end_date, count)
+  File "c:\Django\myproject\monitor\controller.py", line 2607, in search_database
+    return search_power_int(start_date, end_date, count=count, excel=excel)
+  File "c:\Django\myproject\monitor\controller.py", line 2565, in search_power_int
+    database_list = list(power2)
+NameError: global name 'power2' is not defined
+[19/Mar/2016 17:40:02] ERROR [django.request:256] Internal Server Error: /monitor/search_db_power_int_result/
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda\lib\site-packages\django\contrib\auth\decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "c:\Django\myproject\monitor\views.py", line 1045, in search_db_power_int_result
+    response_data = controller.search_database('power-int', start_date, end_date, count)
+  File "c:\Django\myproject\monitor\controller.py", line 2607, in search_database
+    return search_power_int(start_date, end_date, count=count, excel=excel)
+  File "c:\Django\myproject\monitor\controller.py", line 2565, in search_power_int
+    database_list = list(power2)
+NameError: global name 'power2' is not defined
+[19/Mar/2016 17:40:03] ERROR [django.request:256] Internal Server Error: /monitor/search_db_power_int_result/
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda\lib\site-packages\django\contrib\auth\decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "c:\Django\myproject\monitor\views.py", line 1045, in search_db_power_int_result
+    response_data = controller.search_database('power-int', start_date, end_date, count)
+  File "c:\Django\myproject\monitor\controller.py", line 2607, in search_database
+    return search_power_int(start_date, end_date, count=count, excel=excel)
+  File "c:\Django\myproject\monitor\controller.py", line 2565, in search_power_int
+    database_list = list(power2)
+NameError: global name 'power2' is not defined
+[19/Mar/2016 17:40:05] ERROR [django.request:256] Internal Server Error: /monitor/search_db_power_int_result/
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda\lib\site-packages\django\contrib\auth\decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "c:\Django\myproject\monitor\views.py", line 1045, in search_db_power_int_result
+    response_data = controller.search_database('power-int', start_date, end_date, count)
+  File "c:\Django\myproject\monitor\controller.py", line 2607, in search_database
+    return search_power_int(start_date, end_date, count=count, excel=excel)
+  File "c:\Django\myproject\monitor\controller.py", line 2565, in search_power_int
+    database_list = list(power2)
+NameError: global name 'power2' is not defined
+[19/Mar/2016 17:40:36] ERROR [django.request:256] Internal Server Error: /monitor/search_db_power_int_result/
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda\lib\site-packages\django\contrib\auth\decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "c:\Django\myproject\monitor\views.py", line 1045, in search_db_power_int_result
+    response_data = controller.search_database('power-int', start_date, end_date, count)
+  File "c:\Django\myproject\monitor\controller.py", line 2607, in search_database
+    return search_power_int(start_date, end_date, count=count, excel=excel)
+  File "c:\Django\myproject\monitor\controller.py", line 2565, in search_power_int
+    database_list = list(power2)
+NameError: global name 'power2' is not defined
+[19/Mar/2016 17:40:40] ERROR [django.request:256] Internal Server Error: /monitor/search_db_power_int_result/
+Traceback (most recent call last):
+  File "C:\Anaconda\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda\lib\site-packages\django\contrib\auth\decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "c:\Django\myproject\monitor\views.py", line 1045, in search_db_power_int_result
+    response_data = controller.search_database('power-int', start_date, end_date, count)
+  File "c:\Django\myproject\monitor\controller.py", line 2607, in search_database
+    return search_power_int(start_date, end_date, count=count, excel=excel)
+  File "c:\Django\myproject\monitor\controller.py", line 2565, in search_power_int
+    database_list = list(power2)
+NameError: global name 'power2' is not defined
