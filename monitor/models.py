@@ -686,23 +686,21 @@ STATE_CHOICES = (
 	(ERROR, '응답없음'),
 )
 
-EMR='EMR'
-LBY1='LBY1'
 FL1_CHOICES = (
-	(EMR, '방재실'),
-	(LBY1, '로비1'),
+	('EMR', '방재실'),
+	('LBY1', '로비1'),
 	('LBY2', '로비2'),
 	('NUR', '수유실'),
 	('LIC', '저소득층상담실'),
-	('CONF', '회의실'),
-	('OFC1', '사무실1'),
-	('OFC2', '사무실2'),
-	('OFC3', '사무실3'),
-	('RRR', '주민등록실'),
+	('OFC1', '민원실1'),
+	('OFC2', '민원실2'),
+	('OFC3', '민원실3'),
+	('OFC4', '민원실4'),
 	('MDF','MDF실'),
+	('RRR', '주민등록실'),
+	('PHR', '접종보건실'),
 	('TRT', '진료실'),
 	('WWR', '사무대기실'),
-	('PHR', '접종보건실')
 )
 
 class Floor1CIU1(models.Model):
@@ -779,7 +777,7 @@ class Floor1CIU6(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='CONF')
+	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='OFC1')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -792,7 +790,7 @@ class Floor1CIU7(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='OFC1')
+	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='OFC2')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -805,7 +803,7 @@ class Floor1CIU8(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='OFC2')
+	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='OFC3')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -818,7 +816,7 @@ class Floor1CIU9(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='OFC3')
+	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='OFC4')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -831,7 +829,7 @@ class Floor1CIU10(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='RRR')
+	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='MDF')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -844,7 +842,7 @@ class Floor1CIU11(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='MDF')
+	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='RRR')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -857,7 +855,7 @@ class Floor1CIU12(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='TRT')
+	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='PHR')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -870,7 +868,7 @@ class Floor1CIU13(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='WWR')
+	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='TRT')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -883,7 +881,7 @@ class Floor1CIU14(models.Model):
 	opMode = models.CharField(max_length=2, choices=AIR_OP_MODE, default='AT')
 	airFlow = models.CharField(max_length=2, choices=AIRFLOW_CHOICES, default='ST')
 	state = models.CharField(max_length=2, choices=STATE_CHOICES, default='NM')
-	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='PHR')
+	location = models.CharField(max_length=4, choices=FL1_CHOICES, default='WWR')
 	def __str__(self):
 		return '{}, {}, {}'.format(self.dateTime.replace(microsecond=0), self.switch, self.temperature)
 
@@ -1066,8 +1064,8 @@ FL3_CHOICES = (
 	('MPR1', '다목적홀1'),
 	('MPR2', '다목적홀2'),
 	('MPR3', '다목적홀3'),
-	('HR1', '홀공간1'),
-	('HR2', '홀공간2'),
+	('HR1', '준비실1'),
+	('HR2', '준비실2'),
 	('LE11', '평생학습실1-1'),
 	('LE12', '평생학습실1-2'),
 	('LE21', '평생학습실2-1'),

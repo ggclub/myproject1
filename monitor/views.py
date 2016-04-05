@@ -816,14 +816,14 @@ def search_db_error(url, request):
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
-@login_required
+# @login_required
 def search_db_ciu(request):
 	response_data = {}
 	url = 'monitor/search_db_ciu.html'
 	html = render_to_string(url, response_data, RequestContext(request))
 	return HttpResponse(html)
 
-@login_required
+# @login_required
 def search_db_ciu_result(request):
 	start_date = request.POST.get('startDate', 'error')
 	end_date = request.POST.get('endDate', 'error')

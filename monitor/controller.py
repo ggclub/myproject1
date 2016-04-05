@@ -1763,12 +1763,17 @@ def get_CIU_total():
 	file3 = file_path +'ciu3.json'
 
 	try:
-		with open(file1, 'r') as data_file:
-			ciu_dict1 = json.load(data_file)
-		with open(file2, 'r') as data_file:
-			ciu_dict2 = json.load(data_file)
-		with open(file3, 'r') as data_file:
-			ciu_dict3 = json.load(data_file)
+		# with open(file1, 'r') as data_file:
+		# 	ciu_dict1 = json.load(data_file)
+		# with open(file2, 'r') as data_file:
+		# 	ciu_dict2 = json.load(data_file)
+		# with open(file3, 'r') as data_file:
+		# 	ciu_dict3 = json.load(data_file)
+
+		# ordering as ciu1~3.json
+		ciu_dict1 = get_CIU_from_json("1")
+		ciu_dict2 = get_CIU_from_json("2")
+		ciu_dict3 = get_CIU_from_json("3")
 	except Exception, e:
 		ciu_dict = {"ciu_error" : e}
 		return ciu_dict
@@ -2614,33 +2619,33 @@ def search_database(obj, start_date, end_date, count=0, floor=0, name=0, excel=F
 def search_ciu(start_date, end_date, count, floor, name, excel):
 	if excel:
 		if floor == '1':
-			if name == '1':
+			if name == '1':	# 방재실
 				database = Floor1CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '2':
+			elif name == '2':	# 로비1
 				database = Floor1CIU2.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
-			elif name == '3':
+			elif name == '3':	# 로비2
 				database = Floor1CIU3.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '4':
+			elif name == '4':	# 수유실
 				database = Floor1CIU4.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '5':
+			elif name == '5':	# 저소득층상담실
 				database = Floor1CIU5.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '6':
+			elif name == '6':	# 민원실4
 				database = Floor1CIU6.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '7':
+			elif name == '7':	# 민원실1
 				database = Floor1CIU7.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '8':
+			elif name == '8':	# 민원실2
 				database = Floor1CIU8.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '9':
+			elif name == '9':	# 민원실3
 				database = Floor1CIU9.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '10':
+			elif name == '10':	# 주민등록실
 				database = Floor1CIU10.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '11':
+			elif name == '11':	# MDF실
 				database = Floor1CIU11.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '12':
+			elif name == '12':	# 진료실
 				database = Floor1CIU12.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '13':
+			elif name == '13':	# 사무대기실
 				database = Floor1CIU13.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '14':
+			elif name == '14':	# 접종보건실
 				database = Floor1CIU14.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
 			else: # (전체)
 				d1 = Floor1CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
@@ -2668,29 +2673,29 @@ def search_ciu(start_date, end_date, count, floor, name, excel):
 				# log.debug(str(len([database1][0])))
 
 		elif floor == '2':
-			if name == '1':
+			if name == '1':	# 조정실
 				database = Floor2CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
-			elif name == '2':
+			elif name == '2':	# 준비실
 				database = Floor2CIU2.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
-			elif name == '3':
+			elif name == '3':	# 2층 홀
 				database = Floor2CIU3.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '4':
+			elif name == '4':	# 면장실
 				database = Floor2CIU4.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '5':
+			elif name == '5':	# 교육실1
 				database = Floor2CIU5.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '6':
+			elif name == '6':	# 교육실2
 				database = Floor2CIU6.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '7':
+			elif name == '7':	# 교육실3
 				database = Floor2CIU7.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '8':
+			elif name == '8':	# 농업인상담실1
 				database = Floor2CIU8.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '9':
+			elif name == '9':	# 농업인상담실2
 				database = Floor2CIU9.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '10':
+			elif name == '10':	# 서고
 				database = Floor2CIU10.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '11':
+			elif name == '11':	# 면대1
 				database = Floor2CIU11.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '12':
+			elif name == '12':	# 면대2
 				database = Floor2CIU12.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
 			else: # (전체)
 				d1 = Floor2CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
@@ -2713,29 +2718,29 @@ def search_ciu(start_date, end_date, count, floor, name, excel):
 					"count":count,
 				}
 		elif floor == '3':
-			if name == '1':
+			if name == '1':	# 강당1
 				database = Floor3CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
-			elif name == '2':
+			elif name == '2':	# 강당2
 				database = Floor3CIU2.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
-			elif name == '3':
+			elif name == '3':	# 3층 홀
 				database = Floor3CIU3.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '4':
+			elif name == '4':	# 다목적홀1
 				database = Floor3CIU4.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '5':
+			elif name == '5':	# 다목적홀2
 				database = Floor3CIU5.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '6':
+			elif name == '6':	# 다목적홀3
 				database = Floor3CIU6.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '7':
+			elif name == '7':	# 준비실1
 				database = Floor3CIU7.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '8':
+			elif name == '8':	# 준비실2
 				database = Floor3CIU8.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '9':
+			elif name == '9':	# 평생학습실1-1
 				database = Floor3CIU9.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '10':
+			elif name == '10':	# 평생학습실1-2
 				database = Floor3CIU10.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '11':
+			elif name == '11':	# 평생학습실2-1
 				database = Floor3CIU11.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
-			elif name == '12':
+			elif name == '12':	# 평생학습실2-2
 				database = Floor3CIU12.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime')
 			else: # (전체)
 				d1 = Floor3CIU1.objects.filter(Q(dateTime__gte=start_date), Q(dateTime__lte=end_date)).order_by('-dateTime') 
